@@ -1,0 +1,86 @@
+@import 'variables';
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.33;
+  color: $black;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.33;
+  color: $black;
+}
+
+h3 {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.33;
+  color: $black;
+}
+
+a {
+  line-height: 1.5;
+  color: $black;
+  font-weight: 700;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $black;
+}
+
+a {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+.col {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.page-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: $padding-sm;
+
+  @include media-breakpoint(xs) {
+    max-width: 540px;
+  }
+
+  @include media-breakpoint(sm) {
+    max-width: 720px;
+  }
+
+  @include media-breakpoint(md) {
+    max-width: 960px;
+  }
+
+  @include media-breakpoint(lg) {
+    max-width: 1140px;
+  }
+}
