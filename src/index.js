@@ -1,12 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import store from './redux/store/index';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import Form from './components/Form/Form';
+import List from './components/List/List';
+import Post from './components/Post/Post';
+import Loader from './components/Loader/Loader';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+import './styling/style.scss';
+
+const App = () => (
+  <React.Fragment>
+    <div>
+      <h2>Books</h2>
+      <List />
+    </div>
+    <div>
+      <h2>Add a new article</h2>
+      <Form />
+    </div>
+    <div>
+      <h2>API posts</h2>
+      <Post />
+    </div>
+  </React.Fragment>
+);
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById('root')
+);
