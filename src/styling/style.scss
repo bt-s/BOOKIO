@@ -2,7 +2,9 @@
 @import './includes/vendor';
 @import './includes/variables';
 
+@import '../components/BookItem/BookItem';
 @import '../components/Button/Button';
 @import '../components/Footer/Footer';
+@import '../components/GoogleMap/GoogleMap';
 @import '../components/Loader/Loader';
 @import '../components/Navbar/Navbar';
