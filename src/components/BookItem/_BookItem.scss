@@ -1,0 +1,38 @@
+.book-item-container {
+  height: 240px;
+  width: 160px;
+  margin-top: $padding-xs;
+  border: 1px solid $black;
+
+  h2 {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 8px;
+    margin: 0;
+  }
+}
+
+.book-item-cover-image {
+  height: 160px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.book-item-details {
+  display: flex;
+  align-items: center;
+}
+
+.book-item-user-avatar {
+  height: 20px;
+  width: 20px;
+}
+
+.book-item-user-name,
+.book-item-location-name,
+.book-item-location-distance {
+  font-size: 8px;
+}

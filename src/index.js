@@ -17,6 +17,7 @@ import {
   SIGN_UP
 } from './routes';
 
+import BookItem from './components/BookItem/BookItem';
 import Form from './components/Form/Form';
 import List from './components/List/List';
 import Post from './components/Post/Post';
@@ -63,6 +64,7 @@ const TestComponent = props => {
       <div className="google-map-wrapper">
         <GoogleMap />
       </div>
+      <BookItem />
     </React.Fragment>
   );
 };
