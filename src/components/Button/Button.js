@@ -11,18 +11,18 @@ const Button = props => (
   </button>
 );
 
-Button.defaultProps = {
-  className: '',
-  text: '',
-  type: 'button'
-};
-
 Button.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
   onClick: PropTypes.func,
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   type: PropTypes.string
+};
+
+Button.defaultProps = {
+  className: 'btn',
+  text: '',
+  type: 'button'
 };
 
 export default Button;
