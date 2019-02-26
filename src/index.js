@@ -60,7 +60,9 @@ const TestComponent = props => {
         <br />
         <Link to={MY_BOOK_HISTORY}>My book history page</Link>
       </div>
-      <GoogleMap />
+      <div className="google-map-wrapper">
+        <GoogleMap />
+      </div>
     </React.Fragment>
   );
 };
