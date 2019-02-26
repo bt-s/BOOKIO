@@ -7,6 +7,7 @@ html {
 
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 h1 {
@@ -66,21 +67,21 @@ a {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  padding-top: $padding-sm;
+  padding-top: $navbar-height;
 
   @include media-breakpoint(xs) {
-    max-width: 540px;
+    max-width: $max-width-xs;
   }
 
   @include media-breakpoint(sm) {
-    max-width: 720px;
+    max-width: $max-width-sm;
   }
 
   @include media-breakpoint(md) {
-    max-width: 960px;
+    max-width: $max-width-md;
   }
 
   @include media-breakpoint(lg) {
-    max-width: 1140px;
+    max-width: $max-width-lg;
   }
 }
