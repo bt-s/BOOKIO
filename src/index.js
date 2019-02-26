@@ -21,6 +21,7 @@ import Form from './components/Form/Form';
 import List from './components/List/List';
 import Post from './components/Post/Post';
 import Navbar from './components/Navbar/Navbar';
+import GoogleMap from './components/GoogleMap/GoogleMap';
 
 import './styling/style.scss';
 
@@ -59,6 +60,7 @@ const TestComponent = props => {
         <br />
         <Link to={MY_BOOK_HISTORY}>My book history page</Link>
       </div>
+      <GoogleMap />
     </React.Fragment>
   );
 };
