@@ -16,6 +16,15 @@ import * as ROUTES from '../../routes';
 import Button from '../Button/Button';
 import SignOut from '../SignOut/SignOut';
 
+const NavbarAuth = () => <SignOut />;
+
+const NavbarNonAuth = () => (
+  <React.Fragment>
+    <Link to={ROUTES.LOG_IN}>Sign in</Link>;
+    <Link to={ROUTES.SIGN_UP}>Sign up</Link>;
+  </React.Fragment>
+);
+
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +41,7 @@ class NavBar extends React.Component {
   };
 
   render() {
+    const {logo, authUser} = this.props;
     const {showMenu} = this.state;
 
     const screenWidth =
@@ -41,7 +51,7 @@ class NavBar extends React.Component {
 
     const mobileBreakPoint = 768;
 
-    const brandLogo = <div className="navbar-brand">{this.props.logo}</div>;
+    const brandLogo = <div className="navbar-brand">{logo}</div>;
 
     const itemSearchBar = (
       <div className="navbar-search-container">
@@ -74,10 +84,6 @@ class NavBar extends React.Component {
       />
     );
 
-    const signInLink = <Link to={ROUTES.LOG_IN}>Sign in</Link>;
-    const signUpLink = <Link to={ROUTES.SIGN_UP}>Sign up</Link>;
-    const signOutButton = <SignOut />;
-
     return (
       <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
         <div className="navbar-content-container">
@@ -86,9 +92,7 @@ class NavBar extends React.Component {
           {bookShelfLink}
           {accountLink}
           {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
-          {signInLink}
-          {signUpLink}
-          {signOutButton}
+          {authUser ? <NavbarAuth /> : <NavbarNonAuth />}
         </div>
       </nav>
     );
