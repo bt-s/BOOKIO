@@ -23,6 +23,7 @@ import List from './components/List/List';
 import Post from './components/Post/Post';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
+import Firebase, {FirebaseContext} from './components/Firebase';
 
 import './styling/style.scss';
 
@@ -114,9 +115,11 @@ const App = props => {
 
 ReactDOM.render(
   <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <FirebaseContext.Provider value={new Firebase()}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </FirebaseContext.Provider>
   </BrowserRouter>,
   document.getElementById('root')
 );
