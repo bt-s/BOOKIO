@@ -15,6 +15,7 @@ import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
 import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
+import PasswordForgetPage from './components/PasswordForget/PasswordForget';
 import Firebase, {FirebaseContext} from './components/Firebase';
 
 import './styling/style.scss';
@@ -72,7 +73,7 @@ const AppBase = () => (
         <Route path={ROUTES.LOG_IN} render={() => <SignIn />} />
         <Route
           path={ROUTES.PASSWORD_FORGET}
-          render={() => <h2>This is the password forget page.</h2>}
+          render={() => <PasswordForgetPage />}
         />
         <Route
           path={ROUTES.ACCOUNT}
