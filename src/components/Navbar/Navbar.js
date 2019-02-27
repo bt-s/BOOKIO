@@ -32,29 +32,54 @@ class NavBar extends React.Component {
   render() {
     const {showMenu} = this.state;
 
+    const screenWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+
+    const mobileBreakPoint = 768;
+
+    const brandLogo = <div className="navbar-brand">{this.props.logo}</div>;
+
+    const itemSearchBar = (
+      <div className="navbar-search-container">
+        A search component will be inserted here.
+      </div>
+    );
+
+    const bookShelfLink = (
+      <Link to={MY_BOOK_HISTORY} className="navbar-bookshelves">
+        <FontAwesomeIcon icon={faBook} />
+      </Link>
+    );
+
+    const accountLink = (
+      <Link to={ACCOUNT} className="navbar-account">
+        <FontAwesomeIcon icon={faUser} />
+      </Link>
+    );
+
+    const mobileMenuButton = (
+      <Button
+        className="navbar-mobile-menu"
+        onClick={this.onMenuToggle}
+        text={
+          <React.Fragment>
+            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon icon={faTimes} />
+          </React.Fragment>
+        }
+      />
+    );
+
     return (
       <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
         <div className="navbar-content-container">
-          <div className="navbar-brand">{this.props.logo}</div>
-          <div className="navbar-search-container">
-            A search component will be inserted here.
-          </div>
-          <Link to={MY_BOOK_HISTORY} className="navbar-bookshelves">
-            <FontAwesomeIcon icon={faBook} />
-          </Link>
-          <Link to={ACCOUNT} className="navbar-account">
-            <FontAwesomeIcon icon={faUser} />
-          </Link>
-          <Button
-            className="navbar-mobile-menu"
-            onClick={this.onMenuToggle}
-            text={
-              <React.Fragment>
-                <FontAwesomeIcon icon={faBars} />
-                <FontAwesomeIcon icon={faTimes} />
-              </React.Fragment>
-            }
-          />
+          {brandLogo}
+          {itemSearchBar}
+          {bookShelfLink}
+          {accountLink}
+          {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
         </div>
       </nav>
     );
