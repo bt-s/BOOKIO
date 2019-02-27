@@ -13,6 +13,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../routes';
 
+import {AuthUserContext} from '../Session/Session';
 import Button from '../Button/Button';
 import SignOut from '../SignOut/SignOut';
 
@@ -25,7 +26,7 @@ const NavbarNonAuth = () => (
   </React.Fragment>
 );
 
-class NavBar extends React.Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props);
 
@@ -41,7 +42,7 @@ class NavBar extends React.Component {
   };
 
   render() {
-    const {logo, authUser} = this.props;
+    const {logo} = this.props;
     const {showMenu} = this.state;
 
     const screenWidth =
@@ -92,19 +93,21 @@ class NavBar extends React.Component {
           {bookShelfLink}
           {accountLink}
           {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
-          {authUser ? <NavbarAuth /> : <NavbarNonAuth />}
+          <AuthUserContext.Consumer>
+            {authUser => (authUser ? <NavbarAuth /> : <NavbarNonAuth />)}
+          </AuthUserContext.Consumer>
         </div>
       </nav>
     );
   }
 }
 
-NavBar.propTypes = {
+Navbar.propTypes = {
   logo: PropTypes.string
 };
 
-NavBar.defaultProps = {
+Navbar.defaultProps = {
   logo: 'BOOKIO'
 };
 
-export default NavBar;
+export default Navbar;

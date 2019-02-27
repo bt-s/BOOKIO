@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import store from './redux/store/index';
 
 import * as ROUTES from './routes';
-import {withFirebase} from './components/Firebase/context';
+import {withAuthentication} from './components/Session/Session';
 
 import BookItem from './components/BookItem/BookItem';
 import Form from './components/Form/Form';
@@ -62,74 +62,48 @@ const TestComponent = props => {
   );
 };
 
-class AppBase extends React.Component {
-  constructor(props) {
-    super(props);
+const AppBase = () => (
+  <React.Fragment>
+    <Navbar />
+    <div className="page-container">
+      <Switch>
+        <Route exact path={ROUTES.LANDING} render={() => <TestComponent />} />
+        <Route path={ROUTES.SIGN_UP} render={() => <SignUp />} />
+        <Route path={ROUTES.LOG_IN} render={() => <SignIn />} />
+        <Route
+          path={ROUTES.PASSWORD_FORGET}
+          render={() => <h2>This is the password forget page.</h2>}
+        />
+        <Route
+          path={ROUTES.ACCOUNT}
+          render={() => <h2>This is the account page.</h2>}
+        />
+        <Route
+          path={ROUTES.ADMIN}
+          render={() => <h2>This is the admin page.</h2>}
+        />
+        <Route
+          path={ROUTES.BOOKS}
+          render={() => <h2>This is the books page.</h2>}
+        />
+        <Route
+          path={ROUTES.BOOK_DETAIL}
+          render={() => <h2>This is the book detail page.</h2>}
+        />
+        <Route
+          path={ROUTES.ADD_BOOK}
+          render={() => <h2>This is the add book page.</h2>}
+        />
+        <Route
+          path={ROUTES.MY_BOOK_HISTORY}
+          render={() => <h2>This is the my book history page.</h2>}
+        />
+      </Switch>
+    </div>
+  </React.Fragment>
+);
 
-    this.state = {
-      authUser: null
-    };
-  }
-
-  componentDidMount() {
-    this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
-      authUser ? this.setState({authUser}) : this.setState({authUser: null});
-    });
-  }
-
-  componentWillUnmount() {
-    this.listener();
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <Navbar authUser={this.state.authUser} />
-        <div className="page-container">
-          <Switch>
-            <Route
-              exact
-              path={ROUTES.LANDING}
-              render={() => <TestComponent />}
-            />
-            <Route path={ROUTES.SIGN_UP} render={() => <SignUp />} />
-            <Route path={ROUTES.LOG_IN} render={() => <SignIn />} />
-            <Route
-              path={ROUTES.PASSWORD_FORGET}
-              render={() => <h2>This is the password forget page.</h2>}
-            />
-            <Route
-              path={ROUTES.ACCOUNT}
-              render={() => <h2>This is the account page.</h2>}
-            />
-            <Route
-              path={ROUTES.ADMIN}
-              render={() => <h2>This is the admin page.</h2>}
-            />
-            <Route
-              path={ROUTES.BOOKS}
-              render={() => <h2>This is the books page.</h2>}
-            />
-            <Route
-              path={ROUTES.BOOK_DETAIL}
-              render={() => <h2>This is the book detail page.</h2>}
-            />
-            <Route
-              path={ROUTES.ADD_BOOK}
-              render={() => <h2>This is the add book page.</h2>}
-            />
-            <Route
-              path={ROUTES.MY_BOOK_HISTORY}
-              render={() => <h2>This is the my book history page.</h2>}
-            />
-          </Switch>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
-
-const App = withFirebase(AppBase);
+const App = withAuthentication(AppBase);
 
 ReactDOM.render(
   <BrowserRouter>
