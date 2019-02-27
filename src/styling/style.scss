@@ -2,9 +2,14 @@
 @import './includes/vendor';
 @import './includes/variables';
 
+@import '../components/Account/Account';
 @import '../components/BookItem/BookItem';
 @import '../components/Button/Button';
 @import '../components/Footer/Footer';
 @import '../components/GoogleMap/GoogleMap';
 @import '../components/Loader/Loader';
 @import '../components/Navbar/Navbar';
+@import '../components/PasswordForget/PasswordForget';
+@import '../components/PasswordChange/PasswordChange';
+@import '../components/SignIn/SignIn';
+@import '../components/SignUp/SignUp';
