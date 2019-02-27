@@ -13,6 +13,7 @@ import Post from './components/Post/Post';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
 import SignUp from './components/SignUp/SignUp';
+import SignIn from './components/SignIn/SignIn';
 import Firebase, {FirebaseContext} from './components/Firebase';
 
 import './styling/style.scss';
@@ -68,10 +69,7 @@ const App = props => {
         <Switch>
           <Route exact path={ROUTES.LANDING} render={() => <TestComponent />} />
           <Route path={ROUTES.SIGN_UP} render={() => <SignUp />} />
-          <Route
-            path={ROUTES.LOG_IN}
-            render={() => <h2>This is the login page.</h2>}
-          />
+          <Route path={ROUTES.LOG_IN} render={() => <SignIn />} />
           <Route
             path={ROUTES.PASSWORD_FORGET}
             render={() => <h2>This is the password forget page.</h2>}
