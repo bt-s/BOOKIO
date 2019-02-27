@@ -7,6 +7,7 @@ import store from './redux/store/index';
 import * as ROUTES from './routes';
 import {withAuthentication} from './components/Session/Session';
 
+import AccountPage from './components/Account/Account';
 import BookItem from './components/BookItem/BookItem';
 import Form from './components/Form/Form';
 import List from './components/List/List';
@@ -75,10 +76,7 @@ const AppBase = () => (
           path={ROUTES.PASSWORD_FORGET}
           render={() => <PasswordForgetPage />}
         />
-        <Route
-          path={ROUTES.ACCOUNT}
-          render={() => <h2>This is the account page.</h2>}
-        />
+        <Route path={ROUTES.ACCOUNT} render={() => <AccountPage />} />
         <Route
           path={ROUTES.ADMIN}
           render={() => <h2>This is the admin page.</h2>}
