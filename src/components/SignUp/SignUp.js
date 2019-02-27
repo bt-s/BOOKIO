@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link, withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
@@ -95,6 +96,10 @@ class SignUpFormBase extends React.Component {
     );
   }
 }
+
+SignUpFormBase.propTypes = {
+  firebase: PropTypes.object
+};
 
 const SignUpLink = () => (
   <p>

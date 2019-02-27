@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
@@ -79,6 +80,10 @@ class SignInFormBase extends React.Component {
     );
   }
 }
+
+SignInFormBase.propTypes = {
+  firebase: PropTypes.object
+};
 
 const SignInForm = compose(
   withRouter,

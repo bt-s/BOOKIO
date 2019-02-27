@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {withFirebase} from '../Firebase';
 
@@ -35,7 +36,7 @@ class PasswordChangeForm extends React.Component {
   };
 
   render() {
-    const {passwordOne, passwordTwo, error} = this.state;
+    const {passwordOne, passwordTwo} = this.state;
 
     const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
 
@@ -62,5 +63,9 @@ class PasswordChangeForm extends React.Component {
     );
   }
 }
+
+PasswordChangeForm.propTypes = {
+  firebase: PropTypes.object
+};
 
 export default withFirebase(PasswordChangeForm);

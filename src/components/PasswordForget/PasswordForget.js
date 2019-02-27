@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import {withFirebase} from '../Firebase';
@@ -65,6 +66,10 @@ class PasswordForgetFormBase extends React.Component {
     );
   }
 }
+
+PasswordForgetFormBase.propTypes = {
+  firebase: PropTypes.object
+};
 
 const PasswordForgetLink = () => (
   <p>
