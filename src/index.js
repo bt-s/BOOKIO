@@ -4,18 +4,7 @@ import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from './redux/store/index';
 
-import {
-  ACCOUNT,
-  ADD_BOOK,
-  ADMIN,
-  BOOKS,
-  BOOK_DETAIL,
-  LANDING,
-  MY_BOOK_HISTORY,
-  LOG_IN,
-  PASSWORD_FORGET,
-  SIGN_UP
-} from './routes';
+import * as ROUTES from './routes';
 
 import BookItem from './components/BookItem/BookItem';
 import Form from './components/Form/Form';
@@ -23,6 +12,7 @@ import List from './components/List/List';
 import Post from './components/Post/Post';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
+import SignUp from './components/SignUp/SignUp';
 import Firebase, {FirebaseContext} from './components/Firebase';
 
 import './styling/style.scss';
@@ -44,23 +34,23 @@ const TestComponent = props => {
       </div>
 
       <div>
-        <Link to={ACCOUNT}>Account page</Link>
+        <Link to={ROUTES.ACCOUNT}>Account page</Link>
         <br />
-        <Link to={ADD_BOOK}>Add book page</Link>
+        <Link to={ROUTES.ADD_BOOK}>Add book page</Link>
         <br />
-        <Link to={ADMIN}>Admin page</Link>
+        <Link to={ROUTES.ADMIN}>Admin page</Link>
         <br />
-        <Link to={BOOKS}>Books page</Link>
+        <Link to={ROUTES.BOOKS}>Books page</Link>
         <br />
-        <Link to={BOOK_DETAIL}>Book detail page</Link>
+        <Link to={ROUTES.BOOK_DETAIL}>Book detail page</Link>
         <br />
-        <Link to={LOG_IN}>Login page</Link>
+        <Link to={ROUTES.LOG_IN}>Login page</Link>
         <br />
-        <Link to={PASSWORD_FORGET}>Password forget page</Link>
+        <Link to={ROUTES.PASSWORD_FORGET}>Password forget page</Link>
         <br />
-        <Link to={SIGN_UP}>Signup page</Link>
+        <Link to={ROUTES.SIGN_UP}>Signup page</Link>
         <br />
-        <Link to={MY_BOOK_HISTORY}>My book history page</Link>
+        <Link to={ROUTES.MY_BOOK_HISTORY}>My book history page</Link>
       </div>
       <div className="google-map-wrapper">
         <GoogleMap />
@@ -76,35 +66,38 @@ const App = props => {
       <Navbar />
       <div className="page-container">
         <Switch>
-          <Route exact path={LANDING} render={() => <TestComponent />} />
+          <Route exact path={ROUTES.LANDING} render={() => <TestComponent />} />
+          <Route path={ROUTES.SIGN_UP} render={() => <SignUp />} />
           <Route
-            path={SIGN_UP}
-            render={() => <h2>This is the signup page.</h2>}
-          />
-          <Route
-            path={LOG_IN}
+            path={ROUTES.LOG_IN}
             render={() => <h2>This is the login page.</h2>}
           />
           <Route
-            path={PASSWORD_FORGET}
+            path={ROUTES.PASSWORD_FORGET}
             render={() => <h2>This is the password forget page.</h2>}
           />
           <Route
-            path={ACCOUNT}
+            path={ROUTES.ACCOUNT}
             render={() => <h2>This is the account page.</h2>}
           />
-          <Route path={ADMIN} render={() => <h2>This is the admin page.</h2>} />
-          <Route path={BOOKS} render={() => <h2>This is the books page.</h2>} />
           <Route
-            path={BOOK_DETAIL}
+            path={ROUTES.ADMIN}
+            render={() => <h2>This is the admin page.</h2>}
+          />
+          <Route
+            path={ROUTES.BOOKS}
+            render={() => <h2>This is the books page.</h2>}
+          />
+          <Route
+            path={ROUTES.BOOK_DETAIL}
             render={() => <h2>This is the book detail page.</h2>}
           />
           <Route
-            path={ADD_BOOK}
+            path={ROUTES.ADD_BOOK}
             render={() => <h2>This is the add book page.</h2>}
           />
           <Route
-            path={MY_BOOK_HISTORY}
+            path={ROUTES.MY_BOOK_HISTORY}
             render={() => <h2>This is the my book history page.</h2>}
           />
         </Switch>
