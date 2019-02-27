@@ -8,11 +8,13 @@ import {
   faBars,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import {ACCOUNT, MY_BOOK_HISTORY} from '../../routes';
+import * as ROUTES from '../../routes';
 
 import Button from '../Button/Button';
+import SignOut from '../SignOut/SignOut';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -48,13 +50,13 @@ class NavBar extends React.Component {
     );
 
     const bookShelfLink = (
-      <Link to={MY_BOOK_HISTORY} className="navbar-bookshelves">
+      <Link to={ROUTES.MY_BOOK_HISTORY} className="navbar-bookshelves">
         <FontAwesomeIcon icon={faBook} />
       </Link>
     );
 
     const accountLink = (
-      <Link to={ACCOUNT} className="navbar-account">
+      <Link to={ROUTES.ACCOUNT} className="navbar-account">
         <FontAwesomeIcon icon={faUser} />
       </Link>
     );
@@ -72,6 +74,10 @@ class NavBar extends React.Component {
       />
     );
 
+    const signInLink = <Link to={ROUTES.LOG_IN}>Sign in</Link>;
+    const signUpLink = <Link to={ROUTES.SIGN_UP}>Sign up</Link>;
+    const signOutButton = <SignOut />;
+
     return (
       <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
         <div className="navbar-content-container">
@@ -80,6 +86,9 @@ class NavBar extends React.Component {
           {bookShelfLink}
           {accountLink}
           {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
+          {signInLink}
+          {signUpLink}
+          {signOutButton}
         </div>
       </nav>
     );
