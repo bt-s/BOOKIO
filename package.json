@@ -6,6 +6,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "firebase": "^5.8.4",
     "google-maps-react": "^2.0.2",
     "node-sass": "^4.11.0",
     "react": "^16.8.3",
@@ -14,6 +15,7 @@
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "2.1.5",
+    "recompose": "^0.30.0",
     "redux": "^4.0.1"
   },
   "scripts": {

@@ -3,10 +3,6 @@ import {connect} from 'react-redux';
 import {getData} from '../../redux/actions/index';
 
 export class Post extends React.Component {
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     this.props.getData();
   }

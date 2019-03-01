@@ -8,13 +8,25 @@ import {
   faBars,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import {ACCOUNT, MY_BOOK_HISTORY} from '../../routes';
+import * as ROUTES from '../../routes';
 
+import {AuthUserContext} from '../Session/Session';
 import Button from '../Button/Button';
+import SignOut from '../SignOut/SignOut';
 
-class NavBar extends React.Component {
+const NavbarAuth = () => <SignOut />;
+
+const NavbarNonAuth = () => (
+  <React.Fragment>
+    <Link to={ROUTES.LOG_IN}>Sign in</Link>;
+    <Link to={ROUTES.SIGN_UP}>Sign up</Link>;
+  </React.Fragment>
+);
+
+class Navbar extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,43 +42,72 @@ class NavBar extends React.Component {
   };
 
   render() {
+    const {logo} = this.props;
     const {showMenu} = this.state;
+
+    const screenWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+
+    const mobileBreakPoint = 768;
+
+    const brandLogo = <div className="navbar-brand">{logo}</div>;
+
+    const itemSearchBar = (
+      <div className="navbar-search-container">
+        A search component will be inserted here.
+      </div>
+    );
+
+    const bookShelfLink = (
+      <Link to={ROUTES.MY_BOOK_HISTORY} className="navbar-bookshelves">
+        <FontAwesomeIcon icon={faBook} />
+      </Link>
+    );
+
+    const accountLink = (
+      <Link to={ROUTES.ACCOUNT} className="navbar-account">
+        <FontAwesomeIcon icon={faUser} />
+      </Link>
+    );
+
+    const mobileMenuButton = (
+      <Button
+        className="navbar-mobile-menu"
+        onClick={this.onMenuToggle}
+        text={
+          <React.Fragment>
+            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon icon={faTimes} />
+          </React.Fragment>
+        }
+      />
+    );
 
     return (
       <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
         <div className="navbar-content-container">
-          <div className="navbar-brand">{this.props.logo}</div>
-          <div className="navbar-search-container">
-            A search component will be inserted here.
-          </div>
-          <Link to={MY_BOOK_HISTORY} className="navbar-bookshelves">
-            <FontAwesomeIcon icon={faBook} />
-          </Link>
-          <Link to={ACCOUNT} className="navbar-account">
-            <FontAwesomeIcon icon={faUser} />
-          </Link>
-          <Button
-            className="navbar-mobile-menu"
-            onClick={this.onMenuToggle}
-            text={
-              <React.Fragment>
-                <FontAwesomeIcon icon={faBars} />
-                <FontAwesomeIcon icon={faTimes} />
-              </React.Fragment>
-            }
-          />
+          {brandLogo}
+          {itemSearchBar}
+          {bookShelfLink}
+          {accountLink}
+          {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
+          <AuthUserContext.Consumer>
+            {authUser => (authUser ? <NavbarAuth /> : <NavbarNonAuth />)}
+          </AuthUserContext.Consumer>
         </div>
       </nav>
     );
   }
 }
 
-NavBar.propTypes = {
+Navbar.propTypes = {
   logo: PropTypes.string
 };
 
-NavBar.defaultProps = {
+Navbar.defaultProps = {
   logo: 'BOOKIO'
 };
 
-export default NavBar;
+export default Navbar;
