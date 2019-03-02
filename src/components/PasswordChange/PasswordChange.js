@@ -1,20 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
+import {useFormInput} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
-
-const useFormInput = () => {
-  const [value, setValue] = useState('');
-
-  function handleChange(e) {
-    setValue(e.target.value);
-  }
-
-  return {
-    value,
-    onChange: handleChange
-  };
-};
 
 const PasswordChangeForm = props => {
   const passwordOne = useFormInput('');
