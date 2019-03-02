@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
+import {useFormInput} from '../../hooks/hooks';
 import {SignUpLink} from '../SignUp/SignUp';
 import {PasswordForgetLink} from '../PasswordForget/PasswordForget';
 import {withFirebase} from '../Firebase';
@@ -17,69 +18,43 @@ const SignInPage = () => (
   </div>
 );
 
-const INITIAL_STATE = {
-  email: '',
-  password: '',
-  error: null
-};
+const SignInFormBase = props => {
+  const email = useFormInput('');
+  const password = useFormInput('');
+  const [error, setError] = useState(null);
 
-class SignInFormBase extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {...INITIAL_STATE};
-  }
-
-  onSubmit = e => {
-    const {email, password} = this.state;
-
-    this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
+  const onSubmit = e => {
+    props.firebase
+      .doSignInWithEmailAndPassword(email.value, password.value)
       .then(() => {
-        this.setState({...INITIAL_STATE});
-        this.props.history.push(ROUTES.ACCOUNT);
+        props.history.push(ROUTES.ACCOUNT);
       })
       .catch(error => {
-        this.setState({error});
+        setError(error);
       });
 
     e.preventDefault();
   };
 
-  onChange = e => {
-    this.setState({[e.target.name]: e.target.value});
-  };
+  const isInvalid = password === '' || email === '';
 
-  render() {
-    const {email, password, error} = this.state;
+  return (
+    <form onSubmit={onSubmit}>
+      <input placeholder="Email address" name="email" type="text" {...email} />
+      <input
+        placeholder="Password"
+        name="password"
+        type="password"
+        {...password}
+      />
+      <button disabled={isInvalid} type="submit">
+        Sign in
+      </button>
 
-    const isInvalid = password === '' || email === '';
-
-    return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          placeholder="Email address"
-          name="email"
-          type="text"
-          onChange={this.onChange}
-          value={email}
-        />
-        <input
-          placeholder="Password"
-          name="password"
-          type="password"
-          onChange={this.onChange}
-          value={password}
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign in
-        </button>
-
-        {error && <p>{error.message}</p>}
-      </form>
-    );
-  }
-}
+      {error && <p>{error.message}</p>}
+    </form>
+  );
+};
 
 SignInFormBase.propTypes = {
   firebase: PropTypes.object
