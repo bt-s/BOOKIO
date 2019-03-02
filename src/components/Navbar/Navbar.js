@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
@@ -26,81 +26,68 @@ const NavbarNonAuth = () => (
   </React.Fragment>
 );
 
-class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
+const Navbar = props => {
+  const [showMenu, setShowMenu] = useState(false);
 
-    this.state = {
-      showMenu: false
-    };
-  }
-
-  onMenuToggle = e => {
-    this.setState({
-      showMenu: !this.state.showMenu
-    });
+  const onMenuToggle = e => {
+    setShowMenu(!showMenu);
   };
 
-  render() {
-    const {logo} = this.props;
-    const {showMenu} = this.state;
+  const screenWidth =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
 
-    const screenWidth =
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth;
+  const mobileBreakPoint = 768;
 
-    const mobileBreakPoint = 768;
+  const brandLogo = <div className="navbar-brand">{props.logo}</div>;
 
-    const brandLogo = <div className="navbar-brand">{logo}</div>;
+  const itemSearchBar = (
+    <div className="navbar-search-container">
+      A search component will be inserted here.
+    </div>
+  );
 
-    const itemSearchBar = (
-      <div className="navbar-search-container">
-        A search component will be inserted here.
+  const bookShelfLink = (
+    <Link to={ROUTES.MY_BOOK_HISTORY} className="navbar-bookshelves">
+      <FontAwesomeIcon icon={faBook} />
+    </Link>
+  );
+
+  const accountLink = (
+    <Link to={ROUTES.ACCOUNT} className="navbar-account">
+      <FontAwesomeIcon icon={faUser} />
+    </Link>
+  );
+
+  const mobileMenuButton = (
+    <Button
+      className="navbar-mobile-menu"
+      onClick={onMenuToggle}
+      text={
+        <React.Fragment>
+          <FontAwesomeIcon icon={faBars} />
+          <FontAwesomeIcon icon={faTimes} />
+        </React.Fragment>
+      }
+    />
+  );
+
+  return (
+    <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
+      <div className="navbar-content-container">
+        {brandLogo}
+        {itemSearchBar}
+        {bookShelfLink}
+        {accountLink}
+        {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
+        <AuthUserContext.Consumer>
+          {authUser => (authUser ? <NavbarAuth /> : <NavbarNonAuth />)}
+        </AuthUserContext.Consumer>
       </div>
-    );
-
-    const bookShelfLink = (
-      <Link to={ROUTES.MY_BOOK_HISTORY} className="navbar-bookshelves">
-        <FontAwesomeIcon icon={faBook} />
-      </Link>
-    );
-
-    const accountLink = (
-      <Link to={ROUTES.ACCOUNT} className="navbar-account">
-        <FontAwesomeIcon icon={faUser} />
-      </Link>
-    );
-
-    const mobileMenuButton = (
-      <Button
-        className="navbar-mobile-menu"
-        onClick={this.onMenuToggle}
-        text={
-          <React.Fragment>
-            <FontAwesomeIcon icon={faBars} />
-            <FontAwesomeIcon icon={faTimes} />
-          </React.Fragment>
-        }
-      />
-    );
-
-    return (
-      <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
-        <div className="navbar-content-container">
-          {brandLogo}
-          {itemSearchBar}
-          {bookShelfLink}
-          {accountLink}
-          {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
-          <AuthUserContext.Consumer>
-            {authUser => (authUser ? <NavbarAuth /> : <NavbarNonAuth />)}
-          </AuthUserContext.Consumer>
-        </div>
-      </nav>
-    );
-  }
-}
+    </nav>
+  );
+};
 
 Navbar.propTypes = {
   logo: PropTypes.string
