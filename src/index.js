@@ -9,9 +9,6 @@ import {withAuthentication} from './components/Session/Session';
 
 import AccountPage from './components/Account/Account';
 import BookItem from './components/BookItem/BookItem';
-import Form from './components/Form/Form';
-import List from './components/List/List';
-import Post from './components/Post/Post';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
 import SignUp from './components/SignUp/SignUp';
@@ -24,19 +21,6 @@ import './styling/style.scss';
 const TestComponent = props => {
   return (
     <React.Fragment>
-      <div>
-        <h2>Books</h2>
-        <List />
-      </div>
-      <div>
-        <h2>Add a new book</h2>
-        <Form />
-      </div>
-      <div>
-        <h2>API posts</h2>
-        <Post />
-      </div>
-
       <div>
         <Link to={ROUTES.ACCOUNT}>Account page</Link>
         <br />
