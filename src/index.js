@@ -90,11 +90,11 @@ const App = withAuthentication(AppBase);
 
 ReactDOM.render(
   <BrowserRouter>
-    <FirebaseContext.Provider value={new Firebase()}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <FirebaseContext.Provider value={new Firebase()}>
         <App />
-      </Provider>
-    </FirebaseContext.Provider>
+      </FirebaseContext.Provider>
+    </Provider>
   </BrowserRouter>,
   document.getElementById('root')
 );
