@@ -19,6 +19,8 @@ class Firebase {
     app.initializeApp(config);
 
     this.auth = app.auth();
+
+    this.facebookProvider = new app.auth.FacebookAuthProvider();
   }
 
   // *** Auth API ***
@@ -27,6 +29,8 @@ class Firebase {
 
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
+
+  doSignInWithFacebook = () => this.auth.signInWithPopup(this.facebookProvider);
 
   doSignOut = () => this.auth.signOut();
 
