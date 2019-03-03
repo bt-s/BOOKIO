@@ -5,7 +5,7 @@ import {compose} from 'recompose';
 
 import {useFormInput} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
-import * as ROUTES from '../../routes';
+import * as ROUTES from '../../constants/routes';
 
 const SignUpPage = () => (
   <div>

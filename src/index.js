@@ -4,7 +4,7 @@ import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from './redux/store/index';
 
-import * as ROUTES from './routes';
+import * as ROUTES from './constants/routes';
 import {withAuthentication} from './components/Session/Session';
 
 import AccountPage from './components/Account/Account';

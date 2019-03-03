@@ -11,7 +11,7 @@ import {
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import * as ROUTES from '../../routes';
+import * as ROUTES from '../../constants/routes';
 
 import {AuthUserContext} from '../Session/Session';
 import Button from '../Button/Button';
