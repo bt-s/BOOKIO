@@ -7,7 +7,7 @@ import {useFormInput} from '../../hooks/hooks';
 import {SignUpLink} from '../SignUp/SignUp';
 import {PasswordForgetLink} from '../PasswordForget/PasswordForget';
 import {withFirebase} from '../Firebase';
-import * as ROUTES from '../../routes';
+import * as ROUTES from '../../constants/routes';
 
 const SignInPage = () => (
   <div>

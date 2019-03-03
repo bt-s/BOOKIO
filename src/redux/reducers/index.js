@@ -1,23 +1,12 @@
-import {ADD_BOOK, DATA_LOADED} from '../constants/action-types';
+import {combineReducers} from 'redux';
+import sessionReducer from './session';
+import userReducer from './user';
+import messageReducer from './message';
 
-const initialState = {
-  books: [],
-  remoteBooks: []
-};
-
-function rootReducer(state = initialState, action) {
-  if (action.type === ADD_BOOK) {
-    return Object.assign({}, state, {
-      books: state.books.concat(action.payload)
-    });
-  }
-
-  if (action.type === DATA_LOADED) {
-    return Object.assign({}, state, {
-      remoteBooks: state.remoteBooks.concat(action.payload)
-    });
-  }
-  return state;
-}
+const rootReducer = combineReducers({
+  sessionState: sessionReducer,
+  userState: userReducer,
+  messageState: messageReducer
+});
 
 export default rootReducer;
