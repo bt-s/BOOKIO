@@ -85,7 +85,8 @@ const SignUpFormBase = props => {
 };
 
 SignUpFormBase.propTypes = {
-  firebase: PropTypes.object
+  firebase: PropTypes.object,
+  history: PropTypes.object
 };
 
 const SignUpLink = () => (

@@ -58,6 +58,11 @@ const SignInFacebookBase = props => {
   );
 };
 
+SignInFacebookBase.propTypes = {
+  firebase: PropTypes.object,
+  history: PropTypes.object
+};
+
 const SignInFormBase = props => {
   const email = useFormInput('');
   const password = useFormInput('');
@@ -97,7 +102,8 @@ const SignInFormBase = props => {
 };
 
 SignInFormBase.propTypes = {
-  firebase: PropTypes.object
+  firebase: PropTypes.object,
+  history: PropTypes.object
 };
 
 const SignInForm = compose(
