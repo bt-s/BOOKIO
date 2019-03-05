@@ -34,7 +34,7 @@ const LoginManagementBase = props => {
 
   useEffect(() => {
     fetchSignInMethods();
-  });
+  }, [activeSignInMethods]);
 
   const fetchSignInMethods = () => {
     props.firebase.auth
