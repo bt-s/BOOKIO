@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import {withFirebase} from '../Firebase';
 
+import Button from '../Button/Button';
 import DefaultLoginToggle from './DefaultLoginToggle';
 
 const SIGN_IN_METHODS = [
@@ -106,16 +107,16 @@ const SocialLoginToggle = ({
   onUnlink
 }) =>
   isEnabled ? (
-    <button
-      type="button"
+    <Button
       onClick={() => onUnlink(signInMethod.id)}
-      disabled={onlyOneLeft}>
-      Deactivate {signInMethod.id}
-    </button>
+      disabled={onlyOneLeft}
+      text={`Deactivate ${signInMethod.id}`}
+    />
   ) : (
-    <button type="button" onClick={() => onLink(signInMethod.provider)}>
-      Link {signInMethod.id}
-    </button>
+    <Button
+      onClick={() => onLink(signInMethod.provider)}
+      text={`Link {signInMethod.id}`}
+    />
   );
 
 const LoginManagement = withFirebase(LoginManagementBase);

@@ -5,6 +5,9 @@ import {compose} from 'recompose';
 
 import {useFormInput} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
+
+import Button from '../Button/Button';
+
 import * as ROUTES from '../../constants/routes';
 
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
@@ -75,9 +78,7 @@ const SignUpFormBase = props => {
         placeholder="Confirm password"
         {...passwordTwo}
       />
-      <button disabled={isInvalid} type="submit">
-        Sign up
-      </button>
+      <Button disabled={isInvalid} type="submit" text="Sign up" />
 
       {error && <p>{error.message}</p>}
     </form>

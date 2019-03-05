@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
 import {useFormInput} from '../../hooks/hooks';
+import Button from '../Button/Button';
 import {SignUpLink} from '../SignUp/SignUp';
 import {PasswordForgetLink} from '../PasswordForget/PasswordForget';
 import {withFirebase} from '../Firebase';
@@ -52,7 +53,7 @@ const SignInFacebookBase = props => {
 
   return (
     <form onSubmit={onSubmit}>
-      <button type="submit">Sign in with Facebook</button>
+      <Button type="submit" text="Sign in with Facebook" />
       {error && <p>{error.message}</p>}
     </form>
   );
@@ -92,9 +93,7 @@ const SignInFormBase = props => {
         type="password"
         {...password}
       />
-      <button disabled={isInvalid} type="submit">
-        Sign in
-      </button>
+      <Button disabled={isInvalid} type="submit" text="Sign in" />
 
       {error && <p>{error.message}</p>}
     </form>

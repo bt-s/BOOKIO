@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import {useFormInput} from '../../hooks/hooks';
 
+import Button from '../Button/Button';
+
 const DefaultLoginToggle = props => {
   const passwordOne = useFormInput('');
   const passwordTwo = useFormInput('');
@@ -19,12 +21,11 @@ const DefaultLoginToggle = props => {
     passwordOne.value !== passwordTwo.value || passwordOne === '';
 
   return isEnabled ? (
-    <button
-      type="button"
+    <Button
       onClick={() => onUnlink(signInMethod.id)}
-      disabled={onlyOneLeft}>
-      Deactivate {signInMethod.id}
-    </button>
+      disabled={onlyOneLeft}
+      text={`Deactivate ${signInMethod.id}`}
+    />
   ) : (
     <form onSubmit={onSubmit}>
       <input
@@ -39,9 +40,11 @@ const DefaultLoginToggle = props => {
         placeholder="Confirm new password"
         {...passwordTwo}
       />
-      <button disabled={isInvalid} type="submit">
-        Link {signInMethod.id}
-      </button>
+      <Button
+        disabled={isInvalid}
+        type="submit"
+        text={`Link ${signInMethod.id}`}
+      />
     </form>
   );
 };
