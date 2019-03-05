@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 
 import {AuthUserContext, withAuthorization} from '../Session/Session';
 import {useFormInput} from '../../hooks/hooks';
@@ -105,6 +106,11 @@ const LoginManagementBase = props => {
   );
 };
 
+LoginManagementBase.propTypes = {
+  firebase: PropTypes.object,
+  authUser: PropTypes.object
+};
+
 const SocialLoginToggle = ({
   onlyOneLeft,
   isEnabled,
@@ -166,6 +172,13 @@ const DefaultLoginToggle = props => {
       </button>
     </form>
   );
+};
+
+DefaultLoginToggle.propTypes = {
+  onlyOneLeft: PropTypes.bool,
+  isEnabled: PropTypes.bool,
+  signInMethod: PropTypes.object,
+  onUnlink: PropTypes.func
 };
 
 const LoginManagement = withFirebase(LoginManagementBase);
