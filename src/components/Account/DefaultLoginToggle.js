@@ -23,7 +23,7 @@ const DefaultLoginToggle = props => {
       type="button"
       onClick={() => onUnlink(signInMethod.id)}
       disabled={onlyOneLeft}>
-      Deactivate B {signInMethod.id}
+      Deactivate {signInMethod.id}
     </button>
   ) : (
     <form onSubmit={onSubmit}>
