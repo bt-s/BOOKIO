@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
+import Button from '../Button/Button';
+
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
@@ -44,9 +46,7 @@ const PasswordForgetFormBase = props => {
         onChange={onChange}
         value={email}
       />
-      <button disabled={isInvalid} type="submit">
-        Reset my password
-      </button>
+      <Button disabled={isInvalid} type="submit" text="Reset my password" />
 
       {error && <p>{error.message}</p>}
     </form>

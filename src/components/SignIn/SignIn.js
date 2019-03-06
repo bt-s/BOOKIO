@@ -4,10 +4,21 @@ import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
 import {useFormInput} from '../../hooks/hooks';
+import Button from '../Button/Button';
 import {SignUpLink} from '../SignUp/SignUp';
 import {PasswordForgetLink} from '../PasswordForget/PasswordForget';
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+
+const ERROR_CODE_ACCOUNT_EXISTS =
+  'auth/account-exists-with-different-credential';
+
+const ERROR_MSG_ACCOUNT_EXISTS = `
+  An account with an E-Mail address to
+  this social account already exists. Try to login from
+  this account instead and associate your social accounts on
+  your personal account page.
+`;
 
 const SignInPage = () => (
   <div>
@@ -30,6 +41,10 @@ const SignInFacebookBase = props => {
         props.history.push(ROUTES.ACCOUNT);
       })
       .catch(error => {
+        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+          error.message = ERROR_MSG_ACCOUNT_EXISTS;
+        }
+
         setError(error);
       });
 
@@ -38,10 +53,15 @@ const SignInFacebookBase = props => {
 
   return (
     <form onSubmit={onSubmit}>
-      <button type="submit">Sign in with Facebook</button>
+      <Button type="submit" text="Sign in with Facebook" />
       {error && <p>{error.message}</p>}
     </form>
   );
+};
+
+SignInFacebookBase.propTypes = {
+  firebase: PropTypes.object,
+  history: PropTypes.object
 };
 
 const SignInFormBase = props => {
@@ -73,9 +93,7 @@ const SignInFormBase = props => {
         type="password"
         {...password}
       />
-      <button disabled={isInvalid} type="submit">
-        Sign in
-      </button>
+      <Button disabled={isInvalid} type="submit" text="Sign in" />
 
       {error && <p>{error.message}</p>}
     </form>
@@ -83,7 +101,8 @@ const SignInFormBase = props => {
 };
 
 SignInFormBase.propTypes = {
-  firebase: PropTypes.object
+  firebase: PropTypes.object,
+  history: PropTypes.object
 };
 
 const SignInForm = compose(

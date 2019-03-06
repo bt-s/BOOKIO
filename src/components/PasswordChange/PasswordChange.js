@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {useFormInput} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
 
+import Button from '../Button/Button';
+
 const PasswordChangeForm = props => {
   const passwordOne = useFormInput('');
   const passwordTwo = useFormInput('');
@@ -37,9 +39,7 @@ const PasswordChangeForm = props => {
         placeholder="Confirm new password"
         {...passwordTwo}
       />
-      <button disabled={isInvalid} type="submit">
-        Reset my password
-      </button>
+      <Button disabled={isInvalid} type="submit" text="Reset my password" />
 
       {error && <p>{error.message}</p>}
     </form>
