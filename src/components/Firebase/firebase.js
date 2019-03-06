@@ -1,5 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 
 import {firebaseAPIKey} from '../APIKeys/APIKeys';
 
@@ -22,6 +23,7 @@ class Firebase {
 
     this.emailAuthProvider = app.auth.EmailAuthProvider;
     this.auth = app.auth();
+    this.db = app.database();
 
     this.facebookProvider = new app.auth.FacebookAuthProvider();
   }
@@ -45,6 +47,10 @@ class Firebase {
     this.auth.currentUser.sendEmailVerification({
       url: REACT_APP_CONFIRMATION_EMAIL_REDIRECT
     });
+
+  // *** API ***
+  user = uid => this.db.ref(`users/${uid}`);
+  users = () => this.db.ref('users');
 }
 
 export default Firebase;
