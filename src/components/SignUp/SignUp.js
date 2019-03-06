@@ -46,11 +46,14 @@ const SignUpFormBase = props => {
     props.firebase
       .doCreateUserWithEmailAndPassword(email.value, passwordOne.value)
       .then(authUser => {
-        return props.firebase.user(authUser.user.uid).set({
-          usernameValue,
-          emailValue,
-          roles
-        });
+        return props.firebase.user(authUser.user.uid).set(
+          {
+            usernameValue,
+            emailValue,
+            roles
+          },
+          {merge: true}
+        );
       })
       .then(authUser => {
         username.value = '';

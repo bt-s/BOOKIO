@@ -15,18 +15,15 @@ const AdminPage = props => {
   useEffect(() => {
     setLoading(true);
 
-    props.firebase.users().on('value', snapshot => {
-      const usersObject = snapshot.val();
+    const unsubscribe = props.firebase.users().onSnapshot(snapshot => {
+      let users = [];
 
-      const usersList = Object.keys(usersObject).map(key => ({
-        ...usersObject[key],
-        uid: key
-      }));
+      snapshot.forEach(doc => users.push({...doc.data(), uid: doc.id}));
 
-      setUsers(usersList);
+      setUsers(users);
       setLoading(false);
 
-      return [setLoading(false), props.firebase.users().off()];
+      return [setLoading(false), unsubscribe()];
     });
   }, [users]);
 
