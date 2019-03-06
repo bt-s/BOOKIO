@@ -53,6 +53,7 @@ DefaultLoginToggle.propTypes = {
   onlyOneLeft: PropTypes.bool,
   isEnabled: PropTypes.bool,
   signInMethod: PropTypes.object,
+  onLink: PropTypes.func,
   onUnlink: PropTypes.func
 };
 
