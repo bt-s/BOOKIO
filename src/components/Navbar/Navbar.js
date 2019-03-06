@@ -12,12 +12,23 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
 import {AuthUserContext} from '../Session/Session';
 import Button from '../Button/Button';
 import SignOut from '../SignOut/SignOut';
 
-const NavbarAuth = () => <SignOut />;
+const NavbarAuth = ({authUser}) =>
+  authUser.roles.includes(ROLES.ADMIN) && authUser.emailVerified ? (
+    <React.Fragment>
+      <Link to={ROUTES.ADMIN} className="navbar-admin">
+        Admin
+      </Link>
+      <SignOut />
+    </React.Fragment>
+  ) : (
+    <SignOut />
+  );
 
 const NavbarNonAuth = () => (
   <React.Fragment>
@@ -60,12 +71,6 @@ const Navbar = props => {
     </Link>
   );
 
-  const adminLink = (
-    <Link to={ROUTES.ADMIN} className="navbar-admin">
-      Admin
-    </Link>
-  );
-
   const mobileMenuButton = (
     <Button
       className="navbar-mobile-menu"
@@ -86,13 +91,12 @@ const Navbar = props => {
         {itemSearchBar}
         {bookShelfLink}
         {accountLink}
-        {adminLink}
         {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
         <AuthUserContext.Consumer>
           {authUser =>
             authUser ? (
               authUser.emailVerified ? (
-                <NavbarAuth />
+                <NavbarAuth authUser={authUser} />
               ) : null
             ) : (
               <NavbarNonAuth />
