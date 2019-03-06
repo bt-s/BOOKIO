@@ -10,7 +10,7 @@ const withAuthentication = Component => {
     );
 
     useEffect(() => {
-      const listener = props.firebase.auth.onAuthStateChanged(
+      const listener = props.firebase.onAuthUserListener(
         authUser => {
           localStorage.setItem('authUser', JSON.stringify(authUser));
           setAuthUser(authUser);
