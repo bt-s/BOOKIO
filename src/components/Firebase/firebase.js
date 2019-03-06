@@ -3,6 +3,8 @@ import 'firebase/auth';
 
 import {firebaseAPIKey} from '../APIKeys/APIKeys';
 
+const REACT_APP_CONFIRMATION_EMAIL_REDIRECT = 'http://localhost:3000';
+
 const devConfig = {
   apiKey: firebaseAPIKey,
   authDomain: 'bookio-5c798.firebaseapp.com',
@@ -38,6 +40,11 @@ class Firebase {
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
+
+  doSendEmailVerification = () =>
+    this.auth.currentUser.sendEmailVerification({
+      url: REACT_APP_CONFIRMATION_EMAIL_REDIRECT
+    });
 }
 
 export default Firebase;

@@ -40,6 +40,9 @@ const SignUpFormBase = props => {
       .then(authUser => {
         props.history.push(ROUTES.ACCOUNT);
       })
+      .then(() => {
+        return props.firebase.doSendEmailVerification();
+      })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
