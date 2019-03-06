@@ -25,7 +25,7 @@ const AdminPage = props => {
 
       return [setLoading(false), unsubscribe()];
     });
-  }, [users]);
+  }, []);
 
   return (
     <div>
