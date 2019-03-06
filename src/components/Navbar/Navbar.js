@@ -82,7 +82,15 @@ const Navbar = props => {
         {accountLink}
         {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
         <AuthUserContext.Consumer>
-          {authUser => (authUser ? <NavbarAuth /> : <NavbarNonAuth />)}
+          {authUser =>
+            authUser ? (
+              authUser.emailVerified ? (
+                <NavbarAuth />
+              ) : null
+            ) : (
+              <NavbarNonAuth />
+            )
+          }
         </AuthUserContext.Consumer>
       </div>
     </nav>

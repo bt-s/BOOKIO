@@ -9,10 +9,12 @@ import DefaultLoginToggle from './DefaultLoginToggle';
 const SIGN_IN_METHODS = [
   {
     id: 'password',
+    method: 'E-mail login',
     provider: null
   },
   {
     id: 'facebook.com',
+    method: 'Facebook login',
     provider: 'facebookProvider'
   }
 ];
@@ -110,12 +112,12 @@ const SocialLoginToggle = ({
     <Button
       onClick={() => onUnlink(signInMethod.id)}
       disabled={onlyOneLeft}
-      text={`Deactivate ${signInMethod.id}`}
+      text={`Deactivate ${signInMethod.method}`}
     />
   ) : (
     <Button
       onClick={() => onLink(signInMethod.provider)}
-      text={`Link {signInMethod.id}`}
+      text={`Link ${signInMethod.method}`}
     />
   );
 
