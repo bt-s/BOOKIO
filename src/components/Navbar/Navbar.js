@@ -60,6 +60,12 @@ const Navbar = props => {
     </Link>
   );
 
+  const adminLink = (
+    <Link to={ROUTES.ADMIN} className="navbar-admin">
+      Admin
+    </Link>
+  );
+
   const mobileMenuButton = (
     <Button
       className="navbar-mobile-menu"
@@ -80,6 +86,7 @@ const Navbar = props => {
         {itemSearchBar}
         {bookShelfLink}
         {accountLink}
+        {adminLink}
         {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
         <AuthUserContext.Consumer>
           {authUser =>
