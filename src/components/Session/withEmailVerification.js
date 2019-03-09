@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {compose} from 'recompose';
+import {withRouter} from 'react-router-dom';
 
-import AuthUserContext from './context';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
@@ -20,38 +22,40 @@ const withEmailVerification = Component => {
       props.firebase.doSendEmailVerification().then(() => setIsSent(true));
     };
 
-    return (
-      <AuthUserContext.Consumer>
-        {authUser =>
-          needsEmailVerification(authUser) ? (
-            <div>
-              {isSent ? (
-                <p>
-                  An e-mail verfication has been sent: Check your inbox (or spam
-                  folder) for a confirmation e-mail. Refresh this page once you
-                  confirmed our e-mail.
-                </p>
-              ) : (
-                <p>
-                  Verify your E-mail: Check your inbox (or spam folder) for a
-                  confirmation e-mail or send another confirmation e-mail.
-                </p>
-              )}
-              <Button
-                onClick={onSendEmailVerification}
-                disabled={isSent}
-                text="Send confirmation e-mail"
-              />
-            </div>
-          ) : (
-            <Component {...props} />
-          )
-        }
-      </AuthUserContext.Consumer>
+    return needsEmailVerification(props.authUser) ? (
+      <div>
+        {isSent ? (
+          <p>
+            An e-mail verfication has been sent: Check your inbox (or spam
+            folder) for a confirmation e-mail. Refresh this page once you
+            confirmed our e-mail.
+          </p>
+        ) : (
+          <p>
+            Verify your E-mail: Check your inbox (or spam folder) for a
+            confirmation e-mail or send another confirmation e-mail.
+          </p>
+        )}
+        <Button
+          onClick={onSendEmailVerification}
+          disabled={isSent}
+          text="Send confirmation e-mail"
+        />
+      </div>
+    ) : (
+      <Component {...props} />
     );
   };
 
-  return withFirebase(WithEmailVerification);
+  const mapStateToProps = state => ({
+    authUser: state.sessionState.authUser
+  });
+
+  return compose(
+    withRouter,
+    withFirebase,
+    connect(mapStateToProps)
+  )(WithEmailVerification);
 };
 
 export default withEmailVerification;

@@ -37,6 +37,16 @@ const SignInFacebookBase = props => {
     props.firebase
       .doSignInWithFacebook()
       .then(socialAuthUser => {
+        return props.firebase.user(socialAuthUser.user.uid).set(
+          {
+            username: socialAuthUser.user.displayName,
+            email: socialAuthUser.user.email,
+            roles: []
+          },
+          {merge: true}
+        );
+      })
+      .then(() => {
         setError(null);
         props.history.push(ROUTES.ACCOUNT);
       })

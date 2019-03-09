@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import {
   faUser,
@@ -12,12 +13,22 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
-import {AuthUserContext} from '../Session/Session';
 import Button from '../Button/Button';
 import SignOut from '../SignOut/SignOut';
 
-const NavbarAuth = () => <SignOut />;
+const NavbarAuth = ({authUser}) =>
+  authUser.roles.includes(ROLES.ADMIN) && authUser.emailVerified ? (
+    <React.Fragment>
+      <Link to={ROUTES.ADMIN} className="navbar-admin">
+        Admin
+      </Link>
+      <SignOut />
+    </React.Fragment>
+  ) : (
+    <SignOut />
+  );
 
 const NavbarNonAuth = () => (
   <React.Fragment>
@@ -40,7 +51,11 @@ const Navbar = props => {
 
   const mobileBreakPoint = 768;
 
-  const brandLogo = <div className="navbar-brand">{props.logo}</div>;
+  const brandLogo = (
+    <Link to={ROUTES.LANDING}>
+      <div className="navbar-brand">{props.logo}</div>
+    </Link>
+  );
 
   const itemSearchBar = (
     <div className="navbar-search-container">
@@ -81,17 +96,13 @@ const Navbar = props => {
         {bookShelfLink}
         {accountLink}
         {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
-        <AuthUserContext.Consumer>
-          {authUser =>
-            authUser ? (
-              authUser.emailVerified ? (
-                <NavbarAuth />
-              ) : null
-            ) : (
-              <NavbarNonAuth />
-            )
-          }
-        </AuthUserContext.Consumer>
+        {props.authUser ? (
+          props.authUser.emailVerified ? (
+            <NavbarAuth authUser={props.authUser} />
+          ) : null
+        ) : (
+          <NavbarNonAuth />
+        )}
       </div>
     </nav>
   );
@@ -105,4 +116,8 @@ Navbar.defaultProps = {
   logo: 'BOOKIO'
 };
 
-export default Navbar;
+const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser
+});
+
+export default withRouter(connect(mapStateToProps)(Navbar));
