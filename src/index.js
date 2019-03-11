@@ -49,38 +49,102 @@ const TestComponent = props => {
   );
 };
 
-const AppBase = () => (
+const WithNavbar = ({children}) => (
   <React.Fragment>
     <Navbar />
-    <div className="page-container">
-      <Switch>
-        <Route exact path={ROUTES.LANDING} render={() => <TestComponent />} />
-        <Route path={ROUTES.SIGN_UP} render={() => <SignUp />} />
-        <Route path={ROUTES.LOG_IN} render={() => <SignIn />} />
-        <Route
-          path={ROUTES.PASSWORD_FORGET}
-          render={() => <PasswordForgetPage />}
-        />
-        <Route path={ROUTES.ACCOUNT} render={() => <AccountPage />} />
-        <Route path={ROUTES.ADMIN} render={() => <AdminPage />} />
-        <Route
-          path={ROUTES.BOOKS}
-          render={() => <h2>This is the books page.</h2>}
-        />
-        <Route
-          path={ROUTES.BOOK_DETAIL}
-          render={() => <h2>This is the book detail page.</h2>}
-        />
-        <Route
-          path={ROUTES.ADD_BOOK}
-          render={() => <h2>This is the add book page.</h2>}
-        />
-        <Route
-          path={ROUTES.MY_BOOK_HISTORY}
-          render={() => <h2>This is the my book history page.</h2>}
-        />
-      </Switch>
-    </div>
+    <div className="page-container">{children}</div>
+  </React.Fragment>
+);
+
+const WithoutNavbar = ({children}) => (
+  <div className="page-container">{children}</div>
+);
+
+const AppBase = () => (
+  <React.Fragment>
+    <Switch>
+      <Route
+        exact
+        path={ROUTES.LANDING}
+        render={() => (
+          <WithNavbar>
+            <TestComponent />
+          </WithNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.PASSWORD_FORGET}
+        render={() => (
+          <WithNavbar>
+            <PasswordForgetPage />
+          </WithNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.ACCOUNT}
+        render={() => (
+          <WithNavbar>
+            <AccountPage />
+          </WithNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.ADMIN}
+        render={() => (
+          <WithNavbar>
+            <AdminPage />
+          </WithNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.BOOKS}
+        render={() => (
+          <WithNavbar>
+            <h2>This is the books page.</h2>
+          </WithNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.BOOK_DETAIL}
+        render={() => (
+          <WithNavbar>
+            <h2>This is the book detail page.</h2>
+          </WithNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.ADD_BOOK}
+        render={() => (
+          <WithNavbar>
+            <h2>This is the add book page.</h2>
+          </WithNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.MY_BOOK_HISTORY}
+        render={() => (
+          <WithNavbar>
+            <h2>This is the my book history page.</h2>
+          </WithNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.SIGN_UP}
+        render={() => (
+          <WithoutNavbar>
+            <SignUp />
+          </WithoutNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.LOG_IN}
+        render={() => (
+          <WithoutNavbar>
+            <SignIn />
+          </WithoutNavbar>
+        )}
+      />
+    </Switch>
   </React.Fragment>
 );
 
