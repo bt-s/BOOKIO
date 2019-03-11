@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
 import {useFormInput} from '../../hooks/hooks';
+import BrandLogo from '../BrandLogo/BrandLogo';
 import Button from '../Button/Button';
 import {SignUpLink} from '../SignUp/SignUp';
 import {PasswordForgetLink} from '../PasswordForget/PasswordForget';
@@ -21,8 +22,11 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 `;
 
 const SignInPage = () => (
-  <div>
-    <h1>SignIn</h1>
+  <div className="sign-in-page">
+    <span className="header">
+      <h1>Sign in to</h1>
+      <BrandLogo styling="secondary" />
+    </span>
     <SignInForm />
     <SignInFacebook />
     <PasswordForgetLink />
