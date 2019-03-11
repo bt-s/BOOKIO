@@ -67,7 +67,7 @@ a {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  padding-top: $navbar-height;
+  padding-top: $navbar-height-mobile;
 
   @include media-breakpoint(xs) {
     max-width: $max-width-xs;
@@ -75,6 +75,7 @@ a {
 
   @include media-breakpoint(sm) {
     max-width: $max-width-sm;
+    padding-top: $navbar-height;
   }
 
   @include media-breakpoint(md) {
