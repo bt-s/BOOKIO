@@ -15,6 +15,7 @@ import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/SignIn';
 import PasswordForgetPage from './components/PasswordForget/PasswordForget';
 import Firebase, {FirebaseContext} from './components/Firebase';
+import AddNewBookPage from './pages/AddNewBook';
 
 import './styling/style.scss';
 
@@ -75,7 +76,7 @@ const AppBase = () => (
         />
         <Route
           path={ROUTES.ADD_BOOK}
-          render={() => <h2>This is the add book page.</h2>}
+          render={() => <AddNewBookPage />}
         />
         <Route
           path={ROUTES.MY_BOOK_HISTORY}
