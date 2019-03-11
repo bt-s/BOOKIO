@@ -3,7 +3,7 @@ $logo-vertical-border: 2px solid white;
 
 $border-radius: 2px;
 
-$navbar-icon-size: 22px;
+$navbar-icon-size: 20px;
 
 .navbar {
   position: fixed;
@@ -156,6 +156,19 @@ $navbar-icon-size: 22px;
 
   path {
     fill: $white;
+  }
+
+  svg {
+    font-size: $navbar-icon-size;
+    width: $navbar-icon-size;
+    height: $navbar-icon-size;
+  }
+}
+
+.navbar-bookshelves,
+.navbar-account {
+  svg {
+    margin-right: $padding-sm;
   }
 }
 
