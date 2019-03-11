@@ -32,7 +32,6 @@ export const fetchBookTitleSuggestions = (payload) => {
       url: `https://www.goodreads.com/book/auto_complete?format=json&q=${payload}`
     })
       .then((res) => {
-        console.log(res);
         dispatch(success(res.data));
       })
       .catch((err) => {
