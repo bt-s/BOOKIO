@@ -15,6 +15,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
+import BrandLogo from '../BrandLogo/BrandLogo';
 import Button from '../Button/Button';
 import SignOut from '../SignOut/SignOut';
 
@@ -74,13 +75,6 @@ const Navbar = props => {
 
   const mobileBreakPoint = 768;
 
-  const brandLogo = (
-    <Link to={ROUTES.LANDING} className="navbar-brand">
-      <span className="left">{props.logoLeft}</span>
-      <span className="right">{props.logoRight}</span>
-    </Link>
-  );
-
   const itemSearchBar = (
     <div className="navbar-search-container">
       A search component will be inserted here...
@@ -103,7 +97,7 @@ const Navbar = props => {
   return (
     <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
       <div className="navbar-content-container">
-        {brandLogo}
+        <BrandLogo />
         {itemSearchBar}
         {props.authUser ? (
           props.authUser.emailVerified ? (

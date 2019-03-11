@@ -1,0 +1,28 @@
+$logo-horizontal-border: 3px solid white;
+$logo-vertical-border: 2px solid white;
+
+$border-radius: 2px;
+
+.navbar-brand {
+  font-size: 15px;
+  text-decoration: none;
+
+  @include media-breakpoint(sm) {
+    font-size: 20px;
+  }
+
+  .left {
+    color: $white;
+  }
+
+  .right {
+    color: $black-lighter;
+    background-color: $white;
+    margin-left: 4px;
+    border-right: $logo-horizontal-border;
+    border-left: $logo-horizontal-border;
+    border-top: $logo-vertical-border;
+    border-bottom: $logo-vertical-border;
+    border-radius: $border-radius;
+  }
+}
