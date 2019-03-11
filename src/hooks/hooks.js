@@ -12,3 +12,16 @@ export function useFormInput() {
     onChange: handleChange
   };
 }
+
+export function useFormCheckbox() {
+  const [checked, setChecked] = useState(false);
+
+  function handleChange(e) {
+    setChecked(e.target.checked);
+  }
+
+  return {
+    checked,
+    onChange: handleChange
+  };
+}

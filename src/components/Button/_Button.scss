@@ -1,15 +1,19 @@
 @mixin button-bg($bg) {
   background: $bg;
 
-  &:hover {
-    background: darken($bg, 8%);
-    transition: all 0.3s ease;
-  }
-  &:active,
-  &:focus {
-    background: darken($bg, 25%);
+  &:not([disabled]) {
+    &:hover {
+      background: darken($bg, 8%);
+      transition: all 0.3s ease;
+    }
+
+    &:active,
+    &:focus {
+      background: darken($bg, 25%);
+    }
   }
 }
+
 .btn {
   color: $black;
   text-decoration: none;
@@ -17,5 +21,9 @@
   font-size: 18px;
   font-weight: 500;
   border: 3px solid $black;
+  @include button-bg(yellow);
+}
+
+.btn:not([disabled]) {
   cursor: pointer;
 }

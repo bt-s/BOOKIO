@@ -1,37 +1,52 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
+import {compose} from 'recompose';
+import {withRouter} from 'react-router-dom';
 
-import {AuthUserContext} from '../Session/Session';
-import {withFirebase} from '../Firebase/context';
+import {withFirebase} from '../Firebase';
 
 const withAuthentication = Component => {
-  const WithAuthentication = props => {
-    const [authUser, setAuthUser] = useState(
-      JSON.parse(localStorage.getItem('authUser'))
-    );
+  class WithAuthentication extends React.Component {
+    constructor(props) {
+      super(props);
 
-    useEffect(() => {
-      const listener = props.firebase.auth.onAuthStateChanged(
+      this.props.onSetAuthUser(JSON.parse(localStorage.getItem('authUser')));
+    }
+
+    componentDidMount() {
+      this.listener = this.props.firebase.onAuthUserListener(
         authUser => {
           localStorage.setItem('authUser', JSON.stringify(authUser));
-          setAuthUser(authUser);
+          this.props.onSetAuthUser(authUser);
         },
         () => {
           localStorage.removeItem('authUser');
-          setAuthUser(null);
+          this.props.onSetAuthUser(null);
         }
       );
+    }
 
-      return listener();
-    });
+    componentWillUnmount() {
+      this.listener();
+    }
 
-    return (
-      <AuthUserContext.Provider value={authUser}>
-        <Component {...props} />
-      </AuthUserContext.Provider>
-    );
-  };
+    render() {
+      return <Component {...this.props} />;
+    }
+  }
 
-  return withFirebase(WithAuthentication);
+  const mapDispatchToProps = dispatch => ({
+    onSetAuthUser: authUser => dispatch({type: 'AUTH_USER_SET', authUser})
+  });
+
+  return compose(
+    withFirebase,
+    withRouter,
+    connect(
+      null,
+      mapDispatchToProps
+    )
+  )(WithAuthentication);
 };
 
 export default withAuthentication;

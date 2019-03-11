@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
+import Button from '../Button/Button';
+
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
@@ -16,12 +18,17 @@ export default function PasswordForgetPage() {
 
 const PasswordForgetFormBase = props => {
   const [email, setEmail] = useState('');
+  const [isResetRequested, setIsResetRequested] = useState(false);
   const [error, setError] = useState(null);
+
+  const EMAIL_SENT = `
+    An e-mail with a link to reset your password has been sent to ${email}.
+  `;
 
   const onSubmit = e => {
     props.firebase
       .doPasswordReset(email)
-      .then(() => setEmail)
+      .then(() => setIsResetRequested(true))
       .catch(error => {
         setError(error);
       });
@@ -35,7 +42,9 @@ const PasswordForgetFormBase = props => {
 
   const isInvalid = email === '';
 
-  return (
+  return isResetRequested ? (
+    <p>{EMAIL_SENT}</p>
+  ) : (
     <form onSubmit={onSubmit}>
       <input
         placeholder="Email address"
@@ -44,9 +53,12 @@ const PasswordForgetFormBase = props => {
         onChange={onChange}
         value={email}
       />
-      <button disabled={isInvalid} type="submit">
-        Reset my password
-      </button>
+      <Button
+        disabled={isInvalid}
+        type="submit"
+        onClick={onSubmit}
+        text="Reset my password"
+      />
 
       {error && <p>{error.message}</p>}
     </form>

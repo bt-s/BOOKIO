@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const Button = props => (
   <button
     className={props.className}
+    disabled={props.disabled}
     id={props.id}
     onClick={props.onClick}
     type={props.type}>
@@ -13,6 +14,7 @@ const Button = props => (
 
 Button.propTypes = {
   className: PropTypes.string,
+  disabled: PropTypes.bool,
   id: PropTypes.string,
   onClick: PropTypes.func,
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -21,6 +23,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   className: 'btn',
+  disabled: false,
   text: '',
   type: 'button'
 };
