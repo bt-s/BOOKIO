@@ -7,7 +7,7 @@ import {useFormInput, useFormCheckbox} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
-import {SignInFacebook} from '../SignIn/SignIn';
+import {SignInFacebook} from '../Authentication/SignIn';
 
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';

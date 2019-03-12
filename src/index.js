@@ -12,9 +12,9 @@ import AdminPage from './components/Admin/Admin';
 import BookItem from './components/BookItem/BookItem';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
-import SignUp from './components/SignUp/SignUp';
-import SignIn from './components/SignIn/SignIn';
-import PasswordForgetPage from './components/PasswordForget/PasswordForget';
+import SignUp from './components/Authentication/SignUp';
+import SignInPage from './pages/SignInPage';
+import PasswordForgetPage from './components/Authentication/PasswordForget';
 import Firebase, {FirebaseContext} from './components/Firebase';
 
 import './styling/style.scss';
@@ -140,7 +140,7 @@ const AppBase = () => (
         path={ROUTES.LOG_IN}
         render={() => (
           <WithoutNavbar>
-            <SignIn />
+            <SignInPage />
           </WithoutNavbar>
         )}
       />

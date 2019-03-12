@@ -4,10 +4,8 @@ import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
 import {useFormInput} from '../../hooks/hooks';
-import BrandLogo from '../BrandLogo/BrandLogo';
 import Button from '../Button/Button';
-import {SignUpLink} from '../SignUp/SignUp';
-import {PasswordForgetLink} from '../PasswordForget/PasswordForget';
+import {PasswordForgetLink} from '../Authentication/PasswordForget';
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
@@ -24,25 +22,6 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   this account instead and associate your social accounts on
   your personal account page.
 `;
-
-const SignInPage = () => (
-  <div className="sign-in-page">
-    <div className="sign-in-header">
-      <h1>Sign in to</h1>
-      <BrandLogo styling="secondary" />
-    </div>
-
-    <div className="sign-in-body">
-      <SignInForm />
-      <div className="spacer">OR</div>
-      <SignInFacebook />
-    </div>
-
-    <div className="sign-in-sign-up">
-      <SignUpLink />
-    </div>
-  </div>
-);
 
 const SignInFacebookBase = props => {
   const [error, setError] = useState(null);
@@ -146,7 +125,5 @@ const SignInFacebook = compose(
   withRouter,
   withFirebase
 )(SignInFacebookBase);
-
-export default SignInPage;
 
 export {SignInForm, SignInFacebook};

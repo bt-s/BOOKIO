@@ -17,7 +17,7 @@ import * as ROLES from '../../constants/roles';
 
 import BrandLogo from '../BrandLogo/BrandLogo';
 import Button from '../Button/Button';
-import SignOut from '../SignOut/SignOut';
+import SignOut from '../Authentication/SignOut';
 
 const bookShelfLink = (
   <Link to={ROUTES.MY_BOOK_HISTORY} className="navbar-bookshelves">
