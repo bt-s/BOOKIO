@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import uuid from 'uuid/v1';
-import { debounce, throttle } from '../../helper/helper'
+import {throttle} from '../../helper/helper';
 
+import {addNewUserBook} from '../../redux/actions/addNewUserBook';
+import {fetchBookTitleSuggestions} from '../../redux/actions/bookTitleSuggestions';
 
-import { addNewUserBook } from '../../redux/actions/addNewUserBook';
-import { fetchBookTitleSuggestions } from '../../redux/actions/bookTitleSuggestions';
+import Button from '../Button/Button';
 
 class AddNewBookForm extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       newBook: {
@@ -19,51 +20,53 @@ class AddNewBookForm extends Component {
         description: '',
         author: '',
         location: {},
-        imageURL: '',
+        imageURL: ''
       },
       suggestions: []
     };
-    this.getBookTitle = throttle((query) => this.props.fetchBookTitleSuggestions(query),700);
-  };
+    this.getBookTitle = throttle(
+      query => this.props.fetchBookTitleSuggestions(query),
+      700
+    );
+  }
 
-  
   /**
    * @function handleSubmit
    * @description handle all to be submitted data and pass it to redux action
    */
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
   };
 
-  handleTitleSuggestions = (e) => {
+  handleTitleSuggestions = e => {
     this.setState({
       ...this.state,
       newBook: {
         ...this.state.newBook,
         title: e.target.value
-      },
+      }
     });
     this.getBookTitle(e.target.value);
   };
-  
-  /** 
+
+  /**
    * @function handleChangeForm
    * @description change state value when there is a change in form
    */
-  handleChangeForm = (e) => {
+  handleChangeForm = e => {
     this.setState({
       ...this.state,
       newBook: {
         ...this.state.newBook,
         [e.target.name]: e.target.value
       }
-    })
-  }
+    });
+  };
 
-  componentDidMount (){
+  componentDidMount() {
     // TODO: Get location from props and set the location state here
     // TODO: set the owner state with ID from local storage
-  
+
     // Below is just dummy to set location and ID from local storage
     this.setState({
       ...this.state,
@@ -73,53 +76,72 @@ class AddNewBookForm extends Component {
         location: {}
       }
     });
-  };
+  }
 
-  render () {
-    const { newBook } = this.state;
-    
-    
+  render() {
+    const {newBook} = this.state;
+
     return (
       <React.Fragment>
         <h1> Add New Book Page</h1>
 
         <form onSubmit={this.handleSubmit}>
-        {/* TODO: Drop to upload image */}
+          {/* TODO: Drop to upload image */}
           <label>
             Title:
-            <input placeholder='Book Title' name='title' type='text' value={newBook.title} onChange={this.handleTitleSuggestions} />
+            <input
+              placeholder="Book Title"
+              name="title"
+              type="text"
+              value={newBook.title}
+              onChange={this.handleTitleSuggestions}
+            />
           </label>
           <label>
             Description:
-            <textarea placeholder='Description' name='description' type='text' value={newBook.description} onChange={this.handleChangeForm} />
+            <textarea
+              placeholder="Description"
+              name="description"
+              type="text"
+              value={newBook.description}
+              onChange={this.handleChangeForm}
+            />
           </label>
-         
-          <button type='submit'> Add New Book </button>{newBook.title}
+
+          <Button type="submit" text="Add New Book" />
+          {newBook.title}
         </form>
-        {
-          (this.props.isLoading)?<h3>Loading...</h3>:
+        {this.props.isLoading ? (
+          <h3>Loading...</h3>
+        ) : (
           <ul>
             {this.props.bookTitleSuggestions.map((suggestion, index) => {
-              return <li key={index}>{suggestion.bookTitleBare}</li>
+              return <li key={index}>{suggestion.bookTitleBare}</li>;
             })}
           </ul>
-        }
+        )}
       </React.Fragment>
-    )
+    );
   }
-};
+}
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     bookTitleSuggestions: state.bookState.bookTitleSuggestions,
-    isLoading: state.bookState.isLoading,
+    isLoading: state.bookState.isLoading
   };
 };
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchBookTitleSuggestions,
-  addNewUserBook
-}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchBookTitleSuggestions,
+      addNewUserBook
+    },
+    dispatch
+  );
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddNewBookForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddNewBookForm);
