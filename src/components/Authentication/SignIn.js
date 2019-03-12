@@ -94,7 +94,7 @@ const SignInFormBase = props => {
 
   return (
     <form onSubmit={onSubmit} className="auth-form">
-      <p className="form-header">E-mail</p>
+      <p className="form-header">E-mail address</p>
       <input placeholder="" name="email" type="text" {...email} />
       <p className="form-header">Password</p>
       <input placeholder="" name="password" type="password" {...password} />
