@@ -12,8 +12,8 @@ import AdminPage from './components/Admin/Admin';
 import BookItem from './components/BookItem/BookItem';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
-import SignUp from './components/Authentication/SignUp';
 import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './components/Authentication/PasswordForget';
 import Firebase, {FirebaseContext} from './components/Firebase';
 
@@ -132,7 +132,7 @@ const AppBase = () => (
         path={ROUTES.SIGN_UP}
         render={() => (
           <WithoutNavbar>
-            <SignUp />
+            <SignUpPage />
           </WithoutNavbar>
         )}
       />

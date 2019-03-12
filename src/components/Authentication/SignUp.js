@@ -7,7 +7,6 @@ import {useFormInput, useFormCheckbox} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
-import {SignInFacebook} from '../Authentication/SignIn';
 
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
@@ -21,15 +20,6 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   to sign-in with one of them. Afterward, associate your accounts
   on your personal account page.
 `;
-
-const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
-    <SignUpForm />
-    <SignInFacebook />
-    <LoginInLink />
-  </div>
-);
 
 const SignUpFormBase = props => {
   const username = useFormInput('');
@@ -127,7 +117,7 @@ const SignUpLink = () => (
   </p>
 );
 
-const LoginInLink = () => (
+const SignInLink = () => (
   <p>
     Have an account? <Link to={ROUTES.LOG_IN}>Sign in here</Link>
   </p>
@@ -138,6 +128,4 @@ const SignUpForm = compose(
   withFirebase
 )(SignUpFormBase);
 
-export default SignUpPage;
-
-export {SignUpForm, SignUpLink};
+export {SignUpForm, SignInLink, SignUpLink};
