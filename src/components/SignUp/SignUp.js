@@ -7,6 +7,7 @@ import {useFormInput, useFormCheckbox} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
+import {SignInFacebook} from '../SignIn/SignIn';
 
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
@@ -25,6 +26,7 @@ const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
     <SignUpForm />
+    <SignInFacebook />
     <LoginInLink />
   </div>
 );
@@ -85,23 +87,22 @@ const SignUpFormBase = props => {
 
   return (
     <form onSubmit={onSubmit}>
-      <input
-        name="username"
-        type="text"
-        placeholder="Full name"
-        {...username}
-      />
-      <input name="email" type="text" placeholder="Email address" {...email} />
+      <p className="form-header">Full name</p>
+      <input name="username" type="text" placeholder="" {...username} />
+      <p className="form-header">E-mail</p>
+      <input name="email" type="text" placeholder="" {...email} />
+      <p className="form-header">Password</p>
       <input
         name="passwordOne"
         type="password"
-        placeholder="Password"
+        placeholder=""
         {...passwordOne}
       />
+      <p className="form-header">Confirm password</p>
       <input
         name="passwordTwo"
         type="password"
-        placeholder="Confirm password"
+        placeholder=""
         {...passwordTwo}
       />
       <label>
@@ -128,7 +129,7 @@ const SignUpLink = () => (
 
 const LoginInLink = () => (
   <p>
-    Have an account? <Link to={ROUTES.SIGN_UP}>Sign in here</Link>
+    Have an account? <Link to={ROUTES.LOG_IN}>Sign in here</Link>
   </p>
 );
 
