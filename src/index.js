@@ -5,17 +5,18 @@ import {Provider} from 'react-redux';
 import store from './redux/store/index';
 
 import * as ROUTES from './constants/routes';
+
 import {withAuthentication} from './components/Session/Session';
+import Firebase, {FirebaseContext} from './components/Firebase';
+import Navbar from './components/Navbar/Navbar';
+import GoogleMap from './components/GoogleMap/GoogleMap';
+import BookItem from './components/BookItem/BookItem';
 
 import AccountPage from './components/Account/Account';
 import AdminPage from './components/Admin/Admin';
-import BookItem from './components/BookItem/BookItem';
-import Navbar from './components/Navbar/Navbar';
-import GoogleMap from './components/GoogleMap/GoogleMap';
-import SignUp from './components/SignUp/SignUp';
-import SignIn from './components/SignIn/SignIn';
-import PasswordForgetPage from './components/PasswordForget/PasswordForget';
-import Firebase, {FirebaseContext} from './components/Firebase';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
+import PasswordForgetPage from './pages/PasswordForgetPage';
 
 import './styling/style.scss';
 
@@ -132,7 +133,7 @@ const AppBase = () => (
         path={ROUTES.SIGN_UP}
         render={() => (
           <WithoutNavbar>
-            <SignUp />
+            <SignUpPage />
           </WithoutNavbar>
         )}
       />
@@ -140,7 +141,7 @@ const AppBase = () => (
         path={ROUTES.LOG_IN}
         render={() => (
           <WithoutNavbar>
-            <SignIn />
+            <SignInPage />
           </WithoutNavbar>
         )}
       />

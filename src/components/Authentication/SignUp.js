@@ -21,13 +21,6 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   on your personal account page.
 `;
 
-const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
-    <SignUpForm />
-  </div>
-);
-
 const SignUpFormBase = props => {
   const username = useFormInput('');
   const email = useFormInput('');
@@ -83,31 +76,35 @@ const SignUpFormBase = props => {
     username.value === '';
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        name="username"
-        type="text"
-        placeholder="Full name"
-        {...username}
-      />
-      <input name="email" type="text" placeholder="Email address" {...email} />
+    <form className="auth-form" onSubmit={onSubmit}>
+      <p className="form-header">Full name</p>
+      <input name="username" type="text" placeholder="" {...username} />
+      <p className="form-header">E-mail</p>
+      <input name="email" type="text" placeholder="" {...email} />
+      <p className="form-header">Password</p>
       <input
         name="passwordOne"
         type="password"
-        placeholder="Password"
+        placeholder=""
         {...passwordOne}
       />
+      <p className="form-header">Confirm password</p>
       <input
         name="passwordTwo"
         type="password"
-        placeholder="Confirm password"
+        placeholder=""
         {...passwordTwo}
       />
-      <label>
+      <label className="admin-label">
         Admin:
         <input name="isAdmin" type="checkbox" {...isAdmin} />
       </label>
-      <Button disabled={isInvalid} type="submit" text="Sign up" />
+      <Button
+        className="btn btn-auth"
+        disabled={isInvalid}
+        type="submit"
+        text="Sign up"
+      />
 
       {error && <p>{error.message}</p>}
     </form>
@@ -125,11 +122,15 @@ const SignUpLink = () => (
   </p>
 );
 
+const SignInLink = () => (
+  <p>
+    Have an account? <Link to={ROUTES.LOG_IN}>Sign in here</Link>
+  </p>
+);
+
 const SignUpForm = compose(
   withRouter,
   withFirebase
 )(SignUpFormBase);
 
-export default SignUpPage;
-
-export {SignUpForm, SignUpLink};
+export {SignUpForm, SignInLink, SignUpLink};

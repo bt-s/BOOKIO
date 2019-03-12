@@ -1,10 +1,12 @@
-.sign-in-page {
+$auth-form-width: 250px;
+
+.auth-page {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.sign-in-header {
+.auth-page-header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +18,7 @@
   }
 }
 
-.sign-in-body {
+.auth-page-body {
   .spacer {
     display: flex;
     justify-content: center;
@@ -25,17 +27,18 @@
   }
 }
 
-.sign-in-sign-up {
+.sign-in-sign-up-link {
   a {
     color: $orange;
   }
 }
 
-.sign-in-email-form {
+.auth-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 250px;
+  min-width: $auth-form-width;
+  max-width: $auth-form-width;
 
   .form-header {
     text-transform: uppercase;
@@ -50,22 +53,10 @@
     height: 35px;
     border-radius: 2px;
     padding: 0 $padding-sm;
+    margin-bottom: $padding-xs;
 
-    &:nth-of-type(1) {
-      margin-bottom: $padding-xs;
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
-}
-
-.sign-in-facebook-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 250px;
-}
-
-.pw-forget-link {
-  width: 100%;
-  text-align: right;
-  margin-bottom: $padding-xs;
 }
