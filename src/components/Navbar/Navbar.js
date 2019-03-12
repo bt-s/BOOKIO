@@ -94,13 +94,18 @@ const Navbar = props => {
     />
   );
 
+  let providerId;
+  if (props.authUser) {
+    providerId = props.authUser.providerData[0].providerId;
+  }
+
   return (
     <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
       <div className="navbar-content-container">
         <BrandLogo />
         {itemSearchBar}
         {props.authUser ? (
-          props.authUser.emailVerified ? (
+          props.authUser.emailVerified || providerId === 'facebook.com' ? (
             <NavbarAuth authUser={props.authUser} />
           ) : null
         ) : (
