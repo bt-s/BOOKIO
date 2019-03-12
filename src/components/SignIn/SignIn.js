@@ -23,14 +23,20 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 
 const SignInPage = () => (
   <div className="sign-in-page">
-    <span className="header">
+    <div className="sign-in-header">
       <h1>Sign in to</h1>
       <BrandLogo styling="secondary" />
-    </span>
-    <SignInForm />
-    <SignInFacebook />
-    <PasswordForgetLink />
-    <SignUpLink />
+    </div>
+
+    <div className="sign-in-body">
+      <SignInForm />
+      <SignInFacebook />
+      <PasswordForgetLink />
+    </div>
+
+    <div className="sign-in-sign-up">
+      <SignUpLink />
+    </div>
   </div>
 );
 
@@ -66,8 +72,7 @@ const SignInFacebookBase = props => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <Button type="submit" text="Sign in with Facebook" />
+    <form onSubmit={onSubmit} className="sign-in-facebook-form">
       {error && <p>{error.message}</p>}
     </form>
   );
@@ -99,7 +104,7 @@ const SignInFormBase = props => {
   const isInvalid = password === '' || email === '';
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="sign-in-email-form">
       <input placeholder="Email address" name="email" type="text" {...email} />
       <input
         placeholder="Password"

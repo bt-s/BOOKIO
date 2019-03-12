@@ -2,16 +2,31 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
 
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.sign-in-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   h1 {
     font-size: 20px;
     font-weight: 600;
     margin-right: 8px;
   }
+}
+
+.sign-in-body {
+}
+
+.sign-in-sign-up {
+}
+
+.sign-in-email-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign-in-facebook-form {
 }
