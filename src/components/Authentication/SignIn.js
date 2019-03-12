@@ -57,7 +57,7 @@ const SignInFacebookBase = props => {
   return (
     <form onSubmit={onSubmit} className="sign-in-facebook-form">
       <Button
-        className="btn btn-signin btn-facebook"
+        className="btn btn-auth btn-facebook"
         type="submit"
         icon={<FontAwesomeIcon icon={faFacebookF} />}
         text="Sign in with Facebook"
@@ -93,14 +93,14 @@ const SignInFormBase = props => {
   const isInvalid = password === '' || email === '';
 
   return (
-    <form onSubmit={onSubmit} className="sign-in-email-form">
+    <form onSubmit={onSubmit} className="auth-form">
       <p className="form-header">E-mail</p>
       <input placeholder="" name="email" type="text" {...email} />
       <p className="form-header">Password</p>
       <input placeholder="" name="password" type="password" {...password} />
       <PasswordForgetLink styling="pw-forget-link" />
       <Button
-        className="btn btn-signin"
+        className="btn btn-auth"
         disabled={isInvalid}
         type="submit"
         text="Sign in"

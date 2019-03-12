@@ -76,7 +76,7 @@ const SignUpFormBase = props => {
     username.value === '';
 
   return (
-    <form onSubmit={onSubmit}>
+    <form className="auth-form" onSubmit={onSubmit}>
       <p className="form-header">Full name</p>
       <input name="username" type="text" placeholder="" {...username} />
       <p className="form-header">E-mail</p>
@@ -95,11 +95,16 @@ const SignUpFormBase = props => {
         placeholder=""
         {...passwordTwo}
       />
-      <label>
+      <label className="admin-label">
         Admin:
         <input name="isAdmin" type="checkbox" {...isAdmin} />
       </label>
-      <Button disabled={isInvalid} type="submit" text="Sign up" />
+      <Button
+        className="btn btn-auth"
+        disabled={isInvalid}
+        type="submit"
+        text="Sign up"
+      />
 
       {error && <p>{error.message}</p>}
     </form>
