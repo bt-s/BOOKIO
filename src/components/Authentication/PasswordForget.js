@@ -7,15 +7,6 @@ import Button from '../Button/Button';
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-export default function PasswordForgetPage() {
-  return (
-    <div>
-      <h1>Password forget</h1>
-      <PasswordForgetForm />
-    </div>
-  );
-}
-
 const PasswordForgetFormBase = props => {
   const [email, setEmail] = useState('');
   const [isResetRequested, setIsResetRequested] = useState(false);
