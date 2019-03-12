@@ -1,4 +1,4 @@
-$btn-height: 40px;
+$btn-height: 35px;
 $border-radius: 2px;
 
 @mixin button-bg($bg) {
@@ -25,7 +25,7 @@ $border-radius: 2px;
   border: none;
   text-decoration: none;
   padding: 0 $padding-xs;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
   border-radius: $border-radius;
   height: $btn-height;

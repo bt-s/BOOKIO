@@ -36,7 +36,6 @@ const SignInPage = () => (
       <SignInForm />
       <div className="spacer">OR</div>
       <SignInFacebook />
-      <PasswordForgetLink />
     </div>
 
     <div className="sign-in-sign-up">
@@ -116,13 +115,11 @@ const SignInFormBase = props => {
 
   return (
     <form onSubmit={onSubmit} className="sign-in-email-form">
-      <input placeholder="Email address" name="email" type="text" {...email} />
-      <input
-        placeholder="Password"
-        name="password"
-        type="password"
-        {...password}
-      />
+      <p className="form-header">E-mail</p>
+      <input placeholder="" name="email" type="text" {...email} />
+      <p className="form-header">Password</p>
+      <input placeholder="" name="password" type="password" {...password} />
+      <PasswordForgetLink styling="pw-forget-link" />
       <Button
         className="btn btn-signin"
         disabled={isInvalid}
