@@ -17,6 +17,12 @@
 }
 
 .sign-in-body {
+  .spacer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: $padding-xxs 0;
+  }
 }
 
 .sign-in-sign-up {

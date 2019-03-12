@@ -6,13 +6,13 @@ $border-radius: 2px;
 
   &:not([disabled]) {
     &:hover {
-      background: darken($bg, 8%);
+      background: lighten($bg, 8%);
       transition: all 0.3s ease;
     }
 
     &:active,
     &:focus {
-      background: darken($bg, 25%);
+      background: lighten($bg, 25%);
     }
   }
 }
@@ -21,15 +21,15 @@ $border-radius: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $black;
+  color: $white;
+  border: none;
   text-decoration: none;
-  padding: $padding-xxs $padding-xs;
+  padding: 0 $padding-xs;
   font-size: 18px;
   font-weight: 500;
-  border: 3px solid $black;
   border-radius: $border-radius;
   height: $btn-height;
-  @include button-bg(yellow);
+  @include button-bg($black-lighter);
 }
 
 .btn:not([disabled]) {
@@ -37,13 +37,24 @@ $border-radius: 2px;
 }
 
 .btn-signin {
+  min-width: 250px;
+}
+
+.btn-facebook {
+  background-image: $facebook-blue-gradient;
+  text-shadow: $facebook-text-shadow;
   box-sizing: border-box;
   position: relative;
-  padding: 0 15px;
+  padding: 0 $padding-xs;
   border: none;
   text-align: left;
   white-space: nowrap;
   color: $white;
+
+  &:hover,
+  &:focus {
+    background-image: $facebook-blue-gradient-hover;
+  }
 
   &:focus {
     outline: none;
@@ -54,15 +65,5 @@ $border-radius: 2px;
 
   svg {
     margin-right: 12px;
-  }
-}
-
-.btn-facebook {
-  background-image: $facebook-blue-gradient;
-  text-shadow: $facebook-text-shadow;
-
-  &:hover,
-  &:focus {
-    background-image: $facebook-blue-gradient-hover;
   }
 }

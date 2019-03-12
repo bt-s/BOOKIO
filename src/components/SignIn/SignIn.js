@@ -34,6 +34,7 @@ const SignInPage = () => (
 
     <div className="sign-in-body">
       <SignInForm />
+      <div className="spacer">OR</div>
       <SignInFacebook />
       <PasswordForgetLink />
     </div>
@@ -122,7 +123,12 @@ const SignInFormBase = props => {
         type="password"
         {...password}
       />
-      <Button disabled={isInvalid} type="submit" text="Sign in" />
+      <Button
+        className="btn btn-signin"
+        disabled={isInvalid}
+        type="submit"
+        text="Sign in"
+      />
 
       {error && <p>{error.message}</p>}
     </form>
