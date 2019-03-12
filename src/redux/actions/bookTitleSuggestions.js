@@ -11,7 +11,7 @@ const loading = () => {
   };
 };
 
-const success = (payload) => {
+const success = payload => {
   return {
     type: BOOK_TITLE_SUGGESTION_SUCCESS,
     payload
@@ -24,18 +24,18 @@ const error = () => {
   };
 };
 
-export const fetchBookTitleSuggestions = (payload) => {
-  return (dispatch) => {
+export const fetchBookTitleSuggestions = payload => {
+  return dispatch => {
     dispatch(loading());
     axios({
       method: 'GET',
       url: `https://www.goodreads.com/book/auto_complete?format=json&q=${payload}`
     })
-      .then((res) => {
+      .then(res => {
         dispatch(success(res.data));
       })
-      .catch((err) => {
+      .catch(err => {
         dispatch(error());
-      })
+      });
   };
 };

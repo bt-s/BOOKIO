@@ -1,14 +1,14 @@
-import { withStateHandlers } from 'recompose';
+import {withStateHandlers} from 'recompose';
 
 /**
  * High order component that will return the initial state and an object containing the state handlers
  * State handler -> return new state when called
  */
 const initialState = {
-  title: { value: "" },
-  rating: { value: "" },
-  description: { value: "" },
-  imageUrl: { value: "" }
+  title: {value: ''},
+  rating: {value: ''},
+  description: {value: ''},
+  imageUrl: {value: ''}
 };
 
 const onChangeTitle = props => event => ({

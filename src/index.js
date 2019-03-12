@@ -72,10 +72,7 @@ const AppBase = () => (
           path={ROUTES.BOOK_DETAIL}
           render={() => <h2>This is the book detail page.</h2>}
         />
-        <Route
-          path={ROUTES.ADD_BOOK}
-          render={() => <AddNewBookPage />}
-        />
+        <Route path={ROUTES.ADD_BOOK} render={() => <AddNewBookPage />} />
         <Route
           path={ROUTES.MY_BOOK_HISTORY}
           render={() => <h2>This is the my book history page.</h2>}

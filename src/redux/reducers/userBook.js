@@ -2,29 +2,28 @@ import {
   ADD_NEW_USER_BOOK_ERROR,
   ADD_NEW_USER_BOOK_LOADING,
   ADD_NEW_USER_BOOK_SUCCESS
-} from '../constants/action-types'
+} from '../constants/action-types';
 
 const initialState = {
   isLoading: false,
   isError: false,
-  userBooks: [],
+  userBooks: []
 };
 
-export default function reducers( state = {...initialState}, action) {
+export default function reducers(state = {...initialState}, action) {
   switch (action.type) {
-    case ADD_NEW_USER_BOOK_LOADING: 
+    case ADD_NEW_USER_BOOK_LOADING:
       return {
         ...state,
         isLoading: true,
         isError: false
       };
-    case ADD_NEW_USER_BOOK_SUCCESS: 
+    case ADD_NEW_USER_BOOK_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-
+        isLoading: false
       };
-    case ADD_NEW_USER_BOOK_ERROR: 
+    case ADD_NEW_USER_BOOK_ERROR:
       return {
         ...state,
         isError: true,
@@ -32,5 +31,5 @@ export default function reducers( state = {...initialState}, action) {
       };
     default:
       return state;
-  };
-};
+  }
+}

@@ -23,8 +23,8 @@ const error = () => {
   };
 };
 
-export const addNewUserBook = (payload) => {
-  return (dispatch) => {
+export const addNewUserBook = payload => {
+  return dispatch => {
     /**  TODO: Call API to add new book using axios */
     console.warn('[ADD_NEW_BOOK] Calling API to add New Book');
     /** Here is the example to call API */
@@ -40,7 +40,5 @@ export const addNewUserBook = (payload) => {
     //   .catch((err) => {
     //     dispatch(error());
     //   })
-  }
-}
-
-
+  };
+};
