@@ -9,6 +9,7 @@ import {withAuthentication} from './components/Session/Session';
 
 import AccountPage from './components/Account/Account';
 import BookItem from './components/BookItem/BookItem';
+import BookDetail from  './components/BookDetail/BookDetail';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
 import SignUp from './components/SignUp/SignUp';
@@ -67,11 +68,11 @@ const AppBase = () => (
         />
         <Route
           path={ROUTES.BOOKS}
-          render={() => <h2>This is the books page.</h2>}
+          render={() => <h2>This is the book page.</h2> }
         />
         <Route
           path={ROUTES.BOOK_DETAIL}
-          render={() => <h2>This is the book detail page.</h2>}
+          render={() => <BookDetail/> }
         />
         <Route
           path={ROUTES.ADD_BOOK}
