@@ -71,8 +71,14 @@ PasswordForgetFormBase.propTypes = {
 
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
 
-const PasswordForgetLink = () => (
-  <Link to={ROUTES.PASSWORD_FORGET}>Forgot password?</Link>
+const PasswordForgetLink = props => (
+  <Link className={props.styling} to={ROUTES.PASSWORD_FORGET}>
+    Forgot password?
+  </Link>
 );
+
+PasswordForgetLink.propTypes = {
+  styling: PropTypes.string
+};
 
 export {PasswordForgetForm, PasswordForgetLink};
