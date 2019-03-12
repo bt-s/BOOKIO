@@ -25,6 +25,7 @@ const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
     <SignUpForm />
+    <LoginInLink />
   </div>
 );
 
@@ -122,6 +123,12 @@ SignUpFormBase.propTypes = {
 const SignUpLink = () => (
   <p>
     Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+  </p>
+);
+
+const LoginInLink = () => (
+  <p>
+    Have an account? <Link to={ROUTES.SIGN_UP}>Sign in here</Link>
   </p>
 );
 
