@@ -11,6 +11,10 @@ import {PasswordForgetLink} from '../PasswordForget/PasswordForget';
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
+import {faFacebookF} from '@fortawesome/free-brands-svg-icons';
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
 const ERROR_CODE_ACCOUNT_EXISTS =
   'auth/account-exists-with-different-credential';
 
@@ -73,6 +77,11 @@ const SignInFacebookBase = props => {
 
   return (
     <form onSubmit={onSubmit} className="sign-in-facebook-form">
+      <Button
+        type="submit"
+        icon={<FontAwesomeIcon icon={faFacebookF} />}
+        text="Sign in with Facebook"
+      />
       {error && <p>{error.message}</p>}
     </form>
   );

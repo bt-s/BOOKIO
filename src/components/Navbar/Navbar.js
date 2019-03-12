@@ -85,7 +85,7 @@ const Navbar = props => {
     <Button
       className="navbar-mobile-menu"
       onClick={onMenuToggle}
-      text={
+      icon={
         <React.Fragment>
           <FontAwesomeIcon icon={faBars} />
           <FontAwesomeIcon icon={faTimes} />
