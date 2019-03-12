@@ -18,23 +18,46 @@ import * as ROLES from '../../constants/roles';
 import Button from '../Button/Button';
 import SignOut from '../SignOut/SignOut';
 
+const bookShelfLink = (
+  <Link to={ROUTES.MY_BOOK_HISTORY} className="navbar-bookshelves">
+    <FontAwesomeIcon icon={faBook} />
+  </Link>
+);
+
+const accountLink = (
+  <Link to={ROUTES.ACCOUNT} className="navbar-account">
+    <FontAwesomeIcon icon={faUser} />
+  </Link>
+);
+
 const NavbarAuth = ({authUser}) =>
   authUser.roles.includes(ROLES.ADMIN) && authUser.emailVerified ? (
     <React.Fragment>
+      {bookShelfLink}
+      {accountLink}
       <Link to={ROUTES.ADMIN} className="navbar-admin">
         Admin
       </Link>
       <SignOut />
     </React.Fragment>
   ) : (
-    <SignOut />
+    <React.Fragment>
+      {bookShelfLink}
+      {accountLink}
+      <SignOut />
+    </React.Fragment>
   );
 
 const NavbarNonAuth = () => (
-  <React.Fragment>
-    <Link to={ROUTES.LOG_IN}>Sign in</Link>;
-    <Link to={ROUTES.SIGN_UP}>Sign up</Link>;
-  </React.Fragment>
+  <div className="navbar-authentication">
+    <Link to={ROUTES.LOG_IN} className="login">
+      LOG IN
+    </Link>
+    <span className="spacer" />
+    <Link to={ROUTES.SIGN_UP} className="register">
+      REGISTER
+    </Link>
+  </div>
 );
 
 const Navbar = props => {
@@ -52,27 +75,16 @@ const Navbar = props => {
   const mobileBreakPoint = 768;
 
   const brandLogo = (
-    <Link to={ROUTES.LANDING}>
-      <div className="navbar-brand">{props.logo}</div>
+    <Link to={ROUTES.LANDING} className="navbar-brand">
+      <span className="left">{props.logoLeft}</span>
+      <span className="right">{props.logoRight}</span>
     </Link>
   );
 
   const itemSearchBar = (
     <div className="navbar-search-container">
-      A search component will be inserted here.
+      A search component will be inserted here...
     </div>
-  );
-
-  const bookShelfLink = (
-    <Link to={ROUTES.MY_BOOK_HISTORY} className="navbar-bookshelves">
-      <FontAwesomeIcon icon={faBook} />
-    </Link>
-  );
-
-  const accountLink = (
-    <Link to={ROUTES.ACCOUNT} className="navbar-account">
-      <FontAwesomeIcon icon={faUser} />
-    </Link>
   );
 
   const mobileMenuButton = (
@@ -93,9 +105,6 @@ const Navbar = props => {
       <div className="navbar-content-container">
         {brandLogo}
         {itemSearchBar}
-        {bookShelfLink}
-        {accountLink}
-        {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
         {props.authUser ? (
           props.authUser.emailVerified ? (
             <NavbarAuth authUser={props.authUser} />
@@ -103,17 +112,20 @@ const Navbar = props => {
         ) : (
           <NavbarNonAuth />
         )}
+        {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
       </div>
     </nav>
   );
 };
 
 Navbar.propTypes = {
-  logo: PropTypes.string
+  logoLeft: PropTypes.string,
+  logoRight: PropTypes.string
 };
 
 Navbar.defaultProps = {
-  logo: 'BOOKIO'
+  logoLeft: 'BOOK',
+  logoRight: 'IO'
 };
 
 const mapStateToProps = state => ({
