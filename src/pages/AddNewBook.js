@@ -1,14 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import AddNewBookForm from '../components/AddNewBookForm/AddNewBookForm';
 
-class AddNewBook extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <AddNewBookForm />
-      </React.Fragment>
-    )
-  };
-};
+const AddNewBook = () => <AddNewBookForm />;
 
 export default AddNewBook;
