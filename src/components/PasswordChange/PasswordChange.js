@@ -1,59 +1,67 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import PropTypes from 'prop-types';
 
-import {useFormInput} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
+import {formReducer, errorReducer} from '../Authentication/Validation/helpers';
 
 const PasswordChangeForm = props => {
-  const passwordOne = useFormInput('');
-  const passwordTwo = useFormInput('');
+  const initialFormValues = () => ({
+    passwordOne: '',
+    passwordTwo: '',
+    isReset: false
+  });
+
   const [isReset, setIsReset] = useState(false);
-  const [error, setError] = useState(null);
+  const [form, dispatchForm] = useReducer(formReducer, {}, initialFormValues);
+  const [error, dispatchError] = useReducer(errorReducer, {});
+
+  const handleChange = e => {
+    dispatchForm({
+      name: e.target.name,
+      value: e.target.value
+    });
+  };
 
   const onSubmit = e => {
     props.firebase
-      .doPasswordUpdate(passwordOne.value)
-      .then(
-        () => (passwordOne.value = ''),
-        (passwordTwo.value = ''),
-        setIsReset(true)
-      )
+      .doPasswordUpdate(form.passwordOne, form.passwordTwo)
+      .then(() => {
+        form.passwordOne = '';
+        form.passwordTwo = '';
+        setIsReset(true);
+      })
       .catch(error => {
-        setError(error);
+        dispatchError(error);
       });
 
     e.preventDefault();
   };
 
-  const isInvalid =
-    passwordOne.value !== passwordTwo.value || passwordOne.value === '';
-
   return isReset ? (
     <p>Your password has been reset.</p>
   ) : (
     <form onSubmit={onSubmit}>
+      <label className="form-header">New password</label>
       <input
         name="passwordOne"
         type="password"
-        placeholder="New password"
-        {...passwordOne}
+        placeholder=""
+        value={form.passwordOne}
+        onChange={handleChange}
       />
+      <label className="form-header">Confirm new password</label>
       <input
         name="passwordTwo"
         type="password"
-        placeholder="Confirm new password"
-        {...passwordTwo}
-      />
-      <Button
-        disabled={isInvalid}
-        type="submit"
-        onClick={onSubmit}
-        text="Reset my password"
+        placeholder=""
+        value={form.passwordTwo}
+        onChange={handleChange}
       />
 
-      {error && <p>{error.message}</p>}
+      {error.code ? <p>{error.message}</p> : ''}
+      <Button type="submit" onClick={onSubmit} text="Reset my password" />
     </form>
   );
 };
