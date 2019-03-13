@@ -112,7 +112,7 @@ const SignInFormBase = props => {
   return (
     <Validation ref={validationRef}>
       <form onSubmit={onSubmit} className="auth-form">
-        {error.email && <span>{error.email}</span>}
+        {error.email && <span className="validation-error">{error.email}</span>}
         <label htmlFor="" className="form-header">
           E-mail address
         </label>
@@ -130,7 +130,9 @@ const SignInFormBase = props => {
           />
         </Validator>
 
-        {error.password && <span>{error.password}</span>}
+        {error.password && (
+          <span className="validation-error">{error.password}</span>
+        )}
         <label htmlFor="" className="form-header">
           Password
         </label>

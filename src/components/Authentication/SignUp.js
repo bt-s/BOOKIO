@@ -92,7 +92,9 @@ const SignUpFormBase = props => {
   return (
     <Validation ref={validationRef}>
       <form className="auth-form" onSubmit={onSubmit}>
-        {error.username && <span>{error.username}</span>}
+        {error.username && (
+          <span className="validation-error">{error.username}</span>
+        )}
         <label htmlFor="" className="form-header">
           Full name
         </label>
@@ -110,7 +112,7 @@ const SignUpFormBase = props => {
           />
         </Validator>
 
-        {error.email && <span>{error.email}</span>}
+        {error.email && <span className="validation-error">{error.email}</span>}
         <label htmlFor="" className="form-header">
           E-mail
         </label>
@@ -128,7 +130,9 @@ const SignUpFormBase = props => {
           />
         </Validator>
 
-        {error.passwordOne && <span>{error.passwordOne}</span>}
+        {error.passwordOne && (
+          <span className="validation-error">{error.passwordOne}</span>
+        )}
         <label htmlFor="" className="form-header">
           Password
         </label>
@@ -146,7 +150,9 @@ const SignUpFormBase = props => {
           />
         </Validator>
 
-        {error.passwordTwo && <span>{error.passwordTwo}</span>}
+        {error.passwordTwo && (
+          <span className="validation-error">{error.passwordTwo}</span>
+        )}
         <label htmlFor="" className="form-header">
           Confirm password
         </label>

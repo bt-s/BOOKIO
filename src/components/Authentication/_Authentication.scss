@@ -60,3 +60,11 @@ $auth-form-width: 250px;
     }
   }
 }
+
+.validation-error {
+  color: red;
+  width: 100%;
+  text-align: right;
+  font-size: 12px;
+  margin-bottom: -20px;
+}
