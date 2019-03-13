@@ -3,10 +3,17 @@
   flex-direction: column;
   align-items: center;
   min-width: 250px;
+  max-width: 250px;
 }
 
 .pw-forget-link {
   width: 100%;
   text-align: right;
   margin-bottom: $padding-xs;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
 }
