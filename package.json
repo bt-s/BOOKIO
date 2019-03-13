@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "firebase": "^5.8.4",
     "google-maps-react": "^2.0.2",
+    "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",

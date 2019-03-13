@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useRef, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import {Link, withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
-import {useFormInput, useFormCheckbox} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
+import {Validation, Validator, ValidationHelper} from './Validation/Validation';
+import {formReducer, errorReducer} from './Validation/helpers';
 
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
@@ -22,37 +23,56 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 `;
 
 const SignUpFormBase = props => {
-  const username = useFormInput('');
-  const email = useFormInput('');
-  const passwordOne = useFormInput('');
-  const passwordTwo = useFormInput('');
-  const isAdmin = useFormCheckbox(false);
-  const [error, setError] = useState(null);
+  const initialFormValues = () => ({
+    username: '',
+    email: '',
+    passwordOne: '',
+    passwordTwo: '',
+    isAdmin: false
+  });
+
+  const validationRef = useRef(null);
+
+  const [form, dispatchForm] = useReducer(formReducer, {}, initialFormValues);
+  const [error, dispatchError] = useReducer(errorReducer, {});
+
+  const handleChange = e => {
+    dispatchForm({
+      name: e.target.name,
+      value: e.target.value
+    });
+  };
+
+  const onValidate = error => {
+    dispatchError(error);
+  };
 
   const onSubmit = e => {
-    const usernameValue = username.value;
-    const emailValue = email.value;
+    const formUsername = form.username;
+    const formEmail = form.email;
     const roles = [];
 
-    if (isAdmin.checked) roles.push(ROLES.ADMIN);
+    if (form.isAdmin.checked) roles.push(ROLES.ADMIN);
+
+    validationRef.current.validate();
 
     props.firebase
-      .doCreateUserWithEmailAndPassword(email.value, passwordOne.value)
+      .doCreateUserWithEmailAndPassword(form.email, form.passwordOne)
       .then(authUser => {
         return props.firebase.user(authUser.user.uid).set(
           {
-            usernameValue,
-            emailValue,
+            formUsername,
+            formEmail,
             roles
           },
           {merge: true}
         );
       })
       .then(authUser => {
-        username.value = '';
-        email.value = '';
-        passwordOne.value = '';
-        passwordTwo.value = '';
+        form.username = '';
+        form.email = '';
+        form.passwordOne = '';
+        form.passwordTwo = '';
         props.history.push(ROUTES.ACCOUNT);
       })
       .then(() => {
@@ -63,51 +83,109 @@ const SignUpFormBase = props => {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
         }
 
-        setError(error);
+        dispatchError(error);
       });
 
     e.preventDefault();
   };
 
-  const isInvalid =
-    passwordOne.value !== passwordTwo.value ||
-    passwordOne.value === '' ||
-    email.value === '' ||
-    username.value === '';
-
   return (
-    <form className="auth-form" onSubmit={onSubmit}>
-      <p className="form-header">Full name</p>
-      <input name="username" type="text" placeholder="" {...username} />
-      <p className="form-header">E-mail</p>
-      <input name="email" type="text" placeholder="" {...email} />
-      <p className="form-header">Password</p>
-      <input
-        name="passwordOne"
-        type="password"
-        placeholder=""
-        {...passwordOne}
-      />
-      <p className="form-header">Confirm password</p>
-      <input
-        name="passwordTwo"
-        type="password"
-        placeholder=""
-        {...passwordTwo}
-      />
-      <label className="admin-label">
-        Admin:
-        <input name="isAdmin" type="checkbox" {...isAdmin} />
-      </label>
-      <Button
-        className="btn btn-auth"
-        disabled={isInvalid}
-        type="submit"
-        text="Sign up"
-      />
+    <Validation ref={validationRef}>
+      <form className="auth-form" onSubmit={onSubmit}>
+        {error.username && (
+          <span className="validation-error">{error.username}</span>
+        )}
+        <label htmlFor="" className="form-header">
+          Full name
+        </label>
+        <Validator
+          name="username"
+          value={form.username}
+          validations={[ValidationHelper.required('Username is required')]}
+          onValidate={onValidate}>
+          <input
+            name="username"
+            type="text"
+            placeholder=""
+            value={form.username}
+            onChange={handleChange}
+          />
+        </Validator>
 
-      {error && <p>{error.message}</p>}
-    </form>
+        {error.email && <span className="validation-error">{error.email}</span>}
+        <label htmlFor="" className="form-header">
+          E-mail
+        </label>
+        <Validator
+          name="email"
+          value={form.email}
+          validations={[ValidationHelper.required('Email is required')]}
+          onValidate={onValidate}>
+          <input
+            name="email"
+            type="text"
+            placeholder=""
+            value={form.email}
+            onChange={handleChange}
+          />
+        </Validator>
+
+        {error.passwordOne && (
+          <span className="validation-error">{error.passwordOne}</span>
+        )}
+        <label htmlFor="" className="form-header">
+          Password
+        </label>
+        <Validator
+          name="passwordOne"
+          value={form.passwordOne}
+          validations={[ValidationHelper.required('Password is required')]}
+          onValidate={onValidate}>
+          <input
+            name="passwordOne"
+            type="password"
+            placeholder=""
+            value={form.passwordOne}
+            onChange={handleChange}
+          />
+        </Validator>
+
+        {error.passwordTwo && (
+          <span className="validation-error">{error.passwordTwo}</span>
+        )}
+        <label htmlFor="" className="form-header">
+          Confirm password
+        </label>
+        <Validator
+          name="passwordTwo"
+          value={form.passwordTwo}
+          validations={[
+            ValidationHelper.required('Password confirmation is required')
+          ]}
+          onValidate={onValidate}>
+          <input
+            name="passwordTwo"
+            type="password"
+            placeholder=""
+            value={form.passwordTwo}
+            onChange={handleChange}
+          />
+        </Validator>
+
+        <label htmlFor="" className="admin-label">
+          Admin:
+          <input
+            name="isAdmin"
+            type="checkbox"
+            value={form.isAdmin}
+            onChange={handleChange}
+          />
+        </label>
+        <Button className="btn btn-auth" type="submit" text="Sign up" />
+
+        {error.code ? <p>{error.message}</p> : ''}
+      </form>
+    </Validation>
   );
 };
 
