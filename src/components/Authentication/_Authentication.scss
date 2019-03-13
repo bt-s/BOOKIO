@@ -30,6 +30,12 @@ $auth-form-width: 250px;
 .sign-in-sign-up-link {
   a {
     color: $orange;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -58,13 +64,25 @@ $auth-form-width: 250px;
     &:last-of-type {
       margin-bottom: 0;
     }
+
+    &:focus {
+      border-color: darken($gray, 10%);
+      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
+    }
   }
 }
 
 .validation-error {
-  color: red;
+  color: $red-error;
   width: 100%;
   text-align: right;
   font-size: 12px;
-  margin-bottom: -20px;
+  margin-bottom: -46px;
+  padding-right: $padding-sm;
+  padding-top: 32px;
+}
+
+.form-submission-error {
+  color: $red-error;
+  font-size: 12px;
 }

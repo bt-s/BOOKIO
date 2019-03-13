@@ -66,7 +66,11 @@ const SignInFacebookBase = props => {
         icon={<FontAwesomeIcon icon={faFacebookF} />}
         text="Sign in with Facebook"
       />
-      {error && <p>{error.message}</p>}
+      {error.code ? (
+        <p className="form-submission-error">ERROR: {error.message}</p>
+      ) : (
+        ''
+      )}
     </form>
   );
 };
@@ -156,7 +160,11 @@ const SignInFormBase = props => {
         <PasswordForgetLink styling="pw-forget-link" />
         <Button className="btn btn-auth" type="submit" text="Sign in" />
 
-        {error.code ? <p>{error.message}</p> : ''}
+        {error.code ? (
+          <p className="form-submission-error">ERROR: {error.message}</p>
+        ) : (
+          ''
+        )}
       </form>
     </Validation>
   );

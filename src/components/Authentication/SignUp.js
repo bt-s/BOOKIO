@@ -101,7 +101,7 @@ const SignUpFormBase = props => {
         <Validator
           name="username"
           value={form.username}
-          validations={[ValidationHelper.required('Username is required')]}
+          validations={[ValidationHelper.required('Full name is required')]}
           onValidate={onValidate}>
           <input
             name="username"
@@ -114,7 +114,7 @@ const SignUpFormBase = props => {
 
         {error.email && <span className="validation-error">{error.email}</span>}
         <label htmlFor="" className="form-header">
-          E-mail
+          Email
         </label>
         <Validator
           name="email"
@@ -183,7 +183,11 @@ const SignUpFormBase = props => {
         </label>
         <Button className="btn btn-auth" type="submit" text="Sign up" />
 
-        {error.code ? <p>{error.message}</p> : ''}
+        {error.code ? (
+          <p className="form-submission-error">ERROR: {error.message}</p>
+        ) : (
+          ''
+        )}
       </form>
     </Validation>
   );
