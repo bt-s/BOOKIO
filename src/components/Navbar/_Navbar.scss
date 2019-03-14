@@ -163,6 +163,29 @@ $navbar-icon-size: 20px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    &.link {
+      svg {
+        width: 12px;
+        margin-right: $padding-xxs;
+      }
+
+      path {
+        fill: $black-lighter;
+      }
+    }
+
+    &.section-ending {
+      border-bottom: 1px solid $gray;
+    }
+
+    a {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      text-decoration: none;
+    }
   }
 }
 

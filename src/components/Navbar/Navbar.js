@@ -30,14 +30,35 @@ const accountMenuList = [
   {
     id: 0,
     title: (
-      <Link to={ROUTES.ACCOUNT} className="navbar-account">
-        Your profile
+      <Link to={ROUTES.ACCOUNT}>
+        <FontAwesomeIcon icon={faUser} />
+        My profile
       </Link>
     ),
-    classes: 'link'
+    classes: 'link section-ending'
   },
   {
     id: 1,
+    title: <Link to={ROUTES.ACCOUNT}>My borrowed books</Link>,
+    classes: 'link'
+  },
+  {
+    id: 2,
+    title: <Link to={ROUTES.ACCOUNT}>My lended books</Link>,
+    classes: 'link'
+  },
+  {
+    id: 3,
+    title: <Link to={ROUTES.ACCOUNT}>My gotten books</Link>,
+    classes: 'link'
+  },
+  {
+    id: 4,
+    title: <Link to={ROUTES.ACCOUNT}>My given books</Link>,
+    classes: 'link section-ending'
+  },
+  {
+    id: 5,
     title: <SignOut />,
     classes: 'link'
   }
