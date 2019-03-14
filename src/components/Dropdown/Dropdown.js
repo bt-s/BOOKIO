@@ -28,14 +28,14 @@ const Dropdown = props => {
   };
 
   return (
-    <div className="dd-wrapper">
-      <div className="dd-header" ref={ref} onClick={() => toggleMenu()}>
+    <div className={`dd-wrapper ${props.classes}`} ref={ref}>
+      <div className="dd-header" onClick={() => toggleMenu()}>
         {props.headerTitle ? props.headerTitle : props.headerObject}
       </div>
       {showMenu && (
         <ul className="dd-list" onClick={e => e.stopPropagation()}>
           {props.items.map(item => (
-            <li className="dd-list-item" key={item.id}>
+            <li className={`dd-list-item ${item.classes}`} key={item.id}>
               {item.title}
             </li>
           ))}
@@ -46,6 +46,7 @@ const Dropdown = props => {
 };
 
 Dropdown.propTypes = {
+  classes: PropTypes.string,
   headerTitle: PropTypes.string,
   headerObject: PropTypes.object,
   items: PropTypes.array

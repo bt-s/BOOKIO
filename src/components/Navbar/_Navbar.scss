@@ -145,6 +145,27 @@ $navbar-icon-size: 20px;
   }
 }
 
+.navbar-account {
+  .dd-list {
+    left: auto;
+    right: 0;
+    width: $dropdown-menu-width;
+    background-clip: padding-box;
+    border-radius: $border-radius;
+    border: $dropdown-menu-border;
+    box-shadow: $dropdown-menu-box-shadow;
+  }
+
+  .dd-list-item {
+    width: 100%;
+    padding: 0 $padding-xs;
+    height: $dropdown-menu-item-height;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
 .navbar-mobile-menu {
   background: none;
   border: none;

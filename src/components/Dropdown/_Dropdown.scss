@@ -1,5 +1,13 @@
+$dropdown-menu-border: 1px solid rgba(25, 31, 35, 0.15);
+$dropdown-menu-box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+$dropdown-menu-width: 200px;
+$dropdown-menu-item-height: 30px;
+
 .dd-wrapper {
+  position: relative;
+  box-sizing: border-box;
   user-select: none;
+  list-style: none;
 }
 
 .dd-header {
@@ -8,15 +16,13 @@
   align-items: center;
   cursor: pointer;
   position: relative;
-  background-color: $white;
 }
 
 .dd-list {
   z-index: -1;
   position: absolute;
-  with: 100%;
   background-color: $white;
-  overflow-y: scroll;
+  padding: 0;
 }
 
 .dd-list-item {
