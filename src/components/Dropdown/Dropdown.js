@@ -30,7 +30,8 @@ const Dropdown = props => {
   return (
     <div className={`dd-wrapper ${props.classes}`} ref={ref}>
       <div className="dd-header" onClick={() => toggleMenu()}>
-        {props.headerTitle ? props.headerTitle : props.headerObject}
+        {props.headerObject}
+        {props.headerTitle}
       </div>
       {showMenu && (
         <ul className="dd-list" onClick={e => e.stopPropagation()}>
