@@ -1,0 +1,25 @@
+.email-verification {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+
+  p {
+    text-align: center;
+    max-width: 350px;
+  }
+}
+
+.btn-refresh {
+  background: $white;
+  color: $black;
+  border: 1px solid $black;
+  margin-top: $padding-xs;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: $orange !important;
+  }
+}
