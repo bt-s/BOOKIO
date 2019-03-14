@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 
 import {firebaseAPIKey} from '../APIKeys/APIKeys';
 
@@ -28,6 +29,7 @@ class Firebase {
     /* Firebase APIs */
     this.auth = app.auth();
     this.db = app.firestore();
+    this.storage = app.storage;
 
     /* Facebook sign in method provider */
     this.facebookProvider = new app.auth.FacebookAuthProvider();
