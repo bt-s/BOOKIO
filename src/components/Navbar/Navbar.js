@@ -105,9 +105,7 @@ const Navbar = props => {
         <BrandLogo />
         {itemSearchBar}
         {props.authUser ? (
-          props.authUser.emailVerified || providerId === 'facebook.com' ? (
-            <NavbarAuth authUser={props.authUser} />
-          ) : null
+          <NavbarAuth authUser={props.authUser} />
         ) : (
           <NavbarNonAuth />
         )}
