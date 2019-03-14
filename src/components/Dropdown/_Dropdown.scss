@@ -1,0 +1,33 @@
+.dd-wrapper {
+  user-select: none;
+}
+
+.dd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  background-color: $white;
+}
+
+.dd-list {
+  z-index: -1;
+  position: absolute;
+  with: 100%;
+  background-color: $white;
+  overflow-y: scroll;
+}
+
+.dd-list-item {
+  width: 100%;
+  cursor: default;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &:hover {
+    color: $white;
+    background-color: #ffcc01;
+  }
+}
