@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React, {useReducer, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
+import {withFirebase} from '../Firebase';
 import {compose} from 'recompose';
 
-import {useFormInput} from '../../hooks/hooks';
 import Button from '../Button/Button';
-import {PasswordForgetLink} from '../Authentication/PasswordForget';
-import {withFirebase} from '../Firebase';
+import {PasswordForgetLink} from './PasswordForget';
+import {Validation, Validator, ValidationHelper} from './Validation/Validation';
+import {formReducer, errorReducer} from './Validation/helpers';
+
 import * as ROUTES from '../../constants/routes';
 
 import {faFacebookF} from '@fortawesome/free-brands-svg-icons';
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const ERROR_CODE_ACCOUNT_EXISTS =
@@ -24,7 +25,7 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 `;
 
 const SignInFacebookBase = props => {
-  const [error, setError] = useState(null);
+  const [error, dispatchError] = useReducer(errorReducer, {});
 
   const onSubmit = e => {
     props.firebase
@@ -40,7 +41,7 @@ const SignInFacebookBase = props => {
         );
       })
       .then(() => {
-        setError(null);
+        dispatchError(null);
         props.history.push(ROUTES.ACCOUNT);
       })
       .catch(error => {
@@ -48,7 +49,7 @@ const SignInFacebookBase = props => {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
         }
 
-        setError(error);
+        dispatchError(error);
       });
 
     e.preventDefault();
@@ -62,7 +63,11 @@ const SignInFacebookBase = props => {
         icon={<FontAwesomeIcon icon={faFacebookF} />}
         text="Sign in with Facebook"
       />
-      {error && <p>{error.message}</p>}
+      {error.code ? (
+        <p className="form-submission-error">ERROR: {error.message}</p>
+      ) : (
+        ''
+      )}
     </form>
   );
 };
@@ -73,41 +78,92 @@ SignInFacebookBase.propTypes = {
 };
 
 const SignInFormBase = props => {
-  const email = useFormInput('');
-  const password = useFormInput('');
-  const [error, setError] = useState(null);
+  const initialFormValues = () => ({
+    email: '',
+    password: ''
+  });
+
+  const validationRef = useRef(null);
+
+  const [form, dispatchForm] = useReducer(formReducer, {}, initialFormValues);
+  const [error, dispatchError] = useReducer(errorReducer, {});
+
+  const handleChange = e => {
+    dispatchForm({
+      name: e.target.name,
+      value: e.target.value
+    });
+  };
+
+  const onValidate = error => {
+    dispatchError(error);
+  };
 
   const onSubmit = e => {
+    validationRef.current.validate();
     props.firebase
-      .doSignInWithEmailAndPassword(email.value, password.value)
+      .doSignInWithEmailAndPassword(form.email, form.password)
       .then(() => {
         props.history.push(ROUTES.ACCOUNT);
       })
       .catch(error => {
-        setError(error);
+        dispatchError(error);
       });
 
     e.preventDefault();
   };
 
-  const isInvalid = password === '' || email === '';
-
   return (
-    <form onSubmit={onSubmit} className="auth-form">
-      <p className="form-header">E-mail address</p>
-      <input placeholder="" name="email" type="text" {...email} />
-      <p className="form-header">Password</p>
-      <input placeholder="" name="password" type="password" {...password} />
-      <PasswordForgetLink styling="pw-forget-link" />
-      <Button
-        className="btn btn-auth"
-        disabled={isInvalid}
-        type="submit"
-        text="Sign in"
-      />
+    <Validation ref={validationRef}>
+      <form onSubmit={onSubmit} className="auth-form">
+        {error.email && <span className="validation-error">{error.email}</span>}
+        <label htmlFor="" className="form-header">
+          E-mail address
+        </label>
+        <Validator
+          name="email"
+          value={form.email}
+          validations={[ValidationHelper.required('Email is required')]}
+          onValidate={onValidate}>
+          <input
+            placeholder=""
+            name="email"
+            type="text"
+            value={form.email}
+            onChange={handleChange}
+          />
+        </Validator>
 
-      {error && <p>{error.message}</p>}
-    </form>
+        {error.password && (
+          <span className="validation-error">{error.password}</span>
+        )}
+        <label htmlFor="" className="form-header">
+          Password
+        </label>
+        <Validator
+          name="password"
+          value={form.password}
+          validations={[ValidationHelper.required('Password is required')]}
+          onValidate={onValidate}>
+          <input
+            placeholder=""
+            name="password"
+            type="password"
+            value={form.password}
+            onChange={handleChange}
+          />
+        </Validator>
+
+        <PasswordForgetLink styling="pw-forget-link" />
+        <Button className="btn btn-auth" type="submit" text="Sign in" />
+
+        {error.code ? (
+          <p className="form-submission-error">ERROR: {error.message}</p>
+        ) : (
+          ''
+        )}
+      </form>
+    </Validation>
   );
 };
 
