@@ -22,8 +22,12 @@ const withEmailVerification = Component => {
       props.firebase.doSendEmailVerification().then(() => setIsSent(true));
     };
 
+    const refreshPage = () => {
+      window.location.reload();
+    };
+
     return needsEmailVerification(props.authUser) ? (
-      <div>
+      <div className="email-verification">
         {isSent ? (
           <p>
             An e-mail verfication has been sent: Check your inbox (or spam
@@ -40,6 +44,12 @@ const withEmailVerification = Component => {
           onClick={onSendEmailVerification}
           disabled={isSent}
           text="Send confirmation e-mail"
+        />
+        <Button
+          className={'btn btn-refresh'}
+          onClick={refreshPage}
+          disabled={isSent}
+          text="I have confirmation my e-mail"
         />
       </div>
     ) : (

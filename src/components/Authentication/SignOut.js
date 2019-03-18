@@ -6,7 +6,12 @@ import {withFirebase} from '../Firebase';
 import Button from '../Button/Button';
 
 const SignOutButton = props => (
-  <Button type="button" onClick={props.firebase.doSignOut} text="Sign out" />
+  <Button
+    className="btn-sign-out"
+    type="button"
+    onClick={props.firebase.doSignOut}
+    text="Sign out"
+  />
 );
 
 SignOutButton.propTypes = {

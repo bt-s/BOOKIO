@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 
 import {firebaseAPIKey} from '../APIKeys/APIKeys';
 
@@ -28,6 +29,7 @@ class Firebase {
     /* Firebase APIs */
     this.auth = app.auth();
     this.db = app.firestore();
+    this.storage = app.storage;
 
     /* Facebook sign in method provider */
     this.facebookProvider = new app.auth.FacebookAuthProvider();
@@ -46,7 +48,23 @@ class Firebase {
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
-  doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
+  doPasswordUpdate = (passwordOne, passwordTwo) => {
+    return new Promise((resolve, reject) => {
+      if (passwordOne <= 5 || passwordTwo <= 5) {
+        reject({
+          code: 'passwords-too-short',
+          message: 'The password should at least be 6 characters long.'
+        });
+      } else if (passwordOne === passwordTwo) {
+        resolve(this.auth.currentUser.updatePassword(passwordOne));
+      } else {
+        reject({
+          code: 'passwords-not-the-same',
+          message: 'Passwords not the same.'
+        });
+      }
+    });
+  };
 
   doSendEmailVerification = () =>
     this.auth.currentUser.sendEmailVerification({

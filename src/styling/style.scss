@@ -3,13 +3,19 @@
 @import './includes/variables';
 
 @import '../components/Account/Account';
+@import '../components/Account/Avatar';
+@import '../components/Authentication/Authentication';
 @import '../components/BookItem/BookItem';
 @import '../components/Button/Button';
+@import '../components/BrandLogo/BrandLogo';
+@import '../components/Dropdown/Dropdown';
 @import '../components/Footer/Footer';
 @import '../components/GoogleMap/GoogleMap';
 @import '../components/Loader/Loader';
 @import '../components/Navbar/Navbar';
-@import '../components/PasswordForget/PasswordForget';
 @import '../components/PasswordChange/PasswordChange';
-@import '../components/SignIn/SignIn';
-@import '../components/SignUp/SignUp';
+@import '../components/Authentication/PasswordForget';
+@import '../components/Authentication/SignIn';
+@import '../components/Authentication/SignUp';
+@import '../components/Authentication/SignOut';
+@import '../components/Session/Session';
