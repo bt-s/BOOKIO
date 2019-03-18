@@ -10,8 +10,8 @@ import {withAuthentication} from './components/Session/Session';
 import Firebase, {FirebaseContext} from './components/Firebase';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
-import BookItem from './components/BookItem/BookItem';
-
+import AddNewBookPage from './pages/AddNewBook';
+import BookItem from './components/BookItem/BookItem'
 import AdminPage from './components/Admin/Admin';
 import AccountPage from './pages/AccountPage';
 import SignInPage from './pages/SignInPage';
@@ -117,7 +117,7 @@ const AppBase = () => (
         path={ROUTES.ADD_BOOK}
         render={() => (
           <WithNavbar>
-            <h2>This is the add book page.</h2>
+            <AddNewBookPage />
           </WithNavbar>
         )}
       />
