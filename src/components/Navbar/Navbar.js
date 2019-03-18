@@ -17,6 +17,7 @@ import * as ROLES from '../../constants/roles';
 
 import BrandLogo from '../BrandLogo/BrandLogo';
 import Button from '../Button/Button';
+import Dropdown from '../Dropdown/Dropdown';
 import SignOut from '../Authentication/SignOut';
 
 const bookShelfLink = (
@@ -25,27 +26,65 @@ const bookShelfLink = (
   </Link>
 );
 
-const accountLink = (
-  <Link to={ROUTES.ACCOUNT} className="navbar-account">
-    <FontAwesomeIcon icon={faUser} />
-  </Link>
+const accountMenuList = [
+  {
+    id: 0,
+    title: (
+      <Link to={ROUTES.ACCOUNT}>
+        <FontAwesomeIcon icon={faUser} />
+        My profile
+      </Link>
+    ),
+    classes: 'link section-ending'
+  },
+  {
+    id: 1,
+    title: <Link to={ROUTES.ACCOUNT}>My borrowed books</Link>,
+    classes: 'link'
+  },
+  {
+    id: 2,
+    title: <Link to={ROUTES.ACCOUNT}>My lended books</Link>,
+    classes: 'link'
+  },
+  {
+    id: 3,
+    title: <Link to={ROUTES.ACCOUNT}>My gotten books</Link>,
+    classes: 'link'
+  },
+  {
+    id: 4,
+    title: <Link to={ROUTES.ACCOUNT}>My given books</Link>,
+    classes: 'link section-ending'
+  },
+  {
+    id: 5,
+    title: <SignOut />,
+    classes: 'link'
+  }
+];
+
+const accountMenu = (
+  <Dropdown
+    classes="navbar-account"
+    headerObject={<FontAwesomeIcon icon={faUser} />}
+    items={accountMenuList}
+  />
 );
 
 const NavbarAuth = ({authUser}) =>
   authUser.roles.includes(ROLES.ADMIN) && authUser.emailVerified ? (
     <React.Fragment>
       {bookShelfLink}
-      {accountLink}
+      {accountMenu}
       <Link to={ROUTES.ADMIN} className="navbar-admin">
         Admin
       </Link>
-      <SignOut />
     </React.Fragment>
   ) : (
     <React.Fragment>
       {bookShelfLink}
-      {accountLink}
-      <SignOut />
+      {accountMenu}
     </React.Fragment>
   );
 
@@ -100,9 +139,7 @@ const Navbar = props => {
         <BrandLogo />
         {itemSearchBar}
         {props.authUser ? (
-          props.authUser.emailVerified ? (
-            <NavbarAuth authUser={props.authUser} />
-          ) : null
+          <NavbarAuth authUser={props.authUser} />
         ) : (
           <NavbarNonAuth />
         )}

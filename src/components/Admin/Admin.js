@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {compose} from 'recompose';
 
 import {withFirebase} from '../Firebase';
@@ -38,6 +39,10 @@ const AdminPage = props => {
       <UserList users={users} />
     </div>
   );
+};
+
+AdminPage.propTypes = {
+  firebase: PropTypes.object
 };
 
 const UserList = ({users}) => {

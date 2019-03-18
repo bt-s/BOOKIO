@@ -3,10 +3,12 @@
 @import './includes/variables';
 
 @import '../components/Account/Account';
+@import '../components/Account/Avatar';
 @import '../components/Authentication/Authentication';
 @import '../components/BookItem/BookItem';
 @import '../components/Button/Button';
 @import '../components/BrandLogo/BrandLogo';
+@import '../components/Dropdown/Dropdown';
 @import '../components/Footer/Footer';
 @import '../components/GoogleMap/GoogleMap';
 @import '../components/Loader/Loader';
@@ -14,5 +16,6 @@
 @import '../components/PasswordChange/PasswordChange';
 @import '../components/Authentication/PasswordForget';
 @import '../components/Authentication/SignIn';
-@import '../components/Authentication/SignOut';
 @import '../components/Authentication/SignUp';
+@import '../components/Authentication/SignOut';
+@import '../components/Session/Session';
