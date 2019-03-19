@@ -3,12 +3,10 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 
-import {firebaseAPIKey} from '../APIKeys/APIKeys';
-
 const REACT_APP_CONFIRMATION_EMAIL_REDIRECT = 'http://localhost:3000';
 
 const devConfig = {
-  apiKey: firebaseAPIKey,
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'bookio-5c798.firebaseapp.com',
   databaseURL: 'https://bookio-5c798.firebaseio.com',
   projectId: 'bookio',
