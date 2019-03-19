@@ -12,6 +12,7 @@ export const numberValidation = value => {
   return isNaN(value.trim()) ? 'Value should be number' : '';
 };
 
+// Improve this function s.t. it supports international phone numbers
 export const phoneNumberValidation = value => {
   return /[0-9]{10}/.test(value.trim()) ? '' : 'Invalid phone number';
 };
