@@ -26,7 +26,6 @@ const Avatar = props => {
 
   const postUploadTask = url => {
     setImgURL(url);
-    console.log('postUploadTask', props.firebase.auth.currentUser);
 
     //link the file to the user
     props.firebase.auth.currentUser
@@ -58,7 +57,6 @@ const Avatar = props => {
                 postUploadTask,
                 status => {
                   setStatusText(status);
-                  console.log('monitor executed');
                 }
               );
             }}

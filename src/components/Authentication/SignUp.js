@@ -57,7 +57,6 @@ const SignUpFormBase = props => {
     props.firebase
       .doCreateUserWithEmailAndPassword(form.email, form.passwordOne)
       .then(authUser => {
-        console.log(authUser, '\n authUser printed above');
         authUser.user
           .updateProfile({
             displayName: form.username,

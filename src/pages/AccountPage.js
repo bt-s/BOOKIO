@@ -14,8 +14,6 @@ import LoginManagement from '../components/Account/LoginManagement';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 
 const AccountPage = props => {
-  console.log(props);
-
   return (
     <div className="account-page">
       {/* <Avatar /> */}
