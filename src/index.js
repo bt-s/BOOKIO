@@ -15,6 +15,7 @@ import BookItem from './components/BookItem/BookItem';
 
 import AdminPage from './pages/AdminPage';
 import AccountPage from './pages/AccountPage';
+import BookDetail from './pages/BookDetail';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
@@ -111,7 +112,7 @@ const AppBase = () => (
         path={ROUTES.BOOK_DETAIL}
         render={() => (
           <WithNavbar>
-            <h2>This is the book detail page.</h2>
+            <BookDetail />
           </WithNavbar>
         )}
       />
