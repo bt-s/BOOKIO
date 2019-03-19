@@ -42,7 +42,6 @@ const AccountPage = props => {
       <PasswordChangeForm />
       <LoginManagement authUser={props.authUser} />
       <DeleteAccount />
-      >>>>>>> master
     </div>
   );
 };
