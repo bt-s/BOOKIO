@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import GoogleMap from '../GoogleMap/GoogleMap';
 import imageDummy from '../../images/kafka.jpg';
 import location from '../../assets/location.png';
-import Rating from '../Rating/Rating';
 import userProfile from '../../images/kafka.jpg';
 
 import {faStar, faStarHalf} from '@fortawesome/free-solid-svg-icons';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
+/*
 const getStars = rating => {
   // Round to nearest half
   rating = Math.round(rating * 2) / 2;
@@ -30,6 +30,7 @@ const getStars = rating => {
 
   return output.toString();
 };
+*/
 
 const BookDetail = props => (
   <div className="book-details-container">
