@@ -32,15 +32,21 @@ export const uploadPictureToFirebase = (
   uploadTask.on(
     firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
     function(snapshot) {
+      // Get task progress, including the number of bytes uploaded and
+      // the total number of bytes to be uploaded
+      let progress =
+        ((snapshot.bytesTransferred / snapshot.totalBytes) * 100).toFixed(2) +
+        '%';
+      if (monitor) {
+        monitor(progress);
+      }
+      console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
         case firebase.storage.TaskState.PAUSED: // or 'paused'
           console.log('Upload is paused');
           break;
         case firebase.storage.TaskState.RUNNING: // or 'running'
           console.log('Upload is running');
-          if (monitor) {
-            monitor('Uploading...', fileObj.name);
-          }
           break;
         default:
           break;
@@ -69,12 +75,12 @@ export const uploadPictureToFirebase = (
       // Upload completed successfully, now we can get the download URL
       uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
         console.log('File available at', downloadURL);
+        if (monitor) {
+          monitor('Upload a photo...');
+        }
         if (callback) {
           console.log('Executing your callback', callback, '\n');
           callback(downloadURL);
-          if (monitor) {
-            monitor('Upload a photo...');
-          }
         }
       });
     }
