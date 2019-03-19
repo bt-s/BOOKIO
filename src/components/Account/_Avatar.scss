@@ -1,0 +1,64 @@
+.avatar-container {
+  flex: 1 0 40%;
+  width: 200px;
+  max-width: 200px;
+  height: 200px;
+  position: relative;
+
+  img {
+    border-radius: 2px;
+    width: 100%;
+    object-fit: center;
+  }
+}
+
+.avatar {
+  height: 100%;
+}
+
+.edit-avatar {
+  .dd-header {
+    background-color: $black-lighter;
+    background: black;
+    color: white;
+    position: absolute;
+    padding: $padding-xxs $padding-xs;
+    margin-top: -47px;
+    margin-left: $padding-xxs;
+    border-radius: 2px;
+
+    svg {
+      margin-right: $padding-xxs;
+    }
+  }
+
+  .dd-list {
+    margin-top: 0;
+    width: 200px;
+    background-clip: padding-box;
+    border-radius: 2px;
+    border: 1px solid rgba(25, 31, 35, 0.15);
+    box-shadow: 0 3px 12px rgba(27, 31, 35, 0.15);
+    z-index: 10;
+  }
+
+  .dd-list-item {
+    width: 100%;
+    padding: 0 $padding-xs;
+    height: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    label,
+    button {
+      cursor: pointer;
+    }
+
+    button {
+      background: transparent;
+      border: transparent;
+      font-size: 14px;
+    }
+  }
+}

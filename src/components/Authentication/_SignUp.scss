@@ -1,0 +1,13 @@
+.admin-label {
+  display: none;
+}
+
+.sign-up {
+  .auth-form {
+    input {
+      &:last-of-type {
+        margin-bottom: $padding-sm;
+      }
+    }
+  }
+}

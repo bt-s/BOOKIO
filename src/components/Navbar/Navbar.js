@@ -15,8 +15,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
+import BrandLogo from '../BrandLogo/BrandLogo';
 import Button from '../Button/Button';
-import SignOut from '../SignOut/SignOut';
+import Dropdown from '../Dropdown/Dropdown';
+import SignOut from '../Authentication/SignOut';
 
 const bookShelfLink = (
   <Link to={ROUTES.MY_BOOK_HISTORY} className="navbar-bookshelves">
@@ -24,27 +26,65 @@ const bookShelfLink = (
   </Link>
 );
 
-const accountLink = (
-  <Link to={ROUTES.ACCOUNT} className="navbar-account">
-    <FontAwesomeIcon icon={faUser} />
-  </Link>
+const accountMenuList = [
+  {
+    id: 0,
+    title: (
+      <Link to={ROUTES.ACCOUNT}>
+        <FontAwesomeIcon icon={faUser} />
+        My profile
+      </Link>
+    ),
+    classes: 'link section-ending'
+  },
+  {
+    id: 1,
+    title: <Link to={ROUTES.ACCOUNT}>My borrowed books</Link>,
+    classes: 'link'
+  },
+  {
+    id: 2,
+    title: <Link to={ROUTES.ACCOUNT}>My lended books</Link>,
+    classes: 'link'
+  },
+  {
+    id: 3,
+    title: <Link to={ROUTES.ACCOUNT}>My gotten books</Link>,
+    classes: 'link'
+  },
+  {
+    id: 4,
+    title: <Link to={ROUTES.ACCOUNT}>My given books</Link>,
+    classes: 'link section-ending'
+  },
+  {
+    id: 5,
+    title: <SignOut />,
+    classes: 'link'
+  }
+];
+
+const accountMenu = (
+  <Dropdown
+    classes="navbar-account"
+    headerObject={<FontAwesomeIcon icon={faUser} />}
+    items={accountMenuList}
+  />
 );
 
 const NavbarAuth = ({authUser}) =>
   authUser.roles.includes(ROLES.ADMIN) && authUser.emailVerified ? (
     <React.Fragment>
       {bookShelfLink}
-      {accountLink}
+      {accountMenu}
       <Link to={ROUTES.ADMIN} className="navbar-admin">
         Admin
       </Link>
-      <SignOut />
     </React.Fragment>
   ) : (
     <React.Fragment>
       {bookShelfLink}
-      {accountLink}
-      <SignOut />
+      {accountMenu}
     </React.Fragment>
   );
 
@@ -74,13 +114,6 @@ const Navbar = props => {
 
   const mobileBreakPoint = 768;
 
-  const brandLogo = (
-    <Link to={ROUTES.LANDING} className="navbar-brand">
-      <span className="left">{props.logoLeft}</span>
-      <span className="right">{props.logoRight}</span>
-    </Link>
-  );
-
   const itemSearchBar = (
     <div className="navbar-search-container">
       A search component will be inserted here...
@@ -91,7 +124,7 @@ const Navbar = props => {
     <Button
       className="navbar-mobile-menu"
       onClick={onMenuToggle}
-      text={
+      icon={
         <React.Fragment>
           <FontAwesomeIcon icon={faBars} />
           <FontAwesomeIcon icon={faTimes} />
@@ -103,12 +136,10 @@ const Navbar = props => {
   return (
     <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
       <div className="navbar-content-container">
-        {brandLogo}
+        <BrandLogo />
         {itemSearchBar}
         {props.authUser ? (
-          props.authUser.emailVerified ? (
-            <NavbarAuth authUser={props.authUser} />
-          ) : null
+          <NavbarAuth authUser={props.authUser} />
         ) : (
           <NavbarNonAuth />
         )}

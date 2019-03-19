@@ -1,6 +1,3 @@
-$logo-horizontal-border: 3px solid white;
-$logo-vertical-border: 2px solid white;
-
 $border-radius: 2px;
 
 $navbar-icon-size: 20px;
@@ -56,30 +53,6 @@ $navbar-icon-size: 20px;
 
   @include media-breakpoint(lg) {
     max-width: $max-width-lg;
-  }
-}
-
-.navbar-brand {
-  font-size: 15px;
-  text-decoration: none;
-
-  @include media-breakpoint(sm) {
-    font-size: 20px;
-  }
-
-  .left {
-    color: $white;
-  }
-
-  .right {
-    color: $black-lighter;
-    background-color: $white;
-    margin-left: 4px;
-    border-right: $logo-horizontal-border;
-    border-left: $logo-horizontal-border;
-    border-top: $logo-vertical-border;
-    border-bottom: $logo-vertical-border;
-    border-radius: $border-radius;
   }
 }
 
@@ -169,6 +142,50 @@ $navbar-icon-size: 20px;
 .navbar-account {
   svg {
     margin-right: $padding-sm;
+  }
+}
+
+.navbar-account {
+  .dd-list {
+    left: auto;
+    right: 0;
+    width: $dropdown-menu-width;
+    background-clip: padding-box;
+    border-radius: $border-radius;
+    border: $dropdown-menu-border;
+    box-shadow: $dropdown-menu-box-shadow;
+  }
+
+  .dd-list-item {
+    width: 100%;
+    padding: 0 $padding-xs;
+    height: $dropdown-menu-item-height;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &.link {
+      svg {
+        width: 12px;
+        margin-right: $padding-xxs;
+      }
+
+      path {
+        fill: $black-lighter;
+      }
+    }
+
+    &.section-ending {
+      border-bottom: 1px solid $gray;
+    }
+
+    a {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      text-decoration: none;
+    }
   }
 }
 

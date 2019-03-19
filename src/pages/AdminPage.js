@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {compose} from 'recompose';
 
-import {withFirebase} from '../Firebase';
-import {withAuthorization} from '../Session/Session';
+import {withFirebase} from '../components/Firebase';
+import {withAuthorization} from '../components/Session/Session';
+import Loader from '../components/Loader/Loader';
 
-import * as ROLES from '../../constants/roles';
-
-import Loader from '../Loader/Loader';
+import * as ROLES from '../constants/roles';
 
 const AdminPage = props => {
   const [loading, setLoading] = useState(false);
@@ -38,6 +38,10 @@ const AdminPage = props => {
       <UserList users={users} />
     </div>
   );
+};
+
+AdminPage.propTypes = {
+  firebase: PropTypes.object
 };
 
 const UserList = ({users}) => {

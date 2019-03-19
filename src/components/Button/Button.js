@@ -8,6 +8,7 @@ const Button = props => (
     id={props.id}
     onClick={props.onClick}
     type={props.type}>
+    {props.icon}
     {props.text}
   </button>
 );
@@ -17,7 +18,8 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   id: PropTypes.string,
   onClick: PropTypes.func,
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  icon: PropTypes.object,
+  text: PropTypes.string,
   type: PropTypes.string
 };
 
