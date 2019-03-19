@@ -48,8 +48,6 @@ const SignUpFormBase = props => {
   };
 
   const onSubmit = e => {
-    const formUsername = form.username;
-    const formEmail = form.email;
     const roles = [];
 
     if (form.isAdmin.checked) roles.push(ROLES.ADMIN);
@@ -61,8 +59,8 @@ const SignUpFormBase = props => {
       .then(authUser => {
         return props.firebase.user(authUser.user.uid).set(
           {
-            formUsername,
-            formEmail,
+            username: form.username,
+            email: form.email,
             roles
           },
           {merge: true}
