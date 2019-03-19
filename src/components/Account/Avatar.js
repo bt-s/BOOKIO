@@ -9,7 +9,7 @@ import {faPencilAlt} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import Dropdown from '../Dropdown/Dropdown';
-import {uploadPictureToFirebase} from '../../helper/StorageHelper';
+import {uploadPictureToFirebase} from '../../helper/storageHelper';
 
 const Avatar = props => {
   const [statusText, setStatusText] = useState('Upload a photo...');
@@ -55,8 +55,8 @@ const Avatar = props => {
           />
         </label>
       ),
-      classes: 'link avatar-upload',
-    },
+      classes: 'link avatar-upload'
+    }
   ];
 
   return (
@@ -77,11 +77,11 @@ const Avatar = props => {
 };
 
 Avatar.propTypes = {
-  avatarURL: PropTypes.string,
+  avatarURL: PropTypes.string
 };
 
 Avatar.defaultProps = {
-  avatarURL: steve,
+  avatarURL: steve
 };
 
 export default withFirebase(Avatar);
