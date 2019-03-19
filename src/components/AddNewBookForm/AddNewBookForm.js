@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import uuid from 'uuid/v1';
-import {throttle} from '../../helper/helper';
+import {throttle} from '../../helpers/helper';
 
 import {addNewUserBook} from '../../redux/actions/addNewUserBook';
 import {fetchBookTitleSuggestions} from '../../redux/actions/bookTitleSuggestions';
