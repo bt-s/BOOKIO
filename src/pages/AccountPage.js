@@ -4,6 +4,9 @@ import {compose} from 'recompose';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
+import {faPhone, faEnvelope} from '@fortawesome/free-solid-svg-icons';
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   withAuthorization,
   withEmailVerification
@@ -14,24 +17,35 @@ import DeleteAccount from '../components/Account/DeleteAccount';
 import LoginManagement from '../components/Account/LoginManagement';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 
-const AccountPage = props => (
-  <div className="account-page">
-    <Avatar />
-    <ul>
-      Account:
-      <li>UID: {props.authUser.uid}</li>
-      <li>E-mail: {props.authUser.email}</li>
-      <li>Username: {props.authUser.formUsername}</li>
-      <li>Facebook username: {props.authUser.username}</li>
-      <li>Roles: {props.authUser.roles}</li>
-      <li>ProviderId: {props.authUser.providerData[0].providerId}</li>
-      <li>FacebookPhotoURL: {props.authUser.providerData[0].photoURL}</li>
-    </ul>
-    <PasswordChangeForm />
-    <LoginManagement authUser={props.authUser} />
-    <DeleteAccount />
-  </div>
-);
+const AccountPage = props => {
+  return (
+    <div className="account-page">
+      <div className="user-information">
+        <Avatar />
+        <div className="username-container">
+          <span className="username-age">
+            {props.authUser.username}, {props.authUser.age} years old
+          </span>
+          <span className="location">{props.authUser.location}</span>
+        </div>
+        <div className="user-info-container">
+          <span className="info-item">
+            <FontAwesomeIcon icon={faPhone} />
+            {props.authUser.phoneNumber}
+          </span>
+          <span className="info-item">
+            <FontAwesomeIcon icon={faEnvelope} />
+            {props.authUser.email}
+          </span>
+        </div>
+      </div>
+
+      <PasswordChangeForm />
+      <LoginManagement authUser={props.authUser} />
+      <DeleteAccount />
+    </div>
+  );
+};
 
 AccountPage.propTypes = {
   authUser: PropTypes.object

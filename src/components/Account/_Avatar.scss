@@ -1,5 +1,7 @@
 .avatar-container {
+  flex: 1 0 40%;
   width: 200px;
+  max-width: 200px;
   height: 200px;
   position: relative;
 
@@ -8,8 +10,6 @@
     width: 100%;
     object-fit: center;
   }
-
-  margin: 50px 0 100px;
 }
 
 .avatar {
