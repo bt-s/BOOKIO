@@ -12,6 +12,7 @@ import Dropdown from '../Dropdown/Dropdown';
 import {uploadPictureToFirebase} from '../../helper/StorageHelper';
 
 const Avatar = props => {
+  const [statusText, setStatusText] = useState('Upload a photo...');
   const [selectedFile, setSelectedFile] = useState({});
   const [isSelected, setSelected] = useState(false);
   const [imgURL, setImgURL] = useState('');
@@ -33,7 +34,7 @@ const Avatar = props => {
       id: 0,
       title: (
         <label>
-          Upload a photo...
+          {statusText}
           <input
             type="file"
             name=""
@@ -42,7 +43,11 @@ const Avatar = props => {
                 e.target.files[0],
                 'images',
                 props.firebase,
-                postUploadTask
+                postUploadTask,
+                status => {
+                  setStatusText(status);
+                  console.log('monitor executed');
+                }
               );
             }}
             id=""

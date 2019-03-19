@@ -2,12 +2,16 @@
   @callback(param):
   if provided, it will be called with
   a url to picture uploaded as the parameter
+  @monitor(param):
+  this function is used for the caller of this function 
+  to know about the status of uploading
 */
 export const uploadPictureToFirebase = (
   fileObj,
   remoteFolder,
   firebase,
-  callback = false
+  callback = false,
+  monitor = false
 ) => {
   const storageRef = firebase.storage().ref();
   const data = new FormData();
@@ -28,16 +32,15 @@ export const uploadPictureToFirebase = (
   uploadTask.on(
     firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
     function(snapshot) {
-      // Get task progress, including the number of bytes uploaded and
-      // the total number of bytes to be uploaded
-      let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
         case firebase.storage.TaskState.PAUSED: // or 'paused'
           console.log('Upload is paused');
           break;
         case firebase.storage.TaskState.RUNNING: // or 'running'
           console.log('Upload is running');
+          if (monitor) {
+            monitor('Uploading...', fileObj.name);
+          }
           break;
         default:
           break;
@@ -69,6 +72,9 @@ export const uploadPictureToFirebase = (
         if (callback) {
           console.log('Executing your callback', callback, '\n');
           callback(downloadURL);
+          if (monitor) {
+            monitor('Upload a photo...');
+          }
         }
       });
     }
