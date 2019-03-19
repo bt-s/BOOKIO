@@ -7,7 +7,12 @@ import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
 import {Validation, Validator, ValidationHelper} from './Validation';
-import {formReducer, errorReducer} from '../../helpers/validationHelper';
+import {
+  formReducer,
+  errorReducer,
+  /*phoneNumberValidation,*/
+  numberValidation
+} from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
@@ -25,7 +30,10 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 const SignUpFormBase = props => {
   const initialFormValues = () => ({
     username: '',
+    age: '',
     email: '',
+    phoneNumber: '',
+    location: '',
     passwordOne: '',
     passwordTwo: '',
     isAdmin: false
@@ -60,7 +68,10 @@ const SignUpFormBase = props => {
         return props.firebase.user(authUser.user.uid).set(
           {
             username: form.username,
+            age: form.age,
             email: form.email,
+            phoneNumber: form.phoneNumber,
+            location: form.location,
             roles
           },
           {merge: true}
@@ -68,7 +79,10 @@ const SignUpFormBase = props => {
       })
       .then(authUser => {
         form.username = '';
+        form.age = '';
         form.email = '';
+        form.phoneNumber = '';
+        form.location = '';
         form.passwordOne = '';
         form.passwordTwo = '';
         props.history.push(ROUTES.ACCOUNT);
@@ -109,7 +123,26 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
-
+        {error.age && <span className="validation-error">{error.age}</span>}
+        <label htmlFor="" className="form-header">
+          Age
+        </label>
+        <Validator
+          name="age"
+          value={form.age}
+          validations={[
+            ValidationHelper.required('Age is required'),
+            numberValidation
+          ]}
+          onValidate={onValidate}>
+          <input
+            name="age"
+            type="text"
+            placeholder=""
+            value={form.age}
+            onChange={handleChange}
+          />
+        </Validator>
         {error.email && <span className="validation-error">{error.email}</span>}
         <label htmlFor="" className="form-header">
           Email
@@ -127,7 +160,46 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
+        {error.phoneNumber && (
+          <span className="validation-error">{error.phoneNumber}</span>
+        )}
+        <label htmlFor="" className="form-header">
+          Phone number
+        </label>
+        <Validator
+          name="phoneNumber"
+          value={form.phoneNumber}
+          validations={[ValidationHelper.required('Phone number is required')]}
+          onValidate={onValidate}>
+          <input
+            name="phoneNumber"
+            type="text"
+            placeholder=""
+            value={form.phoneNumber}
+            onChange={handleChange}
+          />
+        </Validator>
 
+        {/* Use Google Maps API to find location */}
+        {error.location && (
+          <span className="validation-error">{error.location}</span>
+        )}
+        <label htmlFor="" className="form-header">
+          Location
+        </label>
+        <Validator
+          name="location"
+          value={form.location}
+          validations={[ValidationHelper.required('Location is required')]}
+          onValidate={onValidate}>
+          <input
+            name="location"
+            type="text"
+            placeholder=""
+            value={form.location}
+            onChange={handleChange}
+          />
+        </Validator>
         {error.passwordOne && (
           <span className="validation-error">{error.passwordOne}</span>
         )}
@@ -147,7 +219,6 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
-
         {error.passwordTwo && (
           <span className="validation-error">{error.passwordTwo}</span>
         )}
@@ -169,7 +240,6 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
-
         <label htmlFor="" className="admin-label">
           Admin:
           <input
@@ -180,7 +250,6 @@ const SignUpFormBase = props => {
           />
         </label>
         <Button className="btn btn-auth" type="submit" text="Sign up" />
-
         {error.code ? (
           <p className="form-submission-error">ERROR: {error.message}</p>
         ) : (

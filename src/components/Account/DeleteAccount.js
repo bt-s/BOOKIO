@@ -1,8 +1,7 @@
-import React, {useRef, useReducer} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {withFirebase} from '../Firebase';
-import * as ROUTES from '../../constants/routes';
 
 import Button from '../Button/Button';
 
@@ -14,6 +13,10 @@ const DeleteAccountBase = props => {
   };
 
   return <Button onClick={onDelete} text={`Delete my account`} />;
+};
+
+DeleteAccountBase.propTypes = {
+  firebase: PropTypes.object
 };
 
 const DeleteAccount = withFirebase(DeleteAccountBase);
