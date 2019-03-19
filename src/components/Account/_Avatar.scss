@@ -1,5 +1,7 @@
 .avatar-container {
+  flex: 1 0 40%;
   width: 200px;
+  max-width: 200px;
   height: 200px;
   position: relative;
 
@@ -8,8 +10,6 @@
     width: 100%;
     object-fit: center;
   }
-
-  margin: 50px 0 100px;
 }
 
 .avatar {
@@ -19,11 +19,13 @@
 .edit-avatar {
   .dd-header {
     background-color: $black-lighter;
-    margin-top: -30px;
     background: black;
     color: white;
-    padding-left: $padding-xxs;
     position: absolute;
+    padding: $padding-xxs $padding-xs;
+    margin-top: -47px;
+    margin-left: $padding-xxs;
+    border-radius: 2px;
 
     svg {
       margin-right: $padding-xxs;
