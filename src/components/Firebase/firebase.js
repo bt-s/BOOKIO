@@ -3,20 +3,29 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 
-import {firebaseAPIKey} from '../APIKeys/APIKeys';
-
-const REACT_APP_CONFIRMATION_EMAIL_REDIRECT = 'http://localhost:3000';
-
 const devConfig = {
-  apiKey: firebaseAPIKey,
-  authDomain: 'bookio-5c798.firebaseapp.com',
-  databaseURL: 'https://bookio-5c798.firebaseio.com',
-  projectId: 'bookio',
-  storageBucket: 'bookio.appspot.com',
-  messagingSenderId: '74803950777'
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  confirmationEmailRedirect:
+    process.env.REACT_APP_DEV_CONFIRMATION_EMAIL_REDIRECT
 };
 
-const config = process.env.NODE_ENV === 'development' ? devConfig : null;
+const prodConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  confirmationEmailRedirect:
+    process.env.REACT_APP_PROD_CONFIRMATION_EMAIL_REDIRECT
+};
+
+const config = process.env.NODE_ENV === 'development' ? devConfig : prodConfig;
 
 class Firebase {
   constructor() {
@@ -68,7 +77,7 @@ class Firebase {
 
   doSendEmailVerification = () =>
     this.auth.currentUser.sendEmailVerification({
-      url: REACT_APP_CONFIRMATION_EMAIL_REDIRECT
+      url: config.confirmationEmailRedirect
     });
 
   // *** Merge Auth and DB User API *** //
