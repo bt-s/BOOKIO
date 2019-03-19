@@ -10,6 +10,7 @@ import {
 } from '../components/Session/Session';
 
 import Avatar from '../components/Account/Avatar';
+import DeleteAccount from '../components/Account/DeleteAccount';
 import LoginManagement from '../components/Account/LoginManagement';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 
@@ -28,6 +29,7 @@ const AccountPage = props => (
     </ul>
     <PasswordChangeForm />
     <LoginManagement authUser={props.authUser} />
+    <DeleteAccount />
   </div>
 );
 
