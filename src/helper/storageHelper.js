@@ -15,14 +15,14 @@ export const uploadPictureToFirebase = (
 
   // Create the file metadata
   const metadata = {
-    contentType: 'image/jpeg',
+    contentType: 'image/jpeg'
   };
 
   // Create image location in Firebase storage
   const imgLocation = remoteFolder + '/' + fileObj.name;
 
   // Upload file and metadata to the object 'images/mountains.jpg'
-  var uploadTask = storageRef.child(imgLocation).put(fileObj, metadata);
+  let uploadTask = storageRef.child(imgLocation).put(fileObj, metadata);
 
   // Listen for state changes, errors, and completion of the upload.
   uploadTask.on(
@@ -73,6 +73,4 @@ export const uploadPictureToFirebase = (
       });
     }
   );
-
-  //
 };
