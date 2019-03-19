@@ -2,8 +2,6 @@ import React from 'react';
 
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
-// import {googleAPIKey} from '../APIKeys/APIKeys';
-
 import Loader from '../Loader/Loader';
 
 const LoadingContainer = props => <Loader />;

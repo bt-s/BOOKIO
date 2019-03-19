@@ -3,8 +3,6 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 
-// import {firebaseAPIKey} from '../APIKeys/APIKeys';
-
 const REACT_APP_CONFIRMATION_EMAIL_REDIRECT = 'http://localhost:3000';
 
 const devConfig = {
