@@ -1,16 +1,123 @@
-.Oval {
-  width: 70px;
-  height: 70px;
-  border: solid 1px #979797;
-  background-color: #ffffff;
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.book-details-container {
+  margin-top: 20px;
 }
 
-.imageBook{
-  width: 182px;
-  height: 277px;
+.left-container {
+  max-width: 50%;
+  margin-top: 20px;
+  float: left;
+  margin: auto;
+}
+.right-container {
+  margin-top: 20px;
+  max-width: 50%;
+  float: right;
+  margin: auto;
+}
+  
+.book-title {
+  margin-top: 10px;
+  color: #4a4a4a;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.desc-content{
-	text-align:right;
-	text-color:red;
+.book-description {
+  color: #4a4a4a;
+  font-size: 17px;
+}
+
+.icon-distance {
+  width: 15px;
+  height: 15px;
+  align-items: right;
+}
+.distance {
+  text-align: right;
+}
+.header-description {
+  margin-top: 17px;
+  margin-bottom: 17px;
+  width: 116px;
+  height: 21px;
+  font-size: 18px;
+  color: #4a4a4a;
+}
+
+.service-description {
+  color: #4a4a4a;
+  font-size: 17px;
+  width: 365px;
+  height: 335px;
+  text-align: justify;
+}
+
+.header-pickup {
+  width: 143px;
+  height: 21px;
+  font-size: 18px;
+  text-align: left;
+  color: #4a4a4a;
+  margin-right: auto;
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+
+.book-img {
+  width: 365px;
+  height: 240px;
+}
+.user-name {
+  margin-left: auto;
+  margin-right: auto;
+}
+.user-profile{
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  border: solid 1px #000000;
+  background-color: #000000;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-request {
+  width: 166px;
+  height: 47px;
+  border-radius: 19px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  background-color: #000000;
+  font-size: 15px;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+}
+
+.google-map-wrapper {
+  height: 450px;
+  width: 365px;
+}
+
+@media (max-width: 720px) {
+  .left-container{
+    max-width: 100%;
+    float: left;
+    margin: auto;
+  }
+  .right-container{
+    max-width: 100%;
+    float: left;
+    margin: auto;
+  }
+  .google-map-wrapper {
+    height: 450px;
+    width: 245px;
+  }
+
 }
