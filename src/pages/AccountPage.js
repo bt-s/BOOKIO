@@ -18,8 +18,8 @@ const AccountPage = props => {
 
   return (
     <div className="account-page">
-      <Avatar />
-      {/* <Avatar avatarURL={props.authUser.photoURL} /> */}
+      {/* <Avatar /> */}
+      <Avatar avatarURL={props.authUser.photoURL} />
       <ul>
         Account:
         <li>UID: {props.authUser.uid}</li>
