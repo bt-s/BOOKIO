@@ -33,14 +33,14 @@ const getStars = rating => {
 
 const BookDetail = props => (
   <div className="book-details-container">
-    <div className="left-container">
+    <div className="book-info-container">
       <div className="book-title">{props.bookTitle}</div>
       <img className="book-img" src={props.imageSource} alt={props.bookTitle} />
       <div className="rating">Rating: {props.rating} </div>
       <div className="header-description">Description </div>
       <div className="service-description">{props.serviceDescription}</div>
     </div>
-    <div className="right-container">
+    <div className="book-pickup-container">
       <div className="header-pickup">Pickup Location </div>
       <div className="google-map-wrapper">
         <GoogleMap />
