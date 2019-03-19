@@ -7,7 +7,7 @@ import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
 import {Validation, Validator, ValidationHelper} from './Validation/Validation';
-import {formReducer, errorReducer} from './Validation/helpers';
+import {formReducer, errorReducer} from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';

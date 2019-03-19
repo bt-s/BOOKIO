@@ -7,7 +7,7 @@ import {compose} from 'recompose';
 import Button from '../Button/Button';
 import {PasswordForgetLink} from './PasswordForget';
 import {Validation, Validator, ValidationHelper} from './Validation/Validation';
-import {formReducer, errorReducer} from './Validation/helpers';
+import {formReducer, errorReducer} from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
 

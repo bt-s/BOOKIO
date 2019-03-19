@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
-import {formReducer, errorReducer} from '../Authentication/Validation/helpers';
+import {formReducer, errorReducer} from '../../helpers/validationHelper';
 
 const PasswordChangeForm = props => {
   const initialFormValues = () => ({
