@@ -26,12 +26,13 @@ const Avatar = props => {
 
   const postUploadTask = url => {
     setImgURL(url);
-    console.log('postUploadTask', props.firebase);
+    console.log('postUploadTask', props.firebase.auth.currentUser);
 
     //link the file to the user
-    props.firebase
-      .auth()
-      .currentUser.updatePhotoURL(url)
+    props.firebase.auth.currentUser
+      .updateProfile({
+        photoURL: url,
+      })
       .then(function() {
         // Update successful.
       })
