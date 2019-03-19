@@ -20,9 +20,8 @@ import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 const AccountPage = props => {
   return (
     <div className="account-page">
-
       <div className="user-information">
-        <Avatar avatarURL={props.authUser.photoURL />
+        <Avatar avatarURL={props.authUser.photoURL} />
         <div className="username-container">
           <span className="username-age">
             {props.authUser.username}, {props.authUser.age} years old
@@ -44,7 +43,6 @@ const AccountPage = props => {
       <PasswordChangeForm />
       <LoginManagement authUser={props.authUser} />
       <DeleteAccount />
->>>>>>> master
     </div>
   );
 };
