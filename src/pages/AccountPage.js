@@ -9,7 +9,7 @@ import {faPhone, faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   withAuthorization,
-  withEmailVerification,
+  withEmailVerification
 } from '../components/Session/Session';
 
 import Avatar from '../components/Account/Avatar';
@@ -20,9 +20,8 @@ import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 const AccountPage = props => {
   return (
     <div className="account-page">
-
       <div className="user-information">
-        <Avatar avatarURL={props.authUser.photoURL />
+        <Avatar avatarURL={props.authUser.photoURL} />
         <div className="username-container">
           <span className="username-age">
             {props.authUser.username}, {props.authUser.age} years old
@@ -40,23 +39,22 @@ const AccountPage = props => {
           </span>
         </div>
       </div>
-
       <PasswordChangeForm />
       <LoginManagement authUser={props.authUser} />
       <DeleteAccount />
->>>>>>> master
+      >>>>>>> master
     </div>
   );
 };
 
 AccountPage.propTypes = {
-  authUser: PropTypes.object,
+  authUser: PropTypes.object
 };
 
 const condition = authUser => !!authUser;
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser,
+  authUser: state.sessionState.authUser
 });
 
 export default compose(
