@@ -16,18 +16,13 @@ const Avatar = props => {
   const [imgURL, setImgURL] = useState('');
 
   const postUploadTask = url => {
-    setImgURL(url);
-
     //link the file to the user
     props.firebase.auth.currentUser
       .updateProfile({
-        photoURL: url
+        photoURL: url,
       })
       .then(function() {
-        // Update successful.
-      })
-      .catch(function(error) {
-        // An error happened.
+        setImgURL(url);
       });
   };
 
@@ -56,8 +51,8 @@ const Avatar = props => {
           />
         </label>
       ),
-      classes: 'link avatar-upload'
-    }
+      classes: 'link avatar-upload',
+    },
   ];
 
   return (
@@ -78,11 +73,11 @@ const Avatar = props => {
 };
 
 Avatar.propTypes = {
-  avatarURL: PropTypes.string
+  avatarURL: PropTypes.string,
 };
 
 Avatar.defaultProps = {
-  avatarURL: steve
+  avatarURL: steve,
 };
 
 export default withFirebase(Avatar);

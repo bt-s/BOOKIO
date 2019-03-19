@@ -65,18 +65,10 @@ const SignUpFormBase = props => {
     props.firebase
       .doCreateUserWithEmailAndPassword(form.email, form.passwordOne)
       .then(authUser => {
-        authUser.user
-          .updateProfile({
-            displayName: form.username,
-            photoURL:
-              'https://firebasestorage.googleapis.com/v0/b/bookio.appspot.com/o/images%2Frobot.png?alt=media&token=d0cc8a48-aaad-4e3b-9c08-3e341ed8165e',
-          })
-          .then(function() {
-            // Update successful.
-          })
-          .catch(function(error) {
-            // An error happened.
-          });
+        authUser.user.updateProfile({
+          displayName: form.username,
+          photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT,
+        });
         return props.firebase.user(authUser.user.uid).set(
           {
             username: form.username,
