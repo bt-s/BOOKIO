@@ -27,6 +27,7 @@ const Avatar = props => {
   const postUploadTask = url => {
     setImgURL(url);
     //link the file to the user
+    console.log();
   };
 
   const uploadField = [
@@ -55,8 +56,8 @@ const Avatar = props => {
           />
         </label>
       ),
-      classes: 'link avatar-upload'
-    }
+      classes: 'link avatar-upload',
+    },
   ];
 
   return (
@@ -77,11 +78,11 @@ const Avatar = props => {
 };
 
 Avatar.propTypes = {
-  avatarURL: PropTypes.string
+  avatarURL: PropTypes.string,
 };
 
 Avatar.defaultProps = {
-  avatarURL: steve
+  avatarURL: steve,
 };
 
 export default withFirebase(Avatar);

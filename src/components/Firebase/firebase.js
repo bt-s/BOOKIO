@@ -11,7 +11,7 @@ const devConfig = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   confirmationEmailRedirect:
-    process.env.REACT_APP_DEV_CONFIRMATION_EMAIL_REDIRECT
+    process.env.REACT_APP_DEV_CONFIRMATION_EMAIL_REDIRECT,
 };
 
 const prodConfig = {
@@ -22,7 +22,7 @@ const prodConfig = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   confirmationEmailRedirect:
-    process.env.REACT_APP_PROD_CONFIRMATION_EMAIL_REDIRECT
+    process.env.REACT_APP_PROD_CONFIRMATION_EMAIL_REDIRECT,
 };
 
 const config = process.env.NODE_ENV === 'development' ? devConfig : prodConfig;
@@ -62,14 +62,14 @@ class Firebase {
       if (passwordOne <= 5 || passwordTwo <= 5) {
         reject({
           code: 'passwords-too-short',
-          message: 'The password should at least be 6 characters long.'
+          message: 'The password should at least be 6 characters long.',
         });
       } else if (passwordOne === passwordTwo) {
         resolve(this.auth.currentUser.updatePassword(passwordOne));
       } else {
         reject({
           code: 'passwords-not-the-same',
-          message: 'Passwords not the same.'
+          message: 'Passwords not the same.',
         });
       }
     });
@@ -77,13 +77,15 @@ class Firebase {
 
   doSendEmailVerification = () =>
     this.auth.currentUser.sendEmailVerification({
-      url: config.confirmationEmailRedirect
+      url: config.confirmationEmailRedirect,
     });
 
   // *** Merge Auth and DB User API *** //
   onAuthUserListener = (next, fallback) =>
     this.auth.onAuthStateChanged(authUser => {
       if (authUser) {
+        console.log('onAuthUserListener\n', authUser, '........\n');
+
         this.user(authUser.uid)
           .get()
           .then(snapshot => {
@@ -96,11 +98,12 @@ class Firebase {
 
             // merge auth and db user
             authUser = {
-              uid: authUser.uid,
-              email: authUser.email,
-              emailVerified: authUser.emailVerified,
-              providerData: authUser.providerData,
-              ...dbUser
+              // uid: authUser.uid,
+              // email: authUser.email,
+              // emailVerified: authUser.emailVerified,
+              // providerData: authUser.providerData,
+              ...authUser,
+              ...dbUser,
             };
 
             next(authUser);

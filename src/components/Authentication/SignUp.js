@@ -28,7 +28,7 @@ const SignUpFormBase = props => {
     email: '',
     passwordOne: '',
     passwordTwo: '',
-    isAdmin: false
+    isAdmin: false,
   });
 
   const validationRef = useRef(null);
@@ -39,7 +39,7 @@ const SignUpFormBase = props => {
   const handleChange = e => {
     dispatchForm({
       name: e.target.name,
-      value: e.target.value
+      value: e.target.value,
     });
   };
 
@@ -57,11 +57,24 @@ const SignUpFormBase = props => {
     props.firebase
       .doCreateUserWithEmailAndPassword(form.email, form.passwordOne)
       .then(authUser => {
+        console.log(authUser, '\n authUser printed above');
+        authUser.user
+          .updateProfile({
+            displayName: form.username,
+            photoURL:
+              'https://firebasestorage.googleapis.com/v0/b/bookio.appspot.com/o/images%2Frobot.png?alt=media&token=d0cc8a48-aaad-4e3b-9c08-3e341ed8165e',
+          })
+          .then(function() {
+            // Update successful.
+          })
+          .catch(function(error) {
+            // An error happened.
+          });
         return props.firebase.user(authUser.user.uid).set(
           {
             username: form.username,
             email: form.email,
-            roles
+            roles,
           },
           {merge: true}
         );
@@ -158,7 +171,7 @@ const SignUpFormBase = props => {
           name="passwordTwo"
           value={form.passwordTwo}
           validations={[
-            ValidationHelper.required('Password confirmation is required')
+            ValidationHelper.required('Password confirmation is required'),
           ]}
           onValidate={onValidate}>
           <input
@@ -193,7 +206,7 @@ const SignUpFormBase = props => {
 
 SignUpFormBase.propTypes = {
   firebase: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 const SignUpLink = () => (
