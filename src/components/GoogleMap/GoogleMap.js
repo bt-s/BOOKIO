@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
-import {googleAPIKey} from '../APIKeys/APIKeys';
+// import {googleAPIKey} from '../APIKeys/APIKeys';
 
 import Loader from '../Loader/Loader';
 
@@ -33,7 +33,7 @@ export const MapContainer = props => {
 };
 
 const GoogleMap = GoogleApiWrapper({
-  apiKey: googleAPIKey,
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   LoadingContainer: LoadingContainer
 })(MapContainer);
 

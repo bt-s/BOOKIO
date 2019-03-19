@@ -17,7 +17,6 @@ import AccountPage from './pages/AccountPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
-
 import './styling/style.scss';
 
 const TestComponent = props => {
