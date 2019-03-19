@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import {Link, withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
-import {useFormInput} from '../../hooks/hooks';
+import {useFormInput, useFormCheckbox} from '../../hooks/hooks';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
 
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
 
@@ -32,12 +33,33 @@ const SignUpFormBase = props => {
   const email = useFormInput('');
   const passwordOne = useFormInput('');
   const passwordTwo = useFormInput('');
+  const isAdmin = useFormCheckbox(false);
   const [error, setError] = useState(null);
 
   const onSubmit = e => {
+    const usernameValue = username.value;
+    const emailValue = email.value;
+    const roles = [];
+
+    if (isAdmin.checked) roles.push(ROLES.ADMIN);
+
     props.firebase
       .doCreateUserWithEmailAndPassword(email.value, passwordOne.value)
       .then(authUser => {
+        return props.firebase.user(authUser.user.uid).set(
+          {
+            usernameValue,
+            emailValue,
+            roles
+          },
+          {merge: true}
+        );
+      })
+      .then(authUser => {
+        username.value = '';
+        email.value = '';
+        passwordOne.value = '';
+        passwordTwo.value = '';
         props.history.push(ROUTES.ACCOUNT);
       })
       .then(() => {
@@ -81,6 +103,10 @@ const SignUpFormBase = props => {
         placeholder="Confirm password"
         {...passwordTwo}
       />
+      <label>
+        Admin:
+        <input name="isAdmin" type="checkbox" {...isAdmin} />
+      </label>
       <Button disabled={isInvalid} type="submit" text="Sign up" />
 
       {error && <p>{error.message}</p>}

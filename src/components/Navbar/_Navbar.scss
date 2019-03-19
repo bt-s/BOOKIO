@@ -1,11 +1,23 @@
+$logo-horizontal-border: 3px solid white;
+$logo-vertical-border: 2px solid white;
+
+$border-radius: 2px;
+
+$navbar-icon-size: 20px;
+
 .navbar {
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: $navbar-height;
-  background-color: $mulberry;
+  height: $navbar-height-mobile;
+  background-color: $black-lighter;
+  z-index: 10;
+
+  @include media-breakpoint(sm) {
+    height: $navbar-height;
+  }
 
   &.mobile-menu-open {
     .fa-bars {
@@ -20,9 +32,11 @@
 
 .navbar-content-container {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: $padding-xs;
+  padding-left: $padding-xs;
   margin-right: auto;
   margin-left: auto;
   width: 100%;
@@ -32,6 +46,7 @@
   }
 
   @include media-breakpoint(sm) {
+    flex-wrap: nowrap;
     max-width: $max-width-sm;
   }
 
@@ -45,7 +60,84 @@
 }
 
 .navbar-brand {
+  font-size: 15px;
+  text-decoration: none;
+
+  @include media-breakpoint(sm) {
+    font-size: 20px;
+  }
+
+  .left {
+    color: $white;
+  }
+
+  .right {
+    color: $black-lighter;
+    background-color: $white;
+    margin-left: 4px;
+    border-right: $logo-horizontal-border;
+    border-left: $logo-horizontal-border;
+    border-top: $logo-vertical-border;
+    border-bottom: $logo-vertical-border;
+    border-radius: $border-radius;
+  }
+}
+
+.navbar-search-container {
+  display: none;
+
+  @include media-breakpoint(sm) {
+    display: flex;
+    flex: 1 0 auto;
+    max-width: 300px;
+    margin-right: auto;
+    margin-left: 60px;
+    background-color: $white;
+    height: 30px;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    border-radius: $border-radius;
+    font-size: 10px;
+  }
+
+  @include media-breakpoint(md) {
+    max-width: 400px;
+  }
+}
+
+.navbar-authentication {
+  font-size: 12px;
+  margin-left: auto;
+  margin-right: 10px;
+  font-weight: 600;
   color: $white;
+
+  @include media-breakpoint(sm) {
+    font-size: 15px;
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+    color: $white;
+
+    @include media-breakpoint(sm) {
+      font-size: 15px;
+    }
+  }
+
+  .register {
+    border: 1px solid $white;
+    border-radius: $border-radius;
+    padding: 6px;
+  }
+
+  .spacer {
+    margin: 0 4px;
+  }
 }
 
 .navbar-bookshelves,
@@ -60,8 +152,23 @@
 .navbar-bookshelves,
 .navbar-account,
 .navbar-mobile-menu {
+  cursor: pointer;
+
   path {
     fill: $white;
+  }
+
+  svg {
+    font-size: $navbar-icon-size;
+    width: $navbar-icon-size;
+    height: $navbar-icon-size;
+  }
+}
+
+.navbar-bookshelves,
+.navbar-account {
+  svg {
+    margin-right: $padding-sm;
   }
 }
 
@@ -71,9 +178,9 @@
 
   .fa-times,
   .fa-bars {
-    font-size: 25px;
-    width: 25px;
-    height: 25px;
+    font-size: $navbar-icon-size;
+    width: $navbar-icon-size;
+    height: $navbar-icon-size;
   }
 
   .fa-times {

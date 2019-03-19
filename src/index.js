@@ -8,6 +8,7 @@ import * as ROUTES from './constants/routes';
 import {withAuthentication} from './components/Session/Session';
 
 import AccountPage from './components/Account/Account';
+import AdminPage from './components/Admin/Admin';
 import BookItem from './components/BookItem/BookItem';
 import BookDetail from  './components/BookDetail/BookDetail';
 import Navbar from './components/Navbar/Navbar';
@@ -62,10 +63,7 @@ const AppBase = () => (
           render={() => <PasswordForgetPage />}
         />
         <Route path={ROUTES.ACCOUNT} render={() => <AccountPage />} />
-        <Route
-          path={ROUTES.ADMIN}
-          render={() => <h2>This is the admin page.</h2>}
-        />
+        <Route path={ROUTES.ADMIN} render={() => <AdminPage />} />
         <Route
           path={ROUTES.BOOKS}
           render={() => <h2>This is the book page.</h2> }
