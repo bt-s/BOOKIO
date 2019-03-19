@@ -5,7 +5,7 @@ import {
   Validation,
   Validator,
   ValidationHelper
-} from '../Authentication/Validation/Validation';
+} from '../Authentication/Validation';
 import {formReducer, errorReducer} from '../../helpers/validationHelper';
 
 import Button from '../Button/Button';
