@@ -9,7 +9,7 @@ import {faPhone, faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   withAuthorization,
-  withEmailVerification,
+  withEmailVerification
 } from '../components/Session/Session';
 
 import Avatar from '../components/Account/Avatar';
@@ -39,7 +39,6 @@ const AccountPage = props => {
           </span>
         </div>
       </div>
-
       <PasswordChangeForm />
       <LoginManagement authUser={props.authUser} />
       <DeleteAccount />
@@ -48,13 +47,13 @@ const AccountPage = props => {
 };
 
 AccountPage.propTypes = {
-  authUser: PropTypes.object,
+  authUser: PropTypes.object
 };
 
 const condition = authUser => !!authUser;
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser,
+  authUser: state.sessionState.authUser
 });
 
 export default compose(
