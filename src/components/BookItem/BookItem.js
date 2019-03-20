@@ -1,18 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import reactJPG from '../../images/fullstackreact.jpg';
 import reactSVG from '../../images/react.svg';
+import * as ROUTES from '../../constants/routes';
 
 const BookItem = props => (
   <div className="book-item-container">
-    <img
-      className="book-item-cover-image"
-      src={props.imageSource}
-      alt={props.bookTitle}
-    />
-    <h2>{props.bookTitle}</h2>
-    <h3>{props.authorName}</h3>
+    {/* <Link to={ROUTES.BOOK_DETAIL}> */}
+    <Link to="/detail">
+      <img
+        className="book-item-cover-image"
+        src={props.imageSource}
+        alt={props.bookTitle}
+      />
+      <h2>{props.bookTitle}</h2>
+      <h3>{props.authorName}</h3>
+    </Link>
     <div className="book-item-details">
       <img
         className="book-item-user-avatar"
