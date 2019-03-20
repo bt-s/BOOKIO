@@ -31,7 +31,9 @@ Once the user has been authenticated, the user has access to the books upload an
 > All pages developed are at primitive stage that should be refined later.
 
 - The structure of whole project has been established
+- Some custom components like Dropdown, Button are created.
 - Sign in/up _(own & 3rd party)_
+  > 3rd Party sign in is functioning in localhost version while the online version is not which might be resulted from the hosting server. We will try to fix that later.
 - Firebase setup for storage and authentication
 - Redux setup
 - Google Map API setup
