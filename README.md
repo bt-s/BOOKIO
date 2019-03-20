@@ -15,18 +15,47 @@ BOOKIO will be a book-sharing platform where a user can lend out or give away a 
 
 The website's latest build is available here: [BOOKIO](https://bookio-5c798.firebaseapp.com/).
 
-In order to be able to interact with the website, one has to create a user account.
-This can be done by clicking on the "Register" button on the homepage.
+In order to be able to interact with the website, one has to create a user account. This can be done by clicking on the "Register" button on the homepage.
 An account can either be made by using an email and password combination (which has to be verified) or by loging in to Facebook.\
 Once the user has been authenticated, the user has access to the books upload and display, as well as a personal account page.
 
 ## What we have done
 
-Here we should state the state of the app before our deploy on Thursday.
+**Design**
+
+- Almost all primitive design for desktop.
+- Almost all primitive design for mobile.
+
+**Development**
+
+> All pages developed are under primitive stage, they should be refined later.
+
+- The structure of whole project has been established
+- Sign in/up _(own & 3rd party)_
+- Firebase setup for storage and authentication
+- Redux setup
+- Google Map API setup
+- Navigation Bar setup
+- Account Page setup
+- Add Book Page basic functionality setup
+- Detail Page setup
 
 ## What we still plan to do
 
-Here we should state what is still ahead of us before our deploy on Thursday.
+**Design**
+
+- Design for searchbar since there would be suggestion while typing
+- Further refinement for details
+- Some design might be changed
+
+**Development**
+
+- Search Bar
+- Notification Center
+- Book History/Ongoing page
+- Responsiveness of all pages
+- Admin Page(**_Optional_** _If we have time_)
+- Refine all these primitive pages
 
 ## Project file structure
 
