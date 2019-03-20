@@ -7,16 +7,13 @@
 - Ria Ratna Sari
 - Bas Straathof
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Project description
 
 BOOKIO will be a book-sharing platform where a user can lend out or give away a book for free. If renting out a book, the time span for borrowing can be specified and people looking for specific books can create advertisements. The platform requires the visitor to create a user profile, such that people have an idea whom they are interacting with. Users can create a post for renting out, or giving away, their book(s) and provide details such as time and location of pick-up. When a user uploads a book, the title will be looked up in an open book API such that a description of the book, and possibly other features such as general ratings and comments, can be provided to other users. The main page will have several search and filter options and the books will be listed in an order which is dependent on the location of the user.
 
 ## User instructions
 
-The website's latest build is available here: \
-[BOOKIO](https://bookio-5c798.firebaseapp.com/).
+The website's latest build is available here: [BOOKIO](https://bookio-5c798.firebaseapp.com/).
 
 In order to be able to interact with the website, one has to create a user account.
 This can be done by clicking on the "Register" button on the homepage.
