@@ -28,7 +28,7 @@ Once the user has been authenticated, the user has access to the books upload an
 
 **Development**
 
-> All pages developed are under primitive stage, they should be refined later.
+> All pages developed are at primitive stage that should be refined later.
 
 - The structure of whole project has been established
 - Sign in/up _(own & 3rd party)_
@@ -185,6 +185,7 @@ structure of the folders is the standard best-practice structure for Redux.
 
 ## Design
 
-> Some Picture of Design
+> Below are some Pictures of the Design.\
+> For some pages, there are 2 designs. The final decision has not be made yet.
 
 ![image](img/all.png)
