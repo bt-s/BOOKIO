@@ -5,7 +5,6 @@ import imageDummy from '../images/kafka.jpg';
 import location from '../assets/location.png';
 import userProfile from '../images/kafka.jpg';
 
-/*
 import {faStar, faStarHalf} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
@@ -15,7 +14,7 @@ const getStars = rating => {
   let output = [];
 
   // Append all the filled whole stars
-  for (let i = rating; i >= 1; i--)
+  for (let i = rating; i > 0; i--)
     // If there is a half a star, append it
     if (i === 0.5) {
       output.push(<FontAwesomeIcon icon={faStarHalf} />);
@@ -24,19 +23,19 @@ const getStars = rating => {
     }
 
   // Fill the empty stars
-  for (let i = 5 - rating; i >= 1; i--)
-    output.push(<FontAwesomeIcon icon={faStar} />);
+  // for (let i = 5 - rating; i > 0; i--)
+  //   output.push(<FontAwesomeIcon icon={faStar} />);// can not find a no-fill star
 
-  return output.toString();
+  return output;
 };
-*/
+console.log(getStars(3.5));
 
 const BookDetail = props => (
   <div className="book-details-container">
     <div className="book-info-container">
       <div className="book-title">{props.bookTitle}</div>
       <img className="book-img" src={props.imageSource} alt={props.bookTitle} />
-      <div className="rating">Rating: {props.rating} </div>
+      <div className="rating">Rating: {getStars(props.rating)} </div>
       <div className="header-description">Description </div>
       <div className="service-description">{props.serviceDescription}</div>
     </div>
@@ -75,7 +74,7 @@ BookDetail.defaultProps = {
   serviceDescription:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu',
   userProfile: userProfile,
-  rating: '4.5'
+  rating: 3.5
 };
 
 export default BookDetail;
