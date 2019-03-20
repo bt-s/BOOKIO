@@ -21,7 +21,7 @@ Once the user has been authenticated, the user has access to the books upload an
 
 ## What we have done
 
-[**Design**](##Design)
+[**Design**](#Design)
 
 - Almost all primitive design for desktop.
 - Almost all primitive design for mobile.
