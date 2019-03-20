@@ -183,6 +183,8 @@ structure of the folders is the standard best-practice structure for Redux.
   - `\_variables.scss`
   - `\_vendor.scss`
 
-## Some Picture of Design
+## Design
+
+> Some Picture of Design
 
 ![image](img/all.png)
