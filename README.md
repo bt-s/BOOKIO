@@ -21,7 +21,7 @@ Once the user has been authenticated, the user has access to the books upload an
 
 ## What we have done
 
-**Design**
+[**Design**](##Design)
 
 - Almost all primitive design for desktop.
 - Almost all primitive design for mobile.
@@ -182,3 +182,7 @@ structure of the folders is the standard best-practice structure for Redux.
   - `\_base.scss`
   - `\_variables.scss`
   - `\_vendor.scss`
+
+## Some Picture of Design
+
+![image](img/all.png)
