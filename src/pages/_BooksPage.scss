@@ -29,6 +29,11 @@
   box-shadow: 1px 6px 15px 0 rgba(0, 0, 0, 0.54);
   background-color: #4500d2;
   border-radius: 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
 }
 .search-result {
   width: 900px;

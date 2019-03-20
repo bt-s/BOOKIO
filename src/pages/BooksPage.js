@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import Dropdown from '../components/Dropdown/Dropdown';
-import Button from '../components/Button/Button';
 import BookItem from '../components/BookItem/BookItem';
+import * as ROUTES from '../constants/routes';
 
 const Filters = () => (
   <div id="filters">
@@ -75,7 +76,9 @@ const BooksPage = props => (
     <div id="result-trending">
       <SearchResult results={fakeResults} />
       <div id="btn-and-trending">
-        <Button id="btn-add-book" text="Share My Stuff" />
+        <Link id="btn-add-book" to={ROUTES.ADD_BOOK}>
+          Share My Stuff
+        </Link>
         <Trending />
       </div>
     </div>
