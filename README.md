@@ -15,8 +15,8 @@ BOOKIO will be a book-sharing platform where a user can lend out or give away a 
 
 ## User instructions
 
-The website's latest build is available at\
- <https://bookio-5c798.firebaseapp.com/>.
+The website's latest build is available here: \
+[BOOKIO](https://bookio-5c798.firebaseapp.com/).
 
 In order to be able to interact with the website, one has to create a user account.
 This can be done by clicking on the "Register" button on the homepage.
