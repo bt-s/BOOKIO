@@ -12,7 +12,7 @@ Once the user has been authenticated, the user has access to the books upload an
 
 ## What we have done
 
-> Here is what works now:\
+> Here is what works now:
 
 - Sign in/up Page
 - Password forgot Page
@@ -22,11 +22,11 @@ Once the user has been authenticated, the user has access to the books upload an
   - Find back/change password, delete account, etc
   - Upload portrait
 - Add book Page
+
   - Search books using Goodreads API
 
   - Drag and drop a picture of your book to upload
     > But the uploading function is not implemented yet, so the `Add New Book` button doesn't work now.
-  -
 
 [**Design**](#Design)
 
