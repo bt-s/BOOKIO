@@ -39,13 +39,12 @@ const BookDetail = props => (
       <div className="google-map-wrapper">
         <GoogleMap />
       </div>
-      <img className="icon-distance" src={location} alt={props.distance} />
-      <div className="distance"> {props.distance} </div>
-      <div className="user-profile">
+      <div className="distance">{props.distance} </div>
+      <div className ="user-info">
         <img className="user-profile" src={props.userProfile} alt="" />
-        <div className="user-name">{props.userName}</div>
-        <button className="btn-request"> Request </button>
+        <div className="user-name">{props.userName}</div>  
       </div>
+      <button className="btn-request"> Request </button>
     </div>
   </div>
 );

@@ -1,35 +1,44 @@
 .book-details-container {
   margin-top: $padding-xs;
   width: 100%;
-  display: flex;
+  display: flex; 
+  margin-left: auto;
+  margin-right:auto;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-right: $padding-xs;
+  padding-left: $padding-xs;
 }
 
 .book-info-container {
-  max-width: 50%;
+  flex-basis: 100%;
   margin-top: $padding-sm;
   float: left;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+ 
 
   @include media-breakpoint(sm) {
-    max-width: 100%;
+    flex-basis: 50%;
     float: left;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
-
 .book-pickup-container {
   margin-top: $padding-sm;
-  max-width: 50%;
-  float: right;
-  margin: auto;
+  flex-basis: 100%;
+  float: left;
+  text-align: center;
 
   @include media-breakpoint(sm) {
-    max-width: 100%;
+    flex-basis: 50%;
     float: left;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
-
 .book-title {
   margin-top: $padding-xs;
   color: $gray-lighter;
@@ -45,12 +54,13 @@
 .icon-distance {
   width: 15px;
   height: 15px;
-  align-items: right;
+  margin-left: 0;
 }
 
 .distance {
-  text-align: right;
+  text-align: left;
 }
+
 .rating{
   margin-top: $padding-xs;
 }
@@ -78,13 +88,17 @@
   text-align: left;
   color: $gray-lighter;
   margin-right: auto;
-  margin-top: $padding-xs;
   margin-bottom: $padding-xs;
 }
 
 .book-img {
   width: 365px;
   height: 240px;
+}
+
+.user-info{
+  margin-top: $padding-xs;
+  text-align: center;
 }
 
 .user-name {
@@ -103,6 +117,7 @@
 }
 
 .btn-request {
+  margin-top: $padding-xs;
   width: 166px;
   height: 47px;
   border-radius: 19px;
@@ -110,17 +125,18 @@
   background-color: $black;
   font-size: 15px;
   color: $white;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
+  text-align: center;
+  
 }
 
 .google-map-wrapper {
   height: 450px;
   width: 365px;
+  align-items: center;
 
   @include media-breakpoint(sm) {
     height: 450px;
-    width: 245px;
+    width: 200px;
+    align-items: center;
   }
 }
