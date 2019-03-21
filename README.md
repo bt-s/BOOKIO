@@ -1,5 +1,11 @@
 # BOOKIO | Free book-sharing made easy
 
+> NOTICE:\
+>  Because there are still some update problem with Firebase whitelist. The signup is currently forbidden from domain other than localhost.\
+>  **Please use this account to test:**\
+>  Account: `sesamepicker@outlook.com`\
+>  Password: `000000`
+
 ### Authors:
 
 - Yao, Ming
