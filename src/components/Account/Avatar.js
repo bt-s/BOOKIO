@@ -13,20 +13,17 @@ import {uploadPictureToFirebase} from '../../helper/storageHelper';
 
 const Avatar = props => {
   const [statusText, setStatusText] = useState('Upload a photo...');
-  const [selectedFile, setSelectedFile] = useState({});
-  const [isSelected, setSelected] = useState(false);
   const [imgURL, setImgURL] = useState('');
 
-  var storageRef = props.firebase.storage().ref();
-
-  const handleSelectedFile = e => {
-    setSelectedFile(e.target.files[0]);
-    setSelected(true);
-  };
-
   const postUploadTask = url => {
-    setImgURL(url);
     //link the file to the user
+    props.firebase.auth.currentUser
+      .updateProfile({
+        photoURL: url
+      })
+      .then(function() {
+        setImgURL(url);
+      });
   };
 
   const uploadField = [
@@ -46,7 +43,6 @@ const Avatar = props => {
                 postUploadTask,
                 status => {
                   setStatusText(status);
-                  console.log('monitor executed');
                 }
               );
             }}

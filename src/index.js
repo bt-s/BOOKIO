@@ -18,6 +18,7 @@ import AccountPage from './pages/AccountPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
+import BooksPage from './pages/BooksPage';
 import './styling/style.scss';
 
 require('dotenv').config();
@@ -26,6 +27,15 @@ const TestComponent = props => {
   return (
     <React.Fragment>
       <div>
+        <br />
+        <h>
+          <b>
+            This page is for test purpose, click links below to check different
+            pages Click the logo above to go back to this test page.
+          </b>
+        </h>
+        <br />
+        <br />
         <Link to={ROUTES.ACCOUNT}>Account page</Link>
         <br />
         <Link to={ROUTES.ADD_BOOK}>Add book page</Link>
@@ -103,7 +113,7 @@ const AppBase = () => (
         path={ROUTES.BOOKS}
         render={() => (
           <WithNavbar>
-            <h2>This is the books page.</h2>
+            <BooksPage />
           </WithNavbar>
         )}
       />

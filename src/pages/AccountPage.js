@@ -21,7 +21,7 @@ const AccountPage = props => {
   return (
     <div className="account-page">
       <div className="user-information">
-        <Avatar />
+        <Avatar avatarURL={props.authUser.photoURL} />
         <div className="username-container">
           <span className="username-age">
             {props.authUser.username}, {props.authUser.age} years old
@@ -39,7 +39,6 @@ const AccountPage = props => {
           </span>
         </div>
       </div>
-
       <PasswordChangeForm />
       <LoginManagement authUser={props.authUser} />
       <DeleteAccount />

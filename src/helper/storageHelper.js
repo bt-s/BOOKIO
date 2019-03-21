@@ -19,7 +19,7 @@ export const uploadPictureToFirebase = (
 
   // Create the file metadata
   const metadata = {
-    contentType: 'image/jpeg'
+    contentType: 'image/jpeg',
   };
 
   // Create image location in Firebase storage
@@ -40,7 +40,6 @@ export const uploadPictureToFirebase = (
       if (monitor) {
         monitor(progress);
       }
-      console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
         case firebase.storage.TaskState.PAUSED: // or 'paused'
           console.log('Upload is paused');

@@ -96,10 +96,16 @@ class Firebase {
 
             // merge auth and db user
             authUser = {
-              uid: authUser.uid,
+              age: authUser.age,
               email: authUser.email,
               emailVerified: authUser.emailVerified,
+              location: authUser.location,
+              phoneNumber: authUser.phoneNumber,
+              photoURL: authUser.photoURL,
               providerData: authUser.providerData,
+              userName: authUser.userName,
+              roles: authUser.roles,
+              uid: authUser.uid,
               ...dbUser
             };
 
