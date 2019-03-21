@@ -36,8 +36,8 @@ export const changeNewBook = payload => {
   return {
     type: CHANGE_NEW_BOOK,
     payload
-  }
-}
+  };
+};
 
 export const addNewUserBook = payload => {
   return dispatch => {

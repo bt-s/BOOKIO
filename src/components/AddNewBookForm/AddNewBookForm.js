@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {useEffect} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
-import { changeNewBook } from '../../redux/actions/addNewUserBook';
+import {changeNewBook} from '../../redux/actions/addNewUserBook';
 
 import Button from '../Button/Button';
 
 const AddNewBookForm = props => {
-  const { newBook, changeNewBook } = props;
+  const {newBook, changeNewBook} = props;
 
   const handleChangeForm = e => {
     changeNewBook(e.target);
@@ -16,7 +16,7 @@ const AddNewBookForm = props => {
   useEffect(() => {
     // TODO: Get location from props and set the location state here
     // TODO: set the owner state with ID from local storage
-  })
+  });
 
   return (
     <React.Fragment>
@@ -29,10 +29,9 @@ const AddNewBookForm = props => {
       />
 
       <Button type="submit" text="Add New Book" />
-  
     </React.Fragment>
   );
-}
+};
 
 const mapStateToProps = state => {
   return {

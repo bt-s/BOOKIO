@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
 const DragAndDrop = props => {
@@ -6,21 +6,21 @@ const DragAndDrop = props => {
   const dragCounter = useRef(0);
   const [dragging, setDragging] = useState(false);
 
-  const handleDrag = (e) => {
+  const handleDrag = e => {
     e.preventDefault();
     e.stopPropagation();
   };
 
-  const handleDragIn = (e) => {
+  const handleDragIn = e => {
     e.preventDefault();
     e.stopPropagation();
     dragCounter.current += 1;
     if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
       setDragging(true);
-    };
+    }
   };
 
-  const handleDragOut = (e) => {
+  const handleDragOut = e => {
     e.preventDefault();
     e.stopPropagation();
     dragCounter.current -= 1;
@@ -28,7 +28,7 @@ const DragAndDrop = props => {
     setDragging(false);
   };
 
-  const handleDrop = (e) => {
+  const handleDrop = e => {
     e.preventDefault();
     e.stopPropagation();
     setDragging(false);
@@ -38,7 +38,6 @@ const DragAndDrop = props => {
       dragCounter.current = 0;
     }
   };
-
 
   useEffect(() => {
     let div = dropRef.current;
@@ -56,11 +55,18 @@ const DragAndDrop = props => {
   });
 
   return (
-    <div className={'drop-box '+ (dragging?'drag-hover':'')} ref={dropRef} >
-      <div className='drag-text'> {
-        dragging ? 'Drop here' :
-          <React.Fragment>Choose file <br /> or<br /> Drop file</React.Fragment> 
-      }</div>
+    <div className={'drop-box ' + (dragging ? 'drag-hover' : '')} ref={dropRef}>
+      <div className="drag-text">
+        {' '}
+        {dragging ? (
+          'Drop here'
+        ) : (
+          <React.Fragment>
+            Choose file <br /> or
+            <br /> Drop file
+          </React.Fragment>
+        )}
+      </div>
     </div>
   );
 };
