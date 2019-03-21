@@ -21,21 +21,16 @@ const getStars = rating => {
     } else {
       output.push(<FontAwesomeIcon icon={faStar} />);
     }
-
-  // Fill the empty stars
-  // for (let i = 5 - rating; i > 0; i--)
-  //   output.push(<FontAwesomeIcon icon={faStar} />);// can not find a no-fill star
-
   return output;
 };
-console.log(getStars(3.5));
+
 
 const BookDetail = props => (
   <div className="book-details-container">
     <div className="book-info-container">
       <div className="book-title">{props.bookTitle}</div>
       <img className="book-img" src={props.imageSource} alt={props.bookTitle} />
-      <div className="rating">Rating: {getStars(props.rating)} </div>
+      <div className="rating">{getStars(props.rating)} </div>
       <div className="header-description">Description </div>
       <div className="service-description">{props.serviceDescription}</div>
     </div>
@@ -74,7 +69,7 @@ BookDetail.defaultProps = {
   serviceDescription:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu',
   userProfile: userProfile,
-  rating: 3.5
+  rating: 4.5
 };
 
 export default BookDetail;
