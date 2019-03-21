@@ -41,7 +41,6 @@ Once the user has been authenticated, the user has access to the books upload an
 - Some custom components like Dropdown, Button are created.
 - Sign in/up _(own & 3rd party)_
   > There are some minor issue with Facebook Login. But the sign up/in with email is fine.
-  > 3rd Party sign in/up
 - Firebase setup for storage and authentication
 - Redux setup
 - Google Map API setup
