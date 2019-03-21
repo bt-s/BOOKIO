@@ -1,8 +1,5 @@
 # BOOKIO | Free book-sharing made easy
 
-> NOTICE:\
->  There are some minor issue with Facebook Login. But the sign up/in with email is fine.
-
 BOOKIO will be a book-sharing platform where a user can lend out or give away a book for free. If renting out a book, the time span for borrowing can be specified and people looking for specific books can create advertisements. The platform requires the visitor to create a user profile, such that people have an idea whom they are interacting with. Users can create a post for renting out, or giving away, their book(s) and provide details such as time and location of pick-up. When a user uploads a book, the title will be looked up in an open book API such that a description of the book, and possibly other features such as general ratings and comments, can be provided to other users. The main page will have several search and filter options and the books will be listed in an order which is dependent on the location of the user.
 
 ## User instructions
@@ -14,6 +11,22 @@ An account can either be made by using an email and password combination (which 
 Once the user has been authenticated, the user has access to the books upload and display, as well as a personal account page.
 
 ## What we have done
+
+> Here is what works now:\
+
+- Sign in/up Page
+- Password forgot Page
+- Books Page
+- Book detail Page
+- Account Page
+  - Find back/change password, delete account, etc
+  - Upload portrait
+- Add book Page
+  - Search books using Goodreads API
+    > But the cross domain API call is blocked by Goodread because it is a private API now. You may need a `Allow CORS` browser [extension](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) to make it work.
+  - Drag and drop a picture of your book to upload
+    > But the uploading function is not implemented yet, so the `Add New Book` button doesn't work now.
+  -
 
 [**Design**](#Design)
 
@@ -27,7 +40,8 @@ Once the user has been authenticated, the user has access to the books upload an
 - The structure of whole project has been established
 - Some custom components like Dropdown, Button are created.
 - Sign in/up _(own & 3rd party)_
-  > 3rd Party sign in is functioning in localhost version while the online version is not which might be resulted from the hosting server. We will try to fix that later.
+  > There are some minor issue with Facebook Login. But the sign up/in with email is fine.
+  > 3rd Party sign in/up
 - Firebase setup for storage and authentication
 - Redux setup
 - Google Map API setup
