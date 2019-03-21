@@ -23,7 +23,7 @@ Once the user has been authenticated, the user has access to the books upload an
   - Upload portrait
 - Add book Page
   - Search books using Goodreads API
-    > But the cross domain API call is blocked by Goodread because it is a private API now. You may need a `Allow CORS` browser [extension](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) to make it work.
+
   - Drag and drop a picture of your book to upload
     > But the uploading function is not implemented yet, so the `Add New Book` button doesn't work now.
   -
