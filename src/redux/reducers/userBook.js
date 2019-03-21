@@ -1,13 +1,25 @@
 import {
   ADD_NEW_USER_BOOK_ERROR,
   ADD_NEW_USER_BOOK_LOADING,
-  ADD_NEW_USER_BOOK_SUCCESS
+  ADD_NEW_USER_BOOK_SUCCESS,
+  CHANGE_NEW_BOOK_TITLE,
+  CHANGE_NEW_BOOK
 } from '../constants/action-types';
 
 const initialState = {
   isLoading: false,
   isError: false,
-  userBooks: []
+  userBooks: [],
+  newBook: {
+    title: '',
+    owner: '',
+    rating: '',
+    description: '',
+    author: '',
+    location: {},
+    imageURL: '',
+    type: ''
+  }
 };
 
 export default function reducers(state = {...initialState}, action) {
@@ -28,6 +40,22 @@ export default function reducers(state = {...initialState}, action) {
         ...state,
         isError: true,
         isLoading: false
+      };
+    case CHANGE_NEW_BOOK_TITLE:
+      return {
+        ...state,
+        newBook: {
+          ...state.newBook,
+          title: action.payload
+        }
+      };
+    case CHANGE_NEW_BOOK:
+      return {
+        ...state,
+        newBook: {
+          ...state.newBook,
+          ...action.payload
+        }
       };
     default:
       return state;

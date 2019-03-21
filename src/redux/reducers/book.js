@@ -7,7 +7,7 @@ import {
 const initialState = {
   isLoading: false,
   isError: false,
-  bookTitleSuggestions: []
+  bookTitleSuggestions: [],
 };
 
 export default function reducers(state = {...initialState}, action) {
