@@ -4,7 +4,9 @@
 
 @import '../components/Account/Account';
 @import '../components/Account/Avatar';
+@import '../components/AddNewBookForm/DragAndDrop';
 @import '../components/Authentication/Authentication';
+@import '../components/Autocomplete/Autocomplete';
 @import '../components/BookItem/BookItem';
 @import '../components/Button/Button';
 @import '../components/BrandLogo/BrandLogo';
@@ -19,3 +21,5 @@
 @import '../components/Authentication/SignUp';
 @import '../components/Authentication/SignOut';
 @import '../components/Session/Session';
+
+@import '../pages/AddNewBook';
