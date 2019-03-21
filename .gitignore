@@ -69,3 +69,11 @@ tags
 
 ### APIKeys
 /src/components/APIKeys
+
+# Build files
+/build
+
+# Firebase
+.firebase
+.firebaserc
+firebase.json
