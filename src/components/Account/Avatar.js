@@ -9,7 +9,7 @@ import {faPencilAlt} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import Dropdown from '../Dropdown/Dropdown';
-import {uploadPictureToFirebase} from '../../helper/storageHelper';
+import {uploadPictureToFirebase} from '../../helpers/storageHelper';
 
 const Avatar = props => {
   const [statusText, setStatusText] = useState('Upload a photo...');
