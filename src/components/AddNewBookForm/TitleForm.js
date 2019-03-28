@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {throttle} from '../../helpers/utils';
 
-import {changeNewBookTitle} from '../../redux/actions/addNewUserBook';
+import {changeNewBook} from '../../redux/actions/addNewUserBook';
 import {fetchBookTitleSuggestions} from '../../redux/actions/bookTitleSuggestions';
 import Autocomplete from '../Autocomplete/Autocomplete';
 
@@ -18,6 +18,16 @@ const TitleForm = props => {
     // TODO: set the owner state with ID from local storage
   });
 
+  const handleUserPick = value => {
+    let userPick = props.bookTitleSuggestions[value];
+    console.log(userPick);
+    props.changeNewBook({
+      title: userPick.bookTitleBare,
+      rating: userPick.avgRating,
+      author: userPick.author.name
+    });
+  };
+
   return (
     <React.Fragment>
       <Autocomplete
@@ -26,6 +36,10 @@ const TitleForm = props => {
         suggestions={props.bookTitleSuggestions.map(
           suggestion => suggestion.bookTitleBare
         )}
+        suggestionsImage={props.bookTitleSuggestions.map(
+          suggestion => suggestion.imageUrl
+        )}
+        getUserPick={handleUserPick}
       />
     </React.Fragment>
   );
@@ -43,7 +57,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchBookTitleSuggestions,
-      changeNewBookTitle
+      changeNewBook
     },
     dispatch
   );
