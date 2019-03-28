@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 import {changeNewBook} from '../../redux/actions/addNewUserBook';
 
-import Button from '../Button/Button';
 
 const AddNewBookForm = props => {
   const {newBook, changeNewBook} = props;
@@ -20,16 +19,13 @@ const AddNewBookForm = props => {
 
   return (
     <React.Fragment>
-      <textarea
-        placeholder="Description"
-        name="description"
-        type="text"
-        value={newBook.description}
-        onChange={handleChangeForm}
-      />
-
-      <Button type="submit" text="Add New Book" />
+      <input className="description" type="text" 
+      value={newBook.description}
+      onChange={handleChangeForm} 
+      placeholder="Description">
+      </input>
     </React.Fragment>
+    
   );
 };
 
