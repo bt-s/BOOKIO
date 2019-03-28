@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from '../components/GoogleMap/GoogleMap';
 import imageDummy from '../images/kafka.jpg';
-import location from '../assets/location.png';
 import userProfile from '../images/kafka.jpg';
 
 import {faStar, faStarHalf} from '@fortawesome/free-solid-svg-icons';

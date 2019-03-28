@@ -39,18 +39,30 @@ const AddNewBook = props => {
 
   return (
     <React.Fragment>
+      <div className="add-book">
+     
+      <div className="add-book-container">
       <h1> Add New Book Page</h1>
-      <div className="subtitle">Images:</div>
+      <div className="subtitle">Images</div>
       {files.map((file, i) => {
         return ImageBox(file, i);
       })}
       <DragAndDrop handleDrop={handleDrop} />
-      <br />
-      <div className="subtitle">Title:</div>
+      <div className="subtitle">Book Title</div>
       <TitleForm />
-      <br />
-      <div className="subtitle">Description:</div>
+      <div className="subtitle">Description</div>
       <AddNewBookForm />
+      </div>
+      <div className="type-book-container">
+      <div className="subtitle">Type</div>
+      <input className="type" type="text" ></input>
+      <div className="subtitle">Pick up Location</div>
+      <input className="pick-location" type="text" ></input>
+      <div className="subtitle">Contact Info</div>
+      <input className="contact-info" type="text" ></input>
+      <button className="btn-publish">Publish </button>
+      </div>
+      </div>
     </React.Fragment>
   );
 };

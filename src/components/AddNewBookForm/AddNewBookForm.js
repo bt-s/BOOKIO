@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
-
 import {addNewUserBook} from '../../redux/actions/addNewUserBook';
 import {withFirebase} from '../Firebase';
 import Button from '../Button/Button';
@@ -67,6 +66,7 @@ const AddNewBookForm = props => {
         onClick={() => handleSubmit()}
       />
     </React.Fragment>
+    
   );
 };
 
