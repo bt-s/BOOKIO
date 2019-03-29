@@ -6,20 +6,16 @@ const isRegularType = type => ['reset', 'submit', 'button'].includes(type);
 const Button = props => {
   // only for toggle btn
   const [pushed, setPushed] = useState(false);
-  const [classes, setClasses] = useState(props.className + ' ' + props.type);
-  console.log('props', props, props.className);
 
   return (
     <button
-      className={`${props.className}`}
+      className={props.className + ' ' + (pushed ? 'on' : 'off')}
       disabled={props.disabled}
       id={props.id}
       onClick={() => {
         if (props.type === 'toggle') {
-          console.log('toggle', pushed, classes);
-
+          console.log('toggle', pushed);
           setPushed(!pushed);
-          setClasses(props.className + ' ' + pushed ? 'toggle' : 'toggle-off');
         }
         if (props.onClick) {
           props.onClick();
@@ -45,7 +41,7 @@ Button.propTypes = {
 Button.defaultProps = {
   className: 'btn',
   disabled: false,
-  text: '',
+  text: 'button',
   type: 'button'
 };
 
