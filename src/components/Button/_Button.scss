@@ -1,18 +1,21 @@
 $btn-height: 35px;
 $border-radius: 2px;
+$btn-lr-padding: 15px;
 
 @mixin button-bg($bg) {
   background: $bg;
 
   &:not([disabled]) {
+    background: $bg;
+    transition: all 0.3s ease;
+
     &:hover {
-      background: lighten($bg, 8%);
+      background: darken($bg, 8%);
       transition: all 0.3s ease;
     }
 
-    &:active,
-    &:focus {
-      background: lighten($bg, 25%);
+    &:active {
+      background: darken($bg, 25%);
     }
   }
 }
@@ -70,15 +73,17 @@ $border-radius: 2px;
 
 .filter-toggle {
   outline: none;
-  width: 110px;
+  // width: 110px;
   height: 28px;
+  padding-left: $btn-lr-padding;
+  padding-right: $btn-lr-padding;
   border-radius: 14px;
-  background-color: $sub-background;
   border: none;
+  @include button-bg($sub-background);
   font-size: 15px;
   font-family: sans-serif;
   &.on {
-    background-color: $purple-flat;
+    @include button-bg($base-color);
     color: white;
   }
 }
