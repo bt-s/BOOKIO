@@ -1,17 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
-const Button = props => (
-  <button
-    className={props.className}
-    disabled={props.disabled}
-    id={props.id}
-    onClick={props.onClick}
-    type={props.type}>
-    {props.icon}
-    {props.text}
-  </button>
-);
+const isRegularType = type => ['reset', 'submit', 'button'].includes(type);
+
+const Button = props => {
+  // only for toggle btn
+  const [pushed, setPushed] = useState(false);
+  const [classes, setClasses] = useState(props.className + ' ' + props.type);
+  console.log('props', props, props.className);
+
+  return (
+    <button
+      className={`${props.className}`}
+      disabled={props.disabled}
+      id={props.id}
+      onClick={() => {
+        if (props.type === 'toggle') {
+          console.log('toggle', pushed, classes);
+
+          setPushed(!pushed);
+          setClasses(props.className + ' ' + pushed ? 'toggle' : 'toggle-off');
+        }
+        if (props.onClick) {
+          props.onClick();
+        }
+      }}
+      type={isRegularType(props.type) ? props.type : 'button'}>
+      {props.icon}
+      {props.text}
+    </button>
+  );
+};
 
 Button.propTypes = {
   className: PropTypes.string,

@@ -38,7 +38,7 @@ const Avatar = props => {
             onChange={e => {
               uploadPictureToFirebase(
                 e.target.files[0],
-                'images',
+                'portrait_images',
                 props.firebase,
                 postUploadTask,
                 status => {

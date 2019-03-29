@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 
 import Dropdown from '../components/Dropdown/Dropdown';
 import BookItem from '../components/BookItem/BookItem';
+import Button from '../components/Button/Button';
 import * as ROUTES from '../constants/routes';
 
 const Filters = () => (
@@ -14,6 +15,7 @@ const Filters = () => (
       headerTitle="Give Away"
       items={[{title: 'Lending Out'}]}
     />
+    <Button type="toggle" className="filter-toggle" text="Near Me" />
     <Dropdown
       classes="filter"
       headerTitle="Distance"
@@ -35,11 +37,13 @@ const Filters = () => (
  */
 const SearchResult = props => {
   console.log(props, 'in searchresults');
+  console.log('test');
 
   return (
-    <div class="search-result">
+    <ul className="search-result">
       {props.results.map(item => (
         <BookItem
+          key={item.id}
           imageSource={item.imageSource}
           bookTitle={item.bookTitle}
           userAvatar={item.userAvatar}
@@ -48,7 +52,7 @@ const SearchResult = props => {
           locationDistance={item.locationDistance}
         />
       ))}
-    </div>
+    </ul>
   );
 };
 
