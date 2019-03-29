@@ -26,3 +26,27 @@ $max-width-lg: 1140px;
     }
   }
 }
+
+@mixin smaller-than($point) {
+  @if $point == xs {
+    @media (max-width: 480px) {
+      @content;
+    }
+  } @else if $point == sm {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $point == md {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  } @else if $point == lg {
+    @media (max-width: 1440px) {
+      @content;
+    }
+  } @else if $point == xl {
+    @media (max-width: 1920px) {
+      @content;
+    }
+  }
+}
