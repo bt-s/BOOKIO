@@ -1,14 +1,11 @@
-#filters {
+.books-tool-bar {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  width: 500px;
-}
-
-.filter {
-  height: 28px;
-  width: 20%;
-  border-radius: 14px;
-  background-color: #f2f2f2;
+  align-items: center;
+  .filters > * {
+    margin-right: 20px;
+  }
 }
 
 #result-trending {
@@ -23,7 +20,6 @@
 }
 
 #btn-add-book {
-  align-self: flex-end;
   width: 156px;
   height: 40px;
   box-shadow: 1px 6px 15px 0 rgba(0, 0, 0, 0.54);
@@ -34,6 +30,14 @@
   justify-content: center;
   color: white;
   text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
+  @include smaller-than(sm) {
+    position: fixed;
+    bottom: 2.5%;
+    right: 4%;
+    height: 50px;
+  }
 }
 .search-result {
   width: 900px;
@@ -41,6 +45,9 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding-right: 30px;
+  @include smaller-than(sm) {
+    flex-direction: column;
+  }
 }
 
 #trending-board {
