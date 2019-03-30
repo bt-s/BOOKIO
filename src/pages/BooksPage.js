@@ -58,6 +58,7 @@ const BooksPage = props => (
         Share My Stuff
       </Link>
     </div>
+    <br />
     <SearchResult results={fakeResults} />
   </div>
 );
