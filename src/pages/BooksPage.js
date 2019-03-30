@@ -25,7 +25,7 @@ const SearchResult = props => {
   console.log(props, 'in searchresults');
 
   return (
-    <ul className="search-result">
+    <div className="search-result">
       {props.results.map(item => (
         <BookItem
           key={item.id}
@@ -37,7 +37,7 @@ const SearchResult = props => {
           locationDistance={item.locationDistance}
         />
       ))}
-    </ul>
+    </div>
   );
 };
 

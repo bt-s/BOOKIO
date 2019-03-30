@@ -1,6 +1,6 @@
 $btn-height: 35px;
 $border-radius: 2px;
-$btn-lr-padding: 15px;
+$btn-lr-padding: 10px;
 
 @mixin button-bg($bg) {
   background: $bg;
@@ -72,8 +72,8 @@ $btn-lr-padding: 15px;
 }
 
 .filter-toggle {
+  flex-shrink: 2;
   outline: none;
-  // width: 110px;
   height: 28px;
   padding-left: $btn-lr-padding;
   padding-right: $btn-lr-padding;
