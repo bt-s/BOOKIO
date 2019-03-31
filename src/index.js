@@ -20,6 +20,8 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
 import BooksPage from './pages/BooksPage';
+import HistoryPage from './pages/HistoryPage';
+
 import './styling/style.scss';
 
 require('dotenv').config();
@@ -139,7 +141,7 @@ const AppBase = () => (
         path={ROUTES.MY_BOOK_HISTORY}
         render={() => (
           <WithNavbar>
-            <h2>This is the my book history page.</h2>
+            <HistoryPage />
           </WithNavbar>
         )}
       />

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import steve from '../../images/stevejobs.jpg';
+
 import {faStar, faStarHalf} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
@@ -12,6 +14,11 @@ const UserLabel = props => (
     </div>
   </div>
 );
+UserLabel.defaultProps = {
+  avatarURL: steve,
+  bio: 'klasdjg klasdjglk alsk laksd dk',
+  userName: 'Running Man'
+};
 
 const RatingStars = props => {
   // Round to nearest half

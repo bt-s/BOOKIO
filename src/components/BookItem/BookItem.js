@@ -105,8 +105,8 @@ const BookItem_v2 = props => {
           </div>
           <div className="lower">
             <UserLabel
-              avatarURL={props.userAvatar}
-              userName={props.userName}
+              // avatarURL={props.userAvatar}
+              // userName={props.userName}
               bio={props.bio}
             />
             <Address

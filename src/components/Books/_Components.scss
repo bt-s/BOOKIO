@@ -13,9 +13,6 @@
   }
   > div {
     width: 75%;
-    :first-child {
-      // font-weight: bold;
-    }
     :last-child {
       white-space: nowrap;
       overflow: hidden;
@@ -25,9 +22,6 @@
   }
   @include smaller-than(sm) {
     padding: 5px 5px 5px 0;
-    > img {
-      // margin-right: 5px;
-    }
   }
 }
 
