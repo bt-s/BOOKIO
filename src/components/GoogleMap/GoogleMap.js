@@ -8,8 +8,8 @@ const LoadingContainer = props => <Loader />;
 
 export const MapContainer = props => {
   const style = {
-    width: '350px',
-    height: '420px'
+    width: '250px',
+    height: '350px'
   };
 
   const initialCoordinates = {
