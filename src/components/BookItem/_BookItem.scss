@@ -55,7 +55,10 @@
     height: 240px;
     @include media-breakpoint(sm) {
       box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.28);
+      border: none;
     }
+    border-bottom: 1px solid $gray;
+    border-right: 1px solid $gray;
     background-color: $background;
     > .img-container {
       width: 45%;
@@ -117,6 +120,7 @@
         display: flex;
         height: 45%;
         > p {
+          text-align: justify;
           max-height: 100%;
           font-size: 0.9rem;
           line-height: 1.2rem;
@@ -142,8 +146,11 @@
         }
       }
     }
+
     @include smaller-than(sm) {
+      width: 100%;
       > .information {
+        padding: 8px 15px 8px 8px;
         > .upper {
           > .title {
             font-size: 15px;

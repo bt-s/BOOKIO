@@ -10,6 +10,10 @@
       }
     }
   }
+
+  @include smaller-than(sm) {
+    justify-content: center;
+  }
 }
 
 #btn-add-book {
@@ -37,7 +41,7 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
   // align-content: flex-end;
   flex-direction: row;
   > * {
@@ -47,5 +51,8 @@
   }
   @include smaller-than(sm) {
     flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
   }
 }
