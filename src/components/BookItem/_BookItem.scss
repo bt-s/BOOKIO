@@ -1,45 +1,163 @@
-.book-item-container {
-  height: 240px;
-  width: 160px;
-  margin-top: $padding-xs;
-  border: 1px solid $black;
+@mixin v1-scheme-verticle {
+  .book-item-container {
+    height: 240px;
+    width: 160px;
+    margin-top: $padding-xs;
+    border: 1px solid $black;
 
-  h2 {
-    font-size: 12px;
-    margin: 0;
+    h2 {
+      font-size: 12px;
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 8px;
+      margin: 0;
+    }
   }
 
-  h3 {
+  .book-item-cover-image {
+    height: 160px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .book-item-details {
+    display: flex;
+    align-items: center;
+  }
+
+  .book-item-user-avatar {
+    height: 20px;
+    width: 20px;
+  }
+
+  .book-item-user-name,
+  .book-item-location-name,
+  .book-item-location-distance {
     font-size: 8px;
-    margin: 0;
+  }
+
+  .book-item-location-name {
+    padding-left: 20px;
+  }
+  .book-item-location-distance {
+    padding-left: 8px;
   }
 }
 
-.book-item-cover-image {
-  height: 160px;
-  width: 100%;
-  object-fit: cover;
+@mixin v2-scheme-horizontal {
+  .book-item-v2-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    width: 340px;
+    height: 240px;
+    @include media-breakpoint(sm) {
+      box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.28);
+    }
+    background-color: $background;
+    > .img-container {
+      width: 45%;
+      > img {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+    > .information {
+      width: 55%;
+      height: 100%;
+      padding: 5px 10px 5px 10px;
+      display: flex;
+      flex-direction: column;
+      .upper {
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        .cut-off {
+          // flex: 1;
+          // border-bottom: 1px solid $line-color;
+        }
+        .title {
+          font-size: 1.1rem;
+          font-weight: bold;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          line-height: 1.4rem;
+          max-height: 2.8rem;
+          margin-bottom: 3px;
+        }
+        .rating-star {
+          margin-bottom: 5px;
+        }
+        .label {
+          align-self: flex-start;
+          display: flex;
+          color: white;
+          padding: 0.3em 0.6em 0.3em;
+          font-size: 11px;
+          font-weight: bold;
+          text-align: start;
+          white-space: nowrap;
+          // vertical-align: baseline;
+          border-radius: 10px;
+          &.give {
+            background: $give;
+          }
+          &.lend {
+            background: $lend;
+          }
+        }
+      }
+
+      .middle {
+        display: flex;
+        height: 45%;
+        > p {
+          max-height: 100%;
+          font-size: 0.9rem;
+          line-height: 1.2rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .lower {
+        display: flex;
+        flex-direction: column;
+        height: 25%;
+        align-items: flex-start;
+        > .user-label {
+          > div > :last-child {
+            display: none;
+          }
+        }
+        .item-address {
+          // align-self: flex-end;
+          background: $white-dim;
+          border-radius: 5px;
+        }
+      }
+    }
+    @include smaller-than(sm) {
+      > .information {
+        > .upper {
+          > .title {
+            font-size: 15px;
+            line-height: 16px;
+            max-height: 32px;
+          }
+        }
+        > .middle > p {
+          max-height: 3.6rem;
+        }
+      }
+    }
+  }
 }
 
-.book-item-details {
-  display: flex;
-  align-items: center;
-}
-
-.book-item-user-avatar {
-  height: 20px;
-  width: 20px;
-}
-
-.book-item-user-name,
-.book-item-location-name,
-.book-item-location-distance {
-  font-size: 8px;
-}
-
-.book-item-location-name {
-  padding-left: 20px;
-}
-.book-item-location-distance {
-  padding-left: 8px;
-}
+@include v1-scheme-verticle();
+@include v2-scheme-horizontal();

@@ -36,12 +36,14 @@
 .search-result {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: flex-end;
+  width: 100%;
+  justify-content: space-between;
+  // align-content: flex-end;
+  flex-direction: row;
   > * {
-    width: 23%;
-    margin-left: 1%;
-    margin-right: 1%;
+    margin-bottom: 30px;
+    @include media-breakpoint(sm) {
+    }
   }
   @include smaller-than(sm) {
     flex-direction: column;

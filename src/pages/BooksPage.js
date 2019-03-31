@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import Dropdown from '../components/Dropdown/Dropdown';
-import BookItem from '../components/BookItem/BookItem';
+import {BookItem, BookItem_v2} from '../components/BookItem/BookItem';
 import Button from '../components/Button/Button';
 import * as ROUTES from '../constants/routes';
 
@@ -27,22 +27,24 @@ const SearchResult = props => {
   return (
     <div className="search-result">
       {props.results.map(item => (
-        <BookItem
-          key={item.id}
-          imageSource={item.imageSource}
-          bookTitle={item.bookTitle}
-          userAvatar={item.userAvatar}
-          userName={item.userName}
-          locationName={item.locationName}
-          locationDistance={item.locationDistance}
-        />
+        <div>
+          <BookItem_v2
+            key={item.id}
+            imageSource={item.imageSource}
+            bookTitle={item.bookTitle}
+            userAvatar={item.userAvatar}
+            userName={item.userName}
+            locationName={item.locationName}
+            locationDistance={item.locationDistance}
+          />
+        </div>
       ))}
     </div>
   );
 };
 
 const fakeResults = Array(16).fill({
-  bookTitle: 'A Book Without A Name',
+  bookTitle: 'A Book Without A Looooooooong long long long Name',
   authorName: 'Nobody',
   userName: 'Rick',
   locationName: 'KTH',
