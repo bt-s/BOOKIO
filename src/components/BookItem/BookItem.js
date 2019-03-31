@@ -78,41 +78,44 @@ const BookItem_v2 = props => {
       <Link to="/detail" className="img-container">
         <img src={props.imageSource} alt={props.bookTitle} />
       </Link>
-      <div className="information">
-        <div className="upper">
-          <div className="title">{props.bookTitle}</div>
-          <RatingStars rating="3.5" />
-          {props.type === 'Give Away' ? (
-            <div className="label give">{props.type}</div>
-          ) : (
-            <div className="label lend">{props.type}</div>
-          )}
-          <div className="cut-off" />
+      <Link to="/detail" className="info-container">
+        <div className="information">
+          <div className="upper">
+            <div className="title">{props.bookTitle}</div>
+            <RatingStars rating="3.5" />
+            {props.type === 'Give Away' ? (
+              <div className="label give">{props.type}</div>
+            ) : (
+              <div className="label lend">{props.type}</div>
+            )}
+            <div className="cut-off" />
+          </div>
+          <div className="middle">
+            <p>
+              Contrary to popular belief, Lorem Ipsum is not simply random text.
+              It has roots in a pieceof classical Latin literature from 45 BC,
+              making it over 2000 years old. Richard McClintock, a Latin
+              professor at Hampden-Sydney College in Virginia, looked up one of
+              the more obscure Latin words, consectetur, from a Lorem Ipsum
+              passage, and going through the cites of the word in classical
+              literature, discovered the undoubtable source. Lorem Ipsum comes
+              from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
+              Malorum"
+            </p>
+          </div>
+          <div className="lower">
+            <UserLabel
+              avatarURL={props.userAvatar}
+              userName={props.userName}
+              bio={props.bio}
+            />
+            <Address
+              name={props.locationName}
+              distance={props.locationDistance}
+            />
+          </div>
         </div>
-        <div className="middle">
-          <p>
-            ontrary to popular belief, Lorem Ipsum is not simply random text. It
-            has roots in a pieceof classical Latin literature from 45 BC, making
-            it over 2000 years old. Richard McClintock, a Latin professor at
-            Hampden-Sydney College in Virginia, looked up one of the more
-            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-            going through the cites of the word in classical literature,
-            discovered the undoubtable source. Lorem Ipsum comes from sections
-            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum"
-          </p>
-        </div>
-        <div className="lower">
-          <UserLabel
-            avatarURL={props.userAvatar}
-            userName={props.userName}
-            bio={props.bio}
-          />
-          <Address
-            name={props.locationName}
-            distance={props.locationDistance}
-          />
-        </div>
-      </div>
+      </Link>
     </div>
   );
 };

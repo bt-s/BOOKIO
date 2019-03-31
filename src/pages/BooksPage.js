@@ -39,6 +39,8 @@ const SearchResult = props => {
           />
         </div>
       ))}
+      <div className="filling-empty-space-childs book-item-v2-container" />
+      <div className="filling-empty-space-childs book-item-v2-container" />
     </div>
   );
 };

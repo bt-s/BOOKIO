@@ -56,3 +56,8 @@
     align-items: center;
   }
 }
+
+.filling-empty-space-childs {
+  border: none;
+  height: 0; /*Important! for the divs to collapse should they fall in a new row*/
+}
