@@ -34,20 +34,15 @@ const fakeHistories = [
 ];
 
 const HistoryPage = props => {
-  const [msgType, setMsgType] = useState('lend');
-  const [showingMsg, setShowingMsg] = useState(fakeHistories);
-
-  const updateShowingMsg = type => {
-    setMsgType(type);
-    // do the query and filter only specified msg
-    setShowingMsg(
-      props.history
-        ? props.history.filter(msg => {
-            return msg.type === type;
-          })
-        : []
-    );
-  };
+  const [msgType, setMsgType] = useState('give');
+  const histories = fakeHistories; // Thi should be retrieved on page load
+  function getMsgOfType(type) {
+    return histories
+      .filter(msg => {
+        return msg.type === msgType;
+      })
+      .map(msg => <RequestMessage message={msg} key={msg.id} />);
+  }
   return (
     <div className="history-page">
       <div className="filters">
@@ -58,7 +53,7 @@ const HistoryPage = props => {
           label="Lending"
           checked={msgType === 'lend'}
           onChange={() => {
-            updateShowingMsg('lend');
+            setMsgType('lend');
           }}
         />
         <Radio
@@ -68,7 +63,7 @@ const HistoryPage = props => {
           label="Giving"
           checked={msgType === 'give'}
           onChange={() => {
-            updateShowingMsg('give');
+            setMsgType('give');
           }}
         />
         <Radio
@@ -78,7 +73,7 @@ const HistoryPage = props => {
           label="Borrowing"
           checked={msgType === 'borrow'}
           onChange={() => {
-            updateShowingMsg('borrow');
+            setMsgType('borrow');
           }}
         />
         <Radio
@@ -88,24 +83,11 @@ const HistoryPage = props => {
           label="Getting"
           checked={msgType === 'get'}
           onChange={() => {
-            updateShowingMsg('get');
+            setMsgType('get');
           }}
         />
       </div>
-      <div className="msg-container">
-        {showingMsg ? (
-          // The message structure has not been defined yet
-          // thus, this part is yet to be developed
-          showingMsg.map(msg => <RequestMessage message={msg} key={msg.id} />)
-        ) : (
-          <div>
-            <br />
-            <br />
-            <br />
-            <p> Nothing yet</p>
-          </div>
-        )}
-      </div>
+      <div className="msg-container">{getMsgOfType(msgType)}</div>
     </div>
   );
 };
