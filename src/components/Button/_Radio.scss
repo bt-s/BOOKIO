@@ -1,0 +1,10 @@
+.radio-styled {
+  .radio-label {
+    color: $black-lighter;
+    font-size: 20px;
+  }
+  input:checked + label {
+    color: black;
+    border-bottom: 3px solid black;
+  }
+}
