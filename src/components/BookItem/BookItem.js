@@ -27,12 +27,11 @@ const BookItem = props => (
         alt={props.userName}
       />
       <span className="book-item-user-name">{props.userName}</span>
-      <span className="book-;;item-location-name">{props.locationName},</span>
+      <span className="book-item-location-name">{props.locationName},</span>
       <span className="book-item-location-distance">
         {props.locationDistance}
       </span>
     </div>
-    ;;
   </div>
 );
 

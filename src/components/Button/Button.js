@@ -14,7 +14,6 @@ const Button = props => {
       id={props.id}
       onClick={() => {
         if (props.type === 'toggle') {
-          console.log('toggle', pushed);
           setPushed(!pushed);
         }
         if (props.onClick) {

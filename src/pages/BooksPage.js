@@ -22,8 +22,6 @@ const Filters = () => (
  *
  */
 const SearchResult = props => {
-  console.log(props, 'in searchresults');
-
   return (
     <div className="search-result">
       {props.results.map(item => (
