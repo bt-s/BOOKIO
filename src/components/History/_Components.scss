@@ -63,7 +63,7 @@
       .operation {
         display: flex;
         flex-direction: row;
-        margin: 0 0 10px 10px;
+        margin: 0 0 10px 0px;
         .btn {
           border-width: 2px;
           margin-right: 20px;
@@ -71,6 +71,9 @@
           height: 35px;
         }
       }
+    }
+    @include media-breakpoint(sm) {
+      margin-left: 20px;
     }
     @include smaller-than(sm) {
       flex-direction: column;
