@@ -79,8 +79,8 @@ const BookItem_v2 = props => {
       </Link>
       <Link to="/detail" className="info-container">
         <div className="information">
-          <div className="upper">
-            <div className="title">{props.bookTitle}</div>
+          <div className="info-upper">
+            <div className="info-title">{props.bookTitle}</div>
             <RatingStars rating="3.5" />
             {props.type === 'Give Away' ? (
               <div className="label give">{props.type}</div>
@@ -89,7 +89,7 @@ const BookItem_v2 = props => {
             )}
             <div className="cut-off" />
           </div>
-          <div className="middle">
+          <div className="info-middle">
             <p>
               Contrary to popular belief, Lorem Ipsum is not simply random text.
               It has roots in a pieceof classical Latin literature from 45 BC,
@@ -102,7 +102,7 @@ const BookItem_v2 = props => {
               Malorum"
             </p>
           </div>
-          <div className="lower">
+          <div className="info-lower">
             <UserLabel
               // avatarURL={props.userAvatar}
               // userName={props.userName}
