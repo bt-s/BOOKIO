@@ -9,12 +9,26 @@ $btn-lr-padding: 10px;
   @include media-breakpoint(sm) {
     &:not([disabled]) {
       &:hover {
-        background: darken($bg, 8%);
+        background: lighten($bg, 8%);
         transition: all 0.3s ease;
       }
       &:active {
-        background: darken($bg, 25%);
+        background: lighten($bg, 25%);
         transition: all 0.3s ease;
+      }
+    }
+  }
+}
+
+@mixin button-bg-darken($bg) {
+  @include button-bg($bg);
+  @include media-breakpoint(sm) {
+    &:not([disabled]) {
+      &:hover {
+        background: darken($bg, 8%);
+      }
+      &:active {
+        background: darken($bg, 25%);
       }
     }
   }
@@ -72,6 +86,9 @@ $btn-lr-padding: 10px;
 }
 
 .filter-toggle {
+  &:not([disabled]) {
+    cursor: pointer;
+  }
   flex-shrink: 2;
   outline: none;
   height: 28px;
@@ -79,11 +96,11 @@ $btn-lr-padding: 10px;
   padding-right: $btn-lr-padding;
   border-radius: 14px;
   border: none;
-  @include button-bg($sub-background);
+  @include button-bg-darken($sub-background);
   font-size: 15px;
   font-family: sans-serif;
   &.on {
-    @include button-bg($base-color);
+    @include button-bg-darken($base-color);
     color: white;
   }
 }

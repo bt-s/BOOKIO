@@ -10,7 +10,7 @@ const UserLabel = props => (
     <img src={props.avatarURL} />
     <div>
       <div>{props.userName}</div>
-      <div>{props.bio}</div>
+      {props.showBio && <div>{props.bio}</div>}
     </div>
   </div>
 );
