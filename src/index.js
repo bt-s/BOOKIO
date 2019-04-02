@@ -11,7 +11,7 @@ import Firebase, {FirebaseContext} from './components/Firebase';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
 import AddNewBookPage from './pages/AddNewBook';
-import {BookItem, BookItem_v2} from './components/BookItem/BookItem';
+import {BookItem, BookItemV2} from './components/BookItem/BookItem';
 
 import AdminPage from './pages/AdminPage';
 import AccountPage from './pages/AccountPage';
@@ -61,7 +61,7 @@ const TestComponent = props => {
         <GoogleMap />
       </div>
       <BookItem />
-      <BookItem_v2 />
+      <BookItemV2 />
     </React.Fragment>
   );
 };
