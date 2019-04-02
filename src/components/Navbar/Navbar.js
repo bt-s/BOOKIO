@@ -44,17 +44,17 @@ const accountMenuList = [
   },
   {
     id: 2,
-    title: <Link to={ROUTES.ACCOUNT}>My lended books</Link>,
+    title: <Link to={ROUTES.MY_BOOK_HISTORY}>My lended books</Link>,
     classes: 'link'
   },
   {
     id: 3,
-    title: <Link to={ROUTES.ACCOUNT}>My gotten books</Link>,
+    title: <Link to={ROUTES.MY_BOOK_HISTORY}>My gotten books</Link>,
     classes: 'link'
   },
   {
     id: 4,
-    title: <Link to={ROUTES.ACCOUNT}>My given books</Link>,
+    title: <Link to={ROUTES.MY_BOOK_HISTORY}>My given books</Link>,
     classes: 'link section-ending'
   },
   {
@@ -69,6 +69,7 @@ const accountMenu = (
     classes="navbar-account"
     headerObject={<FontAwesomeIcon icon={faUser} />}
     items={accountMenuList}
+    defaultShowMenu={true}
   />
 );
 

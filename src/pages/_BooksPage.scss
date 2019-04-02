@@ -1,32 +1,25 @@
-#filters {
+.books-tool-bar {
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
-  width: 500px;
-}
+  .filters {
+    > * {
+      margin-right: 10px;
+      @include media-breakpoint(sm) {
+        margin-right: 20px;
+      }
+    }
+  }
 
-.filter {
-  height: 28px;
-  width: 20%;
-  border-radius: 14px;
-  background-color: #f2f2f2;
-}
-
-#result-trending {
-  display: flex;
-  justify-content: space-between;
-}
-
-#btn-and-trending {
-  display: flex;
-  flex-direction: column;
-  padding-left: 15px;
+  @include smaller-than(sm) {
+    justify-content: center;
+  }
 }
 
 #btn-add-book {
-  align-self: flex-end;
   width: 156px;
   height: 40px;
-  box-shadow: 1px 6px 15px 0 rgba(0, 0, 0, 0.54);
+  box-shadow: 1px 3px 15px 0 rgba(0, 0, 0, 0.54);
   background-color: #4500d2;
   border-radius: 30px;
   align-items: center;
@@ -34,22 +27,37 @@
   justify-content: center;
   color: white;
   text-decoration: none;
-}
-.search-result {
-  width: 900px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding-right: 30px;
+  font-size: 17px;
+  font-weight: bold;
+  @include smaller-than(sm) {
+    position: fixed;
+    bottom: 2.5%;
+    right: 4%;
+    height: 50px;
+  }
 }
 
-#trending-board {
-  margin-top: 30px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
-  width: 300px;
-  height: 720px;
+.search-result {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  // align-content: flex-end;
+  flex-direction: row;
+  > * {
+    margin-bottom: 30px;
+    @include media-breakpoint(sm) {
+    }
+  }
+  @include smaller-than(sm) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+.filling-empty-space-childs {
+  border: none;
+  height: 0; /*Important! for the divs to collapse should they fall in a new row*/
 }

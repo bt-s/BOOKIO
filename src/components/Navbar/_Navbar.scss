@@ -145,10 +145,16 @@ $navbar-icon-size: 20px;
   }
 }
 
+.navbar-account:hover .dd-list {
+  display: block;
+  z-index: 999;
+}
 .navbar-account {
   .dd-list {
+    display: none;
     left: auto;
     right: 0;
+    top: -20px;
     width: $dropdown-menu-width;
     background-clip: padding-box;
     border-radius: $border-radius;

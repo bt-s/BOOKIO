@@ -1,18 +1,21 @@
 $btn-height: 35px;
 $border-radius: 2px;
+$btn-lr-padding: 10px;
 
 @mixin button-bg($bg) {
   background: $bg;
+  transition: all 0.3s ease;
 
-  &:not([disabled]) {
-    &:hover {
-      background: lighten($bg, 8%);
-      transition: all 0.3s ease;
-    }
-
-    &:active,
-    &:focus {
-      background: lighten($bg, 25%);
+  @include media-breakpoint(sm) {
+    &:not([disabled]) {
+      &:hover {
+        background: darken($bg, 8%);
+        transition: all 0.3s ease;
+      }
+      &:active {
+        background: darken($bg, 25%);
+        transition: all 0.3s ease;
+      }
     }
   }
 }
@@ -65,5 +68,22 @@ $border-radius: 2px;
 
   svg {
     margin-right: 12px;
+  }
+}
+
+.filter-toggle {
+  flex-shrink: 2;
+  outline: none;
+  height: 28px;
+  padding-left: $btn-lr-padding;
+  padding-right: $btn-lr-padding;
+  border-radius: 14px;
+  border: none;
+  @include button-bg($sub-background);
+  font-size: 15px;
+  font-family: sans-serif;
+  &.on {
+    @include button-bg($base-color);
+    color: white;
   }
 }

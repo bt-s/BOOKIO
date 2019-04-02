@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import {useOnClickOutside} from '../../hooks';
 
 const Dropdown = props => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(props.defaultShowMenu);
   const ref = useRef();
 
-  useOnClickOutside(ref, () => setShowMenu(false));
+  useOnClickOutside(ref, () => setShowMenu(props.defaultShowMenu));
 
   useEffect(() => {
     if (showMenu) {

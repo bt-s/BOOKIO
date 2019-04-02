@@ -8,6 +8,7 @@
 @import '../components/Authentication/Authentication';
 @import '../components/Autocomplete/Autocomplete';
 @import '../components/BookItem/BookItem';
+@import '../components/Books/Components';
 @import '../components/Button/Button';
 @import '../components/BrandLogo/BrandLogo';
 @import '../components/Dropdown/Dropdown';
@@ -22,5 +23,6 @@
 @import '../components/Authentication/SignUp';
 @import '../components/Authentication/SignOut';
 @import '../components/Session/Session';
+// import pages after components
 @import '../pages/AddNewBook';
 @import '../pages/BooksPage';
