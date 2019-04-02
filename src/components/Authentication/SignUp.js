@@ -6,12 +6,12 @@ import {compose} from 'recompose';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
-import {Validation, Validator, ValidationHelper} from './Validation';
+import {Validation, Validator, ValidationHelper} from '../Forms/Validation';
 import {
   formReducer,
   errorReducer,
   /*phoneNumberValidation,*/
-  numberValidation,
+  numberValidation
 } from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
@@ -36,7 +36,7 @@ const SignUpFormBase = props => {
     location: '',
     passwordOne: '',
     passwordTwo: '',
-    isAdmin: false,
+    isAdmin: false
   });
 
   const validationRef = useRef(null);
@@ -47,7 +47,7 @@ const SignUpFormBase = props => {
   const handleChange = e => {
     dispatchForm({
       name: e.target.name,
-      value: e.target.value,
+      value: e.target.value
     });
   };
 
@@ -67,7 +67,7 @@ const SignUpFormBase = props => {
       .then(authUser => {
         authUser.user.updateProfile({
           displayName: form.username,
-          photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT,
+          photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT
         });
         return props.firebase.user(authUser.user.uid).set(
           {
@@ -77,7 +77,7 @@ const SignUpFormBase = props => {
 
             phoneNumber: form.phoneNumber,
             location: form.location,
-            roles,
+            roles
           },
           {merge: true}
         );
@@ -137,7 +137,7 @@ const SignUpFormBase = props => {
           value={form.age}
           validations={[
             ValidationHelper.required('Age is required'),
-            numberValidation,
+            numberValidation
           ]}
           onValidate={onValidate}>
           <input
@@ -234,7 +234,7 @@ const SignUpFormBase = props => {
           name="passwordTwo"
           value={form.passwordTwo}
           validations={[
-            ValidationHelper.required('Password confirmation is required'),
+            ValidationHelper.required('Password confirmation is required')
           ]}
           onValidate={onValidate}>
           <input
@@ -267,7 +267,7 @@ const SignUpFormBase = props => {
 
 SignUpFormBase.propTypes = {
   firebase: PropTypes.object,
-  history: PropTypes.object,
+  history: PropTypes.object
 };
 
 const SignUpLink = () => (
