@@ -15,9 +15,6 @@ import {
 } from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
-
-let _ = require('lodash/core');
 
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
 
@@ -61,7 +58,7 @@ const SignUpFormBase = props => {
 
     const allErrors = validationRef.current.validate();
 
-    if (JSON.stringify(allErrors) == JSON.stringify(initialFormValues())) {
+    if (JSON.stringify(allErrors) === JSON.stringify(initialFormValues())) {
       props.firebase
         .doCreateUserWithEmailAndPassword(form.email, form.passwordOne)
         .then(authUser => {
