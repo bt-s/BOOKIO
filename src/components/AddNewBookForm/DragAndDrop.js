@@ -39,6 +39,10 @@ const DragAndDrop = props => {
     }
   };
 
+  const handleChange = e => {
+    props.handleDrop(e.target.files);
+  };
+
   useEffect(() => {
     let div = dropRef.current;
     div.addEventListener('dragenter', handleDragIn);
@@ -56,6 +60,7 @@ const DragAndDrop = props => {
 
   return (
     <div className={'drop-box ' + (dragging ? 'drag-hover' : '')} ref={dropRef}>
+      <input className="input" type="file" onChange={handleChange} multiple />
       <div className="drag-text">
         {' '}
         {dragging ? (

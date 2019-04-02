@@ -1,4 +1,4 @@
-.submit-book{
+.submit-book {
   margin-top: $padding-xs;
   width: 166px;
   height: 47px;
@@ -10,7 +10,80 @@
   text-align: center;
 }
 
-.input description {
-    height: 500px;
+.input-description {
+  height: 100px;
+  width: 100%;
 }
 
+.add-book {
+  width: 100%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.add-book-container {
+  flex: 100%;
+  margin-top: $padding-sm;
+  float: left;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media-breakpoint(sm) {
+    flex: 50%;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.add-book input {
+  width: 100%;
+}
+
+.add-book select {
+  border: 1px solid #ccc;
+  width: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #fafafa no-repeat 90% 50%;
+}
+
+.add-book select {
+  padding: 5px 8px;
+  width: 100%;
+  // border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.add-book select:focus {
+  outline: none;
+}
+
+.two-col {
+  flex-basis: 100%;
+  float: left;
+  text-align: left;
+  padding: 0 $padding-xs;
+
+  @include media-breakpoint(sm) {
+    flex-basis: 50%;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.subtitle {
+  width: 63px;
+  height: 21px;
+  font-size: 18px;
+  color: var(--greyish-brown);
+  margin-top: $padding-xs;
+}

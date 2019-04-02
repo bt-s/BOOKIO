@@ -10,7 +10,7 @@ import Autocomplete from '../Autocomplete/Autocomplete';
 const TitleForm = props => {
   const getBookTitle = throttle(
     query => props.fetchBookTitleSuggestions(query),
-    700
+    1000
   );
 
   useEffect(() => {
