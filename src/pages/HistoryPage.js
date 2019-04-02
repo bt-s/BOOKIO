@@ -1,12 +1,5 @@
-import {Link} from 'react-router-dom';
 import React, {useState} from 'react';
 
-import {
-  withAuthorization,
-  withEmailVerification
-} from '../components/Session/Session';
-
-import Button from '../components/Button/Button';
 import Radio from '../components/Button/Radio';
 import {RequestMessage} from '../components/History/Components';
 
@@ -35,7 +28,7 @@ const fakeHistories = [
 
 const HistoryPage = props => {
   const [msgType, setMsgType] = useState('give');
-  const histories = fakeHistories; // Thi should be retrieved on page load
+  const histories = fakeHistories; // This should be retrieved on page load
   function getMsgOfType(type) {
     return histories
       .filter(msg => {
