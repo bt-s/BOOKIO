@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {throttle} from '../../helpers/utils';
@@ -20,7 +20,6 @@ const TitleForm = props => {
 
   const handleUserPick = value => {
     let userPick = props.bookTitleSuggestions[value];
-    console.log(userPick);
     props.changeNewBook({
       title: userPick.bookTitleBare,
       rating: userPick.avgRating,

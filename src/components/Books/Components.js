@@ -7,16 +7,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const UserLabel = props => (
   <div className="user-label">
-    <img src={props.avatarURL} />
-    <div>
-      <div>{props.userName}</div>
-      {props.showBio && <div>{props.bio}</div>}
-    </div>
+    <img src={props.avatarURL} alt="" />
+    <div>{props.userName}</div>
+    {props.showBio && <div>{props.bio}</div>}
   </div>
 );
+
 UserLabel.defaultProps = {
   avatarURL: steve,
-  bio: 'klasdjg klasdjglk alsk laksd dk',
+  bio: 'Lorem ipsum dolor sit amet',
   userName: 'Running Man'
 };
 
@@ -44,6 +43,7 @@ const Address = props => {
     </div>
   );
 };
+
 Address.defaultProps = {
   name: 'KTH',
   separator: '᛫',

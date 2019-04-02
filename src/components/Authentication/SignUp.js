@@ -6,16 +6,15 @@ import {compose} from 'recompose';
 import {withFirebase} from '../Firebase';
 
 import Button from '../Button/Button';
-import {Validation, Validator, ValidationHelper} from './Validation';
+import {Validation, Validator, ValidationHelper} from '../Forms/Validation';
 import {
   formReducer,
   errorReducer,
   /*phoneNumberValidation,*/
-  numberValidation,
+  numberValidation
 } from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
 
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
 
@@ -35,8 +34,7 @@ const SignUpFormBase = props => {
     phoneNumber: '',
     location: '',
     passwordOne: '',
-    passwordTwo: '',
-    isAdmin: false,
+    passwordTwo: ''
   });
 
   const validationRef = useRef(null);
@@ -47,7 +45,7 @@ const SignUpFormBase = props => {
   const handleChange = e => {
     dispatchForm({
       name: e.target.name,
-      value: e.target.value,
+      value: e.target.value
     });
   };
 
@@ -58,52 +56,55 @@ const SignUpFormBase = props => {
   const onSubmit = e => {
     const roles = [];
 
-    if (form.isAdmin.checked) roles.push(ROLES.ADMIN);
+    const allErrors = validationRef.current.validate();
 
-    validationRef.current.validate();
+    if (JSON.stringify(allErrors) === JSON.stringify(initialFormValues())) {
+      props.firebase
+        .doCreateUserWithEmailAndPassword(form.email, form.passwordOne)
+        .then(authUser => {
+          authUser.user.updateProfile({
+            displayName: form.username,
+            photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT
+          });
+          return props.firebase.user(authUser.user.uid).set(
+            {
+              username: form.username,
+              age: form.age,
+              email: form.email,
 
-    props.firebase
-      .doCreateUserWithEmailAndPassword(form.email, form.passwordOne)
-      .then(authUser => {
-        authUser.user.updateProfile({
-          displayName: form.username,
-          photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT,
+              phoneNumber: form.phoneNumber,
+              location: form.location,
+              roles
+            },
+            {merge: true}
+          );
+        })
+        .then(authUser => {
+          form.username = '';
+          form.age = '';
+          form.email = '';
+          form.phoneNumber = '';
+          form.location = '';
+          form.passwordOne = '';
+          form.passwordTwo = '';
+          props.history.push(ROUTES.ACCOUNT);
+        })
+        .then(() => {
+          return props.firebase.doSendEmailVerification();
+        })
+        .catch(error => {
+          if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+            error.message = ERROR_MSG_ACCOUNT_EXISTS;
+          }
+
+          dispatchError(error);
         });
-        return props.firebase.user(authUser.user.uid).set(
-          {
-            username: form.username,
-            age: form.age,
-            email: form.email,
 
-            phoneNumber: form.phoneNumber,
-            location: form.location,
-            roles,
-          },
-          {merge: true}
-        );
-      })
-      .then(authUser => {
-        form.username = '';
-        form.age = '';
-        form.email = '';
-        form.phoneNumber = '';
-        form.location = '';
-        form.passwordOne = '';
-        form.passwordTwo = '';
-        props.history.push(ROUTES.ACCOUNT);
-      })
-      .then(() => {
-        return props.firebase.doSendEmailVerification();
-      })
-      .catch(error => {
-        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
-          error.message = ERROR_MSG_ACCOUNT_EXISTS;
-        }
-
-        dispatchError(error);
-      });
-
-    e.preventDefault();
+      e.preventDefault();
+    } else {
+      e.preventDefault();
+      e.stopPropagation();
+    }
   };
 
   return (
@@ -137,7 +138,7 @@ const SignUpFormBase = props => {
           value={form.age}
           validations={[
             ValidationHelper.required('Age is required'),
-            numberValidation,
+            numberValidation
           ]}
           onValidate={onValidate}>
           <input
@@ -234,7 +235,7 @@ const SignUpFormBase = props => {
           name="passwordTwo"
           value={form.passwordTwo}
           validations={[
-            ValidationHelper.required('Password confirmation is required'),
+            ValidationHelper.required('Password confirmation is required')
           ]}
           onValidate={onValidate}>
           <input
@@ -245,15 +246,6 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
-        <label htmlFor="" className="admin-label">
-          Admin:
-          <input
-            name="isAdmin"
-            type="checkbox"
-            value={form.isAdmin}
-            onChange={handleChange}
-          />
-        </label>
         <Button className="btn btn-auth" type="submit" text="Sign up" />
         {error.code ? (
           <p className="form-submission-error">ERROR: {error.message}</p>
@@ -267,7 +259,7 @@ const SignUpFormBase = props => {
 
 SignUpFormBase.propTypes = {
   firebase: PropTypes.object,
-  history: PropTypes.object,
+  history: PropTypes.object
 };
 
 const SignUpLink = () => (

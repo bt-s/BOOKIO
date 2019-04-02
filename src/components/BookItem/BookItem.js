@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 
 import reactJPG from '../../images/fullstackreact.jpg';
 import reactSVG from '../../images/react.svg';
-import * as ROUTES from '../../constants/routes';
 import {UserLabel, Address} from '../Books/Components';
 import {RatingStars} from '../Books/Components';
 
@@ -68,9 +67,7 @@ BookItem.defaultProps = {
 
 */
 
-const BookItem_v2 = props => {
-  console.log(props);
-
+const BookItemV2 = props => {
   return (
     <div className="book-item-v2-container">
       {/* <Link to={ROUTES.BOOK_DETAIL}> */}
@@ -118,7 +115,8 @@ const BookItem_v2 = props => {
     </div>
   );
 };
-BookItem_v2.defaultProps = {
+
+BookItemV2.defaultProps = {
   type: 'Give Away',
   imageSource: reactJPG,
   bookTitle: 'Fullstack React Blablablablablablablablabla',
@@ -130,4 +128,4 @@ BookItem_v2.defaultProps = {
   bio: "All that we are is the result of what we've thought"
 };
 
-export {BookItem, BookItem_v2};
+export {BookItem, BookItemV2};

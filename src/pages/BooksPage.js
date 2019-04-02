@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-import Dropdown from '../components/Dropdown/Dropdown';
-import {BookItem, BookItem_v2} from '../components/BookItem/BookItem';
+import {BookItemV2} from '../components/BookItem/BookItem';
 import Button from '../components/Button/Button';
 import * as ROUTES from '../constants/routes';
 
@@ -26,7 +24,7 @@ const SearchResult = props => {
     <div className="search-result">
       {props.results.map(item => (
         <div>
-          <BookItem_v2
+          <BookItemV2
             key={item.id}
             imageSource={item.imageSource}
             bookTitle={item.bookTitle}
@@ -53,14 +51,12 @@ const fakeResults = Array(16).fill({
 
 const BooksPage = props => (
   <div>
-    <br />
     <div className="books-tool-bar">
       <Filters />
       <Link id="btn-add-book" to={ROUTES.ADD_BOOK}>
         Share My Stuff
       </Link>
     </div>
-    <br />
     <SearchResult results={fakeResults} />
   </div>
 );

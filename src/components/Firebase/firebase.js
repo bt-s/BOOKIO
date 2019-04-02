@@ -2,7 +2,6 @@ import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
-import {firebaseAPIKey} from '../APIKeys/APIKeys';
 
 const devConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
