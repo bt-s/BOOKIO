@@ -1,11 +1,9 @@
-import {errorReducer} from '../helpers/validationHelper';
-
 /*
   @callback(param):
   if provided, it will be called with
   a url to picture uploaded as the parameter
   @monitor(param):
-  this function is used for the caller of this function 
+  this function is used for the caller of this function
   to know about the status of uploading
 */
 export const uploadPictureToFirebase = (

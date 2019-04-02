@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 
 import reactJPG from '../../images/fullstackreact.jpg';
 import reactSVG from '../../images/react.svg';
-import * as ROUTES from '../../constants/routes';
 
 const BookItem = props => (
   <div className="book-item-container">

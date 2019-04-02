@@ -28,13 +28,10 @@ const TestComponent = props => {
   return (
     <React.Fragment>
       <div>
-        <br />
-        <h>
-          <b>
-            This page is for test purpose, click links below to check different
-            pages Click the logo above to go back to this test page.
-          </b>
-        </h>
+        <b>
+          This page is for test purpose, click links below to check different
+          pages Click the logo above to go back to this test page.
+        </b>
         <br />
         <br />
         <Link to={ROUTES.ACCOUNT}>Account page</Link>

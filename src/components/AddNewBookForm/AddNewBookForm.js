@@ -5,7 +5,6 @@ import {compose} from 'recompose';
 import {addNewUserBook} from '../../redux/actions/addNewUserBook';
 import {withFirebase} from '../Firebase';
 import {uploadPictureToFirebase} from '../../helper/storageHelper';
-import Button from '../Button/Button';
 import TitleForm from './TitleForm';
 
 const AddNewBookFormBase = props => {
