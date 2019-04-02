@@ -17,6 +17,8 @@ import {
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
+let _ = require('lodash/core');
+
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
@@ -35,8 +37,7 @@ const SignUpFormBase = props => {
     phoneNumber: '',
     location: '',
     passwordOne: '',
-    passwordTwo: '',
-    isAdmin: false
+    passwordTwo: ''
   });
 
   const validationRef = useRef(null);
@@ -58,52 +59,55 @@ const SignUpFormBase = props => {
   const onSubmit = e => {
     const roles = [];
 
-    if (form.isAdmin.checked) roles.push(ROLES.ADMIN);
+    const allErrors = validationRef.current.validate();
 
-    validationRef.current.validate();
+    if (JSON.stringify(allErrors) == JSON.stringify(initialFormValues())) {
+      props.firebase
+        .doCreateUserWithEmailAndPassword(form.email, form.passwordOne)
+        .then(authUser => {
+          authUser.user.updateProfile({
+            displayName: form.username,
+            photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT
+          });
+          return props.firebase.user(authUser.user.uid).set(
+            {
+              username: form.username,
+              age: form.age,
+              email: form.email,
 
-    props.firebase
-      .doCreateUserWithEmailAndPassword(form.email, form.passwordOne)
-      .then(authUser => {
-        authUser.user.updateProfile({
-          displayName: form.username,
-          photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT
+              phoneNumber: form.phoneNumber,
+              location: form.location,
+              roles
+            },
+            {merge: true}
+          );
+        })
+        .then(authUser => {
+          form.username = '';
+          form.age = '';
+          form.email = '';
+          form.phoneNumber = '';
+          form.location = '';
+          form.passwordOne = '';
+          form.passwordTwo = '';
+          props.history.push(ROUTES.ACCOUNT);
+        })
+        .then(() => {
+          return props.firebase.doSendEmailVerification();
+        })
+        .catch(error => {
+          if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+            error.message = ERROR_MSG_ACCOUNT_EXISTS;
+          }
+
+          dispatchError(error);
         });
-        return props.firebase.user(authUser.user.uid).set(
-          {
-            username: form.username,
-            age: form.age,
-            email: form.email,
 
-            phoneNumber: form.phoneNumber,
-            location: form.location,
-            roles
-          },
-          {merge: true}
-        );
-      })
-      .then(authUser => {
-        form.username = '';
-        form.age = '';
-        form.email = '';
-        form.phoneNumber = '';
-        form.location = '';
-        form.passwordOne = '';
-        form.passwordTwo = '';
-        props.history.push(ROUTES.ACCOUNT);
-      })
-      .then(() => {
-        return props.firebase.doSendEmailVerification();
-      })
-      .catch(error => {
-        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
-          error.message = ERROR_MSG_ACCOUNT_EXISTS;
-        }
-
-        dispatchError(error);
-      });
-
-    e.preventDefault();
+      e.preventDefault();
+    } else {
+      e.preventDefault();
+      e.stopPropagation();
+    }
   };
 
   return (
@@ -245,15 +249,6 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
-        <label htmlFor="" className="admin-label">
-          Admin:
-          <input
-            name="isAdmin"
-            type="checkbox"
-            value={form.isAdmin}
-            onChange={handleChange}
-          />
-        </label>
         <Button className="btn btn-auth" type="submit" text="Sign up" />
         {error.code ? (
           <p className="form-submission-error">ERROR: {error.message}</p>
