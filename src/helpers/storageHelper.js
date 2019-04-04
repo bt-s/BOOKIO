@@ -36,8 +36,8 @@ export const uploadPictureToFirebase = (
         // Get task progress, including the number of bytes uploaded and
         // the total number of bytes to be uploaded
         let progress =
-          ((snapshot.bytesTransferred / snapshot.totalBytes) * 100).toFixed(2) +
-          '%';
+          ((snapshot.bytesTransferred / snapshot.totalBytes) * 100).toFixed(2) /
+          100;
         if (monitor) {
           monitor(progress);
         }
@@ -77,7 +77,7 @@ export const uploadPictureToFirebase = (
         uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
           console.log('File available at', downloadURL);
           if (monitor) {
-            monitor('Upload a photo...');
+            monitor(1); // 100% uploaded
           }
           if (callback) {
             console.log('Executing your callback', callback, '\n');
