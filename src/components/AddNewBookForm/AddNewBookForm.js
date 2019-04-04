@@ -77,7 +77,7 @@ const AddNewBookFormBase = props => {
           setTimeout(() => {
             //go back to homepage after uploading
             props.history.push('/');
-          }, 1600);
+          }, 2000);
         });
       })
       .catch(() => {
