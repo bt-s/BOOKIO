@@ -11,7 +11,7 @@ import Firebase, {FirebaseContext} from './components/Firebase';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
 import {BookItem, BookItemV2} from './components/BookItem/BookItem';
-import AddNewBookPage from './pages/AddNewBook';
+import AddNewBookPage from './pages/AddNewBookPage';
 
 import AdminPage from './pages/AdminPage';
 import AccountPage from './pages/AccountPage';
