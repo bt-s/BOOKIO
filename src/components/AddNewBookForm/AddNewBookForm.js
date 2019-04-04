@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {addNewUserBook} from '../../redux/actions/addNewUserBook';
@@ -15,6 +16,7 @@ const AddNewBookFormBase = props => {
     lon: 0
   });
   const [type, setType] = useState('lend');
+  const [progressStyle, setProgressStyle] = useState('off');
   var imageUrls = [];
 
   const parseLocation = position => {
@@ -70,8 +72,14 @@ const AddNewBookFormBase = props => {
         ).then(() => {
           console.log(imageUrls);
           console.log(res.id);
-          alert('test');
           updateImage(res.id);
+          setTimeout(() => {
+            setProgressStyle('redirect');
+            setTimeout(() => {
+              //go back to homepage after uploading
+              props.history.push('/');
+            }, 1600);
+          }, 100);
         });
       })
       .catch(() => {
@@ -91,6 +99,9 @@ const AddNewBookFormBase = props => {
 
   return (
     <div className="add-book-form">
+      <div className={'upload-progress ' + progressStyle}>
+        <h1>Upload succed, redirecting to homepage.</h1>
+      </div>
       <div className="two-col">
         <div className="subtitle">Title</div>
         <TitleForm className="title-input" />
@@ -114,7 +125,12 @@ const AddNewBookFormBase = props => {
           <option value="lend">Lend</option>
           <option value="giveaway">Giveaway</option>
         </select>
-        <button className="btn-publish btn" onClick={() => handleSubmit()}>
+        <button
+          className="btn-publish btn"
+          onClick={() => {
+            setProgressStyle('on');
+            handleSubmit();
+          }}>
           Publish{' '}
         </button>
       </div>
@@ -140,6 +156,7 @@ const mapDispatchToProps = dispatch =>
 
 const AddNewBookForm = compose(
   withFirebase,
+  withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps

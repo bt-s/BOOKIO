@@ -1,5 +1,49 @@
 $description-height: 200px;
 
+.upload-progress.redirect {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: fixed;
+  left: 30%;
+  top: 40%;
+  background: black;
+  width: 40%;
+  height: 15%;
+  opacity: 0.5;
+  border-radius: 30px;
+  > h1 {
+    color: white;
+    font-size: 25px;
+    align-self: center;
+  }
+}
+.upload-progress.on {
+  > h1 {
+    display: none;
+  }
+  width: 100%;
+  transition: all 1.8s ease;
+  position: fixed;
+  top: $navbar-height;
+  height: 4px;
+  box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
+  left: 0px;
+  background: yellow;
+}
+.upload-progress.off {
+  > h1 {
+    display: none;
+  }
+  position: fixed;
+  top: $navbar-height;
+  height: 4px;
+  box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
+  left: 0px;
+  width: 0px;
+  background: yellow;
+}
+
 .add-book-form {
   display: flex;
   justify-content: space-between;
@@ -64,57 +108,4 @@ $description-height: 200px;
       font-size: 20px;
     }
   }
-}
-
-// .add-book-container {
-//   flex: 100%;
-//   margin-top: $padding-sm;
-//   float: left;
-
-//   @include media-breakpoint(sm) {
-//     flex: 50%;
-//     float: left;
-//     margin-left: auto;
-//     margin-right: auto;
-//   }
-// }
-
-// .add-book input {
-//   width: 100%;
-// }
-
-// .add-book select {
-//   border: 1px solid #ccc;
-//   width: 100%;
-//   border-radius: 3px;
-//   overflow: hidden;
-//   background: #fafafa no-repeat 90% 50%;
-// }
-
-// .add-book select {
-//   padding: 5px 8px;
-//   width: 100%;
-//   // border: none;
-//   box-shadow: none;
-//   background: transparent;
-//   background-image: none;
-//   -webkit-appearance: none;
-// }
-
-// .add-book select:focus {
-//   outline: none;
-// }
-
-.two-col {
-  // flex-basis: 100%;
-  // float: left;
-  // text-align: left;
-  // padding: 0 $padding-xs;
-
-  // @include media-breakpoint(sm) {
-  //   flex-basis: 50%;
-  //   float: left;
-  //   margin-left: auto;
-  //   margin-right: auto;
-  // }
 }
