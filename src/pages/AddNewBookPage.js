@@ -38,7 +38,6 @@ const AddNewBookBase = props => {
         <button onClick={() => removeFiles(i)}>
           <FontAwesomeIcon icon={faTimesCircle} />
         </button>
-        <div id="gradient" />
       </div>
     );
   };
@@ -50,15 +49,15 @@ const AddNewBookBase = props => {
   //TOOO: Drag to change the order of the uploaded
 
   return (
-    <React.Fragment>
-      <h1> New Book </h1>
+    <div className="add-book-page">
+      <h1 className="add-book-page-title"> Share New Book </h1>
       <div className="subtitle">Images</div>
       {files.map((file, i) => {
         return ImageBox(file, i);
       })}
       <DragAndDrop handleDrop={handleDrop} />
       <AddNewBookForm files={files} />
-    </React.Fragment>
+    </div>
   );
 };
 

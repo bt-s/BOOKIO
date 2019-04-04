@@ -70,6 +70,7 @@ const AddNewBookFormBase = props => {
         ).then(() => {
           console.log(imageUrls);
           console.log(res.id);
+          alert('test');
           updateImage(res.id);
         });
       })
@@ -89,37 +90,35 @@ const AddNewBookFormBase = props => {
   }, []);
 
   return (
-    <React.Fragment>
-      <div className="add-book">
-        <div className="two-col">
-          <div className="subtitle">Title</div>
-          <TitleForm />
-          <div className="subtitle">Description</div>
-          <textarea
-            className="input-description"
-            placeholder="Describe it"
-            name="description"
-            type="text"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-          />
-        </div>
-        <div className="two-col">
-          <div className="subtitle">Category</div>
-          <select
-            className="type"
-            type="text"
-            value={type}
-            onChange={e => setType(e.target.value)}>
-            <option value="lend">Lend</option>
-            <option value="giveaway">Giveaway</option>
-          </select>
-          <button className="btn-publish" onClick={() => handleSubmit()}>
-            Publish{' '}
-          </button>
-        </div>
+    <div className="add-book-form">
+      <div className="two-col">
+        <div className="subtitle">Title</div>
+        <TitleForm className="title-input" />
+        <div className="subtitle">Description</div>
+        <textarea
+          className="input-description"
+          placeholder="Describe it"
+          name="description"
+          type="text"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+        />
       </div>
-    </React.Fragment>
+      <div className="two-col">
+        <div className="subtitle">Category</div>
+        <select
+          className="booktype"
+          type="text"
+          value={type}
+          onChange={e => setType(e.target.value)}>
+          <option value="lend">Lend</option>
+          <option value="giveaway">Giveaway</option>
+        </select>
+        <button className="btn-publish btn" onClick={() => handleSubmit()}>
+          Publish{' '}
+        </button>
+      </div>
+    </div>
   );
 };
 
