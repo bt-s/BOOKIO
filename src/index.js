@@ -11,7 +11,7 @@ import Firebase, {FirebaseContext} from './components/Firebase';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
 import AddNewBookPage from './pages/AddNewBookPage';
-import BookItem from './components/BookItem/BookItem';
+import {BookItem, BookItemV2} from './components/BookItem/BookItem';
 
 import AdminPage from './pages/AdminPage';
 import AccountPage from './pages/AccountPage';
@@ -20,6 +20,8 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
 import BooksPage from './pages/BooksPage';
+import HistoryPage from './pages/HistoryPage';
+
 import './styling/style.scss';
 
 require('dotenv').config();
@@ -56,6 +58,7 @@ const TestComponent = props => {
         <GoogleMap />
       </div>
       <BookItem />
+      <BookItemV2 />
     </React.Fragment>
   );
 };
@@ -135,7 +138,7 @@ const AppBase = () => (
         path={ROUTES.MY_BOOK_HISTORY}
         render={() => (
           <WithNavbar>
-            <h2>This is the my book history page.</h2>
+            <HistoryPage />
           </WithNavbar>
         )}
       />

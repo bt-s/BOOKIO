@@ -20,7 +20,6 @@ const TitleForm = props => {
 
   const handleUserPick = value => {
     let userPick = props.bookTitleSuggestions[value];
-    console.log(userPick);
     props.changeNewBook({
       title: userPick.bookTitleBare,
       rating: userPick.avgRating,

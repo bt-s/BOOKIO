@@ -6,8 +6,19 @@ $red-error: red;
 $gray: #d1d5da;
 $black: #000000;
 $black-lighter: #24292e;
-
 $gray-lighter: #4a4a4a;
+
+$purple-flat: #4500d2;
+$white-dim: #f2f2f2;
+$white-dimmer: #8e8e8e;
+// Color Scheme #1
+$base-color: $black;
+$dominant-color: $purple-flat;
+$background: $white;
+$sub-background: $white-dim;
+$line-color: $white-dimmer;
+$lend: #427ec9;
+$give: #ff6e34;
 
 /* Brands */
 $facebook-blue-gradient: linear-gradient(#5b7bd5, #4864b1) !important;

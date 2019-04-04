@@ -1,11 +1,7 @@
 import React, {useRef, useReducer} from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Validation,
-  Validator,
-  ValidationHelper
-} from '../Authentication/Validation';
+import {Validation, Validator, ValidationHelper} from '../Forms/Validation';
 import {formReducer, errorReducer} from '../../helpers/validationHelper';
 
 import Button from '../Button/Button';
