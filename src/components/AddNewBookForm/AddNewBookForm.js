@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {addNewUserBook} from '../../redux/actions/addNewUserBook';
 import {withFirebase} from '../Firebase';
-import {uploadPictureToFirebase} from '../../helper/storageHelper';
+import {uploadPictureToFirebase} from '../../helpers/storageHelper';
 import TitleForm from './TitleForm';
 
 const AddNewBookFormBase = props => {
