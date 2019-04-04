@@ -73,13 +73,11 @@ const AddNewBookFormBase = props => {
           console.log(imageUrls);
           console.log(res.id);
           updateImage(res.id);
+          setProgressStyle('redirect');
           setTimeout(() => {
-            setProgressStyle('redirect');
-            setTimeout(() => {
-              //go back to homepage after uploading
-              props.history.push('/');
-            }, 1600);
-          }, 100);
+            //go back to homepage after uploading
+            props.history.push('/');
+          }, 1600);
         });
       })
       .catch(() => {

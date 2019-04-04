@@ -1,6 +1,7 @@
 $description-height: 200px;
 
 .upload-progress.redirect {
+  transition: all 0.3s;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -10,7 +11,7 @@ $description-height: 200px;
   background: black;
   width: 40%;
   height: 15%;
-  opacity: 0.5;
+  opacity: 0.6;
   border-radius: 30px;
   > h1 {
     color: white;
