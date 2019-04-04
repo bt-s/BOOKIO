@@ -104,6 +104,7 @@ const BookItemV2 = props => {
               // avatarURL={props.userAvatar}
               // userName={props.userName}
               bio={props.bio}
+              showBio={false}
             />
             <Address
               name={props.locationName}

@@ -82,20 +82,20 @@
     flex-direction: column;
   }
 
-  .info-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.4rem;
-    max-height: 2.8rem;
-    margin-bottom: 3px;
-  }
   .info-upper {
     height: 40%;
     display: flex;
     flex-direction: column;
 
+    .info-title {
+      font-size: 15px;
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 17px;
+      max-height: 34px;
+      margin-bottom: 3px;
+    }
     .rating-star {
       margin-bottom: 5px;
     }
@@ -135,13 +135,8 @@
   .info-lower {
     display: flex;
     flex-direction: column;
-    height: 25%;
+    // height: 25%;
     align-items: flex-end;
-    > .user-label {
-      > div > :last-child {
-        display: none;
-      }
-    }
     .item-address {
       // align-self: flex-end;
       background: $white-dim;

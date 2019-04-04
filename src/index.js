@@ -10,8 +10,8 @@ import {withAuthentication} from './components/Session/Session';
 import Firebase, {FirebaseContext} from './components/Firebase';
 import Navbar from './components/Navbar/Navbar';
 import GoogleMap from './components/GoogleMap/GoogleMap';
-import AddNewBookPage from './pages/AddNewBook';
 import {BookItem, BookItemV2} from './components/BookItem/BookItem';
+import AddNewBookPage from './pages/AddNewBook';
 
 import AdminPage from './pages/AdminPage';
 import AccountPage from './pages/AccountPage';
@@ -30,13 +30,10 @@ const TestComponent = props => {
   return (
     <React.Fragment>
       <div>
-        <br />
-        <h>
-          <b>
-            This page is for test purpose, click links below to check different
-            pages Click the logo above to go back to this test page.
-          </b>
-        </h>
+        <b>
+          This page is for test purpose, click links below to check different
+          pages Click the logo above to go back to this test page.
+        </b>
         <br />
         <br />
         <Link to={ROUTES.ACCOUNT}>Account page</Link>
