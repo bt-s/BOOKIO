@@ -13,7 +13,7 @@ const initialState = {
     title: '',
     rating: '',
     author: '',
-    imageURL: '',
+    imageUrls: '',
     type: ''
   }
 };
@@ -32,16 +32,10 @@ export default function reducers(state = {...initialState}, action) {
         isLoading: false,
         newBook: {
           title: '',
-          owner: '',
           rating: '',
-          description: '',
           author: '',
-          location: {},
-          imageURL: '',
-          type: '',
-          year: null,
-          createdAt: null,
-          updatedAt: null
+          imageUrls: '',
+          type: ''
         }
       };
     case ADD_NEW_USER_BOOK_ERROR:
