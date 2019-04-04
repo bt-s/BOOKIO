@@ -1,13 +1,14 @@
 .drop-box {
   vertical-align: top;
   display: inline-block;
-  width: 150px;
+  width: 135px;
   height: 135px;
   border-radius: 5px;
   border: solid 3px rgba(155, 155, 155, 0.34);
   background-color: rgba(207, 206, 206, 0.15);
   margin: 5px 20px 5px 0px;
   text-align: center;
+  position: relative;
 }
 
 .drag-hover {
@@ -16,7 +17,26 @@
 }
 
 .drag-text {
+  position: absolute;
   text-align: 'center';
   color: 'grey';
   font-size: 36;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.input {
+  opacity: 0;
+  /* IE 8 */
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+  /* IE 5-7 */
+  filter: alpha(opacity=0);
+  /* Netscape or and older firefox browsers */
+  -moz-opacity: 0;
+  /* older Safari browsers */
+  -khtml-opacity: 0;
+  width: 100%;
+  height: 100%;
 }
