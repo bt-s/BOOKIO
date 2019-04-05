@@ -20,7 +20,7 @@
 #btn-add-book {
   width: 156px;
   height: 40px;
-  box-shadow: 1px 3px 15px 0 rgba(0, 0, 0, 0.54);
+  box-shadow: $button-shadow;
   background-color: #4500d2;
   border-radius: 30px;
   align-items: center;

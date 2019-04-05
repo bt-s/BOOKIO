@@ -74,8 +74,8 @@ $description-height: 200px;
       .btn-publish {
         width: 166px;
         height: 43px;
-        box-shadow: 1px 3px 15px 0 rgba(0, 0, 0, 0.54);
-        background-color: #4500d2;
+        box-shadow: $button-shadow;
+        background-color: $dominant-color;
         border-radius: 30px;
         align-self: flex-end;
         margin-top: $description-height;
