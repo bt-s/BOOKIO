@@ -1,3 +1,14 @@
+.add-book-page-title {
+  display: none;
+}
+
+.add-book-page {
+  .subtitle {
+    margin: 10px 0 10px;
+    font-size: 20px;
+  }
+}
+
 .image-box img {
   position: absolute;
   left: 50%;
@@ -7,48 +18,6 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-}
-
-#gradient {
-  position: absolute;
-  z-index: 2;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  background: none;
-  background: -moz-linear-gradient(
-    bottom,
-    rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 0.81) 95%
-  );
-  background: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(60%, rgba(255, 255, 255, 0)),
-    color-stop(95%, rgba(255, 255, 255, 0.8))
-  );
-  background: -webkit-linear-gradient(
-    bottom,
-    rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 0.81) 95%
-  );
-  background: -o-linear-gradient(
-    bottom,
-    rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 0.81) 95%
-  );
-  background: -ms-linear-gradient(
-    bottom,
-    rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 0.81) 95%
-  );
-  background: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 0.81) 95%
-  );
 }
 
 .image-box button {
@@ -79,15 +48,4 @@
   text-align: center;
   overflow: hidden;
   position: relative;
-}
-
-.btn-publish {
-  margin-top: $padding-xs;
-  width: 166px;
-  height: 47px;
-  border-radius: 19px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  background-color: $black;
-  font-size: 15px;
-  color: $white;
 }

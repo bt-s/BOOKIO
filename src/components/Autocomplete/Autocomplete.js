@@ -85,6 +85,7 @@ const Autocomplete = props => {
   return (
     <Fragment>
       <input
+        className={props.className}
         type="text"
         onChange={onChange}
         onKeyDown={onKeyDown}
@@ -96,6 +97,7 @@ const Autocomplete = props => {
 };
 
 Autocomplete.propTypes = {
+  className: PropTypes.string,
   suggestions: PropTypes.array,
   isLoading: PropTypes.bool,
   fetchSuggestions: PropTypes.func,

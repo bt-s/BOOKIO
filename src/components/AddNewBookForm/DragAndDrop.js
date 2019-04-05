@@ -66,9 +66,7 @@ const DragAndDrop = props => {
         {dragging ? (
           'Drop here'
         ) : (
-          <div className="drag-box">
-            Click togit choose file or Drop file here
-          </div>
+          <div className="drag-box">Click to choose file or Drop file here</div>
         )}
       </div>
     </div>

@@ -30,6 +30,7 @@ const TitleForm = props => {
   return (
     <React.Fragment>
       <Autocomplete
+        className={props.className}
         isLoading={props.isLoading}
         fetchSuggestions={getBookTitle}
         suggestions={props.bookTitleSuggestions.map(

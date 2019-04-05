@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {addNewUserBook} from '../../redux/actions/addNewUserBook';
@@ -15,6 +16,7 @@ const AddNewBookFormBase = props => {
     lon: 0
   });
   const [type, setType] = useState('lend');
+  const [progressStyle, setProgressStyle] = useState('off');
   var imageUrls = [];
 
   const parseLocation = position => {
@@ -71,6 +73,11 @@ const AddNewBookFormBase = props => {
           console.log(imageUrls);
           console.log(res.id);
           updateImage(res.id);
+          setProgressStyle('redirect');
+          setTimeout(() => {
+            //go back to homepage after uploading
+            props.history.push('/');
+          }, 2000);
         });
       })
       .catch(() => {
@@ -89,37 +96,43 @@ const AddNewBookFormBase = props => {
   }, []);
 
   return (
-    <React.Fragment>
-      <div className="add-book">
-        <div className="two-col">
-          <div className="subtitle">Title</div>
-          <TitleForm />
-          <div className="subtitle">Description</div>
-          <textarea
-            className="input-description"
-            placeholder="Describe it"
-            name="description"
-            type="text"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-          />
-        </div>
-        <div className="two-col">
-          <div className="subtitle">Category</div>
-          <select
-            className="type"
-            type="text"
-            value={type}
-            onChange={e => setType(e.target.value)}>
-            <option value="lend">Lend</option>
-            <option value="giveaway">Giveaway</option>
-          </select>
-          <button className="btn-publish" onClick={() => handleSubmit()}>
-            Publish{' '}
-          </button>
-        </div>
+    <div className="add-book-form">
+      <div className={'upload-progress ' + progressStyle}>
+        <h1>Upload succed, redirecting to homepage.</h1>
       </div>
-    </React.Fragment>
+      <div className="two-col">
+        <div className="subtitle">Title</div>
+        <TitleForm className="title-input" />
+        <div className="subtitle">Description</div>
+        <textarea
+          className="input-description"
+          placeholder="Describe it"
+          name="description"
+          type="text"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+        />
+      </div>
+      <div className="two-col">
+        <div className="subtitle">Category</div>
+        <select
+          className="booktype"
+          type="text"
+          value={type}
+          onChange={e => setType(e.target.value)}>
+          <option value="lend">Lend</option>
+          <option value="giveaway">Giveaway</option>
+        </select>
+        <button
+          className="btn-publish btn"
+          onClick={() => {
+            setProgressStyle('on');
+            handleSubmit();
+          }}>
+          Publish{' '}
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -141,6 +154,7 @@ const mapDispatchToProps = dispatch =>
 
 const AddNewBookForm = compose(
   withFirebase,
+  withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps
