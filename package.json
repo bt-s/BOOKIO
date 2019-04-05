@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@google-cloud/storage": "^2.4.2",
     "axios": "^0.18.0",
+    "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "firebase": "^5.8.4",
     "google-maps-react": "^2.0.2",
@@ -42,7 +43,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "redux-thunk": "^2.3.0",
+    "rimraf": "^2.6.3",
     "uuid": "^3.3.2"
   }
 }
