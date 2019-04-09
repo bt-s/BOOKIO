@@ -26,6 +26,8 @@ const getStars = rating => {
 
 const BookDetail = props => {
   const requestBook = () => {
+    console.log('request book entered');
+
     props.firebase
       .transactions()
       .add({
@@ -45,6 +47,9 @@ const BookDetail = props => {
   };
   return (
     <div className="book-details-container">
+      <button className="btn-request btn" onClick={requestBook}>
+        Request
+      </button>
       <div className="book-info-container">
         <div className="book-title">{props.bookTitle}</div>
         <img
@@ -66,7 +71,7 @@ const BookDetail = props => {
           <img className="user-profile" src={props.userProfile} alt="" />
           <div className="user-name">{props.userName}</div>
         </div>
-        <button className="btn-request" onClick={requestBook}>
+        <button className="btn-request btn" onClick={requestBook}>
           Request
         </button>
       </div>
