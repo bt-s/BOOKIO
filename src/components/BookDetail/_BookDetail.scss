@@ -57,9 +57,10 @@ body {
 }
 
 .book-type {
-  width: 84px;
+  width: 90px;
   height: 30px;
   border-radius: 4px;
+  font-size: 10px;
   background-color: #6aa926;
   color: $white;
   
@@ -68,7 +69,7 @@ body {
   width: 137px;
   height: 17px;
   font-size: 14px;
-  text-align: right;
+  text-align: left;
   color: $gray-lighter;
 }
 #goodreads-info {
@@ -139,7 +140,6 @@ body {
 
 .service-description {
   color: $gray-lighter;
-
   font-size: 17px;
   width: fit-content;
   height: fit-content;
@@ -170,8 +170,8 @@ body {
 }
 
 .book-img {
-  width: 80%;
-  height: 80%;
+  width: 360px;
+  height: 240px;
   margin-right: $padding-xs;
   margin-bottom: $padding-xs;
 }

@@ -6,44 +6,127 @@ import userProfile from '../images/kafka.jpg';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 import {withFirebase} from '../components/Firebase';
-import {connect} from 'react-redux';
-import {compose} from 'recompose';
-
+import {GoogleApiWrapper} from 'google-maps-react';
 import {
   faStar,
   faStarHalf,
   faLocationArrow,
   faMapPin,
-  faClock,
 } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-
 
 const BookDetailComponent = props => {
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState([]);
+  const [owner, setOwner] = useState([]);
+  var book_id = '4oSECEIzfEABHBRQOpqa';
 
   useEffect(() => {
+    fetchBookInfo();
+    fetchOwnerInfo();
+  }, []);
+
+  const fetchBookInfo = () => {
     setLoading(true);
-    var bookDetail = props.firebase.book('3qVthXGJZJkPSRW13uoc');
-    bookDetail.get().then(books=> {
+    var bookDetail = props.firebase.book(book_id);
+    bookDetail
+      .get()
+      .then(books => {
         if (books.exists) {
-          console.log('Document data:', books.data());
           setLoading(false);
           setBooks(books.data());
+          fetchOwnerInfo(books.data().owner);
         } else {
           console.log('No such document!');
         }
       })
       .catch(function(error) {
+        setLoading(false);
         console.log('Error getting document:', error);
       });
-    
-  }, []);
+  };
 
-  return <BookDetail props={books} />;
+  const fetchOwnerInfo = ownerId => {
+    setLoading(true);
+    var ownerInfo = props.firebase.user(ownerId);
+    ownerInfo
+      .get()
+      .then(owner => {
+        if (owner.exists) {
+          setOwner(owner.data());
+          setLoading(false);
+        } else {
+          console.log('owner undefined');
+        }
+      })
+      .catch(function(error) {
+        setLoading(false);
+        console.log('Error getting document:', error);
+      });
+  };
+
+  var loc = books.location;
+  var latitude;
+  var longitude;
+  if (loc !== undefined) {
+
+    console.log('latitude:' + loc.lat);
+   latitude= loc.lat;
+
+    console.log('longitude:' + loc.lon);
+   longitude = loc.lon;
+  }
+
+  return (
+    <div>
+      <BookDetail books={books} owner={owner} />
+    </div>
+  );
+  
 };
 
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+//   } else {
+//     alert('Geolocation is not supported by this browser.');
+//   }
+// }
+
+// function geoError() {
+//   alert('Geocoder failed.');
+// }
+
+// function geoSuccess(position) {
+//   var lat = position.coords.latitude;
+//   var lng = position.coords.longitude;
+//   console.log('lat:' + lat + ' lng:' + lng);
+//  // codeLatLng(lat, lng);
+// }
+
+// var geocoder;
+// function initialize() {
+//   geocoder = new google.maps.Geocoder();
+//   console.log(geocoder);
+// }
+
+// function codeLatLng(lat, lng) {
+//   var latlng = new google.maps.LatLng(lat, lng);
+//   geocoder.geocode({latLng: latlng}, function(results, status) {
+//     if (status == google.maps.GeocoderStatus.OK) {
+//       console.log(results);
+//       if (results[1]) {
+//         //formatted address
+//         var address = results[0].formatted_address;
+//         console.log('address = ' + address);
+//       } else {
+//         console.log('No results found');
+//       }
+//     } else {
+//       console.log('Geocoder failed due to: ' + status);
+//     }
+//   });
+// }
 
 const getStars = rating => {
   // Round to nearest half
@@ -54,54 +137,64 @@ const getStars = rating => {
   for (let i = rating; i > 0; i--)
     // If there is a half a star, append it
     if (i === 0.5) {
-      output.push(<FontAwesomeIcon icon={faStarHalf} />);
+      output.push(<FontAwesomeIcon icon={faStarHalf} color="#e99407" />);
     } else {
-      output.push(<FontAwesomeIcon icon={faStar} />);
+      output.push(<FontAwesomeIcon icon={faStar} color="#e99407" />);
     }
   return output;
 };
 
-const BookDetail = ({props}) => (
+// const getBookLocation = () => {};
+
+// const getMyDistance = () => {
+//   var myDistance;
+//   return getBookLocation() - myDistance;
+// };
+
+// const  getLocation= ()=> {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else {
+//    console.log("Geolocation is not supported by this browser.");
+//   }
+// }
+
+// const showPosition= (position) => {
+//   console.log('lat:'+position.coords.latitude + 'lo'+ position.coords.longitude)
+
+// }
+
+const BookDetail = ({books, owner}) => (
   <div className="book-details-container">
     <div className="book-info-container">
       <div className="title">
-        <div className="book-title">{props.title}</div>
-        <button className="book-type"> {props.type}</button>
+        <div className="book-title">
+          {String(books.title).substring(20, 0)}...
+        </div>
+        <button className="book-type">
+          {' '}
+          {String(books.type).toUpperCase()}
+        </button>
       </div>
-      <div className="author">by {props.author}</div>
+      <div className="author">by {books.author}</div>
 
       <div id="goodreads-info">
         <div className="rating">
-          {getStars(props.rating)} {props.rating}
+          {getStars(books.rating)} {books.rating}
         </div>
-        <div className="total-review">{props.reviewTotal} Reviews</div>
       </div>
 
       <div className="book-info">
-        <img
-          className="book-img"
-          src={props.imageSource}
-          alt={props.bookTitle}
-        />
-        <div className="about">
-          <div className="about-book-header">About Book</div>
-          <br />
-          <div className="about-book">{props.aboutBook}</div>
-        </div>
+        <img className="book-img" src={books.imageUrls} alt={books.title} />
       </div>
       <div className="header-description">Description </div>
-      <div className="service-description">{props.description}</div>
+      <div className="service-description">{books.description}</div>
     </div>
     <div className="book-pickup-container">
       <div className="header-pickup">Pickup Information </div>
-      <span className="time-to-pick">
-        <FontAwesomeIcon icon={faClock} />
-        {'  ' + props.timeToPick}
-      </span>
-      <br />
       <span className="location-to-pick">
         <FontAwesomeIcon icon={faMapPin} />
-        {'  ' + props.pickupLocation}
+        {'  ' + books.location}
       </span>
 
       <div className="google-map-wrapper">
@@ -110,13 +203,14 @@ const BookDetail = ({props}) => (
 
       <div className="distance">
         <FontAwesomeIcon icon={faLocationArrow} />
-        {'  ' + props.distance}
+        {'  ' + books.distance}
+        {/* <i class ="fa fa-location-arrow" aria-hidden="true"></i> */}
       </div>
       <br />
       <br />
       <div className="user-info">
-        <img className="user-profile" src={props.userProfile} alt="" />
-        <div className="user-name">{props.userName}</div>
+        <img className="user-profile" src={books.userProfile} alt="" />
+        <div className="user-name">{owner.username}</div>
       </div>
 
       <Link className="btn-request" to={ROUTES.MY_BOOK_HISTORY}>
@@ -127,11 +221,9 @@ const BookDetail = ({props}) => (
 );
 
 BookDetail.propTypes = {
-  imageSource: PropTypes.string,
-  bookTitle: PropTypes.string,
+  imageUrls: PropTypes.string,
+  title: PropTypes.string,
   distance: PropTypes.string,
-  lender: PropTypes.string,
-  bookDescription: PropTypes.string,
   description: PropTypes.string,
   userProfile: PropTypes.string,
   rating: PropTypes.string,
@@ -142,30 +234,20 @@ BookDetail.propTypes = {
 };
 
 BookDetail.defaultProps = {
-  imageSource: imageDummy,
-  bookTitle: 'Kafka on the Shore',
+  imageUrls: imageDummy,
+  title: 'Kafka on the Shore',
   distance: '1.2 km away',
-  userName: 'Spongebob',
+  owner: 'Spongebob',
   description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu',
   aboutBook:
     'This book is about how to know urself this book is about how to know urself this book is about how to know urself ',
   userProfile: userProfile,
-  rating: 4.5,
-  reviewTotal: 123,
+  rating: '4.5',
+  reviewTotal: '123',
   author: 'Haruki Murakkami',
   timeToPick: '12 March 2019, 18.00',
   pickupLocation: 'KTH Entree ',
 };
 
-// return compose(
-//   withFirebase,
-//   connect(
-//     null,
-//   )(BookDetailComponent)
-// );
-
-// };
-
 export default withFirebase(BookDetailComponent);
-
