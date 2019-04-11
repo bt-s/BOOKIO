@@ -44,6 +44,19 @@ class Firebase {
     this.facebookProvider = new app.auth.FacebookAuthProvider();
   }
 
+  // *** Storage API ***
+  getImage = (ref, imgId) =>
+    this.storage()
+      .refFromURL(ref)
+      .getDownloadURL()
+      .then(url => {
+        const img = document.getElementByID(imgId);
+        img.src = url;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
   // *** Auth API ***
   doCreateUserWithEmailAndPassword = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
