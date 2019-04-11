@@ -25,6 +25,7 @@ const PasswordForgetFormBase = props => {
       });
 
     e.preventDefault();
+    console.log(e);
   };
 
   const onChange = e => {
@@ -38,23 +39,23 @@ const PasswordForgetFormBase = props => {
   ) : (
     <form onSubmit={onSubmit} className="auth-form">
       <p className="pw-forget-header">
-        Enter your email address and we will send you a link to reset your
-        password.
+        We'll send you an email with a reset link.
       </p>
-      <p className="form-header">E-mail address</p>
+
       <input
-        placeholder=""
+        placeholder="E-mail"
         name="email"
         type="text"
         onChange={onChange}
         value={email}
       />
+      <br />
       <Button
         className="btn btn-auth"
         disabled={isInvalid}
         type="submit"
         onClick={onSubmit}
-        text="Sent password reset email"
+        text="Reset Password"
       />
 
       {error && <p>{error.message}</p>}
@@ -63,7 +64,7 @@ const PasswordForgetFormBase = props => {
 };
 
 PasswordForgetFormBase.propTypes = {
-  firebase: PropTypes.object
+  firebase: PropTypes.object,
 };
 
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
@@ -75,7 +76,7 @@ const PasswordForgetLink = props => (
 );
 
 PasswordForgetLink.propTypes = {
-  styling: PropTypes.string
+  styling: PropTypes.string,
 };
 
 export {PasswordForgetForm, PasswordForgetLink};
