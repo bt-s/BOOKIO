@@ -78,7 +78,7 @@ const BookDetailComponent = props => {
 
   return (
     <div>
-      <BookDetail books={books} owner={owner} />
+      <BookDetail books={books} owner={owner} firebase={props.firebase} />
     </div>
   );
 };
@@ -162,61 +162,81 @@ const getStars = rating => {
 
 // }
 
-const BookDetail = ({books, owner}) => (
-  <div className="book-details-container">
-    <div className="book-info-container">
-      <div className="title">
-        <div className="book-title">
-          {String(books.title).substring(20, 0)}...
+const BookDetail = ({books, owner, firebase}) => {
+  const requestBook = () => {
+    firebase
+      .transactions()
+      .add({
+        providerID: 'fake provider', // id should be added
+        consumerID: firebase.getMyUID(),
+        status: 'ongoing',
+        requestTime: new Date().getTime(),
+        itemID: 'fake item id', // item id should be added
+        type: 'lend'
+      })
+      .then(() => {
+        console.log('reqeust success');
+      })
+      .catch(() => {
+        console.log('request fail');
+      });
+  };
+  return (
+    <div className="book-details-container">
+      <div className="book-info-container">
+        <div className="title">
+          <div className="book-title">
+            {String(books.title).substring(20, 0)}...
+          </div>
+          <button className="book-type">
+            {' '}
+            {String(books.type).toUpperCase()}
+          </button>
         </div>
-        <button className="book-type">
-          {' '}
-          {String(books.type).toUpperCase()}
+        <div className="author">by {books.author}</div>
+
+        <div id="goodreads-info">
+          <div className="rating">
+            {getStars(books.rating)} {books.rating}
+          </div>
+        </div>
+
+        <div className="book-info">
+          <img className="book-img" src={books.imageUrls} alt={books.title} />
+        </div>
+        <div className="header-description">Description </div>
+        <div className="service-description">{books.description}</div>
+      </div>
+      <div className="book-pickup-container">
+        <div className="header-pickup">Pickup Information </div>
+        <span className="location-to-pick">
+          <FontAwesomeIcon icon={faMapPin} />
+          {'  ' + books.location}
+        </span>
+
+        <div className="google-map-wrapper">
+          <GoogleMap />
+        </div>
+
+        <div className="distance">
+          <FontAwesomeIcon icon={faLocationArrow} />
+          {'  ' + books.distance}
+          {/* <i class ="fa fa-location-arrow" aria-hidden="true"></i> */}
+        </div>
+        <br />
+        <br />
+        <div className="user-info">
+          <img className="user-profile" src={books.userProfile} alt="" />
+          <div className="user-name">{owner.username}</div>
+        </div>
+
+        <button className="btn-request btn" onClick={requestBook}>
+          Request
         </button>
       </div>
-      <div className="author">by {books.author}</div>
-
-      <div id="goodreads-info">
-        <div className="rating">
-          {getStars(books.rating)} {books.rating}
-        </div>
-      </div>
-
-      <div className="book-info">
-        <img className="book-img" src={books.imageUrls} alt={books.title} />
-      </div>
-      <div className="header-description">Description </div>
-      <div className="service-description">{books.description}</div>
     </div>
-    <div className="book-pickup-container">
-      <div className="header-pickup">Pickup Information </div>
-      <span className="location-to-pick">
-        <FontAwesomeIcon icon={faMapPin} />
-        {'  ' + books.location}
-      </span>
-
-      <div className="google-map-wrapper">
-        <GoogleMap />
-      </div>
-
-      <div className="distance">
-        <FontAwesomeIcon icon={faLocationArrow} />
-        {'  ' + books.distance}
-        {/* <i class ="fa fa-location-arrow" aria-hidden="true"></i> */}
-      </div>
-      <br />
-      <br />
-      <div className="user-info">
-        <img className="user-profile" src={books.userProfile} alt="" />
-        <div className="user-name">{owner.username}</div>
-      </div>
-
-      <Link className="btn-request" to={ROUTES.MY_BOOK_HISTORY}>
-        Request
-      </Link>
-    </div>
-  </div>
-);
+  );
+};
 
 BookDetail.propTypes = {
   imageUrls: PropTypes.string,
