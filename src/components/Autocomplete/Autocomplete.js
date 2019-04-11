@@ -6,20 +6,13 @@ const Autocomplete = props => {
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [userInput, setUserInput] = useState('');
-  const [wrapper, wrapperRef] = useWrapperRef(null);
 
-  function useWrapperRef() {
-    let wrapperRef = null;
-    const ref = useCallback(node => {
-      if (node !== null) {
-        wrapperRef = node;
-        console.log(wrapperRef);
-      }
-    }, []);
-
-    console.log(wrapperRef);
-    return [wrapperRef, ref];
-  }
+  let wrapper = null;
+  const wrapperRef = useCallback(node => {
+    if (node !== null) {
+      wrapper = node;
+    }
+  }, []);
 
   const onChange = e => {
     const userInputVal = e.currentTarget.value;
@@ -47,9 +40,7 @@ const Autocomplete = props => {
   }, []);
 
   const handleClickOutside = e => {
-    console.log(wrapper);
     if (wrapper && !wrapper.contains(e.target)) {
-      console.log('click outsiede');
       setShowSuggestions(false);
     }
   };
