@@ -65,7 +65,7 @@ const SignUpFormBase = props => {
             {
               username: form.username,
               email: form.email,
-              // phoneNumber: form.phoneNumber,
+              // phoneNumber: form.Number,
               roles,
             },
             {merge: true}
