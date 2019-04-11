@@ -49,6 +49,11 @@ $btn-lr-padding: 10px;
   @include button-bg($black-lighter);
 }
 
+.btn-orange {
+  @include button-bg($orange);
+  border-radius: 4px;
+}
+
 .btn:not([disabled]) {
   cursor: pointer;
 }

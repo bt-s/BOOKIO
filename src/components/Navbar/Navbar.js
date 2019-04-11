@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -148,16 +147,6 @@ const Navbar = props => {
       </div>
     </nav>
   );
-};
-
-Navbar.propTypes = {
-  logoLeft: PropTypes.string,
-  logoRight: PropTypes.string
-};
-
-Navbar.defaultProps = {
-  logoLeft: 'BOOK',
-  logoRight: 'IO'
 };
 
 const mapStateToProps = state => ({

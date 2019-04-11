@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import reactJPG from '../../images/fullstackreact.jpg';
 import reactSVG from '../../images/react.svg';
 import {UserLabel, Address} from '../Books/Components';
-import {RatingStars} from '../Books/Components';
+//import {RatingStars} from '../Books/Components';
 
 const BookItem = props => (
   <div className="book-item-container">
@@ -78,7 +78,7 @@ const BookItemV2 = props => {
         <div className="information">
           <div className="info-upper">
             <div className="info-title">{props.bookTitle}</div>
-            <RatingStars rating="3.5" />
+            {/* <RatingStars rating="3.5" /> */}
             {props.type === 'Give Away' ? (
               <div className="label give">{props.type}</div>
             ) : (
