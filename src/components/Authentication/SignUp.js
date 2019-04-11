@@ -27,7 +27,7 @@ const SignUpFormBase = props => {
   const initialFormValues = () => ({
     username: '',
     email: '',
-    phoneNumber: '',
+    // phoneNumber: '',
     passwordOne: '',
     passwordTwo: '',
   });
@@ -65,7 +65,7 @@ const SignUpFormBase = props => {
             {
               username: form.username,
               email: form.email,
-              phoneNumber: form.phoneNumber,
+              // phoneNumber: form.phoneNumber,
               roles,
             },
             {merge: true}
@@ -74,7 +74,7 @@ const SignUpFormBase = props => {
         .then(authUser => {
           form.username = '';
           form.email = '';
-          form.phoneNumber = '';
+          // form.phoneNumber = '';
           form.passwordOne = '';
           form.passwordTwo = '';
           props.history.push(ROUTES.ACCOUNT);
@@ -134,7 +134,7 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
-        {error.phoneNumber && (
+        {/* {error.phoneNumber && (
           <span className="validation-error">{error.phoneNumber}</span>
         )}
 
@@ -150,7 +150,7 @@ const SignUpFormBase = props => {
             value={form.phoneNumber}
             onChange={handleChange}
           />
-        </Validator>
+        </Validator> */}
 
         {error.passwordOne && (
           <span className="validation-error">{error.passwordOne}</span>
