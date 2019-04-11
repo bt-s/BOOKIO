@@ -13,11 +13,6 @@ const TitleForm = props => {
     1000
   );
 
-  useEffect(() => {
-    // TODO: Get location from props and set the location state here
-    // TODO: set the owner state with ID from local storage
-  });
-
   const handleUserPick = value => {
     let userPick = props.bookTitleSuggestions[value];
     props.changeNewBook({

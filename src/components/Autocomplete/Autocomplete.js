@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 const Autocomplete = props => {
@@ -6,6 +6,20 @@ const Autocomplete = props => {
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [userInput, setUserInput] = useState('');
+  const [wrapper, wrapperRef] = useWrapperRef(null);
+
+  function useWrapperRef() {
+    let wrapperRef = null;
+    const ref = useCallback(node => {
+      if (node !== null) {
+        wrapperRef = node;
+        console.log(wrapperRef);
+      }
+    }, []);
+
+    console.log(wrapperRef);
+    return [wrapperRef, ref];
+  }
 
   const onChange = e => {
     const userInputVal = e.currentTarget.value;
@@ -22,6 +36,22 @@ const Autocomplete = props => {
     setShowSuggestions(false);
     setUserInput(e.currentTarget.innerText);
     if (getUserPick) getUserPick(activeSuggestion);
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = e => {
+    console.log(wrapper);
+    if (wrapper && !wrapper.contains(e.target)) {
+      console.log('click outsiede');
+      setShowSuggestions(false);
+    }
   };
 
   const onMouseEnter = index => {
@@ -51,6 +81,8 @@ const Autocomplete = props => {
         return;
       }
       setActiveSuggestion(activeSuggestion + 1);
+    } else if (e.keyCode === 27) {
+      setShowSuggestions(false);
     }
   };
 
@@ -58,7 +90,7 @@ const Autocomplete = props => {
     showSuggestions &&
     userInput &&
     (!isLoading ? (
-      <ul className="suggestions">
+      <ul className="suggestions" ref={wrapperRef}>
         {suggestions.map((suggestion, index) => {
           let className;
 
@@ -70,7 +102,7 @@ const Autocomplete = props => {
           return (
             <li
               className={className}
-              key={suggestion}
+              key={index}
               onClick={onClick}
               onMouseEnter={() => onMouseEnter(index)}>
               {suggestion}

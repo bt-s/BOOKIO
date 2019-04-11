@@ -42,10 +42,6 @@ const AddNewBookBase = props => {
     );
   };
 
-  useEffect(() => {
-    console.log(files);
-  });
-
   //TOOO: Drag to change the order of the uploaded
 
   return (

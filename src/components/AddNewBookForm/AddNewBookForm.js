@@ -3,13 +3,24 @@ import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
-import {addNewUserBook} from '../../redux/actions/addNewUserBook';
+import {
+  addNewUserBook,
+  changeNewBook
+} from '../../redux/actions/addNewUserBook';
 import {withFirebase} from '../Firebase';
 import {uploadPictureToFirebase} from '../../helpers/storageHelper';
 import TitleForm from './TitleForm';
 
 const AddNewBookFormBase = props => {
-  const {addNewUserBook, author, title, rating, firebase, files} = props;
+  const {
+    addNewUserBook,
+    changeNewBook,
+    author,
+    title,
+    rating,
+    firebase,
+    files
+  } = props;
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState({
     lat: 0,
@@ -17,7 +28,7 @@ const AddNewBookFormBase = props => {
   });
   const [type, setType] = useState('lend');
   const [progressStyle, setProgressStyle] = useState('off');
-  var imageUrls = [];
+  let imageUrls = [];
 
   const parseLocation = position => {
     setLocation({
@@ -103,6 +114,17 @@ const AddNewBookFormBase = props => {
       <div className="two-col">
         <div className="subtitle">Title</div>
         <TitleForm className="title-input" />
+        <div className="subtitle">Author</div>
+        <input
+          className="title-input"
+          type="text"
+          onChange={e =>
+            changeNewBook({
+              author: e.target.value
+            })
+          }
+          value={author}
+        />
         <div className="subtitle">Description</div>
         <textarea
           className="input-description"
@@ -147,7 +169,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      addNewUserBook
+      addNewUserBook,
+      changeNewBook
     },
     dispatch
   );

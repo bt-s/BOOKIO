@@ -8,29 +8,36 @@ input {
   border: 1px solid #999;
   border-top-width: 0;
   list-style: none;
-  margin-top: 0;
+  margin: 0px 7px;
   max-height: 143px;
   overflow-y: auto;
   padding-left: 0;
-  width: calc(300px + 1rem);
+  border-radius: 0px !important;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
 }
 
 .suggestions li {
   padding: 0.5rem;
+  background-color: #bfbfbf;
+  font-size: 15px;
+  color: $black;
 }
 
 .loading {
   padding: 0.5rem;
+  background-color: #bfbfbf;
+  font-size: 15px;
+  color: $black;
 }
 
 .suggestion-active,
 .suggestions li:hover {
-  background-color: #008f68;
-  color: #fae042;
+  background-color: #4d4d4d;
+  color: $white;
   cursor: pointer;
   font-weight: 700;
 }
 
 .suggestions li:not(:last-of-type) {
-  border-bottom: 1px solid #999;
+  border-bottom: 2px solid #999;
 }
