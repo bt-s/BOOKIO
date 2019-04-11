@@ -1,16 +1,112 @@
-.submit-book{
-  margin-top: $padding-xs;
-  width: 166px;
-  height: 47px;
-  border-radius: 19px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  background-color: $black;
-  font-size: 15px;
-  color: $white;
-  text-align: center;
+$description-height: 200px;
+
+.upload-progress.redirect {
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: fixed;
+  left: 30%;
+  top: 40%;
+  background: black;
+  width: 40%;
+  height: 15%;
+  opacity: 0.6;
+  border-radius: 30px;
+  > h1 {
+    color: white;
+    font-size: 25px;
+    align-self: center;
+  }
+}
+.upload-progress.on {
+  > h1 {
+    display: none;
+  }
+  width: 100%;
+  transition: all 1.8s ease;
+  position: fixed;
+  top: $navbar-height;
+  height: 4px;
+  box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
+  left: 0px;
+  background: yellow;
+}
+.upload-progress.off {
+  > h1 {
+    display: none;
+  }
+  position: fixed;
+  top: $navbar-height;
+  height: 4px;
+  box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
+  left: 0px;
+  width: 0px;
+  background: yellow;
 }
 
-.input description {
-    height: 500px;
-}
+.add-book-form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .two-col {
+    width: 45%;
+    height: 100%;
+    justify-content: space-between;
+    // flex-direction: column;
+    > * {
+      border-radius: 10px;
+      background: $white-dim;
+      border: $white-dimmer;
+    }
+    > .subtitle {
+      border: none;
+      background: none;
+    }
+    &:last-child {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      .booktype {
+        width: 100%;
+        height: 35px;
+      }
+      .btn-publish {
+        width: 166px;
+        height: 43px;
+        box-shadow: $button-shadow;
+        background-color: $dominant-color;
+        border-radius: 30px;
+        align-self: flex-end;
+        margin-top: $description-height;
+      }
+    }
+  }
+  .input-description {
+    height: $description-height;
+    width: 100%;
+    resize: none;
+  }
+  .title-input {
+    width: 100%;
+  }
 
+  @include smaller-than(sm) {
+    justify-content: flex-start;
+    flex-direction: column;
+    .two-col {
+      width: 100%;
+    }
+    .input-description {
+      height: 100px;
+    }
+    .btn-publish {
+      position: fixed;
+      bottom: 2.5%;
+      right: 4%;
+      height: 50px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+}

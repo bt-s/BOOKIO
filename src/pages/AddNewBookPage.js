@@ -1,21 +1,27 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import AddNewBookForm from '../components/AddNewBookForm/AddNewBookForm';
 import DragAndDrop from '../components/AddNewBookForm/DragAndDrop';
-import TitleForm from '../components/AddNewBookForm/TitleForm';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addNewUserBook} from '../redux/actions/addNewUserBook';
+import {withFirebase} from '../components/Firebase';
+import {compose} from 'recompose';
+import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 
-const AddNewBook = props => {
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+const AddNewBookBase = props => {
   const [files, setFiles] = useState([]);
 
   const handleDrop = payload => {
     let fileList = [...files];
     for (var i = 0; i < payload.length; i++) {
       if (!payload[i].name) return;
-      fileList.push(payload[i].name);
+      if (fileList.map(val => val.name).indexOf(payload[i].name) !== -1)
+        fileList.splice(i, 1);
+      fileList.push(payload[i]);
     }
-    setFiles(fileList);
+    setFiles(fileList.slice(-3));
   };
 
   const removeFiles = i => {
@@ -27,43 +33,31 @@ const AddNewBook = props => {
   const ImageBox = (file, i) => {
     return (
       <div className="image-box" key={i}>
-        <div className="text">{file}</div>
-        <button className="btn-remove" onClick={() => removeFiles(i)}>
-          Remove
+        <img src={URL.createObjectURL(file)} alt={'to be uploaded'} />
+        <div className="text">{file.name}</div>
+        <button onClick={() => removeFiles(i)}>
+          <FontAwesomeIcon icon={faTimesCircle} />
         </button>
       </div>
     );
   };
 
+  useEffect(() => {
+    console.log(files);
+  });
+
   //TOOO: Drag to change the order of the uploaded
 
   return (
-    <React.Fragment>
-      <div className="add-book">
-     
-      <div className="add-book-container">
-      <h1> Add New Book Page</h1>
+    <div className="add-book-page">
+      <h1 className="add-book-page-title"> Share New Book </h1>
       <div className="subtitle">Images</div>
       {files.map((file, i) => {
         return ImageBox(file, i);
       })}
       <DragAndDrop handleDrop={handleDrop} />
-      <div className="subtitle">Book Title</div>
-      <TitleForm />
-      <div className="subtitle">Description</div>
-      <AddNewBookForm />
-      </div>
-      <div className="type-book-container">
-      <div className="subtitle">Type</div>
-      <input className="type" type="text" ></input>
-      <div className="subtitle">Pick up Location</div>
-      <input className="pick-location" type="text" ></input>
-      <div className="subtitle">Contact Info</div>
-      <input className="contact-info" type="text" ></input>
-      <button className="btn-publish">Publish </button>
-      </div>
-      </div>
-    </React.Fragment>
+      <AddNewBookForm files={files} />
+    </div>
   );
 };
 
@@ -81,7 +75,12 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddNewBook);
+const AddNewBook = compose(
+  withFirebase,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+);
+
+export default AddNewBook(AddNewBookBase);

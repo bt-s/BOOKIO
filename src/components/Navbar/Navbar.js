@@ -69,7 +69,7 @@ const accountMenu = (
     classes="navbar-account"
     headerObject={<FontAwesomeIcon icon={faUser} />}
     items={accountMenuList}
-    defaultShowMenu={true}
+    defaultShowMenu={false}
   />
 );
 

@@ -10,7 +10,7 @@ import Autocomplete from '../Autocomplete/Autocomplete';
 const TitleForm = props => {
   const getBookTitle = throttle(
     query => props.fetchBookTitleSuggestions(query),
-    700
+    1000
   );
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const TitleForm = props => {
   return (
     <React.Fragment>
       <Autocomplete
+        className={props.className}
         isLoading={props.isLoading}
         fetchSuggestions={getBookTitle}
         suggestions={props.bookTitleSuggestions.map(

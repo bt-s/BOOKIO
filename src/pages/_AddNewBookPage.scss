@@ -1,0 +1,51 @@
+.add-book-page-title {
+  display: none;
+}
+
+.add-book-page {
+  .subtitle {
+    margin: 10px 0 10px;
+    font-size: 20px;
+  }
+}
+
+.image-box img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.image-box button {
+  z-index: 3;
+  position: absolute;
+  right: -2px;
+  top: 1px;
+  font-size: 20px;
+  opacity: 0.4;
+  color: black;
+  background-color: transparent;
+  border: 0;
+}
+
+.image-box button:hover {
+  opacity: 0.8;
+}
+
+.image-box {
+  vertical-align: top;
+  display: inline-block;
+  width: 135px;
+  height: 135px;
+  border-radius: 5px;
+  border: solid 3px rgba(155, 155, 155, 0.34);
+  background-color: rgba(207, 206, 206, 0.15);
+  margin: 5px 20px 5px 0px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
