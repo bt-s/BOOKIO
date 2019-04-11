@@ -8,10 +8,10 @@ const Footer = props => {
     <footer>
       <div className="footer-content-container">
         <p>
-          An endeavour for the{' '}
-          <i>Interaction Programming and Dynamic Web course</i>, 2019
+          An endeavour for the <i>Interaction Programming and Dynamic Web</i>{' '}
+          course, 2019
         </p>
-        <div class="copyright">
+        <div className="copyright">
           <span>&copy;</span>
           <BrandLogo styling="secondary" />
         </div>

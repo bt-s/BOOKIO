@@ -15,7 +15,7 @@ const AddNewBookFormBase = props => {
     lat: 0,
     lon: 0
   });
-  const [type, setType] = useState('lend');
+  const [type, setType] = useState('to borrow');
   const [progressStyle, setProgressStyle] = useState('off');
   var imageUrls = [];
 
@@ -27,10 +27,7 @@ const AddNewBookFormBase = props => {
   };
 
   const handleImageUploaded = url => {
-    let imageUrlsTemp = [...imageUrls];
-    imageUrlsTemp.push(url);
-    imageUrls = [...imageUrlsTemp];
-    console.log(imageUrlsTemp);
+    imageUrls.push(url);
   };
 
   const updateImage = id => {
@@ -48,18 +45,18 @@ const AddNewBookFormBase = props => {
       .books()
       .add({
         title,
-        owner: JSON.parse(localStorage.getItem('authUser')).uid,
+        owner: props.authUser.username,
+        avatar: props.authUser.photoURL,
         rating: parseInt(rating),
         description,
         author,
         location,
         imageUrls,
-        type: 'lend',
+        type,
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime()
       })
       .then(res => {
-        console.log(res.id);
         Promise.all(
           files.map(file =>
             uploadPictureToFirebase(
@@ -70,13 +67,10 @@ const AddNewBookFormBase = props => {
             )
           )
         ).then(() => {
-          console.log(imageUrls);
-          console.log(res.id);
           updateImage(res.id);
           setProgressStyle('redirect');
           setTimeout(() => {
-            //go back to homepage after uploading
-            props.history.push('/');
+            props.history.push('/books');
           }, 2000);
         });
       })
@@ -87,7 +81,6 @@ const AddNewBookFormBase = props => {
 
   const handleSubmit = () => {
     addNewUserBook('loading');
-    console.warn('[ADD_NEW_BOOK] Calling API to add New Book');
     storeData();
   };
 
@@ -118,10 +111,9 @@ const AddNewBookFormBase = props => {
         <select
           className="booktype"
           type="text"
-          value={type}
           onChange={e => setType(e.target.value)}>
-          <option value="lend">Lend</option>
-          <option value="giveaway">Giveaway</option>
+          <option value="to borrow">Lend</option>
+          <option value="to have">Give away</option>
         </select>
         <button
           className="btn-publish btn"
@@ -136,21 +128,15 @@ const AddNewBookFormBase = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    title: state.userBookState.newBook.title,
-    rating: state.userBookState.newBook.rating,
-    author: state.userBookState.newBook.author
-  };
-};
+const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser,
+  title: state.userBookState.newBook.title,
+  rating: state.userBookState.newBook.rating,
+  author: state.userBookState.newBook.author
+});
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      addNewUserBook
-    },
-    dispatch
-  );
+  bindActionCreators({addNewUserBook}, dispatch);
 
 const AddNewBookForm = compose(
   withFirebase,

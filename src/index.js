@@ -24,6 +24,10 @@ import HistoryPage from './pages/HistoryPage';
 
 import './styling/style.scss';
 
+/* eslint-disable no-unused-vars */
+import library from './fa';
+/* eslint-enable-no-unused-vars */
+
 require('dotenv').config();
 
 const WithFooter = ({children}) => (

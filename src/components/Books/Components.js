@@ -2,7 +2,6 @@ import React from 'react';
 
 import steve from '../../images/stevejobs.jpg';
 
-import {faStar, faStarHalf} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const UserLabel = props => (
@@ -27,9 +26,9 @@ const RatingStars = props => {
   for (let i = rating; i > 0; i--)
     // If there is a half a star, append it
     if (i === 0.5) {
-      output.push(<FontAwesomeIcon icon={faStarHalf} color="#FFAC2D" />);
+      output.push(<FontAwesomeIcon key={i} icon="star-half" color="#FFAC2D" />);
     } else {
-      output.push(<FontAwesomeIcon icon={faStar} color="#FFAC2D" />);
+      output.push(<FontAwesomeIcon key={i} icon="star" color="#FFAC2D" />);
     }
   return <div className="rating-star">{output}</div>;
 };

@@ -4,7 +4,6 @@ import GoogleMap from '../components/GoogleMap/GoogleMap';
 import imageDummy from '../images/kafka.jpg';
 import userProfile from '../images/kafka.jpg';
 
-import {faStar, faStarHalf} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const getStars = rating => {
@@ -16,13 +15,12 @@ const getStars = rating => {
   for (let i = rating; i > 0; i--)
     // If there is a half a star, append it
     if (i === 0.5) {
-      output.push(<FontAwesomeIcon icon={faStarHalf} />);
+      output.push(<FontAwesomeIcon icon="star-half" />);
     } else {
-      output.push(<FontAwesomeIcon icon={faStar} />);
+      output.push(<FontAwesomeIcon icon="star" />);
     }
   return output;
 };
-
 
 const BookDetail = props => (
   <div className="book-details-container">
@@ -39,9 +37,9 @@ const BookDetail = props => (
         <GoogleMap />
       </div>
       <div className="distance">{props.distance} </div>
-      <div className ="user-info">
+      <div className="user-info">
         <img className="user-profile" src={props.userProfile} alt="" />
-        <div className="user-name">{props.userName}</div>  
+        <div className="user-name">{props.userName}</div>
       </div>
       <button className="btn-request"> Request </button>
     </div>

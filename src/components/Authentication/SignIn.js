@@ -11,7 +11,6 @@ import {formReducer, errorReducer} from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
 
-import {faFacebookF} from '@fortawesome/free-brands-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const ERROR_CODE_ACCOUNT_EXISTS =
@@ -63,7 +62,7 @@ const SignInFacebookBase = props => {
       <Button
         className="btn btn-auth btn-facebook"
         type="submit"
-        icon={<FontAwesomeIcon icon={faFacebookF} />}
+        icon={<FontAwesomeIcon icon="facebook-f" />}
         text="Sign in with Facebook"
       />
       {error.code ? (
