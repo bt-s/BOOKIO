@@ -77,3 +77,6 @@ tags
 .firebase
 .firebaserc
 firebase.json
+
+# Firebase function
+/functions/node_modules
