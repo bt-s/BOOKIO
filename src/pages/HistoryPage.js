@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {withFirebase} from '../components/Firebase';
 
 import Radio from '../components/Button/Radio';
 import {RequestMessage} from '../components/History/Components';
@@ -28,9 +29,29 @@ const fakeHistories = [
 
 const HistoryPage = props => {
   const [msgType, setMsgType] = useState('give');
-  const histories = fakeHistories; // This should be retrieved on page load
+  const [gotTransactions, setGotTransactions] = useState(false);
+  const [transactions, setTransactions] = useState([]);
+
+  // const histories = fakeHistories; // This should be retrieved on page load
+  console.log('got?', gotTransactions);
+
+  if (!gotTransactions) {
+    console.log('hhhhhhhhh');
+
+    props.firebase
+      .transactions()
+      .get()
+      .then(querySnapshot => {
+        const tmp = querySnapshot.docs.map(doc => doc.data());
+        console.log(tmp);
+        // 我得在这里 把missing 的info 加入到transactions中, 这些信息需要根据userid 去获取
+        setTransactions(tmp);
+        setGotTransactions(true);
+      });
+  }
+
   function getMsgOfType(type) {
-    return histories
+    return transactions
       .filter(msg => {
         return msg.type === msgType;
       })
@@ -85,4 +106,4 @@ const HistoryPage = props => {
   );
 };
 
-export default HistoryPage;
+export default withFirebase(HistoryPage);
