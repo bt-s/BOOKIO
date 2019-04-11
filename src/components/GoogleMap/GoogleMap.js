@@ -8,13 +8,14 @@ const LoadingContainer = props => <Loader />;
 
 export const MapContainer = props => {
   const style = {
-    width: '350px',
-    height: '420px'
+    width: '250px',
+    height: '350px',
   };
+
 
   const initialCoordinates = {
     lat: 59.3498,
-    lng: 18.0707
+    lng: 18.0707,
   };
 
   const locationName = 'KTH, Stockholm';
@@ -32,7 +33,7 @@ export const MapContainer = props => {
 
 const GoogleMap = GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-  LoadingContainer: LoadingContainer
+  LoadingContainer: LoadingContainer,
 })(MapContainer);
 
 export default GoogleMap;

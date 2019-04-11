@@ -124,11 +124,8 @@ class Firebase {
   // *** API ***
   user = uid => this.db.doc(`users/${uid}`);
   users = () => this.db.collection('users');
-
-  books = () => this.db.collection('books');
   book = uid => this.db.doc(`books/${uid}`);
-
-  transactions = () => this.db.collection('transactions');
+  books = () => this.db.collection('books');
 }
 
 export default Firebase;
