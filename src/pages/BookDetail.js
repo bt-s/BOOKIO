@@ -15,15 +15,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
+const book_id = '06FmAcLxlYVWn6Fmsfwu';
+
 const BookDetailComponent = props => {
   const [loading, setLoading] = useState(false);
-  const [books, setBooks] = useState([]);
+  const [book, setBooks] = useState([]);
   const [owner, setOwner] = useState([]);
-  var book_id = '4oSECEIzfEABHBRQOpqa';
 
   useEffect(() => {
     fetchBookInfo();
-    fetchOwnerInfo();
+    // fetchOwnerInfo();
   }, []);
 
   const fetchBookInfo = () => {
@@ -31,11 +32,12 @@ const BookDetailComponent = props => {
     var bookDetail = props.firebase.book(book_id);
     bookDetail
       .get()
-      .then(books => {
-        if (books.exists) {
+      .then(book => {
+        if (book.exists) {
           setLoading(false);
-          setBooks(books.data());
-          fetchOwnerInfo(books.data().owner);
+          setBooks(book.data());
+          fetchOwnerInfo(book.data().owner);
+          console.log('book data', book.data());
         } else {
           console.log('No such document!');
         }
@@ -55,6 +57,7 @@ const BookDetailComponent = props => {
         if (owner.exists) {
           setOwner(owner.data());
           setLoading(false);
+          console.log(owner.data(), 'owner data');
         } else {
           console.log('owner undefined');
         }
@@ -65,7 +68,7 @@ const BookDetailComponent = props => {
       });
   };
 
-  var loc = books.location;
+  var loc = book.location;
   var latitude;
   var longitude;
   if (loc !== undefined) {
@@ -78,53 +81,10 @@ const BookDetailComponent = props => {
 
   return (
     <div>
-      <BookDetail books={books} owner={owner} firebase={props.firebase} />
+      <BookDetail book={book} owner={owner} firebase={props.firebase} />
     </div>
   );
 };
-
-// function getLocation() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
-//   } else {
-//     alert('Geolocation is not supported by this browser.');
-//   }
-// }
-
-// function geoError() {
-//   alert('Geocoder failed.');
-// }
-
-// function geoSuccess(position) {
-//   var lat = position.coords.latitude;
-//   var lng = position.coords.longitude;
-//   console.log('lat:' + lat + ' lng:' + lng);
-//  // codeLatLng(lat, lng);
-// }
-
-// var geocoder;
-// function initialize() {
-//   geocoder = new google.maps.Geocoder();
-//   console.log(geocoder);
-// }
-
-// function codeLatLng(lat, lng) {
-//   var latlng = new google.maps.LatLng(lat, lng);
-//   geocoder.geocode({latLng: latlng}, function(results, status) {
-//     if (status == google.maps.GeocoderStatus.OK) {
-//       console.log(results);
-//       if (results[1]) {
-//         //formatted address
-//         var address = results[0].formatted_address;
-//         console.log('address = ' + address);
-//       } else {
-//         console.log('No results found');
-//       }
-//     } else {
-//       console.log('Geocoder failed due to: ' + status);
-//     }
-//   });
-// }
 
 const getStars = rating => {
   // Round to nearest half
@@ -142,37 +102,17 @@ const getStars = rating => {
   return output;
 };
 
-// const getBookLocation = () => {};
-
-// const getMyDistance = () => {
-//   var myDistance;
-//   return getBookLocation() - myDistance;
-// };
-
-// const  getLocation= ()=> {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(showPosition);
-//   } else {
-//    console.log("Geolocation is not supported by this browser.");
-//   }
-// }
-
-// const showPosition= (position) => {
-//   console.log('lat:'+position.coords.latitude + 'lo'+ position.coords.longitude)
-
-// }
-
-const BookDetail = ({books, owner, firebase}) => {
+const BookDetail = ({book, owner, firebase}) => {
   const requestBook = () => {
     firebase
       .transactions()
       .add({
-        providerID: 'fake provider', // id should be added
+        providerID: book.owner,
         consumerID: firebase.getMyUID(),
         status: 'ongoing',
         requestTime: new Date().getTime(),
-        itemID: 'fake item id', // item id should be added
-        type: 'lend'
+        itemID: book_id,
+        type: book.type
       })
       .then(() => {
         console.log('reqeust success');
@@ -186,32 +126,32 @@ const BookDetail = ({books, owner, firebase}) => {
       <div className="book-info-container">
         <div className="title">
           <div className="book-title">
-            {String(books.title).substring(20, 0)}...
+            {String(book.title).substring(20, 0)}...
           </div>
           <button className="book-type">
             {' '}
-            {String(books.type).toUpperCase()}
+            {String(book.type).toUpperCase()}
           </button>
         </div>
-        <div className="author">by {books.author}</div>
+        <div className="author">by {book.author}</div>
 
         <div id="goodreads-info">
           <div className="rating">
-            {getStars(books.rating)} {books.rating}
+            {getStars(book.rating)} {book.rating}
           </div>
         </div>
 
         <div className="book-info">
-          <img className="book-img" src={books.imageUrls} alt={books.title} />
+          <img className="book-img" src={book.imageUrls} alt={book.title} />
         </div>
         <div className="header-description">Description </div>
-        <div className="service-description">{books.description}</div>
+        <div className="service-description">{book.description}</div>
       </div>
       <div className="book-pickup-container">
         <div className="header-pickup">Pickup Information </div>
         <span className="location-to-pick">
           <FontAwesomeIcon icon={faMapPin} />
-          {'  ' + books.location}
+          {'  ' + book.location}
         </span>
 
         <div className="google-map-wrapper">
@@ -220,13 +160,13 @@ const BookDetail = ({books, owner, firebase}) => {
 
         <div className="distance">
           <FontAwesomeIcon icon={faLocationArrow} />
-          {'  ' + books.distance}
+          {'  ' + book.distance}
           {/* <i class ="fa fa-location-arrow" aria-hidden="true"></i> */}
         </div>
         <br />
         <br />
         <div className="user-info">
-          <img className="user-profile" src={books.userProfile} alt="" />
+          <img className="user-profile" src={book.userProfile} alt="" />
           <div className="user-name">{owner.username}</div>
         </div>
 
