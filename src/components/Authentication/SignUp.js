@@ -134,24 +134,6 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
-        {/* {error.phoneNumber && (
-          <span className="validation-error">{error.phoneNumber}</span>
-        )}
-
-        <Validator
-          name="phoneNumber"
-          value={form.phoneNumber}
-          validations={[ValidationHelper.required('Phone number is required')]}
-          onValidate={onValidate}>
-          <input
-            name="phoneNumber"
-            type="text"
-            placeholder="Phone Number"
-            value={form.phoneNumber}
-            onChange={handleChange}
-          />
-        </Validator> */}
-
         {error.passwordOne && (
           <span className="validation-error">{error.passwordOne}</span>
         )}
