@@ -1,4 +1,5 @@
-$auth-form-width: 250px;
+$auth-form-width: 350px;
+$auth-form-width-small: 250px;
 
 .auth-page {
   display: flex;
@@ -43,21 +44,30 @@ $auth-form-width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: $auth-form-width-small;
+  max-width: $auth-form-width-small;
+
+  @include media-breakpoint(sm){
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-width: $auth-form-width;
   max-width: $auth-form-width;
+  }
 
   .form-header {
-    text-transform: uppercase;
+    text-transform: titlecase;
     margin: 0;
     width: 100%;
+   
   }
 
   input {
     width: 100%;
     background: none;
     border: 1px solid $gray;
-    height: 35px;
-    border-radius: 2px;
+    height: 40px;
+    border-radius: 10px;
     padding: 0 $padding-sm;
     margin-bottom: $padding-xs;
 
@@ -75,10 +85,10 @@ $auth-form-width: 250px;
 .validation-error {
   color: $red-error;
   width: 100%;
-  text-align: right;
+  text-align: left;
   font-size: 12px;
-  margin-bottom: -46px;
-  padding-right: $padding-sm;
+  margin-bottom: -53px;
+  padding-left: $padding-xxs;
   padding-top: 32px;
 }
 
@@ -86,3 +96,5 @@ $auth-form-width: 250px;
   color: $red-error;
   font-size: 12px;
 }
+
+

@@ -64,7 +64,7 @@ const SignInFacebookBase = props => {
         className="btn btn-auth btn-facebook"
         type="submit"
         icon={<FontAwesomeIcon icon={faFacebookF} />}
-        text="Sign in with Facebook"
+        text="Log in with Facebook"
       />
       {error.code ? (
         <p className="form-submission-error">ERROR: {error.message}</p>

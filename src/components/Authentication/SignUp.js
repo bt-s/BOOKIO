@@ -11,7 +11,7 @@ import {
   formReducer,
   errorReducer,
   /*phoneNumberValidation,*/
-  numberValidation
+  numberValidation,
 } from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
@@ -19,22 +19,17 @@ import * as ROUTES from '../../constants/routes';
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
-  An account with this E-Mail address already exists.
-  Try to login with this account instead. If you think the
-  account is already used from one of the social logins, try
-  to sign-in with one of them. Afterward, associate your accounts
-  on your personal account page.
+  An account with this e-mail address already exists.
+  Try to login with this account instead.
 `;
 
 const SignUpFormBase = props => {
   const initialFormValues = () => ({
     username: '',
-    age: '',
     email: '',
     phoneNumber: '',
-    location: '',
     passwordOne: '',
-    passwordTwo: ''
+    passwordTwo: '',
   });
 
   const validationRef = useRef(null);
@@ -45,7 +40,7 @@ const SignUpFormBase = props => {
   const handleChange = e => {
     dispatchForm({
       name: e.target.name,
-      value: e.target.value
+      value: e.target.value,
     });
   };
 
@@ -64,27 +59,22 @@ const SignUpFormBase = props => {
         .then(authUser => {
           authUser.user.updateProfile({
             displayName: form.username,
-            photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT
+            photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT,
           });
           return props.firebase.user(authUser.user.uid).set(
             {
               username: form.username,
-              age: form.age,
               email: form.email,
-
               phoneNumber: form.phoneNumber,
-              location: form.location,
-              roles
+              roles,
             },
             {merge: true}
           );
         })
         .then(authUser => {
           form.username = '';
-          form.age = '';
           form.email = '';
           form.phoneNumber = '';
-          form.location = '';
           form.passwordOne = '';
           form.passwordTwo = '';
           props.history.push(ROUTES.ACCOUNT);
@@ -113,9 +103,7 @@ const SignUpFormBase = props => {
         {error.username && (
           <span className="validation-error">{error.username}</span>
         )}
-        <label htmlFor="" className="form-header">
-          Full name
-        </label>
+
         <Validator
           name="username"
           value={form.username}
@@ -124,35 +112,15 @@ const SignUpFormBase = props => {
           <input
             name="username"
             type="text"
-            placeholder=""
+            size="30"
+            placeholder="Full Name"
             value={form.username}
             onChange={handleChange}
           />
         </Validator>
-        {error.age && <span className="validation-error">{error.age}</span>}
-        <label htmlFor="" className="form-header">
-          Age
-        </label>
-        <Validator
-          name="age"
-          value={form.age}
-          validations={[
-            ValidationHelper.required('Age is required'),
-            numberValidation
-          ]}
-          onValidate={onValidate}>
-          <input
-            name="age"
-            type="text"
-            placeholder=""
-            value={form.age}
-            onChange={handleChange}
-          />
-        </Validator>
+
         {error.email && <span className="validation-error">{error.email}</span>}
-        <label htmlFor="" className="form-header">
-          Email
-        </label>
+
         <Validator
           name="email"
           value={form.email}
@@ -161,7 +129,7 @@ const SignUpFormBase = props => {
           <input
             name="email"
             type="text"
-            placeholder=""
+            placeholder="E-mail"
             value={form.email}
             onChange={handleChange}
           />
@@ -169,9 +137,7 @@ const SignUpFormBase = props => {
         {error.phoneNumber && (
           <span className="validation-error">{error.phoneNumber}</span>
         )}
-        <label htmlFor="" className="form-header">
-          Phone number
-        </label>
+
         <Validator
           name="phoneNumber"
           value={form.phoneNumber}
@@ -180,38 +146,16 @@ const SignUpFormBase = props => {
           <input
             name="phoneNumber"
             type="text"
-            placeholder=""
+            placeholder="Phone Number"
             value={form.phoneNumber}
             onChange={handleChange}
           />
         </Validator>
 
-        {/* Use Google Maps API to find location */}
-        {error.location && (
-          <span className="validation-error">{error.location}</span>
-        )}
-        <label htmlFor="" className="form-header">
-          Location
-        </label>
-        <Validator
-          name="location"
-          value={form.location}
-          validations={[ValidationHelper.required('Location is required')]}
-          onValidate={onValidate}>
-          <input
-            name="location"
-            type="text"
-            placeholder=""
-            value={form.location}
-            onChange={handleChange}
-          />
-        </Validator>
         {error.passwordOne && (
           <span className="validation-error">{error.passwordOne}</span>
         )}
-        <label htmlFor="" className="form-header">
-          Password
-        </label>
+
         <Validator
           name="passwordOne"
           value={form.passwordOne}
@@ -220,7 +164,7 @@ const SignUpFormBase = props => {
           <input
             name="passwordOne"
             type="password"
-            placeholder=""
+            placeholder="Password"
             value={form.passwordOne}
             onChange={handleChange}
           />
@@ -228,25 +172,24 @@ const SignUpFormBase = props => {
         {error.passwordTwo && (
           <span className="validation-error">{error.passwordTwo}</span>
         )}
-        <label htmlFor="" className="form-header">
-          Confirm password
-        </label>
+
         <Validator
           name="passwordTwo"
           value={form.passwordTwo}
           validations={[
-            ValidationHelper.required('Password confirmation is required')
+            ValidationHelper.required('Password confirmation is required'),
           ]}
           onValidate={onValidate}>
           <input
             name="passwordTwo"
             type="password"
-            placeholder=""
+            placeholder="Confirm Password"
             value={form.passwordTwo}
             onChange={handleChange}
           />
         </Validator>
-        <Button className="btn btn-auth" type="submit" text="Sign up" />
+
+        <Button className="btn btn-auth" type="submit" text="Register" />
         {error.code ? (
           <p className="form-submission-error">ERROR: {error.message}</p>
         ) : (
@@ -259,18 +202,18 @@ const SignUpFormBase = props => {
 
 SignUpFormBase.propTypes = {
   firebase: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 const SignUpLink = () => (
   <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+    Don't have an account? <Link to={ROUTES.SIGN_UP}>Register</Link>
   </p>
 );
 
 const SignInLink = () => (
   <p>
-    Have an account? <Link to={ROUTES.LOG_IN}>Sign in here</Link>
+    Have an account? <Link to={ROUTES.LOG_IN}>Login here</Link>
   </p>
 );
 
