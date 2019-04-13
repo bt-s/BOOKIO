@@ -11,7 +11,7 @@ import {
   formReducer,
   errorReducer,
   /*phoneNumberValidation,*/
-  numberValidation,
+  numberValidation
 } from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
@@ -28,8 +28,9 @@ const SignUpFormBase = props => {
     username: '',
     email: '',
     // phoneNumber: '',
+    location: '',
     passwordOne: '',
-    passwordTwo: '',
+    passwordTwo: ''
   });
 
   const validationRef = useRef(null);
@@ -40,7 +41,7 @@ const SignUpFormBase = props => {
   const handleChange = e => {
     dispatchForm({
       name: e.target.name,
-      value: e.target.value,
+      value: e.target.value
     });
   };
 
@@ -59,14 +60,15 @@ const SignUpFormBase = props => {
         .then(authUser => {
           authUser.user.updateProfile({
             displayName: form.username,
-            photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT,
+            photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT
           });
           return props.firebase.user(authUser.user.uid).set(
             {
               username: form.username,
               email: form.email,
+              location: form.location,
               // phoneNumber: form.Number,
-              roles,
+              roles
             },
             {merge: true}
           );
@@ -75,6 +77,7 @@ const SignUpFormBase = props => {
           form.username = '';
           form.email = '';
           // form.phoneNumber = '';
+          form.location = '';
           form.passwordOne = '';
           form.passwordTwo = '';
           props.history.push(ROUTES.ACCOUNT);
@@ -134,6 +137,24 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
+
+        {/* Use Google Maps API to find location */}
+        {error.location && (
+          <span className="validation-error">{error.location}</span>
+        )}
+        <Validator
+          name="location"
+          value={form.location}
+          validations={[ValidationHelper.required('Location is required')]}
+          onValidate={onValidate}>
+          <input
+            name="location"
+            type="text"
+            placeholder="Location"
+            value={form.location}
+            onChange={handleChange}
+          />
+        </Validator>
         {error.passwordOne && (
           <span className="validation-error">{error.passwordOne}</span>
         )}
@@ -158,9 +179,7 @@ const SignUpFormBase = props => {
         <Validator
           name="passwordTwo"
           value={form.passwordTwo}
-          validations={[
-            ValidationHelper.required('Password confirmation is required'),
-          ]}
+          validations={[ValidationHelper.required('Confirmation is required')]}
           onValidate={onValidate}>
           <input
             name="passwordTwo"
@@ -184,7 +203,7 @@ const SignUpFormBase = props => {
 
 SignUpFormBase.propTypes = {
   firebase: PropTypes.object,
-  history: PropTypes.object,
+  history: PropTypes.object
 };
 
 const SignUpLink = () => (

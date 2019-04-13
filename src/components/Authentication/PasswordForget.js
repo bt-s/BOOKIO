@@ -25,7 +25,6 @@ const PasswordForgetFormBase = props => {
       });
 
     e.preventDefault();
-    console.log(e);
   };
 
   const onChange = e => {
@@ -49,7 +48,6 @@ const PasswordForgetFormBase = props => {
         onChange={onChange}
         value={email}
       />
-      <br />
       <Button
         className="btn btn-auth"
         disabled={isInvalid}
@@ -64,7 +62,7 @@ const PasswordForgetFormBase = props => {
 };
 
 PasswordForgetFormBase.propTypes = {
-  firebase: PropTypes.object,
+  firebase: PropTypes.object
 };
 
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
@@ -76,7 +74,7 @@ const PasswordForgetLink = props => (
 );
 
 PasswordForgetLink.propTypes = {
-  styling: PropTypes.string,
+  styling: PropTypes.string
 };
 
 export {PasswordForgetForm, PasswordForgetLink};
