@@ -1,9 +1,9 @@
 .user-information {
-  max-width: 500px;
+  max-width: fit-content;
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
-  margin: 50px 0 100px;
+  margin: 50px 0 50px;
 }
 
 .username-container {

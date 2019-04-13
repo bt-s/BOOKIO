@@ -20,13 +20,14 @@ import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 const AccountPage = props => {
   return (
     <div className="account-page">
-      <div className="user-information">
+    <h1>Profile</h1>
+      <div className="user-information">  
         <Avatar avatarURL={props.authUser.photoURL} />
         <div className="username-container">
           <span className="username-age">
-            {props.authUser.username}, {props.authUser.age} years old
+            {props.authUser.username}
           </span>
-          <span className="location">{props.authUser.location}</span>
+          <span className="location">{props.authUser.email}</span>
         </div>
         <div className="user-info-container">
           <span className="info-item">
@@ -39,7 +40,9 @@ const AccountPage = props => {
           </span>
         </div>
       </div>
+      <h1>Change Password</h1>
       <PasswordChangeForm />
+      <h1>Settings</h1>
       <LoginManagement authUser={props.authUser} />
       <DeleteAccount />
     </div>

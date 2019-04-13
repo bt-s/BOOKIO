@@ -57,9 +57,9 @@ const PasswordChangeForm = props => {
         value={form.passwordTwo}
         onChange={handleChange}
       />
-
+      <br/>
       {error.code ? <p>{error.message}</p> : ''}
-      <Button type="submit" onClick={onSubmit} text="Update my password" />
+      <Button type="submit" onClick={onSubmit} text="Update My Password" />
     </form>
   );
 };
