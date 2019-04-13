@@ -2,13 +2,6 @@ import React, {useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {
-  faUser,
-  faBook,
-  faBars,
-  faTimes
-} from '@fortawesome/free-solid-svg-icons';
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
@@ -21,7 +14,7 @@ import SignOut from '../Authentication/SignOut';
 
 const bookShelfLink = (
   <Link to={ROUTES.MY_BOOK_HISTORY} className="navbar-bookshelves">
-    <FontAwesomeIcon icon={faBook} />
+    <FontAwesomeIcon icon="book" />
   </Link>
 );
 
@@ -30,7 +23,7 @@ const accountMenuList = [
     id: 0,
     title: (
       <Link to={ROUTES.ACCOUNT}>
-        <FontAwesomeIcon icon={faUser} />
+        <FontAwesomeIcon icon="user" />
         My profile
       </Link>
     ),
@@ -66,7 +59,7 @@ const accountMenuList = [
 const accountMenu = (
   <Dropdown
     classes="navbar-account"
-    headerObject={<FontAwesomeIcon icon={faUser} />}
+    headerObject={<FontAwesomeIcon icon="user" />}
     items={accountMenuList}
     defaultShowMenu={false}
   />
@@ -126,8 +119,8 @@ const Navbar = props => {
       onClick={onMenuToggle}
       icon={
         <React.Fragment>
-          <FontAwesomeIcon icon={faBars} />
-          <FontAwesomeIcon icon={faTimes} />
+          <FontAwesomeIcon icon="bars" />
+          <FontAwesomeIcon icon="times" />
         </React.Fragment>
       }
     />
