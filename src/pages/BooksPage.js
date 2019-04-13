@@ -70,7 +70,11 @@ const BooksPage = props => {
           Add Book
         </Link>
       </div>
-      {!_.isEmpty(props.books) ? <SearchResults /> : <Loader />}
+      {!_.isEmpty(props.books) ? (
+        <SearchResults books={props.books} />
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 };

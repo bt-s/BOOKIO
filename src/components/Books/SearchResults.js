@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {connect} from 'react-redux';
-import {storeBooks} from '../../redux/actions/storeBooks';
-
 import {BookItem} from '../../components/BookItem/BookItem';
 
 const SearchResults = props => (
@@ -26,19 +23,7 @@ const SearchResults = props => (
 );
 
 SearchResults.propTypes = {
-  books: PropTypes.array,
-  storeBooks: PropTypes.func
+  books: PropTypes.array
 };
 
-const mapStateToProps = state => ({
-  books: state.booksState.books
-});
-
-const mapDispatchToProps = dispatch => ({
-  storeBooks: books => dispatch(storeBooks(books))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchResults);
+export default SearchResults;
