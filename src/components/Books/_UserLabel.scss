@@ -23,25 +23,3 @@
     padding: 5px 5px 5px 0;
   }
 }
-
-.item-address {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 100%;
-  font-size: 15px;
-  padding: 0 8px 0 8px;
-  > span:first-child {
-    max-width: 35%;
-  }
-  .separator {
-    max-width: 30px;
-    margin: 0 7px 0 7px;
-  }
-  > span:last-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 60%;
-  }
-}

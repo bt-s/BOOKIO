@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import reactJPG from '../../images/fullstackreact.jpg';
 
-import {UserLabel} from '../Books/Components';
+import UserLabel from '../Books/UserLabel';
 
 const ItemInfo = props => {
   return (

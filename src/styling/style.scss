@@ -9,7 +9,8 @@
 @import '../components/Authentication/Authentication';
 @import '../components/Autocomplete/Autocomplete';
 @import '../components/BookItem/BookItem';
-@import '../components/Books/Components';
+@import '../components/Books/UserLabel';
+@import '../components/Books/SearchResults';
 @import '../components/History/Components';
 @import '../components/Button/Button';
 @import '../components/Button/Radio';
@@ -19,6 +20,7 @@
 @import '../components/GoogleMap/GoogleMap';
 @import '../components/Loader/Loader';
 @import '../components/Navbar/Navbar';
+@import '../components/Search/Search';
 @import '../components/PasswordChange/PasswordChange';
 @import '../components/BookDetail/BookDetail';
 @import '../components/Authentication/PasswordForget';
@@ -26,8 +28,8 @@
 @import '../components/Authentication/SignUp';
 @import '../components/Authentication/SignOut';
 @import '../components/Session/Session';
-// import pages after components
 @import '../pages/AddNewBookPage';
+
 @import '../pages/BooksPage';
 @import '../pages/HistoryPage';
 @import '../pages/HomePage';
