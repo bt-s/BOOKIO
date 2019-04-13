@@ -10,7 +10,7 @@
   height: 350px;
   transition: all 0.2s ease-in-out;
 
-  @include breakpoint(sm) {
+  @include media-breakpoint(sm) {
     max-width: 250px;
   }
 
