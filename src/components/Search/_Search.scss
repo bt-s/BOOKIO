@@ -1,0 +1,34 @@
+.search-container {
+  display: none;
+
+  @include media-breakpoint(sm) {
+    display: flex;
+    flex: 1 0 auto;
+    max-width: 300px;
+    margin-right: auto;
+    margin-left: 60px;
+    background-color: $white;
+    height: 30px;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    border-radius: $border-radius;
+    font-size: 10px;
+  }
+
+  @include media-breakpoint(md) {
+    max-width: 400px;
+  }
+
+  input {
+    border: none;
+    padding: 0;
+  }
+
+  svg {
+    height: 13px;
+    width: 13px !important;
+    margin-right: $padding-xxs;
+    color: $black;
+  }
+}
