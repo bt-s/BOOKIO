@@ -8,7 +8,7 @@ import {RatingStars} from '../Books/Components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const BookItem = props => (
-  <Link to={ROUTES.BOOK_DETAIL}>
+  <Link to={'/detail/' + props.bookId}>
     <div className="book-item-header">
       <h3 className="book-item-title">{props.bookTitle}</h3>
       <h3 className="book-item-author">{props.authorName}</h3>

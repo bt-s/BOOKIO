@@ -118,7 +118,7 @@ const BookDetail = ({book, owner, firebase, bookId}) => {
         </div>
         <div className="owner-field">
           <span>Provided by:</span>
-          <UserLabel avatarURL={owner.photoURL} userName={owner.username} />
+          <UserLabel avatarURL={owner.avatar} userName={owner.owner} />
         </div>
       </div>
     </div>

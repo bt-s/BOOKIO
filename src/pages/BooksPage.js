@@ -41,6 +41,8 @@ const SearchResult = props => {
 
   let results;
   if (props.borrowFilter && props.haveFilter) {
+    console.log('aaaaaaa', props.results[0]);
+
     results = props.results;
   } else if (props.borrowFilter) {
     results = booksFilter('to borrow');
@@ -51,28 +53,27 @@ const SearchResult = props => {
   }
 
   return (
-    <React.Fragment>
-      <div className="search-result">
-        {results.map((book, ix) => (
-          <div key={ix} className="book-item-container">
-            <BookItem
-              bookImgSrc={book.imageUrls ? book.imageUrls[0] : book.imageSource}
-              bookTitle={book.title}
-              bookDescription={book.description}
-              type={book.type}
-              userAvatar={book.avatar}
-              userName={book.owner}
-              authorName={book.author}
-              locationDistance={book.locationDistance}
-            />
-          </div>
-        ))}
-        <div className="filling-empty-space-childs" />
-        <div className="filling-empty-space-childs" />
-        <div className="filling-empty-space-childs" />
-        <div className="filling-empty-space-childs" />
-      </div>
-    </React.Fragment>
+    <div className="search-result">
+      {results.map((book, ix) => (
+        <div key={ix} className="book-item-container">
+          <BookItem
+            bookId={book.id}
+            bookImgSrc={book.imageUrls ? book.imageUrls[0] : book.imageSource}
+            bookTitle={book.title}
+            bookDescription={book.description}
+            type={book.type}
+            userAvatar={book.avatar}
+            userName={book.owner}
+            authorName={book.author}
+            locationDistance={book.locationDistance}
+          />
+        </div>
+      ))}
+      <div className="filling-empty-space-childs" />
+      <div className="filling-empty-space-childs" />
+      <div className="filling-empty-space-childs" />
+      <div className="filling-empty-space-childs" />
+    </div>
   );
 };
 
