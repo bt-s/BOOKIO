@@ -34,7 +34,6 @@ ItemInfo.defaultProps = {
 };
 
 const RequestMessage = props => {
-  const [id, setId] = useState(props.message.id);
   const [showOperation, setShowOperation] = useState(
     props.message.status === 'ongoing'
   );
@@ -60,11 +59,9 @@ const RequestMessage = props => {
       <div className="msg-body">
         <ItemInfo
           imgURL={
-            props.message.book
-              ? props.message.book.imageUrls.length > 0
-                ? props.message.book.imageUrls[0]
-                : null
-              : null
+            props.message.book &&
+            props.message.book.imageUrls.length > 0 &&
+            props.message.book.imageUrls[0]
           }
           title={props.message.book.title}
           status={status}

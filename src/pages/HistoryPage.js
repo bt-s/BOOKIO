@@ -4,36 +4,10 @@ import {withFirebase} from '../components/Firebase';
 import Radio from '../components/Button/Radio';
 import {RequestMessage} from '../components/History/Components';
 
-const fakeHistories = [
-  {
-    id: 'LDKGJ3OIEIODEWUIHD78^D876',
-    type: 'lend',
-    title: 'Little Prince',
-    status: 'Waiting for response',
-    time: '11 Mar. 2019, 14:22',
-    involvedUser: {
-      userName: 'King Kung'
-    }
-  },
-  {
-    id: '3o3OIEIODEWUIHD78^D876',
-    type: 'lend',
-    title: 'The Great Gatsby',
-    status: 'Waiting for response',
-    time: '11 Mar. 2019, 14:22',
-    involvedUser: {
-      userName: 'Steve'
-    }
-  }
-];
-
 const HistoryPage = props => {
   const [msgType, setMsgType] = useState('give');
   const [gotTransactions, setGotTransactions] = useState(false);
   const [transactions, setTransactions] = useState([]);
-
-  // const histories = fakeHistories; // This should be retrieved on page load
-  console.log('got?', gotTransactions);
 
   if (!gotTransactions) {
     props.firebase
@@ -51,23 +25,13 @@ const HistoryPage = props => {
                 : transac.providerID
             )
             .get()
-            .then(user => {
-              if (user.exists) {
-                transac.involvedUser = user.data();
-              } else {
-                transac.involvedUser = false;
-              }
-            });
+            .then(
+              user => (transac.involvedUser = user.exists ? user.data() : false)
+            );
           props.firebase
             .book(transac.itemID)
             .get()
-            .then(book => {
-              if (book.exists) {
-                transac.book = book.data();
-              } else {
-                transac.book = false;
-              }
-            });
+            .then(book => (transac.book = book.exists ? book.data() : false));
         });
         console.log('missing data added', transacs);
 
@@ -82,22 +46,18 @@ const HistoryPage = props => {
       .filter(msg => {
         return msg.type === msgType;
       })
-      .map((msg, index) => {
-        console.log('in map,=', msg);
-
-        return (
-          <RequestMessage
-            message={msg}
-            key={'req_msg' + index}
-            declineCallback={() => {
-              props.firebase.transaction(msg.id).update({status: 'declined'});
-            }}
-            acceptCallback={() => {
-              props.firebase.transaction(msg.id).update({status: 'accpeted'});
-            }}
-          />
-        );
-      });
+      .map((msg, index) => (
+        <RequestMessage
+          message={msg}
+          key={'req_msg' + index}
+          declineCallback={() => {
+            props.firebase.transaction(msg.id).update({status: 'declined'});
+          }}
+          acceptCallback={() => {
+            props.firebase.transaction(msg.id).update({status: 'accpeted'});
+          }}
+        />
+      ));
   }
 
   return (
