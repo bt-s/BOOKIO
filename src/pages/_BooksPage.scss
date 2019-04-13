@@ -25,14 +25,14 @@
   background-color: $black;
 }
 
-$grid-offset-2-cls: 120px;
-$grid-offset-3-cls: 85px;
+$grid-offset-2-cls: 35px;
+$grid-offset-3-cls: 35px;
 $grid-offset-4-cls: 35px;
 
 .search-result {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
 
   @include media-breakpoint(sm) {
