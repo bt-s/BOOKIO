@@ -42,20 +42,18 @@ const PasswordChangeForm = props => {
   return isReset ? (
     <p>Your password has been reset.</p>
   ) : (
-    <form onSubmit={onSubmit}>
-      <label className="form-header">New password</label>
+    <form onSubmit={onSubmit} className="auth-form">
       <input
         name="passwordOne"
         type="password"
-        placeholder=""
+        placeholder="New Password"
         value={form.passwordOne}
         onChange={handleChange}
       />
-      <label className="form-header">Confirm new password</label>
       <input
         name="passwordTwo"
         type="password"
-        placeholder=""
+        placeholder="Confirm New Password"
         value={form.passwordTwo}
         onChange={handleChange}
       />
