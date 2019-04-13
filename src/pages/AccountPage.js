@@ -29,16 +29,7 @@ const AccountPage = props => {
           </span>
           <span className="location">{props.authUser.email}</span>
         </div>
-        <div className="user-info-container">
-          <span className="info-item">
-            <FontAwesomeIcon icon={faPhone} />
-            {props.authUser.phoneNumber}
-          </span>
-          <span className="info-item">
-            <FontAwesomeIcon icon={faEnvelope} />
-            {props.authUser.email}
-          </span>
-        </div>
+    
       </div>
       <h1>Change Password</h1>
       <PasswordChangeForm />
