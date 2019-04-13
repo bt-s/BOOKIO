@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
-import {RatingStars} from '../Books/Components';
+import RatingStars from '../Books/RatingStars';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 

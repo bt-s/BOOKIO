@@ -9,12 +9,17 @@
   max-height: 400px;
   height: 350px;
   max-width: 250px;
+  transition: all 0.2s ease-in-out;
 
   a {
     display: flex;
     flex-direction: column;
     text-decoration: none;
     height: 100%;
+  }
+
+  &:hover {
+    transform: scale(1.015, 1.015) translateY(-1px);
   }
 }
 
