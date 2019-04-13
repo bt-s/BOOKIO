@@ -109,7 +109,7 @@ const BookDetail = ({book, owner, firebase}) => {
       .add({
         providerID: book.owner,
         consumerID: firebase.getMyUID(),
-        status: 'ongoing',
+        status: 'Ongoing',
         requestTime: new Date().getTime(),
         itemID: book_id,
         type: book.type

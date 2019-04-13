@@ -36,14 +36,13 @@ const HistoryPage = props => {
   console.log('got?', gotTransactions);
 
   if (!gotTransactions) {
-    console.log('hhhhhhhhh');
-
     props.firebase
       .transactions()
       .get()
       .then(querySnapshot => {
-        const transacs = querySnapshot.docs.map(doc => doc.data());
-        console.log(transacs);
+        const transacs = querySnapshot.docs.map(doc => {
+          return {id: doc.id, ...doc.data()};
+        });
         transacs.forEach(transac => {
           props.firebase
             .user(
@@ -53,8 +52,6 @@ const HistoryPage = props => {
             )
             .get()
             .then(user => {
-              console.log('uusseerr', user);
-
               if (user.exists) {
                 transac.involvedUser = user.data();
               } else {
@@ -72,6 +69,8 @@ const HistoryPage = props => {
               }
             });
         });
+        console.log('missing data added', transacs);
+
         // 我得在这里 把missing 的info 加入到transactions中, 这些信息需要根据userid 去获取
         setTransactions(transacs);
         setGotTransactions(true);
@@ -83,12 +82,29 @@ const HistoryPage = props => {
       .filter(msg => {
         return msg.type === msgType;
       })
-      .map(msg => <RequestMessage message={msg} key={msg.id} />);
+      .map((msg, index) => {
+        console.log('in map,=', msg);
+
+        return (
+          <RequestMessage
+            message={msg}
+            key={'req_msg' + index}
+            declineCallback={() => {
+              props.firebase.transaction(msg.id).update({status: 'declined'});
+            }}
+            acceptCallback={() => {
+              props.firebase.transaction(msg.id).update({status: 'accpeted'});
+            }}
+          />
+        );
+      });
   }
+
   return (
     <div className="history-page">
       <div className="filters">
         <Radio
+          key="lend"
           id="lend"
           name="history-type"
           value="lend"
@@ -100,6 +116,7 @@ const HistoryPage = props => {
         />
         <Radio
           id="give"
+          key="give"
           name="history-type"
           value="give"
           label="Giving"
@@ -110,6 +127,7 @@ const HistoryPage = props => {
         />
         <Radio
           id="borrow"
+          key="borrow"
           name="history-type"
           value="borrow"
           label="Borrowing"
@@ -120,6 +138,7 @@ const HistoryPage = props => {
         />
         <Radio
           id="get"
+          key="get"
           name="history-type"
           value="get"
           label="Getting"
@@ -129,7 +148,9 @@ const HistoryPage = props => {
           }}
         />
       </div>
-      <div className="msg-container">{getMsgOfType(msgType)}</div>
+      {gotTransactions && (
+        <div className="msg-container">{getMsgOfType(msgType)}</div>
+      )}
     </div>
   );
 };

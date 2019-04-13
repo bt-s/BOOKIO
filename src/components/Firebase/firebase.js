@@ -139,7 +139,7 @@ class Firebase {
   users = () => this.db.collection('users');
   book = uid => this.db.doc(`books/${uid}`);
   books = () => this.db.collection('books');
-
+  transaction = id => this.db.doc(`transactions/${id}`);
   transactions = () => this.db.collection('transactions');
 }
 

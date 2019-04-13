@@ -29,25 +29,50 @@ ItemInfo.propTypes = {
 ItemInfo.defaultProps = {
   imgURL: reactJPG,
   title: 'The Great Gatsby',
-  status: 'Requesting',
-  supplement: 'Duration: 1-23 Mar. 2019'
+  status: 'Requesting'
+  // supplement: 'Duration: 1-23 Mar. 2019'
 };
 
 const RequestMessage = props => {
   const [id, setId] = useState(props.message.id);
+  const [showOperation, setShowOperation] = useState(
+    props.message.status === 'ongoing'
+  );
+  const [status, setStatus] = useState(props.message.status);
+  const {createdAt} = props.message.stuff
+    ? props.message.stuff
+    : {createdAt: '1970-01-01'};
+
   return (
     <div className="request-msg">
-      <div className="msg-time">{props.message.time}</div>
+      <div className="msg-time">
+        {createdAt
+          ? [new Date(createdAt)].map(
+              date =>
+                date.toDateString().substr(4) +
+                ', ' +
+                date.getHours() +
+                ':' +
+                date.getMinutes()
+            )[0]
+          : null}
+      </div>
       <div className="msg-body">
         <ItemInfo
-          imgURL={props.message.imgURL}
-          title={props.message.title}
-          status={props.message.status}
+          imgURL={
+            props.message.stuff
+              ? props.message.stuff.imageUrls.length > 0
+                ? props.message.stuff.imageUrls[0]
+                : null
+              : null
+          }
+          title={props.message.stuff.title}
+          status={status}
           supplement={props.message.supplement}
         />
         <div className="people-and-operation">
           <div className="type-and-people">
-            <div className="type">{props.message.stuff.type || 'TYEP'}</div>
+            {/* <div className="type">{props.message.stuff.type}</div> */}
             <Link to="/account" className="user-container">
               <UserLabel
                 userName={props.message.involvedUser.username}
@@ -56,22 +81,32 @@ const RequestMessage = props => {
               />
             </Link>
           </div>
-          <div className="operation">
-            <button
-              className="btn decline"
-              onClick={() =>
-                props.declineCallback ? props.declineFunction(id) : null
-              }>
-              Decline
-            </button>
-            <button
-              className="btn accept"
-              onClick={() =>
-                props.acceptCallback ? props.acceptCallback(id) : null
-              }>
-              Accept
-            </button>
-          </div>
+          {showOperation && (
+            <div className="operation">
+              <button
+                className="btn decline"
+                onClick={() => {
+                  if (props.declineCallback) {
+                    props.declineCallback();
+                    setStatus('Declined');
+                    setShowOperation(false);
+                  }
+                }}>
+                Decline
+              </button>
+              <button
+                className="btn accept"
+                onClick={() => {
+                  if (props.acceptCallback) {
+                    props.acceptCallback();
+                    setStatus('Accepted');
+                    setShowOperation(false);
+                  }
+                }}>
+                Accept
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <div className="msg-cut-off-line" />

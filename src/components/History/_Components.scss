@@ -5,7 +5,9 @@
   > img {
     display: flex;
     flex: 5;
-    background: green;
+    margin: 0px 20px 10px;
+    object-fit: cover;
+    border-radius: 4px;
     width: 40%;
     max-height: 100%;
     object-fit: contain;
@@ -19,7 +21,6 @@
       flex-direction: column;
     }
     flex: 9;
-    background: red;
     > .title-and-status {
       .title {
         font-weight: bold;
@@ -30,18 +31,20 @@
 }
 
 .request-msg {
+  border-radius: 7px;
   background: $white-dim;
   margin-top: 20px;
   .msg-time {
-    padding: 5px 0 5px;
+    padding: 5px 0px 5px;
+    border-bottom: 1px solid $gray-line;
+    margin: 0px 20px 10px 20px;
   }
   .msg-body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background: blue;
     @include media-breakpoint(sm) {
-      > :first-child {
+      .item-info {
         flex: 3;
       }
       .people-and-operation {
@@ -53,11 +56,13 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
-      background: yellow;
       .type-and-people {
         margin-bottom: 15px;
         > .type {
           margin-bottom: 5px;
+        }
+        > .user-container {
+          text-decoration: none;
         }
       }
       .operation {
@@ -67,13 +72,10 @@
         .btn {
           border-width: 2px;
           margin-right: 20px;
-          border-radius: 15px;
+          border-radius: 30px;
           height: 35px;
         }
       }
-    }
-    @include media-breakpoint(sm) {
-      margin-left: 20px;
     }
     @include smaller-than(sm) {
       flex-direction: column;
