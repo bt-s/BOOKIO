@@ -4,16 +4,8 @@ import GoogleMap from '../components/GoogleMap/GoogleMap';
 import {withFirebase} from '../components/Firebase';
 import imageDummy from '../images/kafka.jpg';
 import userProfile from '../images/kafka.jpg';
-import {Link} from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
-import {GoogleApiWrapper} from 'google-maps-react';
-import {
-  faStar,
-  faStarHalf,
-  faLocationArrow,
-  faMapPin
-} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {UserLabel} from '../components/Books/Components';
 
 const book_id = 'niK1Q2TzWqffiZVj1YrA';
 
@@ -95,14 +87,14 @@ const getStars = rating => {
   for (let i = rating; i > 0; i--)
     // If there is a half a star, append it
     if (i === 0.5) {
-      output.push(<FontAwesomeIcon icon={faStarHalf} color="#e99407" />);
+      output.push(<FontAwesomeIcon icon="star-half" />);
     } else {
-      output.push(<FontAwesomeIcon icon={faStar} color="#e99407" />);
+      output.push(<FontAwesomeIcon icon="star" />);
     }
   return output;
 };
 
-const BookDetail = ({book, owner, firebase}) => {
+const BookDetail = ({book, owner, firebase, distance}) => {
   const requestBook = () => {
     firebase
       .transactions()
@@ -124,55 +116,23 @@ const BookDetail = ({book, owner, firebase}) => {
   return (
     <div className="book-details-container">
       <div className="book-info-container">
-        <div className="title">
-          <div className="book-title">
-            {String(book.title).substring(20, 0)}...
-          </div>
-          <button className="book-type">
-            {' '}
-            {String(book.type).toUpperCase()}
-          </button>
-        </div>
+        <div className="book-title">{book.title}</div>
         <div className="author">by {book.author}</div>
-
-        <div id="goodreads-info">
-          <div className="rating">
-            {getStars(book.rating)} {book.rating}
-          </div>
-        </div>
-
-        <div className="book-info">
-          <img className="book-img" src={book.imageUrls} alt={book.title} />
-        </div>
+        <img className="book-img" src={book.imageUrls} alt={book.title} />
+        <div className="rating">{getStars(book.rating)} </div>
         <div className="header-description">Description </div>
         <div className="service-description">{book.description}</div>
       </div>
       <div className="book-pickup-container">
-        <div className="header-pickup">Pickup Information </div>
-        <span className="location-to-pick">
-          <FontAwesomeIcon icon={faMapPin} />
-          {'  ' + book.location}
-        </span>
-
+        <div className="header-pickup">Pickup Location </div>
         <div className="google-map-wrapper">
           <GoogleMap />
         </div>
-
-        <div className="distance">
-          <FontAwesomeIcon icon={faLocationArrow} />
-          {'  ' + book.distance}
-          {/* <i class ="fa fa-location-arrow" aria-hidden="true"></i> */}
+        <div className="distance">{distance} </div>
+        <div className="owner-field">
+          <span>Provided by:</span>
+          <UserLabel avatarURL={owner.photoURL} userName={owner.username} />
         </div>
-        <br />
-        <br />
-        <div className="user-info">
-          <img className="user-profile" src={book.userProfile} alt="" />
-          <div className="user-name">{owner.username}</div>
-        </div>
-
-        <button className="btn-request btn" onClick={requestBook}>
-          Request
-        </button>
       </div>
     </div>
   );

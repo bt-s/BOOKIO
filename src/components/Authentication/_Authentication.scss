@@ -1,4 +1,5 @@
-$auth-form-width: 250px;
+$auth-form-width: 300px;
+$auth-form-width-small: 250px;
 
 .auth-page {
   display: flex;
@@ -43,11 +44,16 @@ $auth-form-width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: $auth-form-width;
-  max-width: $auth-form-width;
+  min-width: $auth-form-width-small;
+  max-width: $auth-form-width-small;
+
+  @include media-breakpoint(sm) {
+    min-width: $auth-form-width;
+    max-width: $auth-form-width;
+  }
 
   .form-header {
-    text-transform: uppercase;
+    text-transform: titlecase;
     margin: 0;
     width: 100%;
   }
@@ -56,10 +62,11 @@ $auth-form-width: 250px;
     width: 100%;
     background: none;
     border: 1px solid $gray;
-    height: 35px;
-    border-radius: 2px;
+    height: 40px;
+    border-radius: 10px;
     padding: 0 $padding-sm;
-    margin-bottom: $padding-xs;
+    margin-bottom: $padding-sm;
+    font-size: 13px;
 
     &:last-of-type {
       margin-bottom: 0;
@@ -77,9 +84,9 @@ $auth-form-width: 250px;
   width: 100%;
   text-align: right;
   font-size: 12px;
-  margin-bottom: -46px;
+  margin-bottom: -29px;
   padding-right: $padding-sm;
-  padding-top: 32px;
+  padding-top: 13px;
 }
 
 .form-submission-error {

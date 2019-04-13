@@ -7,9 +7,11 @@ import {SignUpLink} from '../components/Authentication/SignUp';
 const SignInPage = () => (
   <div className="auth-page sign-in">
     <div className="auth-page-header">
-      <h1>Sign in to</h1>
+      <h1>Welcome back to</h1>
       <BrandLogo styling="secondary" />
     </div>
+
+  <br/>
 
     <div className="auth-page-body">
       <SignInForm />

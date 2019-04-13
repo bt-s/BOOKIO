@@ -5,7 +5,6 @@ import {withFirebase} from '../Firebase';
 
 import steve from '../../images/stevejobs.jpg';
 
-import {faPencilAlt} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import Dropdown from '../Dropdown/Dropdown';
@@ -16,7 +15,6 @@ const Avatar = props => {
   const [imgURL, setImgURL] = useState('');
 
   const postUploadTask = url => {
-    //link the file to the user
     props.firebase.auth.currentUser
       .updateProfile({
         photoURL: url
@@ -65,7 +63,7 @@ const Avatar = props => {
       />
       <Dropdown
         classes="edit-avatar"
-        headerObject={<FontAwesomeIcon icon={faPencilAlt} />}
+        headerObject={<FontAwesomeIcon icon="pencil-alt" />}
         headerTitle="Edit"
         items={uploadField}
       />

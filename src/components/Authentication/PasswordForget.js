@@ -38,12 +38,11 @@ const PasswordForgetFormBase = props => {
   ) : (
     <form onSubmit={onSubmit} className="auth-form">
       <p className="pw-forget-header">
-        Enter your email address and we will send you a link to reset your
-        password.
+        We'll send you an email with a reset link.
       </p>
-      <p className="form-header">E-mail address</p>
+
       <input
-        placeholder=""
+        placeholder="E-mail"
         name="email"
         type="text"
         onChange={onChange}
@@ -54,7 +53,7 @@ const PasswordForgetFormBase = props => {
         disabled={isInvalid}
         type="submit"
         onClick={onSubmit}
-        text="Sent password reset email"
+        text="Reset Password"
       />
 
       {error && <p>{error.message}</p>}

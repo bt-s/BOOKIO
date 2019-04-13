@@ -1,64 +1,128 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import {BookItemV2} from '../components/BookItem/BookItem';
+import axios from 'axios';
+
+import {BookItem} from '../components/BookItem/BookItem';
 import Button from '../components/Button/Button';
+import Loader from '../components/Loader/Loader';
+
 import * as ROUTES from '../constants/routes';
 
-const Filters = () => (
-  <div className="filters">
-    <Button type="toggle" className="filter-toggle" text="Give Away Only" />
-    <Button type="toggle" className="filter-toggle" text="Near Me" />
-    <Button type="toggle" className="filter-toggle" text="Books Only" />
-  </div>
-);
-
-/**
- * @results
- * should be a list of objects containing information about searched
- * items including name,pic,address,etc.
- *
- */
-const SearchResult = props => {
+const Filters = props => {
   return (
-    <div className="search-result">
-      {props.results.map(item => (
-        <div>
-          <BookItemV2
-            key={item.id}
-            imageSource={item.imageSource}
-            bookTitle={item.bookTitle}
-            userAvatar={item.userAvatar}
-            userName={item.userName}
-            locationName={item.locationName}
-            locationDistance={item.locationDistance}
-          />
-        </div>
-      ))}
-      <div className="filling-empty-space-childs book-item-v2-container" />
-      <div className="filling-empty-space-childs book-item-v2-container" />
+    <div className="filters">
+      <Button
+        onClick={props.onBorrowFilter}
+        type="toggle"
+        className="filter-toggle"
+        text="Books To Borrow"
+      />
+      <Button
+        onClick={props.onHaveFilter}
+        type="toggle"
+        className="filter-toggle"
+        text="Books To Have"
+      />
     </div>
   );
 };
 
-const fakeResults = Array(16).fill({
-  bookTitle: 'A Book Without A Looooooooong long long long Name',
-  authorName: 'Nobody',
-  userName: 'Rick',
-  locationName: 'KTH',
-  locationDistance: '15m'
-});
+const SearchResult = props => {
+  const booksFilter = filter => {
+    const filterFunc = props.results.reduce((filtered, book) => {
+      if (book.type === filter) {
+        filtered.push(book);
+      }
 
-const BooksPage = props => (
-  <div>
-    <div className="books-tool-bar">
-      <Filters />
-      <Link id="btn-add-book" to={ROUTES.ADD_BOOK}>
-        Share My Stuff
-      </Link>
+      return filtered;
+    }, []);
+
+    return filterFunc;
+  };
+
+  let results;
+  if (props.borrowFilter && props.haveFilter) {
+    results = props.results;
+  } else if (props.borrowFilter) {
+    results = booksFilter('to borrow');
+  } else if (props.haveFilter) {
+    results = booksFilter('to have');
+  } else {
+    results = props.results;
+  }
+
+  return (
+    <React.Fragment>
+      <div className="search-result">
+        {results.map((book, ix) => (
+          <div key={ix} className="book-item-container">
+            <BookItem
+              bookImgSrc={book.imageUrls ? book.imageUrls[0] : book.imageSource}
+              bookTitle={book.title}
+              bookDescription={book.description}
+              type={book.type}
+              userAvatar={book.avatar}
+              userName={book.owner}
+              authorName={book.author}
+              locationDistance={book.locationDistance}
+            />
+          </div>
+        ))}
+      </div>
+    </React.Fragment>
+  );
+};
+
+const BooksPage = props => {
+  const [hasBooks, setHasBooks] = useState(false);
+  const [books, setBooks] = useState([]);
+  const [borrowFilter, setBorrowFilter] = useState(false);
+  const [haveFilter, setHaveFilter] = useState(false);
+
+  const onBorrowFilter = e => {
+    setBorrowFilter(!borrowFilter);
+  };
+
+  const onHaveFilter = e => {
+    setHaveFilter(!haveFilter);
+  };
+
+  const getBooks = () => {
+    axios({
+      method: 'GET',
+      url: `https://us-central1-bookio.cloudfunctions.net/getBooks`
+    })
+      .then(res => {
+        setHasBooks(true);
+        setBooks(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  if (!hasBooks) getBooks();
+
+  return (
+    <div>
+      <div className="books-tool-bar">
+        <Filters onBorrowFilter={onBorrowFilter} onHaveFilter={onHaveFilter} />
+        <Link className="btn btn-add-book" to={ROUTES.ADD_BOOK}>
+          Add Book
+        </Link>
+      </div>
+      {hasBooks ? (
+        <SearchResult
+          results={books}
+          haveFilter={haveFilter}
+          borrowFilter={borrowFilter}
+        />
+      ) : (
+        <Loader />
+      )}
     </div>
-    <SearchResult results={fakeResults} />
-  </div>
-);
+  );
+};
 
 export default BooksPage;

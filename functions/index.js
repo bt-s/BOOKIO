@@ -2,6 +2,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const cors = require('cors')({origin: true});
 const geolib = require('geolib');
+const axios = require('axios');
 
 admin.initializeApp();
 
@@ -13,7 +14,71 @@ exports.helloWorld = functions.https.onRequest((req, res) => {
   });
 });
 
+exports.fetchTitleSuggestion = functions.https.onRequest((req, res) => {
+  return cors(req, res, () => {
+    if (req.method !== 'GET') {
+      return res.status(404).json({
+        message: 'Not allowed'
+      });
+    }
+    console.log(req.query.filter);
+    axios({
+      method: 'GET',
+      url: `https://www.goodreads.com/book/auto_complete?format=json&q=${
+        req.query.filter
+      }`
+    })
+      .then(result => {
+        return res.status(200).json(result.data);
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(err.code).json({
+          message: `Cannot fetch data from API. ${err.message}`
+        });
+      });
+  });
+});
+
+// API Call: ........./getBooks?limit=23&offset=23
 exports.getBooks = functions.https.onRequest((req, res) => {
+  return cors(req, res, () => {
+    if (req.method !== 'GET') {
+      return res.status(404).json({
+        message: 'Not allowed'
+      });
+    }
+
+    let mapped_data = [];
+
+    return (
+      database
+        // .startAfter(offset)
+        // .limit(limit)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            let tempObj = doc.data();
+            tempObj.id = doc.id;
+            mapped_data.push(tempObj);
+          });
+          if (req.query.limit || req.query.offset) {
+            let limit = req.query.limit;
+            let offset = req.query.offset;
+            return res.status(200).json(mapped_data.splice(offset, limit));
+          }
+          return res.status(200).json(mapped_data);
+        })
+        .catch(error => {
+          return res.status(error.code).json({
+            message: `Something went wrong. ${error.message}`
+          });
+        })
+    );
+  });
+});
+
+exports.getBooks2 = functions.https.onRequest((req, res) => {
   return cors(req, res, () => {
     if (req.method !== 'GET') {
       return res.status(404).json({
@@ -27,11 +92,10 @@ exports.getBooks = functions.https.onRequest((req, res) => {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          tempObj = doc.data();
+          let tempObj = doc.data();
           tempObj.id = doc.id;
           mapped_data.push(tempObj);
         });
-        return res.status(200).json(mapped_data);
       })
       .catch(error => {
         return res.status(error.code).json({
@@ -58,7 +122,7 @@ exports.getBooksByDistance = functions.https.onRequest((req, res) => {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          tempObj = doc.data();
+          let tempObj = doc.data();
           tempObj.id = doc.id;
           tempObj.distance =
             geolib.getDistance(
@@ -90,7 +154,7 @@ exports.book = functions.https.onRequest((req, res) => {
           .doc(id)
           .get()
           .then(doc => {
-            tempObj = doc.data();
+            let tempObj = doc.data();
             tempObj.id = id;
             return res.status(200).json(tempObj);
           })
