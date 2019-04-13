@@ -29,7 +29,6 @@ const BookDetailComponent = props => {
           setLoading(false);
           setBooks(book.data());
           fetchOwnerInfo(book.data().owner);
-          console.log('book data', book.data());
         } else {
           console.log('No such document!');
         }
@@ -49,7 +48,6 @@ const BookDetailComponent = props => {
         if (owner.exists) {
           setOwner(owner.data());
           setLoading(false);
-          console.log(owner.data(), 'owner data');
         } else {
           console.log('owner undefined');
         }
@@ -94,7 +92,7 @@ const getStars = rating => {
   return output;
 };
 
-const BookDetail = ({book, owner, firebase, distance}) => {
+const BookDetail = ({book, owner, firebase}) => {
   const requestBook = () => {
     firebase
       .transactions()
@@ -128,7 +126,8 @@ const BookDetail = ({book, owner, firebase, distance}) => {
         <div className="google-map-wrapper">
           <GoogleMap />
         </div>
-        <div className="distance">{distance} </div>
+        {/* We should calculate the distance here. -----book.location----- */}
+        <div className="distance">{book.location} </div>
         <div className="owner-field">
           <span>Provided by:</span>
           <UserLabel avatarURL={owner.photoURL} userName={owner.username} />
