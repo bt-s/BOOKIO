@@ -67,6 +67,10 @@ const SearchResult = props => {
             />
           </div>
         ))}
+        <div className="filling-empty-space-childs" />
+        <div className="filling-empty-space-childs" />
+        <div className="filling-empty-space-childs" />
+        <div className="filling-empty-space-childs" />
       </div>
     </React.Fragment>
   );

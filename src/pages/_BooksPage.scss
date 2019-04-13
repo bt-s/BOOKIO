@@ -61,11 +61,6 @@ $grid-offset-4-cls: 35px;
     width: calc(100% + #{$grid-offset-4-cls});
   }
 
-  &:after {
-    content: '';
-    flex: auto;
-  }
-
   > * {
     flex: 1 0 auto;
     margin-bottom: 30px;
@@ -89,11 +84,6 @@ $grid-offset-4-cls: 35px;
     justify-content: flex-start;
     align-items: center;
   }
-}
-
-.search-result:after {
-  content: '';
-  flex: auto;
 }
 
 .filling-empty-space-childs {
