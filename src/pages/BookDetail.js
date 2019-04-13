@@ -5,7 +5,7 @@ import {withFirebase} from '../components/Firebase';
 import imageDummy from '../images/kafka.jpg';
 import userProfile from '../images/kafka.jpg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {UserLabel} from '../components/Books/Components';
+import {UserLabel, RatingStars} from '../components/Books/Components';
 
 const book_id = 'niK1Q2TzWqffiZVj1YrA';
 
@@ -76,22 +76,6 @@ const BookDetailComponent = props => {
   );
 };
 
-const getStars = rating => {
-  // Round to nearest half
-  rating = Math.round(rating * 2) / 2;
-  let output = [];
-
-  // Append all the filled whole stars
-  for (let i = rating; i > 0; i--)
-    // If there is a half a star, append it
-    if (i === 0.5) {
-      output.push(<FontAwesomeIcon icon="star-half" />);
-    } else {
-      output.push(<FontAwesomeIcon icon="star" />);
-    }
-  return output;
-};
-
 const BookDetail = ({book, owner, firebase}) => {
   const requestBook = () => {
     firebase
@@ -117,7 +101,7 @@ const BookDetail = ({book, owner, firebase}) => {
         <div className="book-title">{book.title}</div>
         <div className="author">by {book.author}</div>
         <img className="book-img" src={book.imageUrls} alt={book.title} />
-        <div className="rating">{getStars(book.rating)} </div>
+        <RatingStars rating={book.rating} />
         <div className="header-description">Description </div>
         <div className="service-description">{book.description}</div>
       </div>
@@ -127,7 +111,9 @@ const BookDetail = ({book, owner, firebase}) => {
           <GoogleMap />
         </div>
         {/* We should calculate the distance here. -----book.location----- */}
-        <div className="distance">{book.location} </div>
+        <div className="distance">
+          {book.location && book.location.lat + ' ' + book.location.lon}
+        </div>
         <div className="owner-field">
           <span>Provided by:</span>
           <UserLabel avatarURL={owner.photoURL} userName={owner.username} />
