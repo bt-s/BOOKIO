@@ -96,9 +96,9 @@ const AppBase = () => (
       />
       <Route
         path={ROUTES.BOOK_DETAIL}
-        render={() => (
+        render={props => (
           <WithNavbar>
-            <BookDetail />
+            <BookDetail {...props} />
           </WithNavbar>
         )}
       />

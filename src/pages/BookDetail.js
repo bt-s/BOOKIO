@@ -7,21 +7,18 @@ import userProfile from '../images/kafka.jpg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {UserLabel, RatingStars} from '../components/Books/Components';
 
-const book_id = 'niK1Q2TzWqffiZVj1YrA';
-
 const BookDetailComponent = props => {
   const [loading, setLoading] = useState(false);
   const [book, setBooks] = useState([]);
   const [owner, setOwner] = useState([]);
 
   useEffect(() => {
-    fetchBookInfo();
-    // fetchOwnerInfo();
+    fetchBookInfo(props.match.params.bookId);
   }, []);
 
-  const fetchBookInfo = () => {
+  const fetchBookInfo = bookId => {
     setLoading(true);
-    var bookDetail = props.firebase.book(book_id);
+    const bookDetail = props.firebase.book(bookId);
     bookDetail
       .get()
       .then(book => {
@@ -71,12 +68,17 @@ const BookDetailComponent = props => {
 
   return (
     <div>
-      <BookDetail book={book} owner={owner} firebase={props.firebase} />
+      <BookDetail
+        book={book}
+        owner={owner}
+        firebase={props.firebase}
+        bookId={props.match.params.bookId}
+      />
     </div>
   );
 };
 
-const BookDetail = ({book, owner, firebase}) => {
+const BookDetail = ({book, owner, firebase, bookId}) => {
   const requestBook = () => {
     firebase
       .transactions()
@@ -85,7 +87,7 @@ const BookDetail = ({book, owner, firebase}) => {
         consumerID: firebase.getMyUID(),
         status: 'Ongoing',
         requestTime: new Date().getTime(),
-        itemID: book_id,
+        itemID: bookId,
         type: book.type
       })
       .then(() => {
