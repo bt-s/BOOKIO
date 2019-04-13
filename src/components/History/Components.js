@@ -39,8 +39,8 @@ const RequestMessage = props => {
     props.message.status === 'ongoing'
   );
   const [status, setStatus] = useState(props.message.status);
-  const {createdAt} = props.message.stuff
-    ? props.message.stuff
+  const {createdAt} = props.message.book
+    ? props.message.book
     : {createdAt: '1970-01-01'};
 
   return (
@@ -60,24 +60,22 @@ const RequestMessage = props => {
       <div className="msg-body">
         <ItemInfo
           imgURL={
-            props.message.stuff
-              ? props.message.stuff.imageUrls.length > 0
-                ? props.message.stuff.imageUrls[0]
+            props.message.book
+              ? props.message.book.imageUrls.length > 0
+                ? props.message.book.imageUrls[0]
                 : null
               : null
           }
-          title={props.message.stuff.title}
+          title={props.message.book.title}
           status={status}
           supplement={props.message.supplement}
         />
         <div className="people-and-operation">
           <div className="type-and-people">
-            {/* <div className="type">{props.message.stuff.type}</div> */}
             <Link to="/account" className="user-container">
               <UserLabel
                 userName={props.message.involvedUser.username}
                 avatarURL={props.message.involvedUser.photoURL}
-                // bio={props.message.involvedUser.userName}
               />
             </Link>
           </div>

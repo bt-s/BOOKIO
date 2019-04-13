@@ -63,9 +63,9 @@ const HistoryPage = props => {
             .get()
             .then(book => {
               if (book.exists) {
-                transac.stuff = book.data();
+                transac.book = book.data();
               } else {
-                transac.stuff = false;
+                transac.book = false;
               }
             });
         });
