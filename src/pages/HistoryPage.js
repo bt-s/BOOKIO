@@ -42,10 +42,38 @@ const HistoryPage = props => {
       .transactions()
       .get()
       .then(querySnapshot => {
-        const tmp = querySnapshot.docs.map(doc => doc.data());
-        console.log(tmp);
+        const transacs = querySnapshot.docs.map(doc => doc.data());
+        console.log(transacs);
+        transacs.forEach(transac => {
+          props.firebase
+            .user(
+              transac.providerID === props.firebase.getMyUID()
+                ? transac.consumerID
+                : transac.providerID
+            )
+            .get()
+            .then(user => {
+              console.log('uusseerr', user);
+
+              if (user.exists) {
+                transac.involvedUser = user.data();
+              } else {
+                transac.involvedUser = false;
+              }
+            });
+          props.firebase
+            .book(transac.itemID)
+            .get()
+            .then(book => {
+              if (book.exists) {
+                transac.stuff = book.data();
+              } else {
+                transac.stuff = false;
+              }
+            });
+        });
         // 我得在这里 把missing 的info 加入到transactions中, 这些信息需要根据userid 去获取
-        setTransactions(tmp);
+        setTransactions(transacs);
         setGotTransactions(true);
       });
   }

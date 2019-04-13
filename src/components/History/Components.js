@@ -47,11 +47,11 @@ const RequestMessage = props => {
         />
         <div className="people-and-operation">
           <div className="type-and-people">
-            <div className="type">Request to borrow</div>
+            <div className="type">{props.message.stuff.type || 'TYEP'}</div>
             <Link to="/account" className="user-container">
               <UserLabel
-                userName={props.message.involvedUser.userName}
-                // avatarURL={props.message.involvedUser.userName}
+                userName={props.message.involvedUser.username}
+                avatarURL={props.message.involvedUser.photoURL}
                 // bio={props.message.involvedUser.userName}
               />
             </Link>

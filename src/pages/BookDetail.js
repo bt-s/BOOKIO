@@ -15,7 +15,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-const book_id = '06FmAcLxlYVWn6Fmsfwu';
+const book_id = 'niK1Q2TzWqffiZVj1YrA';
 
 const BookDetailComponent = props => {
   const [loading, setLoading] = useState(false);
