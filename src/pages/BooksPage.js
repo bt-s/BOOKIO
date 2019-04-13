@@ -34,10 +34,8 @@ const SearchResult = props => {
       if (book.type === filter) {
         filtered.push(book);
       }
-
       return filtered;
     }, []);
-
     return filterFunc;
   };
 

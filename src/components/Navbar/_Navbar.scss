@@ -1,5 +1,4 @@
 $border-radius: 2px;
-
 $navbar-icon-size: 20px;
 
 .navbar {
@@ -10,7 +9,7 @@ $navbar-icon-size: 20px;
   width: 100%;
   height: $navbar-height-mobile;
   background-color: $black-lighter;
-  z-index: 10;
+  z-index: 1000;
 
   @include media-breakpoint(sm) {
     height: $navbar-height;

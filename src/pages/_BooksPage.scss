@@ -18,11 +18,25 @@
 }
 
 .btn-add-book {
-  width: 142px;
-  height: 48px;
-  border-radius: 19px;
-  box-shadow: 1px 3px 4px 0 rgba(0, 0, 0, 0.5);
-  background-color: $black;
+  width: 156px;
+  height: 40px;
+  box-shadow: $button-shadow;
+  background-color: $black-lighter;
+  border-radius: 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
+  @include smaller-than(sm) {
+    position: fixed;
+    bottom: 2.5%;
+    right: 4%;
+    z-index: 998;
+    height: 50px;
+  }
 }
 
 $grid-offset-2-cls: 35px;
