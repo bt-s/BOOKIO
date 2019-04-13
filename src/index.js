@@ -61,9 +61,9 @@ const AppBase = () => (
       <Route
         path={ROUTES.PASSWORD_FORGET}
         render={() => (
-          <WithNavbar>
+          <WithoutNavbar>
             <PasswordForgetPage />
-          </WithNavbar>
+          </WithoutNavbar>
         )}
       />
       <Route
