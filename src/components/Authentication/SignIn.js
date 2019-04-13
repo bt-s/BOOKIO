@@ -61,7 +61,7 @@ const SignInFacebookBase = props => {
     <form onSubmit={onSubmit} className="sign-in-facebook-form">
       <Button
         className="btn btn-auth btn-facebook"
-        typw="submit"
+        type="submit"
         icon={<FontAwesomeIcon icon="facebook-f" />}
         text="Login with Facebook"
       />
