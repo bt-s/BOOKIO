@@ -21,6 +21,7 @@ const Avatar = props => {
       })
       .then(function() {
         setImgURL(url);
+        props.firebase.user(props.firebase.getMyUID()).update({photoURL: url});
       });
   };
 

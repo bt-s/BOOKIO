@@ -5,8 +5,9 @@ import {withFirebase} from '../components/Firebase';
 import imageDummy from '../images/kafka.jpg';
 import userProfile from '../images/kafka.jpg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {UserLabel} from '../components/Books/Components';
 
-const book_id = '06FmAcLxlYVWn6Fmsfwu';
+const book_id = 'niK1Q2TzWqffiZVj1YrA';
 
 const BookDetailComponent = props => {
   const [loading, setLoading] = useState(false);
@@ -93,24 +94,45 @@ const getStars = rating => {
   return output;
 };
 
-const BookDetail = props => (
-  <div className="book-details-container">
-    <div className="book-info-container">
-      <div className="book-title">{props.bookTitle}</div>
-      <img className="book-img" src={props.imageSource} alt={props.bookTitle} />
-      <div className="rating">{getStars(props.rating)} </div>
-      <div className="header-description">Description </div>
-      <div className="service-description">{props.serviceDescription}</div>
-    </div>
-    <div className="book-pickup-container">
-      <div className="header-pickup">Pickup Location </div>
-      <div className="google-map-wrapper">
-        <GoogleMap />
+const BookDetail = ({book, owner, firebase, distance}) => {
+  const requestBook = () => {
+    firebase
+      .transactions()
+      .add({
+        providerID: book.owner,
+        consumerID: firebase.getMyUID(),
+        status: 'Ongoing',
+        requestTime: new Date().getTime(),
+        itemID: book_id,
+        type: book.type
+      })
+      .then(() => {
+        console.log('reqeust success');
+      })
+      .catch(() => {
+        console.log('request fail');
+      });
+  };
+  return (
+    <div className="book-details-container">
+      <div className="book-info-container">
+        <div className="book-title">{book.title}</div>
+        <div className="author">by {book.author}</div>
+        <img className="book-img" src={book.imageUrls} alt={book.title} />
+        <div className="rating">{getStars(book.rating)} </div>
+        <div className="header-description">Description </div>
+        <div className="service-description">{book.description}</div>
       </div>
-      <div className="distance">{props.distance} </div>
-      <div className="user-info">
-        <img className="user-profile" src={props.userProfile} alt="" />
-        <div className="user-name">{props.userName}</div>
+      <div className="book-pickup-container">
+        <div className="header-pickup">Pickup Location </div>
+        <div className="google-map-wrapper">
+          <GoogleMap />
+        </div>
+        <div className="distance">{distance} </div>
+        <div className="owner-field">
+          <span>Provided by:</span>
+          <UserLabel avatarURL={owner.photoURL} userName={owner.username} />
+        </div>
       </div>
     </div>
   );
