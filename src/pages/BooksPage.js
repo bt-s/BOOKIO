@@ -10,7 +10,7 @@ import * as ROUTES from '../constants/routes';
 
 import Loader from '../components/Loader/Loader';
 import SearchResults from '../components/Books/SearchResults';
-import BooksFilters from '../components/Books/BooksFilters';
+import FilterGroup from '../components/Books/BooksFilters';
 import {index} from '../components/Algolia';
 
 const BooksPage = props => {
@@ -40,6 +40,8 @@ const BooksPage = props => {
     !haveFilterOn ? onFilter('to have') : getBooks();
     setHaveFilterOn(!haveFilterOn);
   };
+
+  const onNearFilter = evt => {};
 
   const getBooks = () => {
     axios({
@@ -74,9 +76,14 @@ const BooksPage = props => {
   return (
     <div>
       <div className="books-tool-bar">
-        <BooksFilters
-          onBorrowFilter={onBorrowFilter}
-          onHaveFilter={onHaveFilter}
+        <FilterGroup
+          onFilterUpdate={filterStatus => {
+            console.log('filter status', filterStatus);
+          }}
+          titles={['Borrow', 'Have', 'Near Me']}
+          // onBorrowFilter={onBorrowFilter}
+          // onHaveFilter={onHaveFilter}
+          // onNearFilter={onNearFilter}
         />
         <Link className="btn btn-add-book" to={ROUTES.ADD_BOOK}>
           Add Book
