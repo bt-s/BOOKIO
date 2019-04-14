@@ -17,26 +17,24 @@ const BooksPage = props => {
   const [borrowFilterOn, setBorrowFilterOn] = useState(false);
   const [haveFilterOn, setHaveFilterOn] = useState(false);
   const [coordinate, setCoordinate] = useState({lat: 23, lng: 23});
-  // let coordinate = {lat: 23, lng: 23};
 
-  const onFilter = (filter, byDistance) => {
-    console.log(
-      'ffff',
-      coordinate.lat.toString() + ',' + coordinate.lng.toString()
-    );
-
+  const onFilter = filter => {
     index
       .search({
         filters: filter
-        // aroundLatLng:'59.1,18.2'
-        // coordinate.lat.toString() + ',' + coordinate.lng.toString()
       })
       .then(res => {
-        props.storeBooks(res.hits);
+        props.storeBooks(withDistance(res.hits));
       })
       .catch(err => {
         console.error(err);
       });
+
+    /**
+     * The distance API of both agolia and ourselves are not working....
+     * Thus, I disabled it.
+     */
+
     // index
     //   .search({
     //     filters: `type:"${filter}"`
@@ -49,28 +47,30 @@ const BooksPage = props => {
     //   });
   };
 
-  const onBorrowFilter = e => {
-    !borrowFilterOn ? onFilter('to borrow') : getBooks();
-    setBorrowFilterOn(!borrowFilterOn);
-  };
+  // const onBorrowFilter = e => {
+  //   !borrowFilterOn ? onFilter('to borrow') : getBooks();
+  //   setBorrowFilterOn(!borrowFilterOn);
+  // };
 
-  const onHaveFilter = e => {
-    !haveFilterOn ? onFilter('to have') : getBooks();
-    setHaveFilterOn(!haveFilterOn);
-  };
+  // const onHaveFilter = e => {
+  //   !haveFilterOn ? onFilter('to have') : getBooks();
+  //   setHaveFilterOn(!haveFilterOn);
+  // };
 
-  const onNearFilter = evt => {};
+  // const onNearFilter = evt => {};
 
-  const insertDistance = books => {
-    books.forEach(
-      book =>
-        (book.distance = getGeoDistance(
+  const withDistance = books => {
+    return books.map(book => {
+      return {
+        ...book,
+        distance: getGeoDistance(
           book.location.lat,
           book.location.lon,
           coordinate.lat,
           coordinate.lng
-        ))
-    );
+        )
+      };
+    });
   };
 
   const getBooks = () => {
@@ -79,8 +79,7 @@ const BooksPage = props => {
       url: `https://us-central1-bookio.cloudfunctions.net/getBooks`
     })
       .then(res => {
-        insertDistance(res.data);
-        props.storeBooks(res.data);
+        props.storeBooks(withDistance(res.data));
       })
       .catch(err => {
         console.error(err);
@@ -113,14 +112,22 @@ const BooksPage = props => {
                 'type:"_____"'
               )
             );
-            onFilter(
-              filters.reduce(
-                (pre, cur) => pre + ' OR type:"' + strMap[cur] + '"',
-                'type:"_____"'
-              )
-            );
+            if (filters.length > 0) {
+              onFilter(
+                filters.reduce(
+                  (pre, cur) => pre + ' OR type:"' + strMap[cur] + '"',
+                  'type:"_____"'
+                )
+              );
+            } else {
+              onFilter(
+                `type:"${strMap['Books to Have']}" OR type:"${
+                  strMap['Books to Borrow']
+                }"`
+              );
+            }
           }}
-          filters={['Books to Borrow', 'Books to Have', 'Near Me']}
+          filters={['Books to Borrow', 'Books to Have']}
         />
         <Link className="btn btn-add-book" to={ROUTES.ADD_BOOK}>
           Add Book

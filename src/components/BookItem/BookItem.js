@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Numeral from 'numeral';
 
 import RatingStars from '../Books/RatingStars';
+import UserLabel from '../Books/UserLabel';
 
 const BookItem = props => {
   return (
@@ -28,14 +29,7 @@ const BookItem = props => {
           {props.bookDescription.substring(0, 120) + '...'}
         </p>
         <div className="book-item-inner-footer">
-          <div className="book-item-user-info">
-            <img
-              className="book-item-user-avatar"
-              src={props.userAvatar}
-              alt=""
-            />
-            <div className="book-item-username">{props.userName}</div>
-          </div>
+          <UserLabel userName={props.userName} avatarUrl={props.userAvatar} />
           <div className="book-item-distance-container">
             <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
             <span className="book-item-distance">

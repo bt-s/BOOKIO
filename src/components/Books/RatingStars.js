@@ -15,7 +15,7 @@ const RatingStars = props => {
     } else {
       output.push(<FontAwesomeIcon key={i} icon="star" color="#FFAC2D" />);
     }
-  return <div className="rating-star">{output}</div>;
+  return <div className={props.className || 'rating-star'}>{output}</div>;
 };
 
 RatingStars.propTypes = {
