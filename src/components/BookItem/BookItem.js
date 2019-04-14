@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-import RatingStars from '../Books/RatingStars';
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import Numeral from 'numeral';
+
+import RatingStars from '../Books/RatingStars';
 
 const BookItem = props => {
   return (
@@ -37,7 +38,12 @@ const BookItem = props => {
           </div>
           <div className="book-item-distance-container">
             <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
-            <span className="book-item-distance">{props.distance} away</span>
+            <span className="book-item-distance">
+              {parseInt(props.distance) > 0
+                ? Numeral(props.distance).format('0.0') + 'km'
+                : parseInt(props.distance * 1000) + 'm'}{' '}
+              away
+            </span>
           </div>
         </div>
       </div>

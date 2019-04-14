@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import {BookItem} from '../../components/BookItem/BookItem';
 
 const SearchResults = props => {
-  console.log('--------------');
+  // console.log('--------------');
 
-  console.log('results', props, props.books);
+  // console.log('results', props, props.books);
   return (
     <div className="search-result">
       {props.books.map((book, ix) => {
