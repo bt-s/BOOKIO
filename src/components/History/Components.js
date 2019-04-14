@@ -110,14 +110,6 @@ const RequestMessage = props => {
 };
 RequestMessage.propTypes = {
   message: PropTypes.object,
-  // messageTime: PropTypes.string,
-  // requestType: PropTypes.string,
-  // /// Item Info
-  // imgURL: PropTypes.string,
-  // title: PropTypes.string,
-  // status: PropTypes.string,
-  // supplement: PropTypes.object,
-  /// callback
   declineCallback: PropTypes.func,
   acceptCallback: PropTypes.func
 };
