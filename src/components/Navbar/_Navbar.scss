@@ -1,5 +1,4 @@
 $border-radius: 2px;
-
 $navbar-icon-size: 20px;
 
 .navbar {
@@ -10,7 +9,7 @@ $navbar-icon-size: 20px;
   width: 100%;
   height: $navbar-height-mobile;
   background-color: $black-lighter;
-  z-index: 10;
+  z-index: 1000;
 
   @include media-breakpoint(sm) {
     height: $navbar-height;
@@ -53,29 +52,6 @@ $navbar-icon-size: 20px;
 
   @include media-breakpoint(lg) {
     max-width: $max-width-lg;
-  }
-}
-
-.navbar-search-container {
-  display: none;
-
-  @include media-breakpoint(sm) {
-    display: flex;
-    flex: 1 0 auto;
-    max-width: 300px;
-    margin-right: auto;
-    margin-left: 60px;
-    background-color: $white;
-    height: 30px;
-    display: flex;
-    padding: 0 20px;
-    align-items: center;
-    border-radius: $border-radius;
-    font-size: 10px;
-  }
-
-  @include media-breakpoint(md) {
-    max-width: 400px;
   }
 }
 

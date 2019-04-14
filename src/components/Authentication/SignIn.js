@@ -11,7 +11,6 @@ import {formReducer, errorReducer} from '../../helpers/validationHelper';
 
 import * as ROUTES from '../../constants/routes';
 
-import {faFacebookF} from '@fortawesome/free-brands-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const ERROR_CODE_ACCOUNT_EXISTS =
@@ -63,8 +62,8 @@ const SignInFacebookBase = props => {
       <Button
         className="btn btn-auth btn-facebook"
         type="submit"
-        icon={<FontAwesomeIcon icon={faFacebookF} />}
-        text="Sign in with Facebook"
+        icon={<FontAwesomeIcon icon="facebook-f" />}
+        text="Login with Facebook"
       />
       {error.code ? (
         <p className="form-submission-error">ERROR: {error.message}</p>
@@ -120,16 +119,14 @@ const SignInFormBase = props => {
     <Validation ref={validationRef}>
       <form onSubmit={onSubmit} className="auth-form">
         {error.email && <span className="validation-error">{error.email}</span>}
-        <label htmlFor="" className="form-header">
-          E-mail address
-        </label>
+       
         <Validator
           name="email"
           value={form.email}
           validations={[ValidationHelper.required('Email is required')]}
           onValidate={onValidate}>
           <input
-            placeholder=""
+            placeholder="E-mail"
             name="email"
             type="text"
             value={form.email}
@@ -140,16 +137,14 @@ const SignInFormBase = props => {
         {error.password && (
           <span className="validation-error">{error.password}</span>
         )}
-        <label htmlFor="" className="form-header">
-          Password
-        </label>
+    
         <Validator
           name="password"
           value={form.password}
           validations={[ValidationHelper.required('Password is required')]}
           onValidate={onValidate}>
           <input
-            placeholder=""
+            placeholder="Password"
             name="password"
             type="password"
             value={form.password}
@@ -158,7 +153,7 @@ const SignInFormBase = props => {
         </Validator>
 
         <PasswordForgetLink styling="pw-forget-link" />
-        <Button className="btn btn-auth" type="submit" text="Sign in" />
+        <Button className="btn btn-auth" type="submit" text="Login" />
 
         {error.code ? (
           <p className="form-submission-error">ERROR: {error.message}</p>

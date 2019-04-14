@@ -1,64 +1,102 @@
-import React from 'react';
+import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-import {BookItemV2} from '../components/BookItem/BookItem';
-import Button from '../components/Button/Button';
+import {connect} from 'react-redux';
+import {storeBooks} from '../redux/actions/storeBooks';
+
+import axios from 'axios';
+
+import Loader from '../components/Loader/Loader';
+import SearchResults from '../components/Books/SearchResults';
+import BooksFilters from '../components/Books/BooksFilters';
+
+import {index} from '../components/Algolia';
+
 import * as ROUTES from '../constants/routes';
 
-const Filters = () => (
-  <div className="filters">
-    <Button type="toggle" className="filter-toggle" text="Give Away Only" />
-    <Button type="toggle" className="filter-toggle" text="Near Me" />
-    <Button type="toggle" className="filter-toggle" text="Books Only" />
-  </div>
-);
+const _ = require('lodash/core');
 
-/**
- * @results
- * should be a list of objects containing information about searched
- * items including name,pic,address,etc.
- *
- */
-const SearchResult = props => {
+const BooksPage = props => {
+  const [borrowFilterOn, setBorrowFilterOn] = useState(false);
+  const [haveFilterOn, setHaveFilterOn] = useState(false);
+
+  const onFilter = filter => {
+    index
+      .search({
+        filters: `type:"${filter}"`
+      })
+      .then(res => {
+        props.storeBooks(res.hits);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  const onBorrowFilter = e => {
+    !borrowFilterOn ? onFilter('to borrow') : getBooks();
+    setBorrowFilterOn(!borrowFilterOn);
+  };
+
+  const onHaveFilter = e => {
+    !haveFilterOn ? onFilter('to have') : getBooks();
+    setHaveFilterOn(!haveFilterOn);
+  };
+
+  const getBooks = () => {
+    axios({
+      method: 'GET',
+      url: `https://us-central1-bookio.cloudfunctions.net/getBooks`
+    })
+      .then(res => {
+        props.storeBooks(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  if (_.isEmpty(props.books) && props.searchBool === false) {
+    getBooks();
+  }
+
   return (
-    <div className="search-result">
-      {props.results.map(item => (
-        <div>
-          <BookItemV2
-            key={item.id}
-            imageSource={item.imageSource}
-            bookTitle={item.bookTitle}
-            userAvatar={item.userAvatar}
-            userName={item.userName}
-            locationName={item.locationName}
-            locationDistance={item.locationDistance}
-          />
-        </div>
-      ))}
-      <div className="filling-empty-space-childs book-item-v2-container" />
-      <div className="filling-empty-space-childs book-item-v2-container" />
-    </div>
+    <React.Fragment>
+      <div className="books-tool-bar">
+        <BooksFilters
+          onBorrowFilter={onBorrowFilter}
+          onHaveFilter={onHaveFilter}
+        />
+        <Link className="btn btn-add-book" to={ROUTES.ADD_BOOK}>
+          Add Book
+        </Link>
+      </div>
+      {!_.isEmpty(props.books) ? (
+        <SearchResults books={props.books} />
+      ) : (
+        <Loader />
+      )}
+    </React.Fragment>
   );
 };
 
-const fakeResults = Array(16).fill({
-  bookTitle: 'A Book Without A Looooooooong long long long Name',
-  authorName: 'Nobody',
-  userName: 'Rick',
-  locationName: 'KTH',
-  locationDistance: '15m'
+BooksPage.propTypes = {
+  books: PropTypes.array,
+  storeBooks: PropTypes.func,
+  searchBool: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+  books: state.booksState.books,
+  searchBool: state.searchState
 });
 
-const BooksPage = props => (
-  <div>
-    <div className="books-tool-bar">
-      <Filters />
-      <Link id="btn-add-book" to={ROUTES.ADD_BOOK}>
-        Share My Stuff
-      </Link>
-    </div>
-    <SearchResult results={fakeResults} />
-  </div>
-);
+const mapDispatchToProps = dispatch => ({
+  storeBooks: books => dispatch(storeBooks(books))
+});
 
-export default BooksPage;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BooksPage);

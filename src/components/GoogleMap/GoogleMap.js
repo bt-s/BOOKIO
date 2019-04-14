@@ -55,7 +55,7 @@ export const MapContainer = props => {
 
 const GoogleMap = GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-  LoadingContainer: LoadingContainer
+  LoadingContainer: LoadingContainer,
 })(MapContainer);
 
 GoogleMap.propTypes = {

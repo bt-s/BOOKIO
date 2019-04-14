@@ -4,8 +4,6 @@ import {compose} from 'recompose';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {faPhone, faEnvelope} from '@fortawesome/free-solid-svg-icons';
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   withAuthorization,
@@ -30,11 +28,11 @@ const AccountPage = props => {
         </div>
         <div className="user-info-container">
           <span className="info-item">
-            <FontAwesomeIcon icon={faPhone} />
+            <FontAwesomeIcon icon="phone" />
             {props.authUser.phoneNumber}
           </span>
           <span className="info-item">
-            <FontAwesomeIcon icon={faEnvelope} />
+            <FontAwesomeIcon icon="envelope" />
             {props.authUser.email}
           </span>
         </div>

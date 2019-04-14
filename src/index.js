@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from './redux/store/index';
 
@@ -8,14 +8,14 @@ import * as ROUTES from './constants/routes';
 
 import {withAuthentication} from './components/Session/Session';
 import Firebase, {FirebaseContext} from './components/Firebase';
+import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
-import GoogleMap from './components/GoogleMap/GoogleMap';
-import {BookItem, BookItemV2} from './components/BookItem/BookItem';
 import AddNewBookPage from './pages/AddNewBookPage';
 
 import AdminPage from './pages/AdminPage';
 import AccountPage from './pages/AccountPage';
 import BookDetail from './pages/BookDetail';
+import HomePage from './pages/HomePage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
@@ -24,41 +24,18 @@ import HistoryPage from './pages/HistoryPage';
 
 import './styling/style.scss';
 
+/* eslint-disable no-unused-vars */
+import library from './fa';
+/* eslint-enable-no-unused-vars */
+
 require('dotenv').config();
 
-const TestComponent = props => {
-  return (
-    <React.Fragment>
-      <div>
-        <b>
-          This page is for test purpose, click links below to check different
-          pages Click the logo above to go back to this test page.
-        </b>
-        <br />
-        <br />
-        <Link to={ROUTES.ACCOUNT}>Account page</Link>
-        <br />
-        <Link to={ROUTES.ADD_BOOK}>Add book page</Link>
-        <br />
-        <Link to={ROUTES.ADMIN}>Admin page</Link>
-        <br />
-        <Link to={ROUTES.BOOKS}>Books page</Link>
-        <br />
-        <Link to={ROUTES.BOOK_DETAIL}>Book detail page</Link>
-        <br />
-        <Link to={ROUTES.LOG_IN}>Login page</Link>
-        <br />
-        <Link to={ROUTES.PASSWORD_FORGET}>Password forget page</Link>
-        <br />
-        <Link to={ROUTES.SIGN_UP}>Signup page</Link>
-        <br />
-        <Link to={ROUTES.MY_BOOK_HISTORY}>My book history page</Link>
-      </div>
-      <BookItem />
-      <BookItemV2 />
-    </React.Fragment>
-  );
-};
+const WithFooter = ({children}) => (
+  <React.Fragment>
+    {children}
+    <Footer />
+  </React.Fragment>
+);
 
 const WithNavbar = ({children}) => (
   <React.Fragment>
@@ -78,17 +55,19 @@ const AppBase = () => (
         exact
         path={ROUTES.LANDING}
         render={() => (
-          <WithNavbar>
-            <TestComponent />
-          </WithNavbar>
+          <WithFooter>
+            <WithNavbar>
+              <HomePage />
+            </WithNavbar>
+          </WithFooter>
         )}
       />
       <Route
         path={ROUTES.PASSWORD_FORGET}
         render={() => (
-          <WithNavbar>
+          <WithoutNavbar>
             <PasswordForgetPage />
-          </WithNavbar>
+          </WithoutNavbar>
         )}
       />
       <Route
@@ -117,9 +96,9 @@ const AppBase = () => (
       />
       <Route
         path={ROUTES.BOOK_DETAIL}
-        render={() => (
+        render={props => (
           <WithNavbar>
-            <BookDetail />
+            <BookDetail {...props} />
           </WithNavbar>
         )}
       />

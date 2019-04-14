@@ -1,45 +1,67 @@
 import React, {useState} from 'react';
+import {withFirebase} from '../components/Firebase';
 
 import Radio from '../components/Button/Radio';
 import {RequestMessage} from '../components/History/Components';
 
-const fakeHistories = [
-  {
-    id: 'LDKGJ3OIEIODEWUIHD78^D876',
-    type: 'lend',
-    title: 'Little Prince',
-    status: 'Waiting for response',
-    time: '11 Mar. 2019, 14:22',
-    involvedUser: {
-      userName: 'King Kung'
-    }
-  },
-  {
-    id: '3o3OIEIODEWUIHD78^D876',
-    type: 'lend',
-    title: 'The Great Gatsby',
-    status: 'Waiting for response',
-    time: '11 Mar. 2019, 14:22',
-    involvedUser: {
-      userName: 'Steve'
-    }
-  }
-];
-
 const HistoryPage = props => {
   const [msgType, setMsgType] = useState('give');
-  const histories = fakeHistories; // This should be retrieved on page load
+  const [gotTransactions, setGotTransactions] = useState(false);
+  const [transactions, setTransactions] = useState([]);
+
+  if (!gotTransactions) {
+    props.firebase
+      .transactions()
+      .get()
+      .then(querySnapshot => {
+        const transacs = querySnapshot.docs.map(doc => {
+          return {id: doc.id, ...doc.data()};
+        });
+        transacs.forEach(transac => {
+          props.firebase
+            .user(
+              transac.providerID === props.firebase.getMyUID()
+                ? transac.consumerID
+                : transac.providerID
+            )
+            .get()
+            .then(
+              user => (transac.involvedUser = user.exists ? user.data() : false)
+            );
+          props.firebase
+            .book(transac.itemID)
+            .get()
+            .then(book => (transac.book = book.exists ? book.data() : false));
+        });
+        setTransactions(transacs);
+        setGotTransactions(true);
+      });
+  }
+
   function getMsgOfType(type) {
-    return histories
+    return transactions
       .filter(msg => {
         return msg.type === msgType;
       })
-      .map(msg => <RequestMessage message={msg} key={msg.id} />);
+      .map((msg, index) => (
+        <RequestMessage
+          message={msg}
+          key={'req_msg' + index}
+          declineCallback={() => {
+            props.firebase.transaction(msg.id).update({status: 'declined'});
+          }}
+          acceptCallback={() => {
+            props.firebase.transaction(msg.id).update({status: 'accpeted'});
+          }}
+        />
+      ));
   }
+
   return (
     <div className="history-page">
       <div className="filters">
         <Radio
+          key="lend"
           id="lend"
           name="history-type"
           value="lend"
@@ -51,6 +73,7 @@ const HistoryPage = props => {
         />
         <Radio
           id="give"
+          key="give"
           name="history-type"
           value="give"
           label="Giving"
@@ -61,6 +84,7 @@ const HistoryPage = props => {
         />
         <Radio
           id="borrow"
+          key="borrow"
           name="history-type"
           value="borrow"
           label="Borrowing"
@@ -71,6 +95,7 @@ const HistoryPage = props => {
         />
         <Radio
           id="get"
+          key="get"
           name="history-type"
           value="get"
           label="Getting"
@@ -80,9 +105,11 @@ const HistoryPage = props => {
           }}
         />
       </div>
-      <div className="msg-container">{getMsgOfType(msgType)}</div>
+      {gotTransactions && (
+        <div className="msg-container">{getMsgOfType(msgType)}</div>
+      )}
     </div>
   );
 };
 
-export default HistoryPage;
+export default withFirebase(HistoryPage);

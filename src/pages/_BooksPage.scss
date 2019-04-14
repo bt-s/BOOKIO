@@ -17,11 +17,11 @@
   }
 }
 
-#btn-add-book {
+.btn-add-book {
   width: 156px;
   height: 40px;
   box-shadow: $button-shadow;
-  background-color: #4500d2;
+  background-color: $black-lighter;
   border-radius: 30px;
   align-items: center;
   display: flex;
@@ -34,31 +34,7 @@
     position: fixed;
     bottom: 2.5%;
     right: 4%;
+    z-index: 998;
     height: 50px;
   }
-}
-
-.search-result {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: space-around;
-  // align-content: flex-end;
-  flex-direction: row;
-  > * {
-    margin-bottom: 30px;
-    @include media-breakpoint(sm) {
-    }
-  }
-  @include smaller-than(sm) {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-  }
-}
-
-.filling-empty-space-childs {
-  border: none;
-  height: 0; /*Important! for the divs to collapse should they fall in a new row*/
 }

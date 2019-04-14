@@ -29,11 +29,13 @@ const AddNewBookFormBase = props => {
     lat: 0,
     lon: 0
   });
+
   const [initLocation, setInitLocation] = useState({
     lat: 0,
     lon: 0
   });
   const [type, setType] = useState('lend');
+
   const [progressStyle, setProgressStyle] = useState('off');
   let imageUrls = [];
   const [error, dispatchError] = useReducer(errorReducer, {});
@@ -59,10 +61,7 @@ const AddNewBookFormBase = props => {
   };
 
   const handleImageUploaded = url => {
-    let imageUrlsTemp = [...imageUrls];
-    imageUrlsTemp.push(url);
-    imageUrls = [...imageUrlsTemp];
-    console.log(imageUrlsTemp);
+    imageUrls.push(url);
   };
 
   const updateImage = id => {
@@ -86,12 +85,11 @@ const AddNewBookFormBase = props => {
         author,
         location,
         imageUrls,
-        type: 'lend',
+        type,
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime()
       })
       .then(res => {
-        console.log(res.id);
         Promise.all(
           files.map(file =>
             uploadPictureToFirebase(
@@ -102,15 +100,15 @@ const AddNewBookFormBase = props => {
             )
           )
         ).then(() => {
-          console.log(imageUrls);
-          console.log(res.id);
           updateImage(res.id);
           setProgressStyle('redirect');
           setTimeout(() => {
-            //go back to homepage after uploading
-            props.history.push('/');
+            props.history.push('/books');
           }, 2000);
         });
+      })
+      .then(res => {
+        firebase.onBooksAddedListener();
       })
       .catch(() => {
         addNewUserBook('error');
@@ -120,10 +118,7 @@ const AddNewBookFormBase = props => {
   const handleSubmit = e => {
     addNewUserBook('loading');
     const allErrors = validationRef.current.validate();
-    console.log(allErrors);
-    console.log(Object.values(allErrors));
     if (Object.values(allErrors).join('') === '') {
-      console.log(allErrors);
       console.warn('[ADD_NEW_BOOK] Calling API to add New Book');
       storeData();
     }
@@ -234,13 +229,12 @@ const AddNewBookFormBase = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    title: state.userBookState.newBook.title,
-    rating: state.userBookState.newBook.rating,
-    author: state.userBookState.newBook.author
-  };
-};
+const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser,
+  title: state.userBookState.newBook.title,
+  rating: state.userBookState.newBook.rating,
+  author: state.userBookState.newBook.author
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -250,6 +244,7 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
+
 
 const AddNewBookForm = compose(
   withFirebase,

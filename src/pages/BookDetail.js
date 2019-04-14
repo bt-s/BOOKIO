@@ -1,73 +1,125 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from '../components/GoogleMap/GoogleMap';
-import imageDummy from '../images/kafka.jpg';
-import userProfile from '../images/kafka.jpg';
+import {withFirebase} from '../components/Firebase';
+import UserLabel from '../components/Books/UserLabel';
+import RatingStars from '../components/Books/RatingStars';
 
-import {faStar, faStarHalf} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+const BookDetailContainer = props => {
+  const [book, setBooks] = useState([]);
+  const [owner, setOwner] = useState([]);
 
-const getStars = rating => {
-  // Round to nearest half
-  rating = Math.round(rating * 2) / 2;
-  let output = [];
+  useEffect(() => {
+    fetchBookInfo(props.match.params.bookId);
+  }, []);
 
-  // Append all the filled whole stars
-  for (let i = rating; i > 0; i--)
-    // If there is a half a star, append it
-    if (i === 0.5) {
-      output.push(<FontAwesomeIcon icon={faStarHalf} />);
-    } else {
-      output.push(<FontAwesomeIcon icon={faStar} />);
-    }
-  return output;
+  const fetchBookInfo = bookId => {
+    const bookDetail = props.firebase.book(bookId);
+    bookDetail
+      .get()
+      .then(book => {
+        if (book.exists) {
+          setBooks(book.data());
+          fetchOwnerInfo(book.data().owner);
+        } else {
+          console.error('No such document!');
+        }
+      })
+      .catch(function(error) {
+        console.error('Error getting document:', error);
+      });
+  };
+
+  const fetchOwnerInfo = ownerId => {
+    var ownerInfo = props.firebase.user(ownerId);
+    ownerInfo
+      .get()
+      .then(owner => {
+        if (owner.exists) {
+          setOwner(owner.data());
+        } else {
+          console.error('owner undefined');
+        }
+      })
+      .catch(function(error) {
+        console.error('Error getting document:', error);
+      });
+  };
+
+  const loc = book.location;
+  if (loc !== undefined) {
+    const latitude = loc.lat;
+    const longitude = loc.lon;
+  }
+
+  return (
+    <BookDetail
+      book={book}
+      owner={owner}
+      firebase={props.firebase}
+      bookId={props.match.params.bookId}
+    />
+  );
 };
 
-
-const BookDetail = props => (
-  <div className="book-details-container">
-    <div className="book-info-container">
-      <div className="book-title">{props.bookTitle}</div>
-      <img className="book-img" src={props.imageSource} alt={props.bookTitle} />
-      <div className="rating">{getStars(props.rating)} </div>
-      <div className="header-description">Description </div>
-      <div className="service-description">{props.serviceDescription}</div>
-    </div>
-    <div className="book-pickup-container">
-      <div className="header-pickup">Pickup Location </div>
-      <div className="google-map-wrapper">
-        <GoogleMap />
+const BookDetail = ({book, owner, firebase, bookId}) => {
+  const requestBook = () => {
+    firebase
+      .transactions()
+      .add({
+        providerID: book.owner,
+        consumerID: firebase.getMyUID(),
+        status: 'Ongoing',
+        requestTime: new Date().getTime(),
+        itemID: bookId,
+        type: book.type
+      })
+      .then(() => {
+        console.log('reqeust success');
+      })
+      .catch(() => {
+        console.log('request fail');
+      });
+  };
+  return (
+    <div className="book-details-container">
+      <div className="book-info-container">
+        <div className="book-title">{book.title}</div>
+        <div className="author">by {book.author}</div>
+        <img className="book-img" src={book.imageUrls} alt={book.title} />
+        <RatingStars rating={toString(book.rating)} />
+        <div className="header-description">Description </div>
+        <div className="service-description">{book.description}</div>
       </div>
-      <div className="distance">{props.distance} </div>
-      <div className ="user-info">
-        <img className="user-profile" src={props.userProfile} alt="" />
-        <div className="user-name">{props.userName}</div>  
+      <div className="book-pickup-container">
+        <div className="header-pickup">Pickup Location </div>
+        <div className="google-map-wrapper">
+          <GoogleMap />
+        </div>
+        {/* We should calculate the distance here. -----book.location----- */}
+        <div className="distance">
+          {book.location && book.location.lat + ' ' + book.location.lon}
+        </div>
+        <div className="owner-field">
+          <span>Provided by:</span>
+          <UserLabel avatarURL={owner.avatar} userName={owner.owner} />
+        </div>
       </div>
-      <button className="btn-request"> Request </button>
     </div>
-  </div>
-);
+  );
+};
 
 BookDetail.propTypes = {
-  imageSource: PropTypes.string,
-  bookTitle: PropTypes.string,
+  imageUrls: PropTypes.string,
+  title: PropTypes.string,
   distance: PropTypes.string,
-  lender: PropTypes.string,
-  bookDescription: PropTypes.string,
-  serviceDescription: PropTypes.string,
+  description: PropTypes.string,
   userProfile: PropTypes.string,
-  rating: PropTypes.string
+  rating: PropTypes.string,
+  reviewTotal: PropTypes.string,
+  author: PropTypes.string,
+  timeToPick: PropTypes.string,
+  pickupLocation: PropTypes.string
 };
 
-BookDetail.defaultProps = {
-  imageSource: imageDummy,
-  bookTitle: 'Kafka on the Shore',
-  distance: '1.2 km away',
-  userName: 'Spongebob',
-  serviceDescription:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu',
-  userProfile: userProfile,
-  rating: 4.5
-};
-
-export default BookDetail;
+export default withFirebase(BookDetailContainer);
