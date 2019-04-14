@@ -7,7 +7,6 @@ import RatingStars from '../components/Books/RatingStars';
 
 const BookDetailContainer = props => {
   const [book, setBooks] = useState([]);
-  const [owner, setOwner] = useState([]);
 
   useEffect(() => {
     fetchBookInfo(props.match.params.bookId);
@@ -20,7 +19,6 @@ const BookDetailContainer = props => {
       .then(book => {
         if (book.exists) {
           setBooks(book.data());
-          fetchOwnerInfo(book.data().owner);
         } else {
           console.error('No such document!');
         }
@@ -30,39 +28,16 @@ const BookDetailContainer = props => {
       });
   };
 
-  const fetchOwnerInfo = ownerId => {
-    var ownerInfo = props.firebase.user(ownerId);
-    ownerInfo
-      .get()
-      .then(owner => {
-        if (owner.exists) {
-          setOwner(owner.data());
-        } else {
-          console.error('owner undefined');
-        }
-      })
-      .catch(function(error) {
-        console.error('Error getting document:', error);
-      });
-  };
-
-  const loc = book.location;
-  if (loc !== undefined) {
-    const latitude = loc.lat;
-    const longitude = loc.lon;
-  }
-
   return (
     <BookDetail
       book={book}
-      owner={owner}
       firebase={props.firebase}
       bookId={props.match.params.bookId}
     />
   );
 };
 
-const BookDetail = ({book, owner, firebase, bookId}) => {
+const BookDetail = ({book, firebase, bookId}) => {
   const requestBook = () => {
     firebase
       .transactions()
@@ -81,28 +56,45 @@ const BookDetail = ({book, owner, firebase, bookId}) => {
         console.log('request fail');
       });
   };
+
+  const borrowOrHave = (book.type = 'to borrow' ? (
+    <span>You can borrow this book from:</span>
+  ) : (
+    <span>You can get this book for free from:</span>
+  ));
+
+  const googleMap = (
+    <div className="google-map-wrapper">
+      {book.location && (
+        <GoogleMap
+          width="250px"
+          height="350px"
+          lat={book.location.lat}
+          lng={book.location.lon}
+        />
+      )}
+    </div>
+  );
+
   return (
     <div className="book-details-container">
       <div className="book-info-container">
         <div className="book-title">{book.title}</div>
         <div className="author">by {book.author}</div>
         <img className="book-img" src={book.imageUrls} alt={book.title} />
-        <RatingStars rating={toString(book.rating)} />
+        <div className="book-rating">
+          <span>GoodReads users give this book: </span>
+          <RatingStars rating={'' + book.rating} />
+        </div>
         <div className="header-description">Description </div>
-        <div className="service-description">{book.description}</div>
+        <div className="book-description">{book.description}</div>
       </div>
       <div className="book-pickup-container">
         <div className="header-pickup">Pickup Location </div>
-        <div className="google-map-wrapper">
-          <GoogleMap />
-        </div>
-        {/* We should calculate the distance here. -----book.location----- */}
-        <div className="distance">
-          {book.location && book.location.lat + ' ' + book.location.lon}
-        </div>
+        {googleMap}
         <div className="owner-field">
-          <span>Provided by:</span>
-          <UserLabel avatarURL={owner.avatar} userName={owner.owner} />
+          {borrowOrHave}
+          <UserLabel avatarURL={book.avatar} userName={book.owner} />
         </div>
       </div>
     </div>

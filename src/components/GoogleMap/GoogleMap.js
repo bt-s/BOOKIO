@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
@@ -8,32 +9,38 @@ const LoadingContainer = props => <Loader />;
 
 export const MapContainer = props => {
   const style = {
-    width: '250px',
-    height: '350px',
+    width: props.width,
+    height: props.height
   };
 
-
-  const initialCoordinates = {
-    lat: 59.3498,
-    lng: 18.0707,
-  };
-
-  const locationName = 'KTH, Stockholm';
+  console.log(style);
 
   return (
-    <Map
-      google={props.google}
-      style={style}
-      initialCenter={initialCoordinates}
-      zoom={12}>
-      <Marker name={locationName} />
-    </Map>
+    <React.Fragment>
+      <Map
+        google={props.google}
+        style={style}
+        initialCenter={{
+          lat: props.lat,
+          lng: props.lng
+        }}
+        zoom={12}>
+        <Marker />
+      </Map>
+    </React.Fragment>
   );
+};
+
+MapContainer.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+  lat: PropTypes.number,
+  lng: PropTypes.number
 };
 
 const GoogleMap = GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-  LoadingContainer: LoadingContainer,
+  LoadingContainer: LoadingContainer
 })(MapContainer);
 
 export default GoogleMap;
