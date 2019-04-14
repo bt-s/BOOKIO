@@ -50,7 +50,7 @@ const BookDetail = ({book, firebase, bookId}) => {
         type: book.type
       })
       .then(() => {
-        console.log('reqeust success');
+        console.log('request success');
       })
       .catch(() => {
         console.log('request fail');
@@ -62,8 +62,6 @@ const BookDetail = ({book, firebase, bookId}) => {
   ) : (
     <span>You can get this book for free from:</span>
   ));
-
-  if (book.location) console.log(book.location);
 
   const googleMap = (
     <div className="google-map-wrapper">
