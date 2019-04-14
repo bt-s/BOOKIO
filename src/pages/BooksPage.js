@@ -57,10 +57,12 @@ const BooksPage = props => {
       });
   };
 
-  if (_.isEmpty(props.books)) getBooks();
+  if (_.isEmpty(props.books) && props.searchBool === false) {
+    getBooks();
+  }
 
   return (
-    <div>
+    <React.Fragment>
       <div className="books-tool-bar">
         <BooksFilters
           onBorrowFilter={onBorrowFilter}
@@ -75,17 +77,19 @@ const BooksPage = props => {
       ) : (
         <Loader />
       )}
-    </div>
+    </React.Fragment>
   );
 };
 
 BooksPage.propTypes = {
   books: PropTypes.array,
-  storeBooks: PropTypes.func
+  storeBooks: PropTypes.func,
+  searchBool: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  books: state.booksState.books
+  books: state.booksState.books,
+  searchBool: state.searchState
 });
 
 const mapDispatchToProps = dispatch => ({
