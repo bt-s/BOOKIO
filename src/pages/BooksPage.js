@@ -79,6 +79,7 @@ const BooksPage = props => {
         <FilterGroup
           onFilterUpdate={filterStatus => {
             console.log('filter status', filterStatus);
+            onFilter('to borrow');
           }}
           filters={['Books to Borrow', 'Books to Have', 'Near Me']}
         />
