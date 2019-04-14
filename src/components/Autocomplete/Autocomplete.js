@@ -1,11 +1,25 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 const Autocomplete = props => {
-  const {getUserPick, fetchSuggestions, suggestions, isLoading} = props;
+  const {
+    getUserPick,
+    fetchSuggestions,
+    suggestions,
+    isLoading,
+    suggestionsImage,
+    suggestionsAuthor
+  } = props;
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [userInput, setUserInput] = useState('');
+
+  let wrapper = null;
+  const wrapperRef = useCallback(node => {
+    if (node !== null) {
+      wrapper = node;
+    }
+  }, []);
 
   const onChange = e => {
     const userInputVal = e.currentTarget.value;
@@ -22,6 +36,20 @@ const Autocomplete = props => {
     setShowSuggestions(false);
     setUserInput(e.currentTarget.innerText);
     if (getUserPick) getUserPick(activeSuggestion);
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = e => {
+    if (wrapper && !wrapper.contains(e.target)) {
+      setShowSuggestions(false);
+    }
   };
 
   const onMouseEnter = index => {
@@ -51,6 +79,8 @@ const Autocomplete = props => {
         return;
       }
       setActiveSuggestion(activeSuggestion + 1);
+    } else if (e.keyCode === 27) {
+      setShowSuggestions(false);
     }
   };
 
@@ -58,7 +88,7 @@ const Autocomplete = props => {
     showSuggestions &&
     userInput &&
     (!isLoading ? (
-      <ul className="suggestions">
+      <ul className="suggestions" ref={wrapperRef}>
         {suggestions.map((suggestion, index) => {
           let className;
 
@@ -70,10 +100,22 @@ const Autocomplete = props => {
           return (
             <li
               className={className}
-              key={suggestion}
+              key={index}
               onClick={onClick}
               onMouseEnter={() => onMouseEnter(index)}>
-              {suggestion}
+              {suggestionsImage && (
+                <img
+                  alt=".."
+                  className="image-suggestion"
+                  src={suggestionsImage[index]}
+                />
+              )}
+              <div className="desc-wrapper">
+                <div>{suggestion}</div>
+                {suggestionsAuthor && (
+                  <span>{'by ' + suggestionsAuthor[index]}</span>
+                )}
+              </div>
             </li>
           );
         })}

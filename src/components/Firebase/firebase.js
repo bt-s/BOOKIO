@@ -2,6 +2,7 @@ import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+import {index} from '../Algolia';
 
 const devConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -54,8 +55,8 @@ class Firebase {
         const img = document.getElementByID(imgId);
         img.src = url;
       })
-      .catch(error => {
-        console.log(error);
+      .catch(err => {
+        console.error(err);
       });
 
   // *** Auth API ***
@@ -93,6 +94,31 @@ class Firebase {
     this.auth.currentUser.sendEmailVerification({
       url: config.confirmationEmailRedirect
     });
+
+  // *** Algolia API ***
+  onBooksAddedListener = () =>
+    this.db.collection('books').onSnapshot(snap => {
+      snap.docChanges().forEach(change => {
+        if (change.type === 'added') {
+          this.addOrUpdateIndexRecord(change.doc);
+        }
+      });
+    });
+
+  // TODO This is not so efficient: for some reason Firestore thinks
+  // that all its book objects have changed and then sends all of them
+  // to Algolia
+  addOrUpdateIndexRecord(dataSnapshot) {
+    let firebaseObject = dataSnapshot.data();
+    // Specify Algolia's objectID using the Firebase object key
+    firebaseObject.objectID = dataSnapshot.id;
+    // Add or update object
+    index.saveObject(firebaseObject, err => {
+      if (err) {
+        throw err;
+      }
+    });
+  }
 
   // *** Merge Auth and DB User API *** //
   onAuthUserListener = (next, fallback) =>
@@ -139,7 +165,7 @@ class Firebase {
   users = () => this.db.collection('users');
   book = uid => this.db.doc(`books/${uid}`);
   books = () => this.db.collection('books');
-
+  transaction = id => this.db.doc(`transactions/${id}`);
   transactions = () => this.db.collection('transactions');
 }
 

@@ -6,6 +6,7 @@ $description-height: 200px;
   justify-content: center;
   align-content: center;
   position: fixed;
+  z-index: 10;
   left: 30%;
   top: 40%;
   background: black;
@@ -24,6 +25,7 @@ $description-height: 200px;
     display: none;
   }
   width: 100%;
+  z-index: 10;
   transition: all 1.8s ease;
   position: fixed;
   top: $navbar-height;
@@ -37,6 +39,7 @@ $description-height: 200px;
     display: none;
   }
   position: fixed;
+  z-index: 10;
   top: $navbar-height;
   height: 4px;
   box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
@@ -67,25 +70,35 @@ $description-height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      .booktype {
-        width: 100%;
-        height: 35px;
-      }
-      .btn-publish {
-        width: 166px;
-        height: 43px;
-        box-shadow: $button-shadow;
-        background-color: $dominant-color;
-        border-radius: 30px;
-        align-self: flex-end;
-        margin-top: $description-height;
-      }
+    }
+    .validation-error {
+      background-color: transparent;
+      padding: 0px;
     }
   }
+
+  .booktype {
+    width: 100%;
+    height: 35px;
+  }
+
+  .btn-publish {
+    width: 166px;
+    height: 43px;
+    box-shadow: $button-shadow;
+    background-color: black;
+    border-radius: 30px;
+    align-self: flex-start;
+    margin-top: 20px;
+    // z-index: 5;
+    position: relative;
+  }
+
   .input-description {
     height: $description-height;
     width: 100%;
     resize: none;
+    padding: 10px;
   }
   .title-input {
     width: 100%;

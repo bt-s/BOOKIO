@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import AddNewBookForm from '../components/AddNewBookForm/AddNewBookForm';
 import DragAndDrop from '../components/AddNewBookForm/DragAndDrop';
 import {connect} from 'react-redux';
@@ -6,7 +6,6 @@ import {bindActionCreators} from 'redux';
 import {addNewUserBook} from '../redux/actions/addNewUserBook';
 import {withFirebase} from '../components/Firebase';
 import {compose} from 'recompose';
-import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
@@ -36,15 +35,11 @@ const AddNewBookBase = props => {
         <img src={URL.createObjectURL(file)} alt={'to be uploaded'} />
         <div className="text">{file.name}</div>
         <button onClick={() => removeFiles(i)}>
-          <FontAwesomeIcon icon={faTimesCircle} />
+          <FontAwesomeIcon icon="times-circle" />
         </button>
       </div>
     );
   };
-
-  useEffect(() => {
-    console.log(files);
-  });
 
   //TOOO: Drag to change the order of the uploaded
 

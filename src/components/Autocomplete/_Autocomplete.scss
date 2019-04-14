@@ -8,29 +8,64 @@ input {
   border: 1px solid #999;
   border-top-width: 0;
   list-style: none;
-  margin-top: 0;
+  margin: 0px 7px;
   max-height: 143px;
   overflow-y: auto;
   padding-left: 0;
-  width: calc(300px + 1rem);
+  border-radius: 0px !important;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
 }
 
 .suggestions li {
   padding: 0.5rem;
+  background-color: #bfbfbf;
+  color: $black;
+  display: flex;
+}
+.suggestions img {
+  width: 35px;
+  height: 100%;
+  margin-right: 5px;
+  align-items: flex-start;
+}
+
+.suggestions .desc-wrapper {
+  height: 100%;
+  margin-top: 7px;
+  font-size: 15px;
+  width: 100%;
+  overflow: hidden;
+  // align-items: flex-start;
+}
+
+.suggestions .desc-wrapper div {
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.suggestions .desc-wrapper span {
+  font-size: 12px;
 }
 
 .loading {
   padding: 0.5rem;
+  background-color: #bfbfbf;
+  font-size: 15px;
+  color: $black;
 }
 
 .suggestion-active,
 .suggestions li:hover {
-  background-color: #008f68;
-  color: #fae042;
+  background-color: #4d4d4d;
+  color: $white;
   cursor: pointer;
   font-weight: 700;
 }
 
 .suggestions li:not(:last-of-type) {
-  border-bottom: 1px solid #999;
+  border-bottom: 2px solid #999;
 }

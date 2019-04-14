@@ -35,7 +35,7 @@ const AccountPage = props => {
             {props.authUser.email}
           </span>
           <span className="info-item">
-            <FontAwesomeIcon icon={faPhone} />
+            <FontAwesomeIcon icon="phone" />
             {props.authUser.phoneNumber}
           </span>
           <span className="info-item">

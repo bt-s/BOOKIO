@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {throttle} from '../../helpers/utils';
@@ -12,11 +12,6 @@ const TitleForm = props => {
     query => props.fetchBookTitleSuggestions(query),
     1000
   );
-
-  useEffect(() => {
-    // TODO: Get location from props and set the location state here
-    // TODO: set the owner state with ID from local storage
-  });
 
   const handleUserPick = value => {
     let userPick = props.bookTitleSuggestions[value];
@@ -38,6 +33,9 @@ const TitleForm = props => {
         )}
         suggestionsImage={props.bookTitleSuggestions.map(
           suggestion => suggestion.imageUrl
+        )}
+        suggestionsAuthor={props.bookTitleSuggestions.map(
+          suggestion => suggestion.author.name
         )}
         getUserPick={handleUserPick}
       />

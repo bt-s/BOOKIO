@@ -1,5 +1,4 @@
 $border-radius: 2px;
-
 $navbar-icon-size: 20px;
 
 .navbar {
@@ -10,7 +9,7 @@ $navbar-icon-size: 20px;
   width: 100%;
   height: $navbar-height-mobile;
   background-color: $black-lighter;
-  z-index: 10;
+  z-index: 1000;
 
   @include media-breakpoint(sm) {
     height: $navbar-height;
@@ -56,35 +55,13 @@ $navbar-icon-size: 20px;
   }
 }
 
-.navbar-search-container {
-  display: none;
-
-  @include media-breakpoint(sm) {
-    display: flex;
-    flex: 1 0 auto;
-    max-width: 300px;
-    margin-right: auto;
-    margin-left: 60px;
-    background-color: $white;
-    height: 30px;
-    display: flex;
-    padding: 0 20px;
-    align-items: center;
-    border-radius: $border-radius;
-    font-size: 10px;
-  }
-
-  @include media-breakpoint(md) {
-    max-width: 400px;
-  }
-}
-
 .navbar-authentication {
   font-size: 12px;
   margin-left: auto;
   margin-right: 10px;
   font-weight: 600;
   color: $white;
+  order: 3;
 
   @include media-breakpoint(sm) {
     font-size: 15px;
@@ -115,17 +92,9 @@ $navbar-icon-size: 20px;
 
 .navbar-bookshelves,
 .navbar-account {
-  display: none;
-
-  @include media-breakpoint(sm) {
-    display: block;
-  }
-}
-
-.navbar-bookshelves,
-.navbar-account,
-.navbar-mobile-menu {
   cursor: pointer;
+  margin-bottom: 3px;
+  height: $navbar-icon-size;
 
   path {
     fill: $white;
@@ -138,14 +107,33 @@ $navbar-icon-size: 20px;
   }
 }
 
-.navbar-bookshelves,
-.navbar-account {
+.navbar-bookshelves {
+  order: 2;
+
+  @include media-breakpoint(sm) {
+    order: 3;
+  }
+
   svg {
     margin-right: $padding-sm;
   }
 }
 
 .navbar-account {
+  svg {
+    @include media-breakpoint(sm) {
+      margin-right: $padding-sm;
+    }
+  }
+}
+
+.navbar-account {
+  order: 3;
+
+  @include media-breakpoint(sm) {
+    order: 4;
+  }
+
   .dd-list {
     left: auto;
     right: 0;
@@ -154,6 +142,7 @@ $navbar-icon-size: 20px;
     border-radius: $border-radius;
     border: $dropdown-menu-border;
     box-shadow: $dropdown-menu-box-shadow;
+    z-index: 2;
   }
 
   .dd-list-item {
@@ -185,29 +174,6 @@ $navbar-icon-size: 20px;
       align-items: center;
       width: 100%;
       text-decoration: none;
-    }
-  }
-}
-
-.navbar-mobile-menu {
-  background: none;
-  border: none;
-
-  .fa-times,
-  .fa-bars {
-    font-size: $navbar-icon-size;
-    width: $navbar-icon-size;
-    height: $navbar-icon-size;
-  }
-
-  .fa-times {
-    display: none;
-  }
-
-  @include media-breakpoint(sm) {
-    .fa-times,
-    .fa-bars {
-      display: none;
     }
   }
 }
