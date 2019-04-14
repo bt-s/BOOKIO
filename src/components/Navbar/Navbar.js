@@ -10,6 +10,7 @@ import * as ROLES from '../../constants/roles';
 import BrandLogo from '../BrandLogo/BrandLogo';
 import Button from '../Button/Button';
 import Dropdown from '../Dropdown/Dropdown';
+import Search from '../Search/Search';
 import SignOut from '../Authentication/SignOut';
 
 const bookShelfLink = (
@@ -107,11 +108,7 @@ const Navbar = props => {
 
   const mobileBreakPoint = 768;
 
-  const itemSearchBar = (
-    <div className="navbar-search-container">
-      A search component will be inserted here...
-    </div>
-  );
+  const itemSearchBar = <Search />;
 
   const mobileMenuButton = (
     <Button

@@ -2,99 +2,67 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import GoogleMap from '../components/GoogleMap/GoogleMap';
 import {withFirebase} from '../components/Firebase';
-import imageDummy from '../images/kafka.jpg';
-import userProfile from '../images/kafka.jpg';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {UserLabel} from '../components/Books/Components';
+import UserLabel from '../components/Books/UserLabel';
+import RatingStars from '../components/Books/RatingStars';
 
-const book_id = 'niK1Q2TzWqffiZVj1YrA';
-
-const BookDetailComponent = props => {
-  const [loading, setLoading] = useState(false);
+const BookDetailContainer = props => {
   const [book, setBooks] = useState([]);
   const [owner, setOwner] = useState([]);
 
   useEffect(() => {
-    fetchBookInfo();
-    // fetchOwnerInfo();
+    fetchBookInfo(props.match.params.bookId);
   }, []);
 
-  const fetchBookInfo = () => {
-    setLoading(true);
-    var bookDetail = props.firebase.book(book_id);
+  const fetchBookInfo = bookId => {
+    const bookDetail = props.firebase.book(bookId);
     bookDetail
       .get()
       .then(book => {
         if (book.exists) {
-          setLoading(false);
           setBooks(book.data());
           fetchOwnerInfo(book.data().owner);
-          console.log('book data', book.data());
         } else {
-          console.log('No such document!');
+          console.error('No such document!');
         }
       })
       .catch(function(error) {
-        setLoading(false);
-        console.log('Error getting document:', error);
+        console.error('Error getting document:', error);
       });
   };
 
   const fetchOwnerInfo = ownerId => {
-    setLoading(true);
     var ownerInfo = props.firebase.user(ownerId);
     ownerInfo
       .get()
       .then(owner => {
         if (owner.exists) {
           setOwner(owner.data());
-          setLoading(false);
-          console.log(owner.data(), 'owner data');
         } else {
-          console.log('owner undefined');
+          console.error('owner undefined');
         }
       })
       .catch(function(error) {
-        setLoading(false);
-        console.log('Error getting document:', error);
+        console.error('Error getting document:', error);
       });
   };
 
-  var loc = book.location;
-  var latitude;
-  var longitude;
+  const loc = book.location;
   if (loc !== undefined) {
-    console.log('latitude:' + loc.lat);
-    latitude = loc.lat;
-
-    console.log('longitude:' + loc.lon);
-    longitude = loc.lon;
+    const latitude = loc.lat;
+    const longitude = loc.lon;
   }
 
   return (
-    <div>
-      <BookDetail book={book} owner={owner} firebase={props.firebase} />
-    </div>
+    <BookDetail
+      book={book}
+      owner={owner}
+      firebase={props.firebase}
+      bookId={props.match.params.bookId}
+    />
   );
 };
 
-const getStars = rating => {
-  // Round to nearest half
-  rating = Math.round(rating * 2) / 2;
-  let output = [];
-
-  // Append all the filled whole stars
-  for (let i = rating; i > 0; i--)
-    // If there is a half a star, append it
-    if (i === 0.5) {
-      output.push(<FontAwesomeIcon icon="star-half" />);
-    } else {
-      output.push(<FontAwesomeIcon icon="star" />);
-    }
-  return output;
-};
-
-const BookDetail = ({book, owner, firebase, distance}) => {
+const BookDetail = ({book, owner, firebase, bookId}) => {
   const requestBook = () => {
     firebase
       .transactions()
@@ -103,7 +71,7 @@ const BookDetail = ({book, owner, firebase, distance}) => {
         consumerID: firebase.getMyUID(),
         status: 'Ongoing',
         requestTime: new Date().getTime(),
-        itemID: book_id,
+        itemID: bookId,
         type: book.type
       })
       .then(() => {
@@ -119,7 +87,7 @@ const BookDetail = ({book, owner, firebase, distance}) => {
         <div className="book-title">{book.title}</div>
         <div className="author">by {book.author}</div>
         <img className="book-img" src={book.imageUrls} alt={book.title} />
-        <div className="rating">{getStars(book.rating)} </div>
+        <RatingStars rating={toString(book.rating)} />
         <div className="header-description">Description </div>
         <div className="service-description">{book.description}</div>
       </div>
@@ -128,10 +96,13 @@ const BookDetail = ({book, owner, firebase, distance}) => {
         <div className="google-map-wrapper">
           <GoogleMap />
         </div>
-        <div className="distance">{distance} </div>
+        {/* We should calculate the distance here. -----book.location----- */}
+        <div className="distance">
+          {book.location && book.location.lat + ' ' + book.location.lon}
+        </div>
         <div className="owner-field">
           <span>Provided by:</span>
-          <UserLabel avatarURL={owner.photoURL} userName={owner.username} />
+          <UserLabel avatarURL={owner.avatar} userName={owner.owner} />
         </div>
       </div>
     </div>
@@ -151,21 +122,4 @@ BookDetail.propTypes = {
   pickupLocation: PropTypes.string
 };
 
-BookDetail.defaultProps = {
-  imageUrls: imageDummy,
-  title: 'Kafka on the Shore',
-  distance: '1.2 km away',
-  owner: 'Spongebob',
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu',
-  aboutBook:
-    'This book is about how to know urself this book is about how to know urself this book is about how to know urself ',
-  userProfile: userProfile,
-  rating: '4.5',
-  reviewTotal: '123',
-  author: 'Haruki Murakkami',
-  timeToPick: '12 March 2019, 18.00',
-  pickupLocation: 'KTH Entree '
-};
-
-export default withFirebase(BookDetailComponent);
+export default withFirebase(BookDetailContainer);

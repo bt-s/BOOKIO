@@ -74,6 +74,9 @@ const AddNewBookFormBase = props => {
           }, 2000);
         });
       })
+      .then(res => {
+        firebase.onBooksAddedListener();
+      })
       .catch(() => {
         addNewUserBook('error');
       });

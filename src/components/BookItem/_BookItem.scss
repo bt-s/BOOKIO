@@ -1,5 +1,5 @@
 .book-item-container {
-  max-width: 300px;
+  max-width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -8,13 +8,21 @@
   border-radius: 10px;
   max-height: 400px;
   height: 350px;
-  max-width: 250px;
+  transition: all 0.2s ease-in-out;
+
+  @include media-breakpoint(sm) {
+    max-width: 250px;
+  }
 
   a {
     display: flex;
     flex-direction: column;
     text-decoration: none;
     height: 100%;
+  }
+
+  &:hover {
+    transform: scale(1.015, 1.015) translateY(-1px);
   }
 }
 
