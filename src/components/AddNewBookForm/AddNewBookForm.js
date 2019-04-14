@@ -10,6 +10,7 @@ import {
 import {withFirebase} from '../Firebase';
 import {uploadPictureToFirebase} from '../../helpers/storageHelper';
 import TitleForm from './TitleForm';
+import Map from '../GoogleMap/GoogleMap';
 
 const AddNewBookFormBase = props => {
   const {
@@ -35,6 +36,10 @@ const AddNewBookFormBase = props => {
       lat: position.coords.latitude,
       lon: position.coords.longitude
     });
+  };
+
+  const changeLocation = loc => {
+    setLocation(loc);
   };
 
   const handleImageUploaded = url => {
@@ -145,6 +150,14 @@ const AddNewBookFormBase = props => {
           <option value="lend">Lend</option>
           <option value="giveaway">Giveaway</option>
         </select>
+
+        <Map
+          style={{width: '40%', height: '200px'}}
+          zoom={15}
+          coord={location}
+          getCoord={changeLocation}
+        />
+
         <button
           className="btn-publish btn"
           onClick={() => {
