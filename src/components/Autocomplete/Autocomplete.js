@@ -2,7 +2,14 @@ import React, {Fragment, useState, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
 
 const Autocomplete = props => {
-  const {getUserPick, fetchSuggestions, suggestions, isLoading} = props;
+  const {
+    getUserPick,
+    fetchSuggestions,
+    suggestions,
+    isLoading,
+    suggestionsImage,
+    suggestionsAuthor
+  } = props;
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [userInput, setUserInput] = useState('');
@@ -96,7 +103,19 @@ const Autocomplete = props => {
               key={index}
               onClick={onClick}
               onMouseEnter={() => onMouseEnter(index)}>
-              {suggestion}
+              {suggestionsImage && (
+                <img
+                  alt=".."
+                  className="image-suggestion"
+                  src={suggestionsImage[index]}
+                />
+              )}
+              <div className="desc-wrapper">
+                <div>{suggestion}</div>
+                {suggestionsAuthor && (
+                  <span>{'by ' + suggestionsAuthor[index]}</span>
+                )}
+              </div>
             </li>
           );
         })}

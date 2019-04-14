@@ -34,6 +34,9 @@ const TitleForm = props => {
         suggestionsImage={props.bookTitleSuggestions.map(
           suggestion => suggestion.imageUrl
         )}
+        suggestionsAuthor={props.bookTitleSuggestions.map(
+          suggestion => suggestion.author.name
+        )}
         getUserPick={handleUserPick}
       />
     </React.Fragment>
