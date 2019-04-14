@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -8,7 +8,6 @@ import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
 import BrandLogo from '../BrandLogo/BrandLogo';
-import Button from '../Button/Button';
 import Dropdown from '../Dropdown/Dropdown';
 import Search from '../Search/Search';
 import SignOut from '../Authentication/SignOut';
