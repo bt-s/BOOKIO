@@ -56,7 +56,7 @@ BookItem.propTypes = {
   bookTitle: PropTypes.string,
   bookDescription: PropTypes.string,
   bookImgSrc: PropTypes.string,
-  distance: PropTypes.string,
+  distance: PropTypes.number,
   type: PropTypes.string,
   userAvatar: PropTypes.string,
   userName: PropTypes.string

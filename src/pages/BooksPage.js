@@ -56,7 +56,6 @@ const BooksPage = props => {
               coordinate.lng
             ))
         );
-        console.log('dista', res.data);
         props.storeBooks(res.data);
       })
       .catch(err => {
