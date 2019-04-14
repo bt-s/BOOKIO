@@ -44,5 +44,9 @@ footer {
     @include media-breakpoint(xs) {
       flex: 0;
     }
+
+    > span {
+      margin-right: $padding-xxs;
+    }
   }
 }

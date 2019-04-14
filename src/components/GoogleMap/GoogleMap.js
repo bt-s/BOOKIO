@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 import Loader from '../Loader/Loader';
 import PropTypes from 'prop-types';
@@ -53,9 +54,16 @@ export const MapContainer = props => {
   );
 };
 
+MapContainer.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+  lat: PropTypes.number,
+  lng: PropTypes.number
+};
+
 const GoogleMap = GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-  LoadingContainer: LoadingContainer,
+  LoadingContainer: LoadingContainer
 })(MapContainer);
 
 GoogleMap.propTypes = {
