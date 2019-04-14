@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 import Loader from '../Loader/Loader';
-import PropTypes from 'prop-types';
 
 const LoadingContainer = props => <Loader />;
 
@@ -25,7 +24,6 @@ export const MapContainer = props => {
   }, [props.coord]);
 
   useEffect(() => {
-    console.log(props.initCoord);
     setInitialCoordinates({
       lat: props.initCoord.lat,
       lng: props.initCoord.lon
