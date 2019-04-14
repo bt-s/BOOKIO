@@ -11,6 +11,14 @@
   transition: all 0.2s ease-in-out;
 
   @include media-breakpoint(sm) {
+    max-width: 310px;
+  }
+
+  @include media-breakpoint(md) {
+    max-width: 275px;
+  }
+
+  @include media-breakpoint(lg) {
     max-width: 250px;
   }
 
