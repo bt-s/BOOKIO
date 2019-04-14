@@ -1,31 +1,49 @@
-import React from 'react';
-
+import React, {useState, useEffect} from 'react';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
-
 import Loader from '../Loader/Loader';
+import PropTypes from 'prop-types';
 
 const LoadingContainer = props => <Loader />;
 
 export const MapContainer = props => {
-  const style = {
-    width: '350px',
-    height: '420px'
+  const style = props.style;
+  console.log(props.coord);
+  const [initialCoordinates, setInitialCoordinates] = useState({
+    lat: 59.3473154,
+    lng: 18.0732396
+  });
+
+  useEffect(() => {
+    setInitialCoordinates({
+      lat: props.coord.lat,
+      lng: props.coord.lon
+    });
+    console.log('update');
+  }, [props.coord]);
+
+  const onMapClicked = (mapProps, map, coord) => {
+    const {latLng} = coord;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+    console.log('Change loc: ' + lat + ' ' + lng);
+    props.getCoord({lat: lat, lon: lng});
   };
 
-  const initialCoordinates = {
-    lat: 59.3498,
-    lng: 18.0707
-  };
-
-  const locationName = 'KTH, Stockholm';
+  const locationName = 'Your Location';
 
   return (
     <Map
       google={props.google}
       style={style}
       initialCenter={initialCoordinates}
-      zoom={12}>
-      <Marker name={locationName} />
+      center={initialCoordinates}
+      zoom={props.zoom}
+      onClick={onMapClicked}>
+      <Marker
+        name={locationName}
+        // title={locationName}
+        position={initialCoordinates}
+      />
     </Map>
   );
 };
@@ -34,5 +52,12 @@ const GoogleMap = GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   LoadingContainer: LoadingContainer
 })(MapContainer);
+
+GoogleMap.propTypes = {
+  getCoord: PropTypes.func,
+  style: PropTypes.object,
+  zoom: PropTypes.number,
+  coord: PropTypes.object
+};
 
 export default GoogleMap;
