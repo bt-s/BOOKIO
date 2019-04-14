@@ -29,35 +29,7 @@ const BooksPage = props => {
       .catch(err => {
         console.error(err);
       });
-
-    /**
-     * The distance API of both agolia and ourselves are not working....
-     * Thus, I disabled it.
-     */
-
-    // index
-    //   .search({
-    //     filters: `type:"${filter}"`
-    //   })
-    //   .then(res => {
-    //     props.storeBooks(res.hits);
-    //   })
-    //   .catch(err => {
-    //     console.error(err);
-    //   });
   };
-
-  // const onBorrowFilter = e => {
-  //   !borrowFilterOn ? onFilter('to borrow') : getBooks();
-  //   setBorrowFilterOn(!borrowFilterOn);
-  // };
-
-  // const onHaveFilter = e => {
-  //   !haveFilterOn ? onFilter('to have') : getBooks();
-  //   setHaveFilterOn(!haveFilterOn);
-  // };
-
-  // const onNearFilter = evt => {};
 
   const withDistance = books => {
     return books.map(book => {
@@ -90,7 +62,6 @@ const BooksPage = props => {
     navigator.geolocation.getCurrentPosition(pos => {
       console.log('im at', pos.coords);
       setCoordinate({lat: pos.coords.latitude, lng: pos.coords.longitude});
-      // coordinate = {lat: pos.coords.latitude, lng: pos.coords.longitude};
       getBooks();
     });
   }, []);

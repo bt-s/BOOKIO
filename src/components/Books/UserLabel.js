@@ -10,7 +10,7 @@ const UserLabel = props => (
 );
 
 UserLabel.propTypes = {
-  avatarUrl: PropTypes.object,
+  avatarUrl: PropTypes.string,
   bio: PropTypes.string,
   userName: PropTypes.string
 };

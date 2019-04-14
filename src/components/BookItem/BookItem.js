@@ -8,6 +8,17 @@ import Numeral from 'numeral';
 import RatingStars from '../Books/RatingStars';
 import UserLabel from '../Books/UserLabel';
 
+// This should be reused. in future. don't delete again, thx.
+const Address = props => {
+  return (
+    <div className="item-address">
+      <span>{props.distance}</span>
+      <span className="separator">{props.separator}</span>
+      <span>{props.name}</span>
+    </div>
+  );
+};
+
 const BookItem = props => {
   return (
     <Link to={'/detail/' + props.bookId}>
@@ -26,7 +37,7 @@ const BookItem = props => {
           <div className="book-item-type">{props.type}</div>
         </div>
         <p className="book-item-description">
-          {props.bookDescription.substring(0, 120) + '...'}
+          {props.bookDescription.substring(0, 80) + '...'}
         </p>
         <div className="book-item-inner-footer">
           <UserLabel userName={props.userName} avatarUrl={props.userAvatar} />
@@ -57,7 +68,7 @@ BookItem.propTypes = {
 };
 
 BookItem.defaultProps = {
-  distance: '1.4 km'
+  distance: ''
 };
 
 export {BookItem};

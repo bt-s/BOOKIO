@@ -14,8 +14,8 @@ const BookDetailContainer = props => {
   }, []);
 
   const fetchOwnerInfo = ownerId => {
-    var ownerInfo = props.firebase.user(ownerId);
-    ownerInfo
+    props.firebase
+      .user(ownerId)
       .get()
       .then(owner => {
         if (owner.exists) {
@@ -30,8 +30,8 @@ const BookDetailContainer = props => {
   };
 
   const fetchBookInfo = bookId => {
-    const bookDetail = props.firebase.book(bookId);
-    bookDetail
+    props.firebase
+      .book(bookId)
       .get()
       .then(book => {
         if (book.exists) {
