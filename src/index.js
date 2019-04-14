@@ -54,9 +54,6 @@ const TestComponent = props => {
         <br />
         <Link to={ROUTES.MY_BOOK_HISTORY}>My book history page</Link>
       </div>
-      <div className="google-map-wrapper">
-        <GoogleMap />
-      </div>
       <BookItem />
       <BookItemV2 />
     </React.Fragment>
