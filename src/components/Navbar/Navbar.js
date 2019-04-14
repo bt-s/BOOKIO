@@ -94,50 +94,19 @@ const NavbarNonAuth = () => (
   </div>
 );
 
-const Navbar = props => {
-  const [showMenu, setShowMenu] = useState(false);
-
-  const onMenuToggle = e => {
-    setShowMenu(!showMenu);
-  };
-
-  const screenWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  const mobileBreakPoint = 768;
-
-  const itemSearchBar = <Search />;
-
-  const mobileMenuButton = (
-    <Button
-      className="navbar-mobile-menu"
-      onClick={onMenuToggle}
-      icon={
-        <React.Fragment>
-          <FontAwesomeIcon icon="bars" />
-          <FontAwesomeIcon icon="times" />
-        </React.Fragment>
-      }
-    />
-  );
-
-  return (
-    <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
-      <div className="navbar-content-container">
-        <BrandLogo />
-        {itemSearchBar}
-        {props.authUser ? (
-          <NavbarAuth authUser={props.authUser} />
-        ) : (
-          <NavbarNonAuth />
-        )}
-        {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
-      </div>
-    </nav>
-  );
-};
+const Navbar = props => (
+  <nav className={'navbar'}>
+    <div className="navbar-content-container">
+      <BrandLogo />
+      <Search />;
+      {props.authUser ? (
+        <NavbarAuth authUser={props.authUser} />
+      ) : (
+        <NavbarNonAuth />
+      )}
+    </div>
+  </nav>
+);
 
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser

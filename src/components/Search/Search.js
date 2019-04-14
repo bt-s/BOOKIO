@@ -33,16 +33,18 @@ const SearchBase = props => {
   };
 
   return (
-    <form className="search-container" onSubmit={onSearchAlgolia}>
+    <div className="search-wrapper">
       <FontAwesomeIcon icon="search" aria-hidden="true" />
-      <input
-        name="search"
-        placeholder="Search for a book"
-        type="text"
-        value={searchString}
-        onChange={handleChange}
-      />
-    </form>
+      <form className="search-container" onSubmit={onSearchAlgolia}>
+        <input
+          name="search"
+          placeholder="Search for a book"
+          type="text"
+          value={searchString}
+          onChange={handleChange}
+        />
+      </form>
+    </div>
   );
 };
 
