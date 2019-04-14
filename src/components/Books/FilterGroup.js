@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
 const FilterGroup = props => {
-  let filterStatus = props.filters.reduce((pre, cur) => {
-    pre[cur] = {pushed: false};
+  const filterStatus = props.filters.reduce((pre, cur) => {
+    pre[cur] = {pushed: true};
     return pre;
   }, {});
+  // const [filterStatus, setFilterStatus] = useState(tmpFilterStatus);
 
   return (
     <div className="filters">
@@ -18,7 +19,11 @@ const FilterGroup = props => {
             if (!props.onFilterUpdate) {
               return;
             }
+            console.log('before change', filterStatus);
             filterStatus[title].pushed = !filterStatus[title].pushed;
+            console.log('after', filterStatus);
+
+            // setFilterStatus({title: {pushed: !filterStatus[title].pushed}});
             props.onFilterUpdate(
               Object.keys(filterStatus).filter(key => filterStatus[key].pushed)
             );

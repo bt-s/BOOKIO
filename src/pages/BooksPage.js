@@ -21,7 +21,7 @@ const BooksPage = props => {
   const onFilter = filter => {
     index
       .search({
-        filters: `type:"${filter}"`
+        filters: filter
       })
       .then(res => {
         props.storeBooks(res.hits);
@@ -29,6 +29,16 @@ const BooksPage = props => {
       .catch(err => {
         console.error(err);
       });
+    // index
+    //   .search({
+    //     filters: `type:"${filter}"`
+    //   })
+    //   .then(res => {
+    //     props.storeBooks(res.hits);
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //   });
   };
 
   const onBorrowFilter = e => {
@@ -77,9 +87,25 @@ const BooksPage = props => {
     <div>
       <div className="books-tool-bar">
         <FilterGroup
-          onFilterUpdate={filterStatus => {
-            console.log('filter status', filterStatus);
-            onFilter('to borrow');
+          onFilterUpdate={filters => {
+            const strMap = {
+              'Books to Borrow': 'to borrow',
+              'Books to Have': 'to have'
+            };
+            console.log('filters', filters);
+            console.log(
+              '00000000000',
+              filters.reduce(
+                (pre, cur) => pre + ' OR type:"' + strMap[cur] + '"',
+                'type:"_____"'
+              )
+            );
+            onFilter(
+              filters.reduce(
+                (pre, cur) => pre + ' OR type:"' + strMap[cur] + '"',
+                'type:"_____"'
+              )
+            );
           }}
           filters={['Books to Borrow', 'Books to Have', 'Near Me']}
         />
