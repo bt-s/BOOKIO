@@ -19,8 +19,36 @@ input {
 .suggestions li {
   padding: 0.5rem;
   background-color: #bfbfbf;
-  font-size: 15px;
   color: $black;
+  display: flex;
+}
+.suggestions img {
+  width: 35px;
+  height: 100%;
+  margin-right: 5px;
+  align-items: flex-start;
+}
+
+.suggestions .desc-wrapper {
+  height: 100%;
+  margin-top: 7px;
+  font-size: 15px;
+  width: 100%;
+  overflow: hidden;
+  // align-items: flex-start;
+}
+
+.suggestions .desc-wrapper div {
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.suggestions .desc-wrapper span {
+  font-size: 12px;
 }
 
 .loading {
