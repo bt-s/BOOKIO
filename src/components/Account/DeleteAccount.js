@@ -12,7 +12,7 @@ const DeleteAccountBase = props => {
     });
   };
 
-  return <Button onClick={onDelete} text={`Delete my account`} />;
+  return <Button onClick={onDelete} text={`Delete My Account`} />;
 };
 
 DeleteAccountBase.propTypes = {

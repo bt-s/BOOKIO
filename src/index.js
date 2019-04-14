@@ -21,6 +21,7 @@ import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
 import BooksPage from './pages/BooksPage';
 import HistoryPage from './pages/HistoryPage';
+import EditProfilePage from './pages/EditProfilePage';
 
 import './styling/style.scss';
 
@@ -126,26 +127,34 @@ const AppBase = () => (
           <WithNavbar>
             <HistoryPage />
           </WithNavbar>
-        </WithFooter>
-      )}
-    />
-    <Route
-      path={ROUTES.SIGN_UP}
-      render={() => (
-        <WithoutNavbar>
-          <SignUpPage />
-        </WithoutNavbar>
-      )}
-    />
-    <Route
-      path={ROUTES.LOG_IN}
-      render={() => (
-        <WithoutNavbar>
-          <SignInPage />
-        </WithoutNavbar>
-      )}
-    />
-  </Switch>
+        )}
+      />
+      <Route
+        path={ROUTES.SIGN_UP}
+        render={() => (
+          <WithoutNavbar>
+            <SignUpPage />
+          </WithoutNavbar>
+        )}
+      />
+      <Route
+        path={ROUTES.LOG_IN}
+        render={() => (
+          <WithoutNavbar>
+            <SignInPage />
+          </WithoutNavbar>
+        )}
+      />
+       <Route
+        path={ROUTES.EDIT_PROFILE}
+        render={() => (
+          <WithoutNavbar>
+            <EditProfilePage />
+          </WithoutNavbar>
+        )}
+      />
+    </Switch>
+  </React.Fragment>
 );
 
 const App = withAuthentication(AppBase);

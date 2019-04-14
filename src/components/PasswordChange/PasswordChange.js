@@ -42,27 +42,27 @@ const PasswordChangeForm = props => {
   return isReset ? (
     <p>Your password has been reset.</p>
   ) : (
-    <form onSubmit={onSubmit}>
-      <label className="form-header">New password</label>
+    <div className ="pw-change">
+    <form onSubmit={onSubmit} className="auth-form">
       <input
         name="passwordOne"
         type="password"
-        placeholder=""
+        placeholder="New Password"
         value={form.passwordOne}
         onChange={handleChange}
       />
-      <label className="form-header">Confirm new password</label>
       <input
         name="passwordTwo"
         type="password"
-        placeholder=""
+        placeholder="Confirm New Password"
         value={form.passwordTwo}
         onChange={handleChange}
       />
-
+      <br/>
       {error.code ? <p>{error.message}</p> : ''}
-      <Button type="submit" onClick={onSubmit} text="Update my password" />
+      <Button type="submit" onClick={onSubmit} text="Update" />
     </form>
+    </div>
   );
 };
 
