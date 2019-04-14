@@ -127,34 +127,34 @@ const AppBase = () => (
           <WithNavbar>
             <HistoryPage />
           </WithNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.SIGN_UP}
-        render={() => (
-          <WithoutNavbar>
-            <SignUpPage />
-          </WithoutNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.LOG_IN}
-        render={() => (
-          <WithoutNavbar>
-            <SignInPage />
-          </WithoutNavbar>
-        )}
-      />
-       <Route
-        path={ROUTES.EDIT_PROFILE}
-        render={() => (
-          <WithoutNavbar>
-            <EditProfilePage />
-          </WithoutNavbar>
-        )}
-      />
-    </Switch>
-  </React.Fragment>
+        </WithFooter>
+      )}
+    />
+    <Route
+      path={ROUTES.SIGN_UP}
+      render={() => (
+        <WithoutNavbar>
+          <SignUpPage />
+        </WithoutNavbar>
+      )}
+    />
+    <Route
+      path={ROUTES.LOG_IN}
+      render={() => (
+        <WithoutNavbar>
+          <SignInPage />
+        </WithoutNavbar>
+      )}
+    />
+    <Route
+      path={ROUTES.EDIT_PROFILE}
+      render={() => (
+        <WithoutNavbar>
+          <EditProfilePage />
+        </WithoutNavbar>
+      )}
+    />
+  </Switch>
 );
 
 const App = withAuthentication(AppBase);
