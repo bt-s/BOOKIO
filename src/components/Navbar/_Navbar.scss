@@ -141,6 +141,7 @@ $navbar-icon-size: 20px;
     border-radius: $border-radius;
     border: $dropdown-menu-border;
     box-shadow: $dropdown-menu-box-shadow;
+    z-index: 2;
   }
 
   .dd-list-item {

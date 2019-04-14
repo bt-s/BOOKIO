@@ -31,26 +31,6 @@ const accountMenuList = [
     classes: 'link section-ending'
   },
   {
-    id: 1,
-    title: <Link to={ROUTES.ACCOUNT}>My borrowed books</Link>,
-    classes: 'link'
-  },
-  {
-    id: 2,
-    title: <Link to={ROUTES.MY_BOOK_HISTORY}>My lended books</Link>,
-    classes: 'link'
-  },
-  {
-    id: 3,
-    title: <Link to={ROUTES.MY_BOOK_HISTORY}>My gotten books</Link>,
-    classes: 'link'
-  },
-  {
-    id: 4,
-    title: <Link to={ROUTES.MY_BOOK_HISTORY}>My given books</Link>,
-    classes: 'link section-ending'
-  },
-  {
     id: 5,
     title: <SignOut />,
     classes: 'link'
