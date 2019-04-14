@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useReducer, useRef} from 'react';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -11,6 +11,8 @@ import {withFirebase} from '../Firebase';
 import {uploadPictureToFirebase} from '../../helpers/storageHelper';
 import TitleForm from './TitleForm';
 import Map from '../GoogleMap/GoogleMap';
+import {Validation, Validator, ValidationHelper} from '../Forms/Validation';
+import {errorReducer} from '../../helpers/validationHelper';
 
 const AddNewBookFormBase = props => {
   const {
@@ -34,6 +36,12 @@ const AddNewBookFormBase = props => {
   const [type, setType] = useState('lend');
   const [progressStyle, setProgressStyle] = useState('off');
   let imageUrls = [];
+  const [error, dispatchError] = useReducer(errorReducer, {});
+  const validationRef = useRef(null);
+
+  const onValidate = error => {
+    dispatchError(error);
+  };
 
   const parseLocation = position => {
     setLocation({
@@ -109,10 +117,16 @@ const AddNewBookFormBase = props => {
       });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = e => {
     addNewUserBook('loading');
-    console.warn('[ADD_NEW_BOOK] Calling API to add New Book');
-    storeData();
+    const allErrors = validationRef.current.validate();
+    console.log(allErrors);
+    console.log(Object.values(allErrors));
+    if (Object.values(allErrors).join('') === '') {
+      console.log(allErrors);
+      console.warn('[ADD_NEW_BOOK] Calling API to add New Book');
+      storeData();
+    }
   };
 
   useEffect(() => {
@@ -124,59 +138,98 @@ const AddNewBookFormBase = props => {
       <div className={'upload-progress ' + progressStyle}>
         <h1>Upload succed, redirecting to homepage.</h1>
       </div>
-      <div className="two-col">
-        <div className="subtitle">Title</div>
-        <TitleForm className="title-input" />
-        <div className="subtitle">Author</div>
-        <input
-          className="title-input"
-          type="text"
-          onChange={e =>
-            changeNewBook({
-              author: e.target.value
-            })
-          }
-          value={author}
-        />
-        <div className="subtitle">Description</div>
-        <textarea
-          className="input-description"
-          placeholder="Describe it"
-          name="description"
-          type="text"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-        />
-      </div>
-      <div className="two-col">
-        <div className="subtitle">Category</div>
-        <select
-          className="booktype"
-          type="text"
-          value={type}
-          onChange={e => setType(e.target.value)}>
-          <option value="lend">Lend</option>
-          <option value="giveaway">Giveaway</option>
-        </select>
+      <Validation ref={validationRef}>
+        <div className="two-col">
+          <div className="subtitle">Title</div>
+          <Validator
+            name="title"
+            value={title}
+            validations={[ValidationHelper.required('*Book Title is required')]}
+            onValidate={onValidate}>
+            <TitleForm className="title-input" />
+          </Validator>
+          {error.title && (
+            <span className="validation-error">{error.title}</span>
+          )}
+          <div className="subtitle">Author</div>
+          <Validator
+            name="author"
+            value={author}
+            validations={[
+              ValidationHelper.required('*Book Author is required')
+            ]}
+            onValidate={onValidate}>
+            <input
+              className="title-input"
+              type="text"
+              onChange={e =>
+                changeNewBook({
+                  author: e.target.value
+                })
+              }
+              value={author}
+            />
+          </Validator>
+          {error.author && (
+            <span className="validation-error">{error.author}</span>
+          )}
+          <div className="subtitle">Description</div>
+          <Validator
+            name="description"
+            value={description}
+            validations={[
+              ValidationHelper.required('*Book Description is required')
+            ]}
+            onValidate={onValidate}>
+            <textarea
+              className="input-description"
+              placeholder="Describe it"
+              name="description"
+              type="text"
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+            />
+          </Validator>
+          {error.description && (
+            <span className="validation-error">{error.description}</span>
+          )}
+        </div>
+        <div className="two-col">
+          <div className="subtitle">Category</div>
+          <select
+            className="booktype"
+            type="text"
+            value={type}
+            onChange={e => setType(e.target.value)}>
+            <option value="lend">Lend</option>
+            <option value="giveaway">Giveaway</option>
+          </select>
 
-        <div className="subtitle">Location</div>
-        <Map
-          style={{width: '40%', height: '200px'}}
-          zoom={15}
-          coord={location}
-          getCoord={changeLocation}
-          initCoord={initLocation}
-        />
+          <div className="subtitle">Location</div>
+          <Map
+            style={{
+              width: '100%',
+              height: '200px',
+              position: 'relative'
+            }}
+            zoom={15}
+            coord={location}
+            getCoord={changeLocation}
+            initCoord={initLocation}
+          />
 
-        <button
-          className="btn-publish btn"
-          onClick={() => {
-            setProgressStyle('on');
-            handleSubmit();
-          }}>
-          Publish{' '}
-        </button>
-      </div>
+          <button
+            className="btn-publish btn"
+            onClick={e => {
+              console.log('test');
+              e.preventDefault();
+              setProgressStyle('on');
+              handleSubmit(e);
+            }}>
+            Publish{' '}
+          </button>
+        </div>
+      </Validation>
     </div>
   );
 };

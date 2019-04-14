@@ -43,7 +43,7 @@ export const MapContainer = props => {
   return (
     <Map
       google={props.google}
-      style={style}
+      containerStyle={{...style, position: 'relative'}}
       initialCenter={initialCoordinates}
       center={initialCoordinates}
       zoom={props.zoom}
