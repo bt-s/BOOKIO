@@ -33,9 +33,6 @@ const HistoryPage = props => {
             .get()
             .then(book => (transac.book = book.exists ? book.data() : false));
         });
-        console.log('missing data added', transacs);
-
-        // 我得在这里 把missing 的info 加入到transactions中, 这些信息需要根据userid 去获取
         setTransactions(transacs);
         setGotTransactions(true);
       });

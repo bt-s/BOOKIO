@@ -22,7 +22,6 @@
 @import '../components/Navbar/Navbar';
 @import '../components/Search/Search';
 @import '../components/PasswordChange/PasswordChange';
-@import '../components/BookDetail/BookDetail';
 @import '../components/Authentication/PasswordForget';
 @import '../components/Authentication/SignIn';
 @import '../components/Authentication/SignUp';
@@ -30,6 +29,7 @@
 @import '../components/Session/Session';
 @import '../pages/AddNewBookPage';
 
+@import '../pages/BookDetail';
 @import '../pages/BooksPage';
 @import '../pages/HistoryPage';
 @import '../pages/HomePage';
