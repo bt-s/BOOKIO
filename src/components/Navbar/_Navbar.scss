@@ -61,6 +61,7 @@ $navbar-icon-size: 20px;
   margin-right: 10px;
   font-weight: 600;
   color: $white;
+  order: 3;
 
   @include media-breakpoint(sm) {
     font-size: 15px;

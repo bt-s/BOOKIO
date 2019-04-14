@@ -50,7 +50,7 @@ const BookDetail = ({book, firebase, bookId}) => {
         type: book.type
       })
       .then(() => {
-        console.log('reqeust success');
+        console.log('request success');
       })
       .catch(() => {
         console.log('request fail');
@@ -69,8 +69,14 @@ const BookDetail = ({book, firebase, bookId}) => {
         <GoogleMap
           width="250px"
           height="350px"
-          lat={book.location.lat}
-          lng={book.location.lon}
+          coord={{
+            lat: book.location.lat,
+            lng: book.location.lon
+          }}
+          initCoord={{
+            lat: book.location.lat,
+            lng: book.location.lon
+          }}
         />
       )}
     </div>

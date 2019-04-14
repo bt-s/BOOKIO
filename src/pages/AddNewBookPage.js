@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import AddNewBookForm from '../components/AddNewBookForm/AddNewBookForm';
 import DragAndDrop from '../components/AddNewBookForm/DragAndDrop';
 import {connect} from 'react-redux';
@@ -40,10 +40,6 @@ const AddNewBookBase = props => {
       </div>
     );
   };
-
-  useEffect(() => {
-    console.log(files);
-  });
 
   //TOOO: Drag to change the order of the uploaded
 
