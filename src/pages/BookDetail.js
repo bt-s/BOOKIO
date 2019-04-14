@@ -63,14 +63,22 @@ const BookDetail = ({book, firebase, bookId}) => {
     <span>You can get this book for free from:</span>
   ));
 
+  if (book.location) console.log(book.location);
+
   const googleMap = (
     <div className="google-map-wrapper">
       {book.location && (
         <GoogleMap
           width="250px"
           height="350px"
-          lat={book.location.lat}
-          lng={book.location.lon}
+          coord={{
+            lat: book.location.lat,
+            lng: book.location.lon
+          }}
+          initCoord={{
+            lat: book.location.lat,
+            lng: book.location.lon
+          }}
         />
       )}
     </div>
