@@ -31,26 +31,6 @@ const accountMenuList = [
     classes: 'link section-ending'
   },
   {
-    id: 1,
-    title: <Link to={ROUTES.ACCOUNT}>My borrowed books</Link>,
-    classes: 'link'
-  },
-  {
-    id: 2,
-    title: <Link to={ROUTES.MY_BOOK_HISTORY}>My lended books</Link>,
-    classes: 'link'
-  },
-  {
-    id: 3,
-    title: <Link to={ROUTES.MY_BOOK_HISTORY}>My gotten books</Link>,
-    classes: 'link'
-  },
-  {
-    id: 4,
-    title: <Link to={ROUTES.MY_BOOK_HISTORY}>My given books</Link>,
-    classes: 'link section-ending'
-  },
-  {
     id: 5,
     title: <SignOut />,
     classes: 'link'
@@ -94,50 +74,19 @@ const NavbarNonAuth = () => (
   </div>
 );
 
-const Navbar = props => {
-  const [showMenu, setShowMenu] = useState(false);
-
-  const onMenuToggle = e => {
-    setShowMenu(!showMenu);
-  };
-
-  const screenWidth =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  const mobileBreakPoint = 768;
-
-  const itemSearchBar = <Search />;
-
-  const mobileMenuButton = (
-    <Button
-      className="navbar-mobile-menu"
-      onClick={onMenuToggle}
-      icon={
-        <React.Fragment>
-          <FontAwesomeIcon icon="bars" />
-          <FontAwesomeIcon icon="times" />
-        </React.Fragment>
-      }
-    />
-  );
-
-  return (
-    <nav className={showMenu ? 'navbar mobile-menu-open' : 'navbar'}>
-      <div className="navbar-content-container">
-        <BrandLogo />
-        {itemSearchBar}
-        {props.authUser ? (
-          <NavbarAuth authUser={props.authUser} />
-        ) : (
-          <NavbarNonAuth />
-        )}
-        {screenWidth < mobileBreakPoint ? mobileMenuButton : null}
-      </div>
-    </nav>
-  );
-};
+const Navbar = props => (
+  <nav className={'navbar'}>
+    <div className="navbar-content-container">
+      <BrandLogo />
+      <Search />;
+      {props.authUser ? (
+        <NavbarAuth authUser={props.authUser} />
+      ) : (
+        <NavbarNonAuth />
+      )}
+    </div>
+  </nav>
+);
 
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser

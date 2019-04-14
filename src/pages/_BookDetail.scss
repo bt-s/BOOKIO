@@ -2,41 +2,30 @@
   margin-top: $padding-xs;
   width: 100%;
   display: flex;
-  margin-left: auto;
-  margin-right: auto;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: flex-start;
-  margin-right: $padding-xs;
-  margin-left: $padding-xs;
 
   .book-info-container {
+    display: flex;
+    flex-direction: column;
     flex-basis: 100%;
     margin-top: $padding-sm;
-    float: left;
-    margin-left: auto;
-    margin-right: auto;
 
     @include media-breakpoint(sm) {
       flex-basis: 60%;
-      float: left;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 60%;
     }
   }
 
   .book-pickup-container {
     flex-basis: 100%;
-    float: left;
     text-align: left;
     margin-top: $padding-sm;
 
     @include media-breakpoint(sm) {
       flex-basis: 20%;
-      float: left;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 138px;
+      margin-top: 105px;
     }
   }
 
@@ -46,56 +35,51 @@
     color: $gray-lighter;
     font-size: 25px;
     margin-bottom: $padding-xs;
-    min-height: 65px;
   }
 
   .author {
-    width: 137px;
-    height: 17px;
     font-size: 14px;
     text-align: left;
     color: $gray-lighter;
-  }
-
-  .header-description {
-    margin-top: $padding-xs;
-    margin-bottom: $padding-xs;
-    width: 116px;
-    height: 21px;
-    font-size: 18px;
-    font-weight: bold;
-    color: $gray-lighter;
-  }
-
-  .service-description {
-    color: $gray-lighter;
-    font-size: 17px;
-    width: fit-content;
-    height: fit-content;
-    text-align: justify;
-  }
-
-  .header-pickup {
-    width: fit-content;
-    height: 21px;
-    font-size: 17px;
-    font-weight: bold;
-    text-align: left;
-    color: $gray-lighter;
-    margin-right: auto;
-    margin-bottom: $padding-xs;
+    padding-bottom: 4px;
   }
 
   .book-img {
-    width: 360px;
-    height: 240px;
+    width: 100%;
+    object-fit: cover;
     margin-right: $padding-xs;
     margin-bottom: $padding-xs;
   }
 
-  .distance {
-    text-align: right;
-    font-size: 12px;
+  .book-rating {
+    display: flex;
+
+    span {
+      padding-right: $padding-xxs;
+    }
+  }
+
+  .header-description {
+    margin-top: $padding-sm;
+    margin-bottom: $padding-xxs;
+    font-size: 18px;
+    font-weight: 600;
+    color: $gray-lighter;
+  }
+
+  .book-description {
+    color: $gray-lighter;
+    font-size: 17px;
+    text-align: left;
+  }
+
+  .header-pickup {
+    width: fit-content;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: left;
+    color: $gray-lighter;
+    margin-bottom: $padding-xs;
   }
 
   .btn-request {
@@ -125,9 +109,14 @@
     margin-bottom: $padding-xs;
 
     @include media-breakpoint(sm) {
-      height: 350px;
-      width: 250px;
       text-align: center;
+    }
+
+    > div {
+      > div {
+        height: 350px !important;
+        width: 250px !important;
+      }
     }
   }
 }

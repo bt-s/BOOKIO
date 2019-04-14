@@ -3,6 +3,11 @@
   left: 0;
   z-index: -1;
   height: 500px;
+  width: 100%;
+
+  @include media-breakpoint(sm) {
+    width: auto;
+  }
 
   @include media-breakpoint(md) {
     height: 600px;
@@ -32,6 +37,7 @@
 
   h1 {
     font-size: 18px;
+    margin-top: 0;
 
     @include media-breakpoint(sm) {
       font-size: 20px;
