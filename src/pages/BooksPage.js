@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
+import {getGeoDistance} from '../helpers/utils';
 import {storeBooks} from '../redux/actions/storeBooks';
 import * as ROUTES from '../constants/routes';
 
@@ -15,6 +16,7 @@ import {index} from '../components/Algolia';
 const BooksPage = props => {
   const [borrowFilterOn, setBorrowFilterOn] = useState(false);
   const [haveFilterOn, setHaveFilterOn] = useState(false);
+  let coordinate = {lat: 23, lng: 23};
 
   const onFilter = filter => {
     index
@@ -45,6 +47,16 @@ const BooksPage = props => {
       url: `https://us-central1-bookio.cloudfunctions.net/getBooks`
     })
       .then(res => {
+        res.data.forEach(
+          book =>
+            (book.distance = getGeoDistance(
+              book.location.lat,
+              book.location.lon,
+              coordinate.lat,
+              coordinate.lng
+            ))
+        );
+        console.log('dista', res.data);
         props.storeBooks(res.data);
       })
       .catch(err => {
@@ -52,9 +64,12 @@ const BooksPage = props => {
       });
   };
 
-  // if (_.isEmpty(props.books)) getBooks();
   useEffect(() => {
-    getBooks();
+    navigator.geolocation.getCurrentPosition(pos => {
+      console.log('im at', pos.coords);
+      coordinate = {lat: pos.coords.latitude, lng: pos.coords.longitude};
+      getBooks();
+    });
   }, []);
 
   return (

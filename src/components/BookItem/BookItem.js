@@ -7,7 +7,6 @@ import RatingStars from '../Books/RatingStars';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const BookItem = props => {
-  //console.log(props);
   return (
     <Link to={'/detail/' + props.bookId}>
       <div className="book-item-header">
@@ -38,9 +37,7 @@ const BookItem = props => {
           </div>
           <div className="book-item-distance-container">
             <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
-            <span className="book-item-distance">
-              {props.locationDistance} away
-            </span>
+            <span className="book-item-distance">{props.distance} away</span>
           </div>
         </div>
       </div>
@@ -53,14 +50,14 @@ BookItem.propTypes = {
   bookTitle: PropTypes.string,
   bookDescription: PropTypes.string,
   bookImgSrc: PropTypes.string,
-  locationDistance: PropTypes.string,
+  distance: PropTypes.string,
   type: PropTypes.string,
   userAvatar: PropTypes.string,
   userName: PropTypes.string
 };
 
 BookItem.defaultProps = {
-  locationDistance: '1.4 km'
+  distance: '1.4 km'
 };
 
 export {BookItem};
