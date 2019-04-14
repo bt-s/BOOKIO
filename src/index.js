@@ -21,6 +21,7 @@ import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
 import BooksPage from './pages/BooksPage';
 import HistoryPage from './pages/HistoryPage';
+import EditProfilePage from './pages/EditProfilePage';
 
 import './styling/style.scss';
 
@@ -127,6 +128,14 @@ const AppBase = () => (
         render={() => (
           <WithoutNavbar>
             <SignInPage />
+          </WithoutNavbar>
+        )}
+      />
+       <Route
+        path={ROUTES.EDIT_PROFILE}
+        render={() => (
+          <WithoutNavbar>
+            <EditProfilePage />
           </WithoutNavbar>
         )}
       />
