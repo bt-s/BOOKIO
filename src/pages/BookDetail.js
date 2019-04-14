@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
 import GoogleMap from '../components/GoogleMap/GoogleMap';
 import {withFirebase} from '../components/Firebase';
 import UserLabel from '../components/Books/UserLabel';
@@ -20,6 +22,7 @@ const BookDetailContainer = props => {
       .then(owner => {
         if (owner.exists) {
           setOwner(owner.data());
+          console.log('fetched owner', owner.data());
         } else {
           console.error('owner undefined');
         }
@@ -36,7 +39,7 @@ const BookDetailContainer = props => {
       .then(book => {
         if (book.exists) {
           setBooks(book.data());
-          fetchOwnerInfo(book.data().owner);
+          fetchOwnerInfo(book.data().ownerId);
         } else {
           console.error('No such document!');
         }
@@ -62,25 +65,37 @@ const BookDetailContainer = props => {
   );
 };
 
-const BookDetail = ({book, owner, firebase, bookId}) => {
+const BookDetail = props => {
+  const {book, owner, firebase, bookId} = props;
   const requestBook = () => {
     firebase
       .transactions()
       .add({
-        providerID: book.owner,
+        providerID: book.ownerId,
         consumerID: firebase.getMyUID(),
         status: 'Ongoing',
         requestTime: new Date().getTime(),
         itemID: bookId,
         type: book.type
       })
-      .then(() => {
-        console.log('reqeust success');
+      .then(transac => {
+        console.log('reqeust success, transaction id is', transac);
+
+        firebase
+          .user(firebase.getMyUID())
+          .get()
+          .then(user =>
+            firebase.user(firebase.getMyUID()).update({
+              transactions: (user.data().transactions || []).concat(transac.id)
+            })
+          );
       })
       .catch(() => {
         console.log('request fail');
       });
   };
+  console.log('ownerrrr', owner, props.authUser);
+
   return (
     <div className="book-details-container">
       <div className="book-info-container">
@@ -102,12 +117,17 @@ const BookDetail = ({book, owner, firebase, bookId}) => {
         </div>
         <div className="owner-field">
           <span>Provided by:</span>
-          <UserLabel avatarURL={owner.avatar} userName={owner.owner} />
+          <UserLabel avatarUrl={owner.photoUrl} userName={owner.username} />
         </div>
       </div>
-      <button className="btn-request btn" onClick={requestBook}>
-        Request
-      </button>
+      {/* dont show if this book is mine */}
+      {firebase.getMyUID() !== book.ownerId && (
+        /* authUser is undefined, but can be seen in Redux in chrome */
+        // {/* {props.authUser && props.authUser.transactions.includes(book.ownerId) && ( */}
+        <button className="btn-request btn" onClick={requestBook}>
+          Request
+        </button>
+      )}
     </div>
   );
 };
@@ -125,4 +145,8 @@ BookDetail.propTypes = {
   pickupLocation: PropTypes.string
 };
 
-export default withFirebase(BookDetailContainer);
+const mapStateToProps = state => ({
+  books: state.booksState.books,
+  authUser: state.sessionState.authUser
+});
+export default connect(mapStateToProps)(withFirebase(BookDetailContainer));
