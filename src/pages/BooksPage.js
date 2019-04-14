@@ -1,21 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-
 import {connect} from 'react-redux';
-import {storeBooks} from '../redux/actions/storeBooks';
-
 import axios from 'axios';
+
+import {storeBooks} from '../redux/actions/storeBooks';
+import * as ROUTES from '../constants/routes';
 
 import Loader from '../components/Loader/Loader';
 import SearchResults from '../components/Books/SearchResults';
 import BooksFilters from '../components/Books/BooksFilters';
-
 import {index} from '../components/Algolia';
-
-import * as ROUTES from '../constants/routes';
-
-const _ = require('lodash/core');
 
 const BooksPage = props => {
   const [borrowFilterOn, setBorrowFilterOn] = useState(false);
@@ -57,7 +52,10 @@ const BooksPage = props => {
       });
   };
 
-  if (_.isEmpty(props.books)) getBooks();
+  // if (_.isEmpty(props.books)) getBooks();
+  useEffect(() => {
+    getBooks();
+  }, []);
 
   return (
     <div>
@@ -70,11 +68,7 @@ const BooksPage = props => {
           Add Book
         </Link>
       </div>
-      {!_.isEmpty(props.books) ? (
-        <SearchResults books={props.books} />
-      ) : (
-        <Loader />
-      )}
+      {props.books ? <SearchResults books={props.books} /> : <Loader />}
     </div>
   );
 };
