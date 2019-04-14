@@ -10,7 +10,7 @@ import * as ROUTES from '../constants/routes';
 
 import Loader from '../components/Loader/Loader';
 import SearchResults from '../components/Books/SearchResults';
-import FilterGroup from '../components/Books/BooksFilters';
+import FilterGroup from '../components/Books/FilterGroup';
 import {index} from '../components/Algolia';
 
 const BooksPage = props => {
@@ -80,10 +80,7 @@ const BooksPage = props => {
           onFilterUpdate={filterStatus => {
             console.log('filter status', filterStatus);
           }}
-          titles={['Borrow', 'Have', 'Near Me']}
-          // onBorrowFilter={onBorrowFilter}
-          // onHaveFilter={onHaveFilter}
-          // onNearFilter={onNearFilter}
+          filters={['Books to Borrow', 'Books to Have', 'Near Me']}
         />
         <Link className="btn btn-add-book" to={ROUTES.ADD_BOOK}>
           Add Book
