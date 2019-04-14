@@ -13,6 +13,22 @@ const BookDetailContainer = props => {
     fetchBookInfo(props.match.params.bookId);
   }, []);
 
+  const fetchOwnerInfo = ownerId => {
+    var ownerInfo = props.firebase.user(ownerId);
+    ownerInfo
+      .get()
+      .then(owner => {
+        if (owner.exists) {
+          setOwner(owner.data());
+        } else {
+          console.error('owner undefined');
+        }
+      })
+      .catch(function(error) {
+        console.error('Error getting document:', error);
+      });
+  };
+
   const fetchBookInfo = bookId => {
     const bookDetail = props.firebase.book(bookId);
     bookDetail
@@ -23,22 +39,6 @@ const BookDetailContainer = props => {
           fetchOwnerInfo(book.data().owner);
         } else {
           console.error('No such document!');
-        }
-      })
-      .catch(function(error) {
-        console.error('Error getting document:', error);
-      });
-  };
-
-  const fetchOwnerInfo = ownerId => {
-    var ownerInfo = props.firebase.user(ownerId);
-    ownerInfo
-      .get()
-      .then(owner => {
-        if (owner.exists) {
-          setOwner(owner.data());
-        } else {
-          console.error('owner undefined');
         }
       })
       .catch(function(error) {
@@ -105,6 +105,9 @@ const BookDetail = ({book, owner, firebase, bookId}) => {
           <UserLabel avatarURL={owner.avatar} userName={owner.owner} />
         </div>
       </div>
+      <button className="btn-request btn" onClick={requestBook}>
+        Request
+      </button>
     </div>
   );
 };
