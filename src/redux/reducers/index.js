@@ -4,13 +4,15 @@ import userReducer from './user';
 import userBookReducer from './userBook';
 import bookReducer from './book';
 import books from './books';
+import search from './search';
 
 const rootReducer = combineReducers({
   sessionState: sessionReducer,
   userState: userReducer,
   userBookState: userBookReducer,
   bookState: bookReducer,
-  booksState: books
+  booksState: books,
+  searchState: search
 });
 
 export default rootReducer;
