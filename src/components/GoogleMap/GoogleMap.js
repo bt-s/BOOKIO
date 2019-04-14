@@ -7,25 +7,34 @@ const LoadingContainer = props => <Loader />;
 
 export const MapContainer = props => {
   const style = props.style;
-  console.log(props.coord);
   const [initialCoordinates, setInitialCoordinates] = useState({
     lat: 59.3473154,
     lng: 18.0732396
   });
+  const [markerCoordinates, setMarkerCoordinates] = useState({
+    lat: 59.3473154,
+    lng: 18.073239
+  });
 
   useEffect(() => {
-    setInitialCoordinates({
+    setMarkerCoordinates({
       lat: props.coord.lat,
       lng: props.coord.lon
     });
-    console.log('update');
   }, [props.coord]);
+
+  useEffect(() => {
+    console.log(props.initCoord);
+    setInitialCoordinates({
+      lat: props.initCoord.lat,
+      lng: props.initCoord.lon
+    });
+  }, [props.initCoord]);
 
   const onMapClicked = (mapProps, map, coord) => {
     const {latLng} = coord;
     const lat = latLng.lat();
     const lng = latLng.lng();
-    console.log('Change loc: ' + lat + ' ' + lng);
     props.getCoord({lat: lat, lon: lng});
   };
 
@@ -39,11 +48,7 @@ export const MapContainer = props => {
       center={initialCoordinates}
       zoom={props.zoom}
       onClick={onMapClicked}>
-      <Marker
-        name={locationName}
-        // title={locationName}
-        position={initialCoordinates}
-      />
+      <Marker name={locationName} position={markerCoordinates} />
     </Map>
   );
 };
@@ -57,7 +62,8 @@ GoogleMap.propTypes = {
   getCoord: PropTypes.func,
   style: PropTypes.object,
   zoom: PropTypes.number,
-  coord: PropTypes.object
+  coord: PropTypes.object,
+  initCoord: PropTypes.object
 };
 
 export default GoogleMap;

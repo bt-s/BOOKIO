@@ -27,12 +27,20 @@ const AddNewBookFormBase = props => {
     lat: 0,
     lon: 0
   });
+  const [initLocation, setInitLocation] = useState({
+    lat: 0,
+    lon: 0
+  });
   const [type, setType] = useState('lend');
   const [progressStyle, setProgressStyle] = useState('off');
   let imageUrls = [];
 
   const parseLocation = position => {
     setLocation({
+      lat: position.coords.latitude,
+      lon: position.coords.longitude
+    });
+    setInitLocation({
       lat: position.coords.latitude,
       lon: position.coords.longitude
     });
@@ -65,7 +73,7 @@ const AddNewBookFormBase = props => {
       .add({
         title,
         owner: JSON.parse(localStorage.getItem('authUser')).uid,
-        rating: parseInt(rating),
+        rating: parseFloat(rating),
         description,
         author,
         location,
@@ -151,11 +159,13 @@ const AddNewBookFormBase = props => {
           <option value="giveaway">Giveaway</option>
         </select>
 
+        <div className="subtitle">Location</div>
         <Map
           style={{width: '40%', height: '200px'}}
           zoom={15}
           coord={location}
           getCoord={changeLocation}
+          initCoord={initLocation}
         />
 
         <button
