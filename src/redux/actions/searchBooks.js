@@ -1,4 +1,4 @@
-export const searchBooks = searchBool => ({
+export const searchBooks = hasSearched => ({
   type: 'SEARCH_BOOKS',
-  searchBool
+  hasSearched
 });

@@ -182,6 +182,7 @@ const EditProfilePage = props => {
 };
 EditProfilePage.propTypes = {
   authUser: PropTypes.object,
+
 };
 
 const condition = authUser => !!authUser;
@@ -192,10 +193,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onSetAuthUser: authUser => dispatch({type: 'AUTH_USER_SET', authUser}),
+
 });
 
 export default compose(
   withRouter,
+
   connect(
     mapStateToProps,
     mapDispatchToProps

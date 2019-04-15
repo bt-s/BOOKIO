@@ -72,7 +72,7 @@ const RequestMessage = props => {
             <Link to="/account" className="user-container">
               <UserLabel
                 userName={props.message.involvedUser.username}
-                avatarURL={props.message.involvedUser.photoURL}
+                avatarURL={props.message.involvedUser.photoUrl}
               />
             </Link>
           </div>

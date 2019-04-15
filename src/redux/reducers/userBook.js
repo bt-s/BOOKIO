@@ -11,7 +11,7 @@ const initialState = {
   userBooks: [],
   newBook: {
     title: '',
-    rating: '',
+    rating: 0,
     author: '',
     imageUrls: '',
     type: ''

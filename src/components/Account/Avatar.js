@@ -17,11 +17,11 @@ const Avatar = props => {
   const postUploadTask = url => {
     props.firebase.auth.currentUser
       .updateProfile({
-        photoURL: url
+        photoUrl: url
       })
       .then(function() {
         setImgURL(url);
-        props.firebase.user(props.firebase.getMyUID()).update({photoURL: url});
+        props.firebase.user(props.firebase.getMyUID()).update({photoUrl: url});
       });
   };
 
