@@ -96,6 +96,11 @@ const BookDetail = props => {
                   // items I requested
                   items: (user.data().items || []).concat(bookId)
                 });
+                firebase.user(book.ownerId).update({
+                  transactions: (user.data().transactions || []).concat(
+                    transac.id
+                  )
+                });
                 alert('You have successfully requested this item');
               })
               .catch(err => {
