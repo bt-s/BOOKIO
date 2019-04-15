@@ -10,10 +10,6 @@ const HistoryPage = props => {
   const [msgType, setMsgType] = useState('give');
   const [gotTransactions, setGotTransactions] = useState(false);
   const [transactions, setTransactions] = useState([]);
-  useEffect(() => {
-    console.log('transacs', transactions);
-    console.log('got', gotTransactions);
-  });
   if (!gotTransactions) {
     props.firebase.myUID &&
       props.firebase
@@ -28,10 +24,7 @@ const HistoryPage = props => {
                   .transaction(id)
                   .get()
                   .then(transac => {
-                    console.log(transac.data(), 'ssssssssss');
                     return transac.data();
-
-                    // return {id: id, ...transac.data()};
                   })
               )
             ).then(transactions => {
@@ -45,7 +38,6 @@ const HistoryPage = props => {
                     : transac.providerID === props.firebase.getMyUID()
                     ? 'give'
                     : 'get';
-
                 Promise.all([
                   props.firebase
                     // get the user other than me
@@ -70,64 +62,12 @@ const HistoryPage = props => {
                       book => (transac.book = book.exists ? book.data() : false)
                     )
                 ]).then(bookAndUser => {
-                  console.log('b u', bookAndUser);
                   setTransactions(transactions);
                   setGotTransactions(true);
                 });
-                // props.firebase
-                //   // get the user other than me
-                //   .user(
-                //     transac.providerID === props.firebase.getMyUID()
-                //       ? transac.consumerID
-                //       : transac.providerID
-                //   )
-                //   .get()
-                //   .then(
-                //     // inject the other user's data
-                //     user =>
-                //       (transac.involvedUser = user.exists ? user.data() : false)
-                //   );
-                // props.firebase
-                //   .book(transac.itemID)
-                //   .get()
-                //   .then(
-                //     // inject book data
-                //     book => (transac.book = book.exists ? book.data() : false)
-                //   );
               });
-
-              // setTransactions(transactions);
-              // setGotTransactions(true);
             });
         });
-
-    // previous one, working, but data not filtered
-    // props.firebase
-    //   .transactions()
-    //   .get()
-    //   .then(querySnapshot => {
-    //     const transacs = querySnapshot.docs.map(doc => {
-    //       return {id: doc.id, ...doc.data()};
-    //     });
-    //     transacs.forEach(transac => {
-    //       props.firebase
-    //         .user(
-    //           transac.providerID === props.firebase.getMyUID()
-    //             ? transac.consumerID
-    //             : transac.providerID
-    //         )
-    //         .get()
-    //         .then(
-    //           user => (transac.involvedUser = user.exists ? user.data() : false)
-    //         );
-    //       props.firebase
-    //         .book(transac.itemID)
-    //         .get()
-    //         .then(book => (transac.book = book.exists ? book.data() : false));
-    //     });
-    //     setTransactions(transacs);
-    //     setGotTransactions(true);
-    //   });
   }
 
   function getMsgOfType(type) {
