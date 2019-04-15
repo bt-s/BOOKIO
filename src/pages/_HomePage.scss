@@ -1,16 +1,21 @@
+.homepage-container {
+  background-image: url('../images/white_background.jpg');
+  background-color: $black;
+}
 .home-img-banner {
   position: absolute;
-  left: 0;
+  right: 50px;
   z-index: -1;
   height: 500px;
-  width: 100%;
+  width: 500px;
 
   @include media-breakpoint(sm) {
-    width: auto;
+    width: fit-content;
+    height: fit-content;
   }
 
   @include media-breakpoint(md) {
-    height: 600px;
+    height: fit-content;
   }
 }
 
@@ -18,10 +23,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 500px;
+  height: 600px;
 
   @include media-breakpoint(sm) {
-    float: right;
+    float: left;
+    height: 600px;
   }
 
   @include media-breakpoint(md) {
@@ -29,15 +35,19 @@
   }
 
   .inner {
-    background: rgba(255, 255, 255, 0.5);
-    padding: 40px;
+    // background-color: #00b3b3;
+    padding-right: 40px;
     border-radius: 4px;
-    margin: 0 15px;
+    margin: 0 20px;
+    width: 400px;
+    border-color: $orange;
+    color: $black;
   }
 
   h1 {
     font-size: 18px;
     margin-top: 0;
+    color: $black;
 
     @include media-breakpoint(sm) {
       font-size: 20px;
@@ -74,4 +84,14 @@
   .btn-signup {
     max-width: 130px;
   }
+}
+
+.inner-card {
+  background-color: #00b3b3;
+  padding: 40px;
+  border-radius: 4px;
+  margin: 0 20px;
+  width: 220px;
+  color: $white;
+  margin-bottom: 40px;
 }
