@@ -8,11 +8,16 @@ import {hasLocation, withDistance} from '../helpers/utils';
 import {storeBooks} from '../redux/actions/storeBooks';
 import {storeCoords} from '../redux/actions/storeCoords';
 import * as ROUTES from '../constants/routes';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faPlus} from '@fortawesome/free-solid-svg-icons';
 
 import Loader from '../components/Loader/Loader';
 import SearchResults from '../components/Books/SearchResults';
 import FilterGroup from '../components/Books/FilterGroup';
 import {index} from '../components/Algolia';
+
+library.add(faPlus);
 
 const _ = require('lodash/core');
 
@@ -80,7 +85,8 @@ const BooksPage = props => {
           filters={['Books to Borrow', 'Books to Have']}
         />
         <Link className="btn btn-add-book" to={ROUTES.ADD_BOOK}>
-          Add Book
+          <FontAwesomeIcon className="phone" icon="plus" />
+          <span className="desktop">Add Book</span>
         </Link>
       </div>
       {!_.isEmpty(props.books) && props.coords !== initialCoords ? (
