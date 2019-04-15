@@ -10,6 +10,7 @@ import {
   faPhone,
   faEnvelope,
   faHome,
+  faBirthdayCake,
 } from '@fortawesome/free-solid-svg-icons';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -31,7 +32,7 @@ const AccountPage = props => {
         <div className="user-info-container">
           <span className="username">Hey, I am {props.authUser.username} </span>
           <span className="info-item">
-            <FontAwesomeIcon icon={faEnvelope}  />
+            <FontAwesomeIcon icon={faEnvelope} />
             {props.authUser.email}
           </span>
           <span className="info-item">
@@ -39,8 +40,12 @@ const AccountPage = props => {
             {props.authUser.phoneNumber}
           </span>
           <span className="info-item">
-            <FontAwesomeIcon icon={faHome}  />
+            <FontAwesomeIcon icon={faHome} />
             {props.authUser.location}
+          </span>
+          <span className="info-item">
+            <FontAwesomeIcon icon={faBirthdayCake} />
+            {props.authUser.age}
           </span>
           <Link to={ROUTES.EDIT_PROFILE} className="edit-profile">
             Edit Profile
@@ -65,6 +70,8 @@ const AccountPage = props => {
 AccountPage.propTypes = {
   authUser: PropTypes.object,
 };
+
+AccountPage.defaultProps = {};
 
 const condition = authUser => !!authUser;
 

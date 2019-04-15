@@ -48,7 +48,7 @@
 .user-info-container {
   display: flex;
   flex-direction: column;
-  padding: $padding-lg;
+  padding: $padding-sm;
 
   .info-item {
     margin-bottom: $padding-xxs;
@@ -97,6 +97,26 @@
   }
 }
 
-.edit-profile{
-  color:$orange;
+.edit-profile {
+  color: $orange;
+}
+
+.edit-profile-page {
+  @include media-breakpoint(sm) {
+    margin-left: 50px;
+  }
+}
+
+.field-item {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: $padding-xxs;
+  margin-top: $padding-xxs;
+  .field-label {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+  }
 }
