@@ -71,7 +71,27 @@
     }
   }
 
-  .btn-signup {
+  .homepage-btns {
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint(sm) {
+      flex-direction: row;
+    }
+  }
+
+  .btn-homepage {
+    width: 100%;
     max-width: 130px;
+    border-radius: 4px;
+
+    &:first-child {
+      margin-bottom: $padding-xs;
+
+      @include media-breakpoint(sm) {
+        margin-bottom: 0;
+        margin-right: $padding-sm;
+      }
+    }
   }
 }
