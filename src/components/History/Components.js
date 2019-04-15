@@ -63,7 +63,7 @@ const RequestMessage = props => {
             props.message.book.imageUrls.length > 0 &&
             props.message.book.imageUrls[0]
           }
-          title={props.message.book.title}
+          title={props.message.book && props.message.book.title}
           status={status}
           supplement={props.message.supplement}
         />

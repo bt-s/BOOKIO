@@ -7,11 +7,24 @@ import {RequestMessage} from '../components/History/Components';
 const _ = require('lodash/core');
 
 const HistoryPage = props => {
-  const [msgType, setMsgType] = useState('give');
+  const [msgType, setMsgType] = useState('lend');
   const [gotTransactions, setGotTransactions] = useState(false);
   const [transactions, setTransactions] = useState([]);
+  const [tictok, setTictok] = useState(0);
+
   if (!gotTransactions) {
-    props.firebase.myUID &&
+    console.log(
+      `wait another ${(0.2 * tictok).toFixed(
+        2
+      )}s for firebase be mounted to this page`
+    );
+    if (!props.firebase.myUID) {
+      if (tictok > 50) {
+      }
+      setTimeout(() => {
+        setTictok(tictok + 1);
+      }, tictok * 200);
+    } else {
       props.firebase
         .user(props.firebase.getMyUID())
         .get()
@@ -68,9 +81,10 @@ const HistoryPage = props => {
               });
             });
         });
+    }
   }
 
-  function getMsgOfType(type) {
+  const getMsgOfType = type => {
     return transactions
       .filter(msg => {
         return msg.type === msgType;
@@ -87,7 +101,7 @@ const HistoryPage = props => {
           }}
         />
       ));
-  }
+  };
 
   return (
     <div className="history-page">
