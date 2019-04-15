@@ -1,9 +1,12 @@
 .home-img-banner {
   position: absolute;
-  left: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   z-index: -1;
   height: 500px;
-  width: 100%;
+  width: auto;
 
   @include media-breakpoint(sm) {
     width: auto;
