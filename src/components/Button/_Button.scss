@@ -55,6 +55,28 @@ $btn-lr-padding: 10px;
   border-radius: 4px;
 }
 
+.btn-black {
+  width: auto;
+  height: 40px;
+  padding: 0 $padding-xs;
+  box-shadow: $button-shadow;
+  background-color: $black !important;
+  border-radius: 30px !important;
+  align-self: flex-start;
+  margin-top: 20px;
+  position: relative;
+  border: non !important;
+  min-width: 120px;
+
+  @include smaller-than(sm) {
+    position: fixed;
+    bottom: 2.5%;
+    right: 4%;
+    font-weight: bold;
+    font-size: 20px;
+  }
+}
+
 .btn:not([disabled]) {
   cursor: pointer;
 }

@@ -95,17 +95,6 @@ $description-height: 200px;
     padding-right: $padding-sm;
   }
 
-  .btn-publish {
-    width: 166px;
-    height: 43px;
-    box-shadow: $button-shadow;
-    background-color: black;
-    border-radius: 30px;
-    align-self: flex-start;
-    margin-top: 20px;
-    position: relative;
-  }
-
   .input-description {
     height: $description-height;
     resize: none;
@@ -129,15 +118,6 @@ $description-height: 200px;
 
     .input-description {
       height: 100px;
-    }
-
-    .btn-publish {
-      position: fixed;
-      bottom: 2.5%;
-      right: 4%;
-      height: 50px;
-      font-weight: bold;
-      font-size: 20px;
     }
   }
 }

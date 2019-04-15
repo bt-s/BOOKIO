@@ -1,6 +1,5 @@
 import React from 'react';
 
-import BrandLogo from '../components/BrandLogo/BrandLogo';
 import {PasswordForgetForm} from '../components/Authentication/PasswordForget';
 
 const PasswordForgetPage = () => (
