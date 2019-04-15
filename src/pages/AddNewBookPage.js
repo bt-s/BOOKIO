@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import {addNewUserBook} from '../redux/actions/addNewUserBook';
 import {withFirebase} from '../components/Firebase';
 import {compose} from 'recompose';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
@@ -41,15 +42,11 @@ const AddNewBookBase = props => {
 
   const onDragOver = index => {
     const draggedOverItem = files[index];
-
     if (draggedItem === draggedOverItem) {
       return;
     }
-
     let files_temp = files.filter(file => file !== draggedItem);
-
     files_temp.splice(index, 0, draggedItem);
-
     setFiles(files_temp);
   };
 
@@ -80,9 +77,14 @@ const AddNewBookBase = props => {
       </div>
       <div className="subtitle">Images</div>
       <div className="image-box-container">
-        {files.map((file, i) => {
-          return ImageBox(file, i);
-        })}
+        <ReactCSSTransitionGroup
+          transitionName="image-box-transition"
+          transitionEnterTimeout={700}
+          transitionLeaveTimeout={700}>
+          {files.map((file, i) => {
+            return ImageBox(file, i);
+          })}
+        </ReactCSSTransitionGroup>
         <DragAndDrop handleDrop={handleDrop} />
       </div>
       <AddNewBookForm files={files} />
