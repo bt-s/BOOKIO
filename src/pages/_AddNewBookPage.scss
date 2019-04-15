@@ -1,45 +1,23 @@
-.add-book-page-title {
-  display: none;
-}
+.add-book-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: $padding-xs;
+  flex-direction: column;
 
-.add-book-page {
-  .subtitle {
-    margin: 10px 0 10px;
-    font-size: 20px;
+  @include media-breakpoint(xs) {
+    flex-direction: row;
+    align-items: center;
   }
 }
 
-.image-box img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  width: auto;
-  transform: translate(-50%, -50%);
-}
+.add-book-page {
+  padding-bottom: $padding-lg;
 
-.image-box:hover {
-  transform: scale(1.05);
-}
-
-.image-box button {
-  z-index: 3;
-  position: absolute;
-  right: -2px;
-  top: 1px;
-  font-size: 20px;
-  opacity: 0.4;
-  color: black;
-  background-color: transparent;
-  border: 0;
-}
-
-.image-box button:hover {
-  opacity: 1;
-}
-
-.image-box-container {
-  min-height: 160px;
+  .subtitle {
+    margin: $padding-xs $padding-xs 4px;
+    font-size: 20px;
+  }
 }
 
 .image-box {
@@ -55,7 +33,38 @@
   text-align: center;
   overflow: hidden;
   position: relative;
-  -webkit-box-shadow: -1px 6px 10px 0px rgba(0, 0, 0, 0.07);
-  -moz-box-shadow: -1px 6px 10px 0px rgba(0, 0, 0, 0.07);
   box-shadow: -1px 6px 10px 0px rgba(0, 0, 0, 0.07);
+
+  img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    transform: translate(-50%, -50%);
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  button {
+    z-index: 3;
+    position: absolute;
+    right: -2px;
+    top: 1px;
+    font-size: 20px;
+    opacity: 0.4;
+    color: $black;
+    background-color: transparent;
+    border: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.image-box-container {
+  min-height: 160px;
 }
