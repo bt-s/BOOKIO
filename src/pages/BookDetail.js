@@ -22,9 +22,8 @@ const BookDetailContainer = props => {
       .then(owner => {
         if (owner.exists) {
           setOwner(owner.data());
-          console.log('fetched owner', owner.data());
         } else {
-          console.error('owner undefined');
+          console.error('Owner undefined');
         }
       })
       .catch(function(error) {
@@ -48,12 +47,6 @@ const BookDetailContainer = props => {
         console.error('Error getting document:', error);
       });
   };
-
-  const loc = book.location;
-  if (loc !== undefined) {
-    const latitude = loc.lat;
-    const longitude = loc.lon;
-  }
 
   return (
     <BookDetail
@@ -79,8 +72,6 @@ const BookDetail = props => {
         type: book.type
       })
       .then(transac => {
-        console.log('reqeust success, transaction id is', transac);
-
         firebase
           .user(firebase.getMyUID())
           .get()
@@ -91,10 +82,9 @@ const BookDetail = props => {
           );
       })
       .catch(() => {
-        console.log('request fail');
+        console.error('Request failed');
       });
   };
-  console.log('ownerrrr', owner, props.authUser);
 
   return (
     <div className="book-details-container">
@@ -116,13 +106,14 @@ const BookDetail = props => {
         </div>
         <div className="owner-field">
           <span>Provided by:</span>
-          <UserLabel avatarUrl={owner.photoUrl} userName={owner.username} />
+          {firebase.getMyUID() !== book.ownerId ? (
+            <UserLabel avatarUrl={owner.photoUrl} userName={owner.username} />
+          ) : (
+            <UserLabel avatarUrl={owner.photoUrl} userName="you" />
+          )}
         </div>
       </div>
-      {/* dont show if this book is mine */}
       {firebase.getMyUID() !== book.ownerId && (
-        /* authUser is undefined, but can be seen in Redux in chrome */
-        // {/* {props.authUser && props.authUser.transactions.includes(book.ownerId) && ( */}
         <button className="btn-request btn" onClick={requestBook}>
           Request
         </button>

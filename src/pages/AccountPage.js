@@ -19,7 +19,7 @@ const AccountPage = props => {
   return (
     <div className="account-page">
       <div className="user-information">
-        <Avatar avatarURL={props.authUser.photoURL} />
+        <Avatar avatarURL={props.authUser.photoUrl} />
         <div className="username-container">
           <span className="username-age">
             {props.authUser.username}, {props.authUser.age} years old

@@ -47,7 +47,7 @@ const AddNewBookFormBase = props => {
         title,
         ownerId: props.authUser.uid,
         owner: props.authUser.username,
-        avatar: props.authUser.photoURL,
+        avatar: props.authUser.photoUrl,
         rating: parseInt(rating),
         description,
         author,

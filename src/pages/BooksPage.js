@@ -14,8 +14,6 @@ import FilterGroup from '../components/Books/FilterGroup';
 import {index} from '../components/Algolia';
 
 const BooksPage = props => {
-  const [borrowFilterOn, setBorrowFilterOn] = useState(false);
-  const [haveFilterOn, setHaveFilterOn] = useState(false);
   const [coordinate, setCoordinate] = useState({lat: 23, lng: 23});
 
   const onFilter = filter => {
@@ -60,14 +58,13 @@ const BooksPage = props => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(pos => {
-      console.log('im at', pos.coords);
       setCoordinate({lat: pos.coords.latitude, lng: pos.coords.longitude});
       getBooks();
     });
   }, []);
 
   return (
-    <div>
+    <React.Fragment>
       <div className="books-tool-bar">
         <FilterGroup
           onFilterUpdate={filters => {
@@ -75,14 +72,6 @@ const BooksPage = props => {
               'Books to Borrow': 'to borrow',
               'Books to Have': 'to have'
             };
-            console.log('filters', filters);
-            console.log(
-              '00000000000',
-              filters.reduce(
-                (pre, cur) => pre + ' OR type:"' + strMap[cur] + '"',
-                'type:"_____"'
-              )
-            );
             if (filters.length > 0) {
               onFilter(
                 filters.reduce(
@@ -105,7 +94,7 @@ const BooksPage = props => {
         </Link>
       </div>
       {props.books ? <SearchResults books={props.books} /> : <Loader />}
-    </div>
+    </React.Fragment>
   );
 };
 

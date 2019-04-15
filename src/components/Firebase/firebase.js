@@ -100,7 +100,6 @@ class Firebase {
     this.db.collection('books').onSnapshot(snap => {
       snap.docChanges().forEach(change => {
         if (change.type === 'added') {
-          console.log('change.doc', change.doc);
           this.addOrUpdateIndexRecord(change.doc);
         }
       });
@@ -143,7 +142,7 @@ class Firebase {
               emailVerified: authUser.emailVerified,
               location: authUser.location,
               phoneNumber: authUser.phoneNumber,
-              photoUrl: authUser.photoURL,
+              photoUrl: authUser.photoUrl,
               providerData: authUser.providerData,
               userName: authUser.userName,
               roles: authUser.roles,

@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
 const FilterGroup = props => {
+  /* eslint-disable no-unused-vars */
   const [filterStatus, setFilterStatus] = useState(
+    /* eslint-enable no-unused-vars */
     props.filters.reduce((pre, cur) => {
       pre[cur] = {pushed: false};
       return pre;
@@ -20,9 +22,8 @@ const FilterGroup = props => {
             if (!props.onFilterUpdate || !filterStatus) {
               return;
             }
-            console.log('before change', filterStatus, title);
+
             filterStatus[title].pushed = !filterStatus[title].pushed;
-            console.log('after', filterStatus);
 
             // setFilterStatus({title: {pushed: !filterStatus[title].pushed}});
             props.onFilterUpdate(
