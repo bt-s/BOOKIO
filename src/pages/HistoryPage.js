@@ -12,16 +12,12 @@ const HistoryPage = props => {
   const [transactions, setTransactions] = useState([]);
 
   if (!gotTransactions) {
-    console.log('////', props);
-
     props.firebase.myUID &&
       props.firebase
         .user(props.firebase.getMyUID())
         .get()
         .then(user => {
           const transactions = user.data().transactions;
-          console.log(!_.isEmpty(transactions));
-
           !_.isEmpty(transactions) &&
             Promise.all(
               transactions.map(id =>
