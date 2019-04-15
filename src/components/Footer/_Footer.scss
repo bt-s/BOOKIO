@@ -1,8 +1,9 @@
-$footer-height: 150px;
+$footer-height: 60px;
 
 footer {
   display: flex;
   width: 100%;
+  background-color: #f5f5f5;
 
   .footer-content-container {
     display: flex;
