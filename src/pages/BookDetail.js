@@ -67,16 +67,13 @@ const BookDetail = ({book, firebase, bookId}) => {
     <div className="google-map-wrapper">
       {book.location && (
         <GoogleMap
-          width="250px"
-          height="350px"
-          coord={{
-            lat: book.location.lat,
-            lng: book.location.lon
+          style={{
+            width: '250px',
+            height: '350px'
           }}
-          initCoord={{
-            lat: book.location.lat,
-            lng: book.location.lon
-          }}
+          coord={book.location}
+          initCoord={book.location}
+          zoom={15}
         />
       )}
     </div>
