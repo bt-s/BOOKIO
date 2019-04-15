@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {BookItem} from '../../components/BookItem/BookItem';
+import BookItem from '../../components/BookItem/BookItem';
 
 const SearchResults = props => (
   <div className="search-result">
@@ -16,7 +16,7 @@ const SearchResults = props => (
           userAvatar={book.avatar}
           userName={book.owner}
           authorName={book.author}
-          locationDistance={book.locationDistance}
+          distance={book.distance}
           rating={book.rating}
         />
       </div>

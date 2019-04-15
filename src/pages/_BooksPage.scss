@@ -4,6 +4,9 @@
   align-items: baseline;
   justify-content: space-between;
   .filters {
+    .on {
+      background: $black-lighter;
+    }
     > * {
       margin-right: 10px;
       @include media-breakpoint(sm) {

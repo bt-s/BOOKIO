@@ -6,16 +6,12 @@ import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
-import {
-  faPhone,
-  faEnvelope,
-  faHome,
-} from '@fortawesome/free-solid-svg-icons';
+import {faPhone, faEnvelope, faHome} from '@fortawesome/free-solid-svg-icons';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   withAuthorization,
-  withEmailVerification,
+  withEmailVerification
 } from '../components/Session/Session';
 
 import Avatar from '../components/Account/Avatar';
@@ -27,11 +23,17 @@ const AccountPage = props => {
     <div className="account-page">
       <h1>My Profile</h1>
       <div className="user-information">
-        <Avatar avatarURL={props.authUser.photoURL} />
+        <Avatar avatarURL={props.authUser.photoUrl} />
+        <div className="username-container">
+          <span className="username-age">
+            {props.authUser.username}, {props.authUser.age} years old
+          </span>
+          <span className="location">{props.authUser.location}</span>
+        </div>
         <div className="user-info-container">
           <span className="username">Hey, I am {props.authUser.username} </span>
           <span className="info-item">
-            <FontAwesomeIcon icon={faEnvelope}  />
+            <FontAwesomeIcon icon={faEnvelope} />
             {props.authUser.email}
           </span>
           <span className="info-item">
@@ -39,7 +41,7 @@ const AccountPage = props => {
             {props.authUser.phoneNumber}
           </span>
           <span className="info-item">
-            <FontAwesomeIcon icon={faHome}  />
+            <FontAwesomeIcon icon={faHome} />
             {props.authUser.location}
           </span>
           <Link to={ROUTES.EDIT_PROFILE} className="edit-profile">
@@ -63,13 +65,13 @@ const AccountPage = props => {
 };
 
 AccountPage.propTypes = {
-  authUser: PropTypes.object,
+  authUser: PropTypes.object
 };
 
 const condition = authUser => !!authUser;
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser,
+  authUser: state.sessionState.authUser
 });
 
 export default compose(

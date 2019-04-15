@@ -142,7 +142,7 @@ class Firebase {
               emailVerified: authUser.emailVerified,
               location: authUser.location,
               phoneNumber: authUser.phoneNumber,
-              photoURL: authUser.photoURL,
+              photoUrl: authUser.photoUrl,
               providerData: authUser.providerData,
               userName: authUser.userName,
               roles: authUser.roles,

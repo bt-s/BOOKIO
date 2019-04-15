@@ -79,7 +79,10 @@ const AddNewBookFormBase = props => {
       .books()
       .add({
         title,
-        owner: JSON.parse(localStorage.getItem('authUser')).uid,
+        ownerId: props.authUser.uid,
+        owner: props.authUser.username,
+        //owner: JSON.parse(localStorage.getItem('authUser')).uid,
+        avatar: props.authUser.photoUrl,
         rating: parseFloat(rating),
         description,
         author,
@@ -216,7 +219,6 @@ const AddNewBookFormBase = props => {
           <button
             className="btn-publish btn"
             onClick={e => {
-              console.log('test');
               e.preventDefault();
               setProgressStyle('on');
               handleSubmit(e);
@@ -244,7 +246,6 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   );
-
 
 const AddNewBookForm = compose(
   withFirebase,

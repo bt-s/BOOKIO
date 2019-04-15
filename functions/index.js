@@ -133,6 +133,11 @@ exports.getBooksByDistance = functions.https.onRequest((req, res) => {
         });
         console.log(mapped_data);
         mapped_data.sort(compare);
+        if (req.query.limit || req.query.offset) {
+          return res
+            .status(200)
+            .json(mapped_data.splice(req.query.offset, req.query.limit));
+        }
         return res.status(200).json(mapped_data);
       })
       .catch(error => {

@@ -41,8 +41,6 @@ const AddNewBookBase = props => {
     );
   };
 
-  //TOOO: Drag to change the order of the uploaded
-
   return (
     <div className="add-book-page">
       <h1 className="add-book-page-title"> Share New Book </h1>
