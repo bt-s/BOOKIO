@@ -111,7 +111,6 @@ const BookDetail = props => {
         <div className="google-map-wrapper">
           <GoogleMap />
         </div>
-        {/* We should calculate the distance here. -----book.location----- */}
         <div className="distance">
           {book.location && book.location.lat + ' ' + book.location.lon}
         </div>
