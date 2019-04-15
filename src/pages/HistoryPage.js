@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {withFirebase} from '../components/Firebase';
 
 import Radio from '../components/Button/Radio';
@@ -10,22 +10,28 @@ const HistoryPage = props => {
   const [msgType, setMsgType] = useState('give');
   const [gotTransactions, setGotTransactions] = useState(false);
   const [transactions, setTransactions] = useState([]);
-
+  useEffect(() => {
+    console.log('transacs', transactions);
+    console.log('got', gotTransactions);
+  });
   if (!gotTransactions) {
     props.firebase.myUID &&
       props.firebase
         .user(props.firebase.getMyUID())
         .get()
         .then(user => {
-          const transactions = user.data().transactions;
-          !_.isEmpty(transactions) &&
+          const myTransacIds = user.data().transactions;
+          !_.isEmpty(myTransacIds) &&
             Promise.all(
-              transactions.map(id =>
+              myTransacIds.map(id =>
                 props.firebase
                   .transaction(id)
                   .get()
                   .then(transac => {
-                    return {id: id, ...transac.data()};
+                    console.log(transac.data(), 'ssssssssss');
+                    return transac.data();
+
+                    // return {id: id, ...transac.data()};
                   })
               )
             ).then(transactions => {
@@ -40,27 +46,58 @@ const HistoryPage = props => {
                     ? 'give'
                     : 'get';
 
-                props.firebase
-                  .user(
-                    transac.providerID === props.firebase.getMyUID()
-                      ? transac.consumerID
-                      : transac.providerID
-                  )
-                  .get()
-                  .then(
-                    user =>
-                      (transac.involvedUser = user.exists ? user.data() : false)
-                  );
-                props.firebase
-                  .book(transac.itemID)
-                  .get()
-                  .then(
-                    book => (transac.book = book.exists ? book.data() : false)
-                  );
+                Promise.all([
+                  props.firebase
+                    // get the user other than me
+                    .user(
+                      transac.providerID === props.firebase.getMyUID()
+                        ? transac.consumerID
+                        : transac.providerID
+                    )
+                    .get()
+                    .then(
+                      // inject the other user's data
+                      user =>
+                        (transac.involvedUser = user.exists
+                          ? user.data()
+                          : false)
+                    ),
+                  props.firebase
+                    .book(transac.itemID)
+                    .get()
+                    .then(
+                      // inject book data
+                      book => (transac.book = book.exists ? book.data() : false)
+                    )
+                ]).then(bookAndUser => {
+                  console.log('b u', bookAndUser);
+                  setTransactions(transactions);
+                  setGotTransactions(true);
+                });
+                // props.firebase
+                //   // get the user other than me
+                //   .user(
+                //     transac.providerID === props.firebase.getMyUID()
+                //       ? transac.consumerID
+                //       : transac.providerID
+                //   )
+                //   .get()
+                //   .then(
+                //     // inject the other user's data
+                //     user =>
+                //       (transac.involvedUser = user.exists ? user.data() : false)
+                //   );
+                // props.firebase
+                //   .book(transac.itemID)
+                //   .get()
+                //   .then(
+                //     // inject book data
+                //     book => (transac.book = book.exists ? book.data() : false)
+                //   );
               });
 
-              setTransactions(transactions);
-              setGotTransactions(true);
+              // setTransactions(transactions);
+              // setGotTransactions(true);
             });
         });
 
