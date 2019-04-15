@@ -8,7 +8,7 @@ const SearchResults = props => (
     {props.books.map((book, ix) => (
       <div key={ix} className="book-item-container">
         <BookItem
-          bookId={book.id}
+          bookId={book.id || book.objectID}
           bookImgSrc={book.imageUrls ? book.imageUrls[0] : book.imageSource}
           bookTitle={book.title}
           bookDescription={book.description}
