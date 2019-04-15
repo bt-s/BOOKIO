@@ -219,7 +219,6 @@ const AddNewBookFormBase = props => {
           <button
             className="btn-publish btn"
             onClick={e => {
-              console.log('test');
               e.preventDefault();
               setProgressStyle('on');
               handleSubmit(e);

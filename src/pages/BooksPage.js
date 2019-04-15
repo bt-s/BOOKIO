@@ -4,8 +4,9 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
-import {getGeoDistance} from '../helpers/utils';
+import {withDistance} from '../helpers/utils';
 import {storeBooks} from '../redux/actions/storeBooks';
+import {storeCoords} from '../redux/actions/storeCoords';
 import * as ROUTES from '../constants/routes';
 
 import Loader from '../components/Loader/Loader';
@@ -16,7 +17,7 @@ import {index} from '../components/Algolia';
 const _ = require('lodash/core');
 
 const BooksPage = props => {
-  const [coordinate, setCoordinate] = useState({lat: 23, lng: 23});
+  const initialCoords = {lat: 0, lng: 0};
 
   const onFilter = filter => {
     index
@@ -24,25 +25,11 @@ const BooksPage = props => {
         filters: filter
       })
       .then(res => {
-        props.storeBooks(withDistance(res.hits));
+        props.storeBooks(withDistance(res.hits, props.coords));
       })
       .catch(err => {
         console.error(err);
       });
-  };
-
-  const withDistance = books => {
-    return books.map(book => {
-      return {
-        ...book,
-        distance: getGeoDistance(
-          book.location.lat,
-          book.location.lon,
-          coordinate.lat,
-          coordinate.lng
-        )
-      };
-    });
   };
 
   const getBooks = () => {
@@ -51,16 +38,20 @@ const BooksPage = props => {
       url: `https://us-central1-bookio.cloudfunctions.net/getBooks`
     })
       .then(res => {
-        props.storeBooks(withDistance(res.data));
+        props.storeBooks(withDistance(res.data, props.coords));
       })
       .catch(err => {
         console.error(err);
       });
   };
 
-  if (_.isEmpty(props.books) && props.searchBool === false) {
+  if (
+    _.isEmpty(props.books) &&
+    props.hasSearched === false &&
+    JSON.stringify(props.coords) !== JSON.stringify(initialCoords)
+  ) {
     navigator.geolocation.getCurrentPosition(pos => {
-      setCoordinate({lat: pos.coords.latitude, lng: pos.coords.longitude});
+      props.storeCoords({lat: pos.coords.latitude, lng: pos.coords.longitude});
       getBooks();
     });
   }
@@ -95,7 +86,7 @@ const BooksPage = props => {
           Add Book
         </Link>
       </div>
-      {!_.isEmpty(props.books) ? (
+      {!_.isEmpty(props.books) && props.coords !== initialCoords ? (
         <SearchResults books={props.books} />
       ) : (
         <Loader />
@@ -106,17 +97,21 @@ const BooksPage = props => {
 
 BooksPage.propTypes = {
   books: PropTypes.array,
+  coords: PropTypes.object,
   storeBooks: PropTypes.func,
-  searchBool: PropTypes.bool
+  storeCoords: PropTypes.func,
+  hasSearched: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   books: state.booksState.books,
-  searchBool: state.searchState
+  coords: state.coordsState.coords,
+  hasSearched: state.searchState.hasSearched
 });
 
 const mapDispatchToProps = dispatch => ({
-  storeBooks: books => dispatch(storeBooks(books))
+  storeBooks: books => dispatch(storeBooks(books)),
+  storeCoords: coords => dispatch(storeCoords(coords))
 });
 
 export default connect(

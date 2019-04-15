@@ -59,3 +59,17 @@ export const getGeoDistance = (lat1, lon1, lat2, lon2) => {
   const d = R * c; // Distance in km
   return d;
 };
+
+export const withDistance = (books, coordinates) => {
+  return books.map(book => {
+    return {
+      ...book,
+      distance: getGeoDistance(
+        book.location.lat,
+        book.location.lon,
+        coordinates.lat,
+        coordinates.lng
+      )
+    };
+  });
+};
