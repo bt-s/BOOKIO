@@ -21,7 +21,7 @@ const BookItem = props => {
       />
       <div className="book-item-inner">
         <div className="book-item-inner-header">
-          <RatingStars rating="3.5" />
+          <RatingStars rating={props.rating} />
           <div className="book-item-type">{props.type}</div>
         </div>
         <p className="book-item-description">

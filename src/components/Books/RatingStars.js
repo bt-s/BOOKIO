@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const RatingStars = props => {
   // Round to nearest half
-  const rating = Math.round(props.rating * 2) / 2;
+  const rating = Math.round(parseFloat(props.rating) * 2) / 2;
   let output = [];
   // Append all the filled whole stars
   for (let i = rating; i > 0; i--)
