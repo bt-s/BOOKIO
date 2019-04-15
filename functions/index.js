@@ -24,11 +24,16 @@ exports.fetchTitleSuggestion = functions.https.onRequest((req, res) => {
     console.log(req.query.filter);
     axios({
       method: 'GET',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      },
       url: `https://www.goodreads.com/book/auto_complete?format=json&q=${
         req.query.filter
       }`
     })
       .then(result => {
+        console.log(result.data);
         return res.status(200).json(result.data);
       })
       .catch(err => {
@@ -105,10 +110,22 @@ exports.getBooks2 = functions.https.onRequest((req, res) => {
   });
 });
 
+function distance(lat1, lon1, lat2, lon2) {
+  var p = 0.017453292519943295; // Math.PI / 180
+  var c = Math.cos;
+  var a =
+    0.5 -
+    c((lat2 - lat1) * p) / 2 +
+    (c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p))) / 2;
+
+  return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+}
+
 exports.getBooksByDistance = functions.https.onRequest((req, res) => {
   let lon = req.query.lon;
   let lat = req.query.lat;
-
+  console.log(lon);
+  console.log(lat);
   return cors(req, res, () => {
     if (req.method !== 'GET') {
       return res.status(404).json({
@@ -123,12 +140,19 @@ exports.getBooksByDistance = functions.https.onRequest((req, res) => {
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           let tempObj = doc.data();
+          console.log(tempObj);
           tempObj.id = doc.id;
-          tempObj.distance =
-            geolib.getDistance(
-              {latitude: lat, longitude: lon},
-              {latitude: tempObj.location.lat, longitude: tempObj.location.lon}
-            ) / 1000;
+          tempObj.distance = distance(
+            lat,
+            lon,
+            tempObj.location.lat,
+            tempObj.location.lon
+          );
+          // geolib.getDistance(
+          //   {latitude: lat, longitude: lon},
+          //   {latitude: tempObj.location.lat, longitude: tempObj.location.lon}
+          // ) / 1000;
+          console.log(tempObj);
           mapped_data.push(tempObj);
         });
         console.log(mapped_data);
