@@ -70,7 +70,10 @@ const BookDetail = props => {
       .user(consumerID)
       .get()
       .then(user => {
-        const item = user.data().items.filter(item => item === bookId);
+        const item =
+          user.data().items &&
+          user.data().items.filter(item => item === bookId);
+
         !_.isEmpty(item)
           ? alert('You have already requested this item')
           : firebase
@@ -85,26 +88,18 @@ const BookDetail = props => {
               })
               .then(transac => {
                 console.log('Request successful, transaction id is:', transac);
-                //firebase
-                //.transaction(transac.id)
-                //.get()
-                //.then(transac => console.log(transac.data()));
-                firebase
-                  .user(consumerID)
-                  .get()
-                  .then(user => {
-                    console.log('user.data()', user.data());
-                    firebase.user(consumerID).update({
-                      transactions: (user.data().transactions || []).concat(
-                        transac.id
-                      ),
-                      items: (user.data().items || []).concat(bookId)
-                    });
-                  });
+                console.log('user me', user, user.data());
+                firebase.user(consumerID).update({
+                  transactions: (user.data().transactions || []).concat(
+                    transac.id
+                  ),
+                  // items I requested
+                  items: (user.data().items || []).concat(bookId)
+                });
                 alert('You have successfully requested this item');
               })
-              .catch(() => {
-                console.log('Request failed');
+              .catch(err => {
+                console.log('Request failed', err);
               });
       });
   };
