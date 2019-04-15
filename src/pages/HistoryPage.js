@@ -4,65 +4,64 @@ import {withFirebase} from '../components/Firebase';
 import Radio from '../components/Button/Radio';
 import {RequestMessage} from '../components/History/Components';
 
+const _ = require('lodash/core');
+
 const HistoryPage = props => {
   const [msgType, setMsgType] = useState('give');
   const [gotTransactions, setGotTransactions] = useState(false);
   const [transactions, setTransactions] = useState([]);
 
   if (!gotTransactions) {
-    console.log('////', props);
-
     props.firebase.myUID &&
       props.firebase
         .user(props.firebase.getMyUID())
         .get()
         .then(user => {
-          console.log('user12///', user.data());
-          Promise.all(
-            user.data().transactions.map(id =>
-              props.firebase
-                .transaction(id)
-                .get()
-                .then(transac => {
-                  return {id: id, ...transac.data()};
-                })
-            )
-          ).then(transactions => {
-            console.log('transactions with IDDD', transactions);
-            transactions.forEach(transac => {
-              // calc transaction type
-              transac.type =
-                transac.type === 'to borrow'
-                  ? transac.providerID === props.firebase.getMyUID()
-                    ? 'lend'
-                    : 'borrow'
-                  : transac.providerID === props.firebase.getMyUID()
-                  ? 'give'
-                  : 'get';
+          const transactions = user.data().transactions;
+          !_.isEmpty(transactions) &&
+            Promise.all(
+              transactions.map(id =>
+                props.firebase
+                  .transaction(id)
+                  .get()
+                  .then(transac => {
+                    return {id: id, ...transac.data()};
+                  })
+              )
+            ).then(transactions => {
+              transactions.forEach(transac => {
+                // calc transaction type
+                transac.type =
+                  transac.type === 'to borrow'
+                    ? transac.providerID === props.firebase.getMyUID()
+                      ? 'lend'
+                      : 'borrow'
+                    : transac.providerID === props.firebase.getMyUID()
+                    ? 'give'
+                    : 'get';
 
-              props.firebase
-                .user(
-                  transac.providerID === props.firebase.getMyUID()
-                    ? transac.consumerID
-                    : transac.providerID
-                )
-                .get()
-                .then(
-                  user =>
-                    (transac.involvedUser = user.exists ? user.data() : false)
-                );
-              props.firebase
-                .book(transac.itemID)
-                .get()
-                .then(
-                  book => (transac.book = book.exists ? book.data() : false)
-                );
+                props.firebase
+                  .user(
+                    transac.providerID === props.firebase.getMyUID()
+                      ? transac.consumerID
+                      : transac.providerID
+                  )
+                  .get()
+                  .then(
+                    user =>
+                      (transac.involvedUser = user.exists ? user.data() : false)
+                  );
+                props.firebase
+                  .book(transac.itemID)
+                  .get()
+                  .then(
+                    book => (transac.book = book.exists ? book.data() : false)
+                  );
+              });
+
+              setTransactions(transactions);
+              setGotTransactions(true);
             });
-            console.log('before set', transactions);
-
-            setTransactions(transactions);
-            setGotTransactions(true);
-          });
         });
 
     // previous one, working, but data not filtered

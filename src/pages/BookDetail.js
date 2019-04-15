@@ -7,6 +7,8 @@ import {withFirebase} from '../components/Firebase';
 import UserLabel from '../components/Books/UserLabel';
 import RatingStars from '../components/Books/RatingStars';
 
+const _ = require('lodash/core');
+
 const BookDetailContainer = props => {
   const [book, setBooks] = useState([]);
   const [owner, setOwner] = useState([]);
@@ -61,31 +63,49 @@ const BookDetailContainer = props => {
 const BookDetail = props => {
   const {book, owner, firebase, bookId} = props;
   const requestBook = () => {
+    const consumerID = firebase.getMyUID();
     console.log('book.type', book.type);
-    firebase
-      .transactions()
-      .add({
-        providerID: book.ownerId,
-        consumerID: firebase.getMyUID(),
-        status: 'Ongoing',
-        requestTime: new Date().getTime(),
-        itemID: bookId,
-        type: book.type
-      })
-      .then(transac => {
-        console.log('reqeust success, transaction id is', transac);
 
-        firebase
-          .user(firebase.getMyUID())
-          .get()
-          .then(user =>
-            firebase.user(firebase.getMyUID()).update({
-              transactions: (user.data().transactions || []).concat(transac.id)
-            })
-          );
-      })
-      .catch(() => {
-        console.log('request fail');
+    firebase
+      .user(consumerID)
+      .get()
+      .then(user => {
+        const item = user.data().items.filter(item => item === bookId);
+        !_.isEmpty(item)
+          ? alert('You have already requested this item')
+          : firebase
+              .transactions()
+              .add({
+                providerID: book.ownerId,
+                consumerID: consumerID,
+                status: 'Ongoing',
+                requestTime: new Date().getTime(),
+                itemID: bookId,
+                type: book.type
+              })
+              .then(transac => {
+                console.log('Request successful, transaction id is:', transac);
+                //firebase
+                //.transaction(transac.id)
+                //.get()
+                //.then(transac => console.log(transac.data()));
+                firebase
+                  .user(consumerID)
+                  .get()
+                  .then(user => {
+                    console.log('user.data()', user.data());
+                    firebase.user(consumerID).update({
+                      transactions: (user.data().transactions || []).concat(
+                        transac.id
+                      ),
+                      items: (user.data().items || []).concat(bookId)
+                    });
+                  });
+                alert('You have successfully requested this item');
+              })
+              .catch(() => {
+                console.log('Request failed');
+              });
       });
   };
 
