@@ -18,8 +18,8 @@ input {
 
 .suggestions li {
   padding: 0.5rem;
-  background-color: #bfbfbf;
-  color: $black;
+  background-color: $black-lighter;
+  color: $white;
   display: flex;
 }
 .suggestions img {
