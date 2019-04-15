@@ -1,76 +1,87 @@
 $description-height: 200px;
 
-.upload-progress.redirect {
-  transition: all 0.3s;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  position: fixed;
-  z-index: 10;
-  left: 30%;
-  top: 40%;
-  background: black;
-  width: 40%;
-  height: 15%;
-  opacity: 0.6;
-  border-radius: 30px;
-  > h1 {
-    color: white;
-    font-size: 25px;
-    align-self: center;
+.upload-progress {
+  &.redirect {
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: fixed;
+    z-index: 10;
+    left: 30%;
+    top: 40%;
+    background: black;
+    width: 40%;
+    height: 15%;
+    opacity: 0.6;
+    border-radius: 30px;
+
+    > h1 {
+      color: white;
+      font-size: 25px;
+      align-self: center;
+    }
   }
-}
-.upload-progress.on {
-  > h1 {
-    display: none;
+
+  &.on {
+    width: 100%;
+    z-index: 10;
+    transition: all 1.8s ease;
+    position: fixed;
+    top: $navbar-height;
+    height: 4px;
+    box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
+    left: 0px;
+    background: yellow;
+
+    > h1 {
+      display: none;
+    }
   }
-  width: 100%;
-  z-index: 10;
-  transition: all 1.8s ease;
-  position: fixed;
-  top: $navbar-height;
-  height: 4px;
-  box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
-  left: 0px;
-  background: yellow;
-}
-.upload-progress.off {
-  > h1 {
-    display: none;
+
+  &.off {
+    position: fixed;
+    z-index: 10;
+    top: $navbar-height;
+    height: 4px;
+    box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
+    left: 0px;
+    width: 0px;
+    background: yellow;
+
+    > h1 {
+      display: none;
+    }
   }
-  position: fixed;
-  z-index: 10;
-  top: $navbar-height;
-  height: 4px;
-  box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
-  left: 0px;
-  width: 0px;
-  background: yellow;
 }
 
 .add-book-form {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+
   .two-col {
     width: 45%;
     height: 100%;
     justify-content: space-between;
-    // flex-direction: column;
-    > * {
-      border-radius: 10px;
-      background: $white-dim;
-      border: $white-dimmer;
-    }
-    > .subtitle {
-      border: none;
-      background: none;
-    }
+
     &:last-child {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
     }
+
+    > * {
+      border-radius: 10px;
+      background: $white-dim;
+      border: $white-dimmer;
+    }
+
+    > .subtitle {
+      border: none;
+      background: none;
+    }
+
     .validation-error {
       background-color: transparent;
       padding: 0px;
@@ -80,6 +91,8 @@ $description-height: 200px;
   .booktype {
     width: 100%;
     height: 35px;
+    padding-left: $padding-sm;
+    padding-right: $padding-sm;
   }
 
   .btn-publish {
@@ -90,29 +103,34 @@ $description-height: 200px;
     border-radius: 30px;
     align-self: flex-start;
     margin-top: 20px;
-    // z-index: 5;
     position: relative;
   }
 
   .input-description {
     height: $description-height;
-    width: 100%;
     resize: none;
     padding: 10px;
   }
-  .title-input {
+
+  .title-input,
+  .input-description {
     width: 100%;
+    padding-left: $padding-sm;
+    padding-right: $padding-sm;
   }
 
   @include smaller-than(sm) {
     justify-content: flex-start;
     flex-direction: column;
+
     .two-col {
       width: 100%;
     }
+
     .input-description {
       height: 100px;
     }
+
     .btn-publish {
       position: fixed;
       bottom: 2.5%;

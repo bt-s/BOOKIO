@@ -1,9 +1,12 @@
 .home-img-banner {
   position: absolute;
-  left: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   z-index: -1;
   height: 500px;
-  width: 100%;
+  width: auto;
 
   @include media-breakpoint(sm) {
     width: auto;
@@ -71,7 +74,27 @@
     }
   }
 
-  .btn-signup {
+  .homepage-btns {
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint(sm) {
+      flex-direction: row;
+    }
+  }
+
+  .btn-homepage {
+    width: 100%;
     max-width: 130px;
+    border-radius: 4px;
+
+    &:first-child {
+      margin-bottom: $padding-xs;
+
+      @include media-breakpoint(sm) {
+        margin-bottom: 0;
+        margin-right: $padding-sm;
+      }
+    }
   }
 }

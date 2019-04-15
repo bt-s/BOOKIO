@@ -7,6 +7,8 @@ import {addNewUserBook} from '../redux/actions/addNewUserBook';
 import {withFirebase} from '../components/Firebase';
 import {compose} from 'recompose';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {Link} from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
@@ -67,7 +69,12 @@ const AddNewBookBase = props => {
 
   return (
     <div className="add-book-page">
-      <h1 className="add-book-page-title"> Share New Book </h1>
+      <div className="add-book-page-header">
+        <h1 className="add-book-page-title"> Share New Book </h1>
+        <Link to={ROUTES.BOOKS} className="btn btn-orange">
+          To Books Overview
+        </Link>
+      </div>
       <div className="subtitle">Images</div>
       <div className="image-box-container">
         <ReactCSSTransitionGroup

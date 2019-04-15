@@ -73,6 +73,8 @@ a {
   margin-right: auto;
   margin-left: auto;
   padding-top: $navbar-height-mobile;
+  position: relative;
+  min-height: 100vh;
 
   @include media-breakpoint(xs) {
     max-width: $max-width-xs;
