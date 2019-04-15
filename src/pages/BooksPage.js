@@ -13,6 +13,8 @@ import SearchResults from '../components/Books/SearchResults';
 import FilterGroup from '../components/Books/FilterGroup';
 import {index} from '../components/Algolia';
 
+const _ = require('lodash/core');
+
 const BooksPage = props => {
   const [coordinate, setCoordinate] = useState({lat: 23, lng: 23});
 
@@ -56,12 +58,12 @@ const BooksPage = props => {
       });
   };
 
-  useEffect(() => {
+  if (_.isEmpty(props.books) && props.searchBool === false) {
     navigator.geolocation.getCurrentPosition(pos => {
       setCoordinate({lat: pos.coords.latitude, lng: pos.coords.longitude});
       getBooks();
     });
-  }, []);
+  }
 
   return (
     <React.Fragment>
@@ -93,18 +95,24 @@ const BooksPage = props => {
           Add Book
         </Link>
       </div>
-      {props.books ? <SearchResults books={props.books} /> : <Loader />}
+      {!_.isEmpty(props.books) ? (
+        <SearchResults books={props.books} />
+      ) : (
+        <Loader />
+      )}
     </React.Fragment>
   );
 };
 
 BooksPage.propTypes = {
   books: PropTypes.array,
-  storeBooks: PropTypes.func
+  storeBooks: PropTypes.func,
+  searchBool: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  books: state.booksState.books
+  books: state.booksState.books,
+  searchBool: state.searchState
 });
 
 const mapDispatchToProps = dispatch => ({

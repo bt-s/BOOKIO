@@ -4,14 +4,17 @@
   max-width: 200px;
   height: 200px;
   position: relative;
+  margin: 0 auto;
+  @include media-breakpoint(sm){
+    margin-left: 75px;
+  }
 
   img {
     border-radius: 50%;
     width: 100%;
-    object-fit: center;
+    align-items: center;
   }
-  
-  
+
 }
 
 .avatar {

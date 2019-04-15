@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
+
+import {faPhone, faEnvelope, faHome} from '@fortawesome/free-solid-svg-icons';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
@@ -11,13 +15,13 @@ import {
 } from '../components/Session/Session';
 
 import Avatar from '../components/Account/Avatar';
-import DeleteAccount from '../components/Account/DeleteAccount';
 import LoginManagement from '../components/Account/LoginManagement';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 
 const AccountPage = props => {
   return (
     <div className="account-page">
+      <h1>My Profile</h1>
       <div className="user-information">
         <Avatar avatarURL={props.authUser.photoUrl} />
         <div className="username-container">
@@ -27,19 +31,35 @@ const AccountPage = props => {
           <span className="location">{props.authUser.location}</span>
         </div>
         <div className="user-info-container">
+          <span className="username">Hey, I am {props.authUser.username} </span>
+          <span className="info-item">
+            <FontAwesomeIcon icon={faEnvelope} />
+            {props.authUser.email}
+          </span>
           <span className="info-item">
             <FontAwesomeIcon icon="phone" />
             {props.authUser.phoneNumber}
           </span>
           <span className="info-item">
-            <FontAwesomeIcon icon="envelope" />
-            {props.authUser.email}
+            <FontAwesomeIcon icon={faHome} />
+            {props.authUser.location}
           </span>
+          <Link to={ROUTES.EDIT_PROFILE} className="edit-profile">
+            Edit Profile
+          </Link>
         </div>
       </div>
-      <PasswordChangeForm />
-      <LoginManagement authUser={props.authUser} />
-      <DeleteAccount />
+      <div className="line-break" />
+      <h1>Settings</h1>
+      <div className="user-information">
+        <div className="sub-header-account">Change Password</div>
+        <PasswordChangeForm />
+      </div>
+      <div className="line-break-sm" />
+      <div className="user-information">
+        <div className="sub-header-account"> Manage Account</div>
+        <LoginManagement authUser={props.authUser} />
+      </div>
     </div>
   );
 };

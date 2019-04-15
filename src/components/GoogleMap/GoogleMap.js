@@ -1,39 +1,75 @@
-import React from 'react';
-
+import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
-
 import Loader from '../Loader/Loader';
 
 const LoadingContainer = props => <Loader />;
 
 export const MapContainer = props => {
-  const style = {
-    width: '250px',
-    height: '350px',
+  const style = props.style;
+  const [initialCoordinates, setInitialCoordinates] = useState({
+    lat: 59.3473154,
+    lng: 18.0732396
+  });
+  const [markerCoordinates, setMarkerCoordinates] = useState({
+    lat: 59.3473154,
+    lng: 18.073239
+  });
+
+  useEffect(() => {
+    setMarkerCoordinates({
+      lat: props.coord.lat,
+      lng: props.coord.lon
+    });
+  }, [props.coord]);
+
+  useEffect(() => {
+    setInitialCoordinates({
+      lat: props.initCoord.lat,
+      lng: props.initCoord.lon
+    });
+  }, [props.initCoord]);
+
+  const onMapClicked = (mapProps, map, coord) => {
+    const {latLng} = coord;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+    props.getCoord({lat: lat, lon: lng});
   };
 
-
-  const initialCoordinates = {
-    lat: 59.3498,
-    lng: 18.0707,
-  };
-
-  const locationName = 'KTH, Stockholm';
+  const locationName = 'Your Location';
 
   return (
     <Map
       google={props.google}
-      style={style}
+      containerStyle={{...style, position: 'relative'}}
       initialCenter={initialCoordinates}
-      zoom={12}>
-      <Marker name={locationName} />
+      center={initialCoordinates}
+      zoom={props.zoom}
+      onClick={onMapClicked}>
+      <Marker name={locationName} position={markerCoordinates} />
     </Map>
   );
 };
 
+MapContainer.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+  lat: PropTypes.number,
+  lng: PropTypes.number
+};
+
 const GoogleMap = GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-  LoadingContainer: LoadingContainer,
+  LoadingContainer: LoadingContainer
 })(MapContainer);
+
+GoogleMap.propTypes = {
+  getCoord: PropTypes.func,
+  style: PropTypes.object,
+  zoom: PropTypes.number,
+  coord: PropTypes.object,
+  initCoord: PropTypes.object
+};
 
 export default GoogleMap;

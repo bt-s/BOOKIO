@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom';
 
 import {connect} from 'react-redux';
 import {storeBooks} from '../../redux/actions/storeBooks';
+import {searchBooks} from '../../redux/actions/searchBooks';
 
 import {index} from '../Algolia';
 
@@ -20,6 +21,7 @@ const SearchBase = props => {
 
   const onSearchAlgolia = e => {
     e.preventDefault();
+    props.searchBooks(true);
 
     index
       .search({
@@ -33,22 +35,25 @@ const SearchBase = props => {
   };
 
   return (
-    <form className="search-container" onSubmit={onSearchAlgolia}>
+    <div className="search-wrapper">
       <FontAwesomeIcon icon="search" aria-hidden="true" />
-      <input
-        name="search"
-        placeholder="Search for a book"
-        type="text"
-        value={searchString}
-        onChange={handleChange}
-      />
-    </form>
+      <form className="search-container" onSubmit={onSearchAlgolia}>
+        <input
+          name="search"
+          placeholder="Search for a book"
+          type="text"
+          value={searchString}
+          onChange={handleChange}
+        />
+      </form>
+    </div>
   );
 };
 
 SearchBase.propTypes = {
   books: PropTypes.array,
-  storeBooks: PropTypes.func
+  storeBooks: PropTypes.func,
+  searchBooks: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -56,7 +61,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  storeBooks: books => dispatch(storeBooks(books))
+  storeBooks: books => dispatch(storeBooks(books)),
+  searchBooks: searchBool => dispatch(searchBooks(searchBool))
 });
 
 const Search = withRouter(

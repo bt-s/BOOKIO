@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 import {withFirebase} from '../Firebase';
+import DeleteAccount from '../../components/Account/DeleteAccount';
 
 import Button from '../Button/Button';
 import DefaultLoginToggle from './DefaultLoginToggle';
@@ -10,13 +11,13 @@ const SIGN_IN_METHODS = [
   {
     id: 'password',
     method: 'E-mail login',
-    provider: null
+    provider: null,
   },
   {
     id: 'facebook.com',
     method: 'Facebook login',
-    provider: 'facebookProvider'
-  }
+    provider: 'facebookProvider',
+  },
 ];
 
 const LoginManagementBase = props => {
@@ -61,9 +62,8 @@ const LoginManagementBase = props => {
   };
 
   return (
-    <div>
-      Sign In Methods:
-      <ul>
+    <React.Fragment>
+      <ul className= "settings">
         {SIGN_IN_METHODS.map(signInMethod => {
           const onlyOneLeft = activeSignInMethods.length === 1;
           const isEnabled = activeSignInMethods.includes(signInMethod.id);
@@ -87,18 +87,21 @@ const LoginManagementBase = props => {
                   onUnlink={onUnlink}
                 />
               )}
+              
             </li>
           );
         })}
+        <li><DeleteAccount /></li>
       </ul>
+     
       {error && error.message}
-    </div>
+    </React.Fragment>
   );
 };
 
 LoginManagementBase.propTypes = {
   firebase: PropTypes.object,
-  authUser: PropTypes.object
+  authUser: PropTypes.object,
 };
 
 const SocialLoginToggle = ({
@@ -106,7 +109,7 @@ const SocialLoginToggle = ({
   isEnabled,
   signInMethod,
   onLink,
-  onUnlink
+  onUnlink,
 }) =>
   isEnabled ? (
     <Button
@@ -117,7 +120,7 @@ const SocialLoginToggle = ({
   ) : (
     <Button
       onClick={() => onLink(signInMethod.provider)}
-      text={`Link ${signInMethod.method}`}
+      text={`Link to ${signInMethod.method}`}
     />
   );
 

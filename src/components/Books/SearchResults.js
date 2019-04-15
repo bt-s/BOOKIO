@@ -17,6 +17,7 @@ const SearchResults = props => (
           userName={book.owner}
           authorName={book.author}
           distance={book.distance}
+          rating={book.rating}
         />
       </div>
     ))}

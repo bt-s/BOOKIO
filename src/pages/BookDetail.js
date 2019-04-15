@@ -61,6 +61,7 @@ const BookDetailContainer = props => {
 const BookDetail = props => {
   const {book, owner, firebase, bookId} = props;
   const requestBook = () => {
+    console.log('book.type', book.type);
     firebase
       .transactions()
       .add({
@@ -72,6 +73,8 @@ const BookDetail = props => {
         type: book.type
       })
       .then(transac => {
+        console.log('reqeust success, transaction id is', transac);
+
         firebase
           .user(firebase.getMyUID())
           .get()
@@ -82,9 +85,45 @@ const BookDetail = props => {
           );
       })
       .catch(() => {
-        console.error('Request failed');
+        console.log('request fail');
       });
   };
+
+  const borrowOrHave =
+    book.type === 'to borrow' ? (
+      <span>You can borrow this book from:</span>
+    ) : (
+      <span>You can get this book for free from:</span>
+    );
+
+  const ownerDetails = (
+    <div className="owner-field">
+      {firebase.getMyUID() !== book.ownerId ? (
+        <div>
+          {borrowOrHave}
+          <UserLabel avatarUrl={owner.photoUrl} userName={owner.username} />
+        </div>
+      ) : (
+        <div>Provided by you!</div>
+      )}
+    </div>
+  );
+
+  const googleMap = (
+    <div className="google-map-wrapper">
+      {book.location && (
+        <GoogleMap
+          style={{
+            width: '250px',
+            height: '350px'
+          }}
+          coord={book.location}
+          initCoord={book.location}
+          zoom={15}
+        />
+      )}
+    </div>
+  );
 
   return (
     <div className="book-details-container">
@@ -92,26 +131,20 @@ const BookDetail = props => {
         <div className="book-title">{book.title}</div>
         <div className="author">by {book.author}</div>
         <img className="book-img" src={book.imageUrls} alt={book.title} />
-        <RatingStars rating={toString(book.rating)} />
+        <div className="book-rating">
+          <span>GoodReads users give this book: </span>
+          <RatingStars rating={'' + book.rating} />
+        </div>
         <div className="header-description">Description </div>
-        <div className="service-description">{book.description}</div>
+        <div className="book-description">{book.description}</div>
       </div>
       <div className="book-pickup-container">
         <div className="header-pickup">Pickup Location </div>
-        <div className="google-map-wrapper">
-          <GoogleMap />
-        </div>
+        {googleMap}
         <div className="distance">
           {book.location && book.location.lat + ' ' + book.location.lon}
         </div>
-        <div className="owner-field">
-          <span>Provided by:</span>
-          {firebase.getMyUID() !== book.ownerId ? (
-            <UserLabel avatarUrl={owner.photoUrl} userName={owner.username} />
-          ) : (
-            <UserLabel avatarUrl={owner.photoUrl} userName="you" />
-          )}
-        </div>
+        {ownerDetails}
       </div>
       {firebase.getMyUID() !== book.ownerId && (
         <button className="btn-request btn" onClick={requestBook}>

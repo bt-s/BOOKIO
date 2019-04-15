@@ -21,6 +21,7 @@ import SignUpPage from './pages/SignUpPage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
 import BooksPage from './pages/BooksPage';
 import HistoryPage from './pages/HistoryPage';
+import EditProfilePage from './pages/EditProfilePage';
 
 import './styling/style.scss';
 
@@ -49,93 +50,111 @@ const WithoutNavbar = ({children}) => (
 );
 
 const AppBase = () => (
-  <React.Fragment>
-    <Switch>
-      <Route
-        exact
-        path={ROUTES.LANDING}
-        render={() => (
-          <WithFooter>
-            <WithNavbar>
-              <HomePage />
-            </WithNavbar>
-          </WithFooter>
-        )}
-      />
-      <Route
-        path={ROUTES.PASSWORD_FORGET}
-        render={() => (
-          <WithoutNavbar>
-            <PasswordForgetPage />
-          </WithoutNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.ACCOUNT}
-        render={() => (
+  <Switch>
+    <Route
+      exact
+      path={ROUTES.LANDING}
+      render={() => (
+        <WithFooter>
+          <WithNavbar>
+            <HomePage />
+          </WithNavbar>
+        </WithFooter>
+      )}
+    />
+    <Route
+      path={ROUTES.PASSWORD_FORGET}
+      render={() => (
+        <WithoutNavbar>
+          <PasswordForgetPage />
+        </WithoutNavbar>
+      )}
+    />
+    <Route
+      path={ROUTES.ACCOUNT}
+      render={() => (
+        <WithFooter>
           <WithNavbar>
             <AccountPage />
           </WithNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.ADMIN}
-        render={() => (
+        </WithFooter>
+      )}
+    />
+    <Route
+      path={ROUTES.ADMIN}
+      render={() => (
+        <WithFooter>
           <WithNavbar>
             <AdminPage />
           </WithNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.BOOKS}
-        render={() => (
+        </WithFooter>
+      )}
+    />
+    <Route
+      path={ROUTES.BOOKS}
+      render={() => (
+        <WithFooter>
           <WithNavbar>
             <BooksPage />
           </WithNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.BOOK_DETAIL}
-        render={props => (
+        </WithFooter>
+      )}
+    />
+    <Route
+      path={ROUTES.BOOK_DETAIL}
+      render={props => (
+        <WithFooter>
           <WithNavbar>
             <BookDetail {...props} />
           </WithNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.ADD_BOOK}
-        render={() => (
+        </WithFooter>
+      )}
+    />
+    <Route
+      path={ROUTES.ADD_BOOK}
+      render={() => (
+        <WithFooter>
           <WithNavbar>
             <AddNewBookPage />
           </WithNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.MY_BOOK_HISTORY}
-        render={() => (
+        </WithFooter>
+      )}
+    />
+    <Route
+      path={ROUTES.MY_BOOK_HISTORY}
+      render={() => (
+        <WithFooter>
           <WithNavbar>
             <HistoryPage />
           </WithNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.SIGN_UP}
-        render={() => (
-          <WithoutNavbar>
-            <SignUpPage />
-          </WithoutNavbar>
-        )}
-      />
-      <Route
-        path={ROUTES.LOG_IN}
-        render={() => (
-          <WithoutNavbar>
-            <SignInPage />
-          </WithoutNavbar>
-        )}
-      />
-    </Switch>
-  </React.Fragment>
+        </WithFooter>
+      )}
+    />
+    <Route
+      path={ROUTES.SIGN_UP}
+      render={() => (
+        <WithoutNavbar>
+          <SignUpPage />
+        </WithoutNavbar>
+      )}
+    />
+    <Route
+      path={ROUTES.LOG_IN}
+      render={() => (
+        <WithoutNavbar>
+          <SignInPage />
+        </WithoutNavbar>
+      )}
+    />
+    <Route
+      path={ROUTES.EDIT_PROFILE}
+      render={() => (
+        <WithoutNavbar>
+          <EditProfilePage />
+        </WithoutNavbar>
+      )}
+    />
+  </Switch>
 );
 
 const App = withAuthentication(AppBase);
