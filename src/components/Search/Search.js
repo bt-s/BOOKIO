@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 
 import {connect} from 'react-redux';
 
-import {withDistance} from '../../helpers/utils';
+import {hasLocation, withDistance} from '../../helpers/utils';
 import {storeBooks} from '../../redux/actions/storeBooks';
 import {storeCoords} from '../../redux/actions/storeCoords';
 import {searchBooks} from '../../redux/actions/searchBooks';
@@ -15,10 +15,18 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
 
-const _ = require('lodash/core');
-
 const SearchBase = props => {
   const [searchString, setSearchString] = useState('');
+
+  useEffect(() => {
+    if (!hasLocation(props.coords))
+      navigator.geolocation.getCurrentPosition(pos => {
+        props.storeCoords({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
+        });
+      });
+  }, []);
 
   const handleChange = e => {
     setSearchString(e.target.value);
@@ -38,12 +46,6 @@ const SearchBase = props => {
 
     props.history.push(ROUTES.BOOKS);
   };
-
-  if (_.isEmpty(props.books) && props.hasSearched === false) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      props.storeCoords({lat: pos.coords.latitude, lng: pos.coords.longitude});
-    });
-  }
 
   return (
     <div className="search-wrapper">

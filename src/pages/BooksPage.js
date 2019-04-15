@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
-import {withDistance} from '../helpers/utils';
+import {hasLocation, withDistance} from '../helpers/utils';
 import {storeBooks} from '../redux/actions/storeBooks';
 import {storeCoords} from '../redux/actions/storeCoords';
 import * as ROUTES from '../constants/routes';
@@ -48,12 +48,9 @@ const BooksPage = props => {
   if (
     _.isEmpty(props.books) &&
     props.hasSearched === false &&
-    JSON.stringify(props.coords) !== JSON.stringify(initialCoords)
+    hasLocation(props.coords)
   ) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      props.storeCoords({lat: pos.coords.latitude, lng: pos.coords.longitude});
-      getBooks();
-    });
+    getBooks();
   }
 
   return (
