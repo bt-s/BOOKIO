@@ -5,6 +5,7 @@ input {
 }
 
 .suggestions {
+  position: absolute;
   border: 1px solid #999;
   border-top-width: 0;
   list-style: none;
@@ -14,6 +15,10 @@ input {
   padding-left: 0;
   border-radius: 0px !important;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  width: 90%;
+  @include media-breakpoint(sm) {
+    width: 30%;
+  }
 }
 
 .suggestions li {
@@ -53,9 +58,11 @@ input {
 
 .loading {
   padding: 0.5rem;
+  height: 40px;
   background-color: #bfbfbf;
   font-size: 15px;
   color: $black;
+  // font-weight: bold;
 }
 
 .suggestion-active,
@@ -63,9 +70,60 @@ input {
   background-color: #4d4d4d;
   color: $white;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 200;
 }
 
 .suggestions li:not(:last-of-type) {
   border-bottom: 2px solid #999;
+}
+
+.suggestion-transition-enter {
+  opacity: 0.01;
+}
+
+.suggestion-transition-enter.suggestion-transition-enter-active {
+  opacity: 1;
+  transition: 200ms;
+}
+
+.suggestion-transition-leave {
+  opacity: 1;
+}
+
+.suggestion-transition-leave.suggestion-transition-leave-active {
+  opacity: 0.01;
+  transition: 700ms;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.5;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.loading span {
+  animation-name: blink;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.loading span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.loading span:nth-child(4) {
+  animation-delay: 0.6s;
+}
+.loading span:nth-child(5) {
+  animation-delay: 0.8s;
 }
