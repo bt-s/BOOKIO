@@ -149,9 +149,11 @@ const AppBase = () => (
     <Route
       path={ROUTES.EDIT_PROFILE}
       render={() => (
-        <WithoutNavbar>
-          <EditProfilePage />
-        </WithoutNavbar>
+        <WithFooter>
+          <WithNavbar>
+            <EditProfilePage />
+          </WithNavbar>
+        </WithFooter>
       )}
     />
   </Switch>
