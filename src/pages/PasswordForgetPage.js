@@ -5,7 +5,6 @@ import {PasswordForgetForm} from '../components/Authentication/PasswordForget';
 
 const PasswordForgetPage = () => (
   <div className="auth-page pw-forget">
-    <BrandLogo />
     <div className="auth-page-header">
       <h1>Forgot your password?</h1>
     </div>

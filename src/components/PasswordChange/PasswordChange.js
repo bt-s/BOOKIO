@@ -10,7 +10,7 @@ const PasswordChangeForm = props => {
   const initialFormValues = () => ({
     passwordOne: '',
     passwordTwo: '',
-    isReset: false
+    isReset: false,
   });
 
   const [isReset, setIsReset] = useState(false);
@@ -20,7 +20,7 @@ const PasswordChangeForm = props => {
   const handleChange = e => {
     dispatchForm({
       name: e.target.name,
-      value: e.target.value
+      value: e.target.value,
     });
   };
 
@@ -42,32 +42,32 @@ const PasswordChangeForm = props => {
   return isReset ? (
     <p>Your password has been reset.</p>
   ) : (
-    <form onSubmit={onSubmit}>
-      <label className="form-header">New password</label>
-      <input
-        name="passwordOne"
-        type="password"
-        placeholder=""
-        value={form.passwordOne}
-        onChange={handleChange}
-      />
-      <label className="form-header">Confirm new password</label>
-      <input
-        name="passwordTwo"
-        type="password"
-        placeholder=""
-        value={form.passwordTwo}
-        onChange={handleChange}
-      />
-
-      {error.code ? <p>{error.message}</p> : ''}
-      <Button type="submit" onClick={onSubmit} text="Update my password" />
-    </form>
+    <div className="pw-change">
+      <form onSubmit={onSubmit} className="auth-form">
+        <input
+          name="passwordOne"
+          type="password"
+          placeholder="New Password"
+          value={form.passwordOne}
+          onChange={handleChange}
+        />
+        <input
+          name="passwordTwo"
+          type="password"
+          placeholder="Confirm New Password"
+          value={form.passwordTwo}
+          onChange={handleChange}
+        />
+        <br />
+        {error.code ? <p>{error.message}</p> : ''}
+        <Button type="submit" onClick={onSubmit} text="Update" />
+      </form>
+    </div>
   );
 };
 
 PasswordChangeForm.propTypes = {
-  firebase: PropTypes.object
+  firebase: PropTypes.object,
 };
 
 export default withFirebase(PasswordChangeForm);

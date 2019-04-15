@@ -1,8 +1,9 @@
-$footer-height: 150px;
+$footer-height: 120px;
 
 footer {
   display: flex;
   width: 100%;
+  background-color: #f5f5f5;
 
   .footer-content-container {
     display: flex;
@@ -43,6 +44,10 @@ footer {
 
     @include media-breakpoint(xs) {
       flex: 0;
+    }
+
+    > span {
+      margin-right: $padding-xxs;
     }
   }
 }

@@ -3,7 +3,11 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  height: 80px;
   .filters {
+    .on {
+      background: $black-lighter;
+    }
     > * {
       margin-right: 10px;
       @include media-breakpoint(sm) {
@@ -31,10 +35,22 @@
   font-size: 17px;
   font-weight: bold;
   @include smaller-than(sm) {
+    .desktop {
+      display: none;
+    }
+    font-size: 30px;
+    width: 60px;
     position: fixed;
     bottom: 2.5%;
-    right: 4%;
+    right: 6%;
     z-index: 998;
-    height: 50px;
+    height: 60px;
   }
+  .desktop {
+    margin-left: 10px;
+  }
+}
+
+.btn-add-book:hover {
+  zoom: 105%;
 }

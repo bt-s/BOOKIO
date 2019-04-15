@@ -29,7 +29,8 @@ export const fetchBookTitleSuggestions = payload => {
     dispatch(loading());
     axios({
       method: 'GET',
-      url: `https://www.goodreads.com/book/auto_complete?format=json&q=${payload}`
+      header: 'origin',
+      url: `https://cors-anywhere.herokuapp.com/https://www.goodreads.com/book/auto_complete?format=json&q=${payload}`
     })
       .then(res => {
         dispatch(success(res.data));
