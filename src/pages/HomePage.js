@@ -41,27 +41,36 @@ const HomePage = props => (
 
     <div className="homepage-cards">
       <div className="inner-card">
-         <h2>Secure</h2>
-          <div className="line-break" />
-          <span>We ensure that every transaction is secure with a compliance procedure.</span>
+        <h2>Secure</h2>
+        <div className="line-break" />
+        <span>
+          We ensure that every transaction is secure with a compliance
+          procedure.
+        </span>
       </div>
       <div className="inner-card">
-         <h2>Easy</h2>
-          <div className="line-break" />
-          <span>Find your favorite book, request to owner, and decide on when you can \
-        come pick it up.</span>
+        <h2>Easy</h2>
+        <div className="line-break" />
+        <span>
+          Find your favorite book, request to owner, and decide on when you can
+          \ come pick it up.
+        </span>
       </div>
       <div className="inner-card">
-         <h2>Efficient</h2>
-          <div className="line-break" />
-          <span>Track your booking without hassle. You will be notified for every \
-        process change.</span>
+        <h2>Efficient</h2>
+        <div className="line-break" />
+        <span>
+          Track your booking without hassle. You will be notified for every \
+          process change.
+        </span>
       </div>
       <div className="inner-card">
-         <h2>Search</h2>
-          <div className="line-break" />
-          <span>We provide lots of books from different authors with different \
-        languages.</span>
+        <h2>Search</h2>
+        <div className="line-break" />
+        <span>
+          We provide lots of books from different authors with different \
+          languages.
+        </span>
       </div>
     </div>
 
@@ -73,29 +82,27 @@ const HomePage = props => (
         alt="Book stack homepage banner"
       />
 
-        <div className="how-it-works">
-          <div>
-            <div className="header-title">Find your book</div>
-            Search the book that you want to read. BOOKIO provides a fully
-            comprehensive books from various authors provided in different
-            languages.
-          </div>
-          <div>
-            <div className="header-title">Request the book</div>
-            Request to lend or get the book from the book's owner. We let the
-            owner decide to lend or give their books away.
-          </div>
-          <div>
-            <div className="header-title">Meet the owner</div>
-            Set the appointment to meet the owner to pickup the book. Our
-            platform will only give the owner detail location once the request
-            is approved.
-          </div>
-          <div>
-            <div className="header-title">Return the book</div>
-            Return the book on time to let other customer read the book you
-            like. We will remind you when you need to return the book.
-          </div>
+      <div className="how-it-works">
+        <div>
+          <div className="header-title">Find your book</div>
+          Search the book that you want to read. BOOKIO provides a fully
+          comprehensive books from various authors provided in different
+          languages.
+        </div>
+        <div>
+          <div className="header-title">Request the book</div>
+          Request to lend or get the book from the book's owner. We let the
+          owner decide to lend or give their books away.
+        </div>
+        <div>
+          <div className="header-title">Meet the owner</div>
+          Set the appointment to meet the owner to pickup the book. Our platform
+          will only give the owner detail location once the request is approved.
+        </div>
+        <div>
+          <div className="header-title">Return the book</div>
+          Return the book on time to let other customer read the book you like.
+          We will remind you when you need to return the book.
         </div>
       </div>
     </div>
