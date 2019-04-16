@@ -16,6 +16,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as ROUTES from '../../constants/routes';
 
 const SearchBase = props => {
+  console.log(props);
   const [searchString, setSearchString] = useState('');
 
   useEffect(() => {

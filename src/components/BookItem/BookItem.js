@@ -14,6 +14,16 @@ const BookItem = props => {
       ? Numeral(props.distance).format('0.0') + 'km'
       : parseInt(props.distance * 1000) + 'm';
 
+  const booksPageOnly = (
+    <div className="book-item-inner-footer">
+      <UserLabel userName={props.userName} avatarUrl={props.userAvatar} />
+      <div className="book-item-distance-container">
+        <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
+        <span className="book-item-distance">{parseDistance} away</span>
+      </div>
+    </div>
+  );
+
   return (
     <Link to={'/detail/' + props.bookId}>
       <div className="book-item-header">
@@ -33,13 +43,7 @@ const BookItem = props => {
         <p className="book-item-description">
           {props.bookDescription.substring(0, 120) + '...'}
         </p>
-        <div className="book-item-inner-footer">
-          <UserLabel userName={props.userName} avatarUrl={props.userAvatar} />
-          <div className="book-item-distance-container">
-            <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
-            <span className="book-item-distance">{parseDistance} away</span>
-          </div>
-        </div>
+        {!props.accountPage && booksPageOnly}
       </div>
     </Link>
   );

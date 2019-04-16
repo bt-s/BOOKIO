@@ -1,7 +1,5 @@
 .account-page {
-  margin-left: auto;
   @include media-breakpoint(sm) {
-    margin-left: 50px;
     margin-top: 50px;
   }
 }
