@@ -4,6 +4,8 @@ import {withFirebase} from '../components/Firebase';
 import Radio from '../components/Button/Radio';
 import {RequestMessage} from '../components/History/RequestMessage';
 
+import Loader from '../components/Loader/Loader';
+
 const HistoryPage = props => {
   const [msgType, setMsgType] = useState(
     localStorage.getItem('history_type') || 'lend'
@@ -13,16 +15,10 @@ const HistoryPage = props => {
   const [tictok, setTictok] = useState(0);
 
   if (!gotTransactions) {
-    console.info(
-      `wait another ${(0.2 * tictok).toFixed(
-        2
-      )}s for firebase be mounted to this page`
-    );
     if (!props.firebase.getMyUID()) {
-      if (tictok > 50) {
-      }
+      // use this to keep re-rendering until firebase mounted
       setTimeout(() => {
-        setTictok(tictok + 1); // use this to keep re-rendering until firebase mounted
+        setTictok(tictok + 1);
       }, tictok * 200);
     } else {
       props.firebase
@@ -101,7 +97,7 @@ const HistoryPage = props => {
       ));
   };
 
-  return (
+  return gotTransactions ? (
     <div className="history-page">
       <div className="filters">
         <Radio
@@ -157,6 +153,8 @@ const HistoryPage = props => {
         <div className="msg-container">{getMsgOfType(msgType)}</div>
       )}
     </div>
+  ) : (
+    <Loader />
   );
 };
 
