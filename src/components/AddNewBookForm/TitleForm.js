@@ -38,6 +38,7 @@ const TitleForm = props => {
           suggestion => suggestion.author.name
         )}
         getUserPick={handleUserPick}
+        placeholder="Book Title"
       />
     </React.Fragment>
   );

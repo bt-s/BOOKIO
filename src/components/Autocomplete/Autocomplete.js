@@ -10,7 +10,8 @@ const Autocomplete = props => {
     suggestions,
     isLoading,
     suggestionsImage,
-    suggestionsAuthor
+    suggestionsAuthor,
+    placeholder
   } = props;
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -140,6 +141,7 @@ const Autocomplete = props => {
         onChange={onChange}
         onKeyDown={onKeyDown}
         value={userInput}
+        placeholder={placeholder}
       />
       <ReactCSSTransitionGroup
         transitionName="suggestion-transition"
@@ -156,7 +158,8 @@ Autocomplete.propTypes = {
   suggestions: PropTypes.array,
   isLoading: PropTypes.bool,
   fetchSuggestions: PropTypes.func,
-  getUserPick: PropTypes.func
+  getUserPick: PropTypes.func,
+  placeholder: PropTypes.string
 };
 
 export default Autocomplete;
