@@ -72,7 +72,7 @@ const HistoryPage = props => {
                 })
             )
           ).then(transacsWithData => {
-            // console.log('the final full data', transacsWithData);
+            // console.log('the full data', transacsWithData);
             setTransactions(transacsWithData);
             setGotTransactions(true);
           });
