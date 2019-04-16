@@ -1,5 +1,12 @@
 $border-radius: 2px;
 $navbar-icon-size: 20px;
+.scroll-height {
+  // height: $navbar-height-mobile !important;
+  transition: height 0.25s ease-in;
+  @include media-breakpoint(sm) {
+    height: $navbar-height !important;
+  }
+}
 
 .navbar {
   position: fixed;
@@ -7,12 +14,13 @@ $navbar-icon-size: 20px;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: $navbar-height-mobile;
+  height: $navbar-height-mobile-top;
   background-color: $black-lighter;
   z-index: 1000;
+  transition: height 0.25s ease-in;
 
   @include media-breakpoint(sm) {
-    height: $navbar-height;
+    height: $navbar-height-top;
   }
 
   &.mobile-menu-open {
