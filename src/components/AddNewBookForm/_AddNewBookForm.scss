@@ -58,9 +58,9 @@ $description-height: 200px;
     justify-content: space-between;
     // flex-direction: column;
     > * {
-      border-radius: 10px;
-      background: $white-dim;
-      border: $white-dimmer;
+      // border-radius: 10px;
+
+      // border: $white-dimmer;
     }
     > .subtitle {
       border: none;
@@ -79,7 +79,13 @@ $description-height: 200px;
 
   .booktype {
     width: 100%;
-    height: 35px;
+    background: $white-dim;
+    border: 1px solid $gray !important;
+    height: 40px !important;
+    border-radius: 10px !important;
+    padding: 0 $padding-sm !important;
+    margin-bottom: $padding-sm !important;
+    font-size: 13px !important;
   }
 
   .btn-publish {
@@ -98,10 +104,23 @@ $description-height: 200px;
     height: $description-height;
     width: 100%;
     resize: none;
-    padding: 10px;
+    border: 1px solid $gray !important;
+    border-radius: 10px !important;
+    padding: 20px $padding-sm !important;
+    margin-bottom: $padding-sm !important;
+    font-size: 13px !important;
+    background: $white-dim;
   }
   .title-input {
-    width: 100%;
+    width: 100% !important;
+    // background: none;
+    border: 1px solid $gray !important;
+    height: 40px !important;
+    border-radius: 10px !important;
+    padding: 0 $padding-sm !important;
+    margin-bottom: $padding-sm !important;
+    font-size: 13px !important;
+    background: $white-dim;
   }
 
   @include smaller-than(sm) {
