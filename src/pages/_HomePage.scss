@@ -1,21 +1,20 @@
-.homepage-container {
-  background-image: url('../images/white_background.jpg');
-  background-color: $black;
-}
 .home-img-banner {
-  position: absolute;
-  right: 50px;
   z-index: -1;
-  height: 500px;
-  width: 500px;
+  height: 225px;
+  width: 300px;
+  margin: 0 auto 0 auto;
+  background-color: white;
+  text-align: center;
 
   @include media-breakpoint(sm) {
-    width: fit-content;
-    height: fit-content;
+    width: 800px;
+    height: 600px;
+    position: absolute;
+    right: 0;
   }
 
   @include media-breakpoint(md) {
-    height: fit-content;
+    height: 600px;
   }
 }
 
@@ -23,38 +22,47 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 600px;
+  height: 300px;
+  margin: 0 auto 0 auto;
 
   @include media-breakpoint(sm) {
     float: left;
-    height: 600px;
+    height: 400px;
   }
 
   @include media-breakpoint(md) {
     height: 600px;
+    float: left;
   }
 
   .inner {
-    // background-color: #00b3b3;
-    padding-right: 40px;
     border-radius: 4px;
     margin: 0 20px;
-    width: 400px;
+
     border-color: $orange;
-    color: $black;
+    color: #4a4a4a;
+
+    @include media-breakpoint(sm) {
+      width: 400px;
+      padding: 20px;
+    }
   }
 
+  .inner-content {
+    text-align: justify;
+  }
   h1 {
     font-size: 18px;
     margin-top: 0;
-    color: $black;
+    color: #4a4a4a;
+    text-align: left;
 
     @include media-breakpoint(sm) {
-      font-size: 20px;
+      font-size: 36px;
     }
 
     @include media-breakpoint(md) {
-      font-size: 24px;
+      font-size: 36px;
     }
 
     .right {
@@ -71,6 +79,7 @@
 
   h2 {
     font-size: 14px;
+    color: #4a4a4a;
 
     @include media-breakpoint(sm) {
       font-size: 18px;
@@ -87,11 +96,70 @@
 }
 
 .inner-card {
-  background-color: #00b3b3;
-  padding: 40px;
-  border-radius: 4px;
+  width: 200px;
+  height: 230px;
+  border-radius: 10px;
+  padding: 20px;
   margin: 0 20px;
-  width: 220px;
-  color: $white;
+  box-shadow: 1px 1px 4px 0 #9b9b9b;
+  background-color: #ffffff;
   margin-bottom: 40px;
+  color: #4a4a4a;
+  h2 {
+    font-size: 14px;
+    color: #4a4a4a;
+
+    @include media-breakpoint(sm) {
+      font-size: 18px;
+    }
+
+    @include media-breakpoint(md) {
+      font-size: 20px;
+    }
+  }
+}
+
+.btn-dark-orange {
+  background-color: #f38202;
+}
+
+.how-it-works {
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 600px;
+  text-align: justify;
+  color: #4a4a4a;
+  h1 {
+    font-size: 24px;
+    margin-top: 0;
+    color: #4a4a4a;
+    text-align: left;
+    padding-top: 10px;
+
+    @include media-breakpoint(sm) {
+      font-size: 30px;
+    }
+
+    @include media-breakpoint(md) {
+      font-size: 28px;
+    }
+  }
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: $padding-xxs;
+  margin-top: $padding-xs;
+  @include media-breakpoint(sm) {
+    font-size: 18px;
+  }
+
+  @include media-breakpoint(md) {
+    font-size: 20px;
+  }
+}
+
+.mockup-platform {
+  margin: 0 auto 0 auto;
 }
