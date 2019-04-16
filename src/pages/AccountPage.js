@@ -11,13 +11,14 @@ import {storeBooks} from '../redux/actions/storeBooks';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   withAuthorization,
-  withEmailVerification,
+  withEmailVerification
 } from '../components/Session/Session';
 
 import Avatar from '../components/Account/Avatar';
 import LoginManagement from '../components/Account/LoginManagement';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 import SearchResults from '../components/Books/SearchResults';
+import {hasLocation, withDistance} from '../helpers/locationHelper';
 
 import {index} from '../components/Algolia';
 
@@ -25,10 +26,10 @@ const AccountPage = props => {
   const onSearchBooks = uid => {
     index
       .search({
-        query: uid,
+        query: uid
       })
       .then(res => {
-        props.storeBooks(res.hits);
+        props.storeBooks(withDistance(res.hits, props.coords));
       })
       .catch(err => {
         console.error(err);
@@ -91,18 +92,18 @@ const AccountPage = props => {
 };
 
 AccountPage.propTypes = {
-  authUser: PropTypes.object,
+  authUser: PropTypes.object
 };
 
 const condition = authUser => !!authUser;
 
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser,
-  books: state.booksState.books,
+  books: state.booksState.books
 });
 
 const mapDispatchToProps = dispatch => ({
-  storeBooks: books => dispatch(storeBooks(books)),
+  storeBooks: books => dispatch(storeBooks(books))
 });
 
 export default compose(

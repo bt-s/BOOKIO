@@ -9,17 +9,26 @@ import RatingStars from '../Books/RatingStars';
 import UserLabel from '../Books/UserLabel';
 
 const BookItem = props => {
-  const parseDistance =
-    parseInt(props.distance) > 0
-      ? Numeral(props.distance).format('0.0') + 'km'
-      : parseInt(props.distance * 1000) + 'm';
+  const parseDistance = distance => {
+    console.log('before', distance, props);
+
+    const dist =
+      parseInt(distance) > 0
+        ? Numeral(distance).format('0.0') + 'km'
+        : parseInt(distance * 1000) + 'm';
+    console.log('parse result', dist);
+
+    return dist;
+  };
 
   const booksPageOnly = (
     <div className="book-item-inner-footer">
       <UserLabel userName={props.userName} avatarUrl={props.userAvatar} />
       <div className="book-item-distance-container">
         <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
-        <span className="book-item-distance">{parseDistance} away</span>
+        <span className="book-item-distance">
+          {parseDistance(props.distance)} away
+        </span>
       </div>
     </div>
   );
