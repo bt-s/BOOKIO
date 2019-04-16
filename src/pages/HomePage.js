@@ -55,6 +55,7 @@ const HomePage = props => {
           <Link to={ROUTES.SIGN_UP} className="btn btn-dark-orange btn-signup">
             Join Now
           </Link>
+          <br />
         </div>
       </div>
 
@@ -101,17 +102,17 @@ const HomePage = props => {
         </div>
       </div>
 
+      <div className="title-section">How BOOKIO works? </div>
       <div className="user-information">
         <img
           className="mockup-platform"
-          src={require('../images/stevejobs.jpg')}
+          src={require('../images/image_1.png')}
           alt="Book stack homepage banner"
         />
 
         <div className="how-it-works">
-          <h1>How BOOKIO works?</h1>
           <div>
-            <div className="header-title">Find your book.</div>
+            <div className="header-title">Find your book</div>
             Search the book that you want to read. BOOKIO provides a fully
             comprehensive books from various authors provided in different
             languages.

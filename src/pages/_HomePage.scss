@@ -2,18 +2,23 @@
   z-index: -1;
   height: 225px;
   width: 300px;
-  margin: 0 auto 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   background-color: white;
-  text-align: center;
 
   @include media-breakpoint(sm) {
     width: 800px;
-    height: 600px;
+    height: 580px;
     position: absolute;
     right: 0;
   }
 
   @include media-breakpoint(md) {
+    width: 800px;
+    height: 600px;
+  }
+  @include media-breakpoint(lg) {
+    width: 800px;
     height: 600px;
   }
 }
@@ -52,7 +57,7 @@
     text-align: justify;
   }
   h1 {
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 0;
     color: #4a4a4a;
     text-align: left;
@@ -124,9 +129,8 @@
 }
 
 .how-it-works {
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 600px;
+  padding: 0 20px 20px 20px;
+  width: 550px;
   text-align: justify;
   color: #4a4a4a;
   h1 {
@@ -161,5 +165,21 @@
 }
 
 .mockup-platform {
-  margin: 0 auto 0 auto;
+  height: 240px;
+  width: 280px;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  @include media-breakpoint(sm) {
+    height: 360px;
+    width: 450px;
+  }
+}
+
+.title-section {
+  font-size: 20px;
+  color: #4a4a4a;
+  @include media-breakpoint(sm) {
+    font-size: 34px;
+  }
 }
