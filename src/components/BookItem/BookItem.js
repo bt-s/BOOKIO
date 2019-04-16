@@ -10,14 +10,10 @@ import UserLabel from '../Books/UserLabel';
 
 const BookItem = props => {
   const parseDistance = distance => {
-    console.log('before', distance, props);
-
     const dist =
       parseInt(distance) > 0
         ? Numeral(distance).format('0.0') + 'km'
         : parseInt(distance * 1000) + 'm';
-    console.log('parse result', dist);
-
     return dist;
   };
 

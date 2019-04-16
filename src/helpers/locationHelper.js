@@ -19,7 +19,6 @@ export const getGeoDistance = (lat1, lon1, lat2, lon2) => {
 };
 
 export const withDistance = (books, coordinates) => {
-  console.log('withDistance');
   return books.map(book => {
     return {
       ...book,
