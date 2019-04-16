@@ -1,33 +1,35 @@
+// Generic stylesheets
 @import './includes/base';
-@import './includes/vendor';
 @import './includes/variables';
 
+// Component specific stylesheets
 @import '../components/Account/Account';
 @import '../components/Account/Avatar';
-@import '../components/AddNewBookForm/DragAndDrop';
 @import '../components/AddNewBookForm/AddNewBookForm';
+@import '../components/AddNewBookForm/DragAndDrop';
 @import '../components/Authentication/Authentication';
+@import '../components/Authentication/PasswordForget';
+@import '../components/Authentication/SignIn';
+@import '../components/Authentication/SignOut';
+@import '../components/Authentication/SignUp';
 @import '../components/Autocomplete/Autocomplete';
 @import '../components/BookItem/BookItem';
-@import '../components/Books/UserLabel';
 @import '../components/Books/SearchResults';
-@import '../components/History/HistoryComponents';
+@import '../components/Books/UserLabel';
+@import '../components/BrandLogo/BrandLogo';
 @import '../components/Button/Button';
 @import '../components/Button/Radio';
-@import '../components/BrandLogo/BrandLogo';
 @import '../components/Dropdown/Dropdown';
 @import '../components/Footer/Footer';
 @import '../components/GoogleMap/GoogleMap';
+@import '../components/History/HistoryComponents';
 @import '../components/Loader/Loader';
 @import '../components/Navbar/Navbar';
-@import '../components/Search/Search';
 @import '../components/PasswordChange/PasswordChange';
-@import '../components/Authentication/PasswordForget';
-@import '../components/Authentication/SignIn';
-@import '../components/Authentication/SignUp';
-@import '../components/Authentication/SignOut';
+@import '../components/Search/Search';
 @import '../components/Session/Session';
 
+// Page specific stylesheets
 @import '../pages/AccountPage';
 @import '../pages/AddNewBookPage';
 @import '../pages/BookDetail';
