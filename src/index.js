@@ -10,18 +10,18 @@ import {withAuthentication} from './components/Session/Session';
 import Firebase, {FirebaseContext} from './components/Firebase';
 import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
-import AddNewBookPage from './pages/AddNewBookPage';
 
-import AdminPage from './pages/AdminPage';
 import AccountPage from './pages/AccountPage';
+import AddNewBookPage from './pages/AddNewBookPage';
+import AdminPage from './pages/AdminPage';
 import BookDetail from './pages/BookDetail';
+import BooksPage from './pages/BooksPage';
+import EditProfilePage from './pages/EditProfilePage';
+import HistoryPage from './pages/HistoryPage';
 import HomePage from './pages/HomePage';
+import PasswordForgetPage from './pages/PasswordForgetPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
-import PasswordForgetPage from './pages/PasswordForgetPage';
-import BooksPage from './pages/BooksPage';
-import HistoryPage from './pages/HistoryPage';
-import EditProfilePage from './pages/EditProfilePage';
 
 import './styling/style.scss';
 
