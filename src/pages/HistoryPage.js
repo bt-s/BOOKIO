@@ -4,8 +4,6 @@ import {withFirebase} from '../components/Firebase';
 import Radio from '../components/Button/Radio';
 import {RequestMessage} from '../components/History/RequestMessage';
 
-const _ = require('lodash/core');
-
 const HistoryPage = props => {
   const [msgType, setMsgType] = useState(
     localStorage.getItem('history_type') || 'lend'
@@ -20,70 +18,68 @@ const HistoryPage = props => {
         2
       )}s for firebase be mounted to this page`
     );
-    if (!props.firebase.myUID) {
+    if (!props.firebase.getMyUID()) {
       if (tictok > 50) {
       }
       setTimeout(() => {
-        setTictok(tictok + 1);
+        setTictok(tictok + 1); // use this to keep re-rendering until firebase mounted
       }, tictok * 200);
     } else {
       props.firebase
         .user(props.firebase.getMyUID())
         .get()
         .then(user => {
-          const myTransacIds = user.data().transactions;
-          !_.isEmpty(myTransacIds) &&
-            Promise.all(
-              myTransacIds.map(id =>
-                props.firebase
-                  .transaction(id)
-                  .get()
-                  .then(transac => {
-                    transac = transac.data();
-                    // calc transaction type
-                    transac.type =
-                      transac.type === 'to borrow'
-                        ? transac.providerID === props.firebase.getMyUID()
-                          ? 'lend'
-                          : 'borrow'
-                        : transac.providerID === props.firebase.getMyUID()
-                        ? 'give'
-                        : 'get';
-                    return Promise.all([
-                      props.firebase
-                        // get the user other than me
-                        .user(
-                          transac.providerID === props.firebase.getMyUID()
-                            ? transac.consumerID
-                            : transac.providerID
-                        )
-                        .get()
-                        .then(
-                          // inject the other user's data
-                          user => {
-                            transac.involvedUser = user.data();
-                          }
-                        ),
-                      props.firebase
-                        .book(transac.itemID)
-                        .get()
-                        .then(
-                          // inject book data
-                          book => {
-                            transac.book = book.data();
-                          }
-                        )
-                    ]).then(bookAndUser => {
-                      // console.log('injected', bookAndUser, transac);
-                      return transac;
-                    });
-                  })
-              )
-            ).then(transacsWithData => {
-              // console.log('the final full data', transacsWithData);
-              setTransactions(transacsWithData);
-              setGotTransactions(true);
-            });
+          Promise.all(
+            user.data().transactions.map(id =>
+              props.firebase
+                .transaction(id)
+                .get()
+                .then(transac => {
+                  transac = transac.data();
+                  // calc transaction type
+                  transac.type =
+                    transac.type === 'to borrow'
+                      ? transac.providerID === props.firebase.getMyUID()
+                        ? 'lend'
+                        : 'borrow'
+                      : transac.providerID === props.firebase.getMyUID()
+                      ? 'give'
+                      : 'get';
+                  return Promise.all([
+                    props.firebase
+                      // get the user other than me
+                      .user(
+                        transac.providerID === props.firebase.getMyUID()
+                          ? transac.consumerID
+                          : transac.providerID
+                      )
+                      .get()
+                      .then(
+                        // inject the other user's data
+                        user => {
+                          transac.involvedUser = user.data();
+                        }
+                      ),
+                    props.firebase
+                      .book(transac.itemID)
+                      .get()
+                      .then(
+                        // inject book data
+                        book => {
+                          transac.book = book.data();
+                        }
+                      )
+                  ]).then(bookAndUser => {
+                    // console.log('injected', bookAndUser, transac);
+                    return transac;
+                  });
+                })
+            )
+          ).then(transacsWithData => {
+            // console.log('the final full data', transacsWithData);
+            setTransactions(transacsWithData);
+            setGotTransactions(true);
+          });
         });
       // });
     }
