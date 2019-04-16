@@ -15,28 +15,21 @@ const RequestMessage = props => {
     : {createdAt: '1970-01-01'};
 
   const statusMap = status => {
-    console.log('status', status);
     switch (status.toLowerCase()) {
       case 'ongoing':
         return ['get', 'borrow'].includes(props.message.type.toLowerCase())
           ? 'Requesting'
           : 'Waiting For Response';
-        break;
       case 'accepted':
         return 'Accepted';
-        break;
       case 'declined':
         return 'Declined';
-        break;
       default:
         return '';
-        break;
     }
-    return {ongoing: 'Waiting For Response'}[status.toLowerCase()];
-    // if (['get','borrow'].includes(props.message.type.toLowerCase())) {
-    // }else{
 
-    // }
+    // This code can never be reached
+    return {ongoing: 'Waiting For Response'}[status.toLowerCase()];
   };
   const OperationButtons = (
     <div className="operation">

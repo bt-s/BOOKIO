@@ -4,17 +4,17 @@ import {compose} from 'recompose';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
-import {formReducer, errorReducer} from '../helpers/validationHelper';
+import {errorReducer} from '../helpers/validationHelper';
 import Button from '../components/Button/Button';
 import {
   Validation,
   Validator,
-  ValidationHelper,
+  ValidationHelper
 } from '../components/Forms/Validation';
 
 import {
   withAuthorization,
-  withEmailVerification,
+  withEmailVerification
 } from '../components/Session/Session';
 
 const EditProfilePage = props => {
@@ -47,7 +47,7 @@ const EditProfilePage = props => {
         phoneNumber: phoneNumber,
         location: location,
         age: age,
-        roles,
+        roles
       })
       .then(function() {
         console.log('updateduser');
@@ -64,7 +64,7 @@ const EditProfilePage = props => {
             phoneNumber: phoneNumber,
             location: location,
             age: age,
-            roles,
+            roles
           })
           .then(() => {
             let newUserData = {
@@ -73,7 +73,7 @@ const EditProfilePage = props => {
               email: email,
               phoneNumber: phoneNumber,
               location: location,
-              age: age,
+              age: age
             };
             window.localStorage.setItem(
               'authUser',
@@ -181,19 +181,17 @@ const EditProfilePage = props => {
   );
 };
 EditProfilePage.propTypes = {
-  authUser: PropTypes.object,
-
+  authUser: PropTypes.object
 };
 
 const condition = authUser => !!authUser;
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser,
+  authUser: state.sessionState.authUser
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSetAuthUser: authUser => dispatch({type: 'AUTH_USER_SET', authUser}),
-
+  onSetAuthUser: authUser => dispatch({type: 'AUTH_USER_SET', authUser})
 });
 
 export default compose(
