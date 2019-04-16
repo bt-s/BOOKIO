@@ -26,7 +26,7 @@ import SignUpPage from './pages/SignUpPage';
 import './styling/style.scss';
 
 /* eslint-disable no-unused-vars */
-import library from './fa';
+import library from './constants/fa';
 /* eslint-enable-no-unused-vars */
 
 require('dotenv').config();
