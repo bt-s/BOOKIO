@@ -8,9 +8,11 @@ import {
   faBars,
   faTimes,
   faPhone,
-  faEnvelope,
   faTimesCircle,
-  faSearch
+  faSearch,
+  faEnvelope,
+  faHome,
+  faBirthdayCake
 } from '@fortawesome/free-solid-svg-icons';
 
 import {faFacebookF} from '@fortawesome/free-brands-svg-icons';
@@ -18,7 +20,6 @@ import {faFacebookF} from '@fortawesome/free-brands-svg-icons';
 import {library} from '@fortawesome/fontawesome-svg-core';
 
 library.add(
-  faEnvelope,
   faPhone,
   faTimesCircle,
   faFacebookF,
@@ -30,7 +31,10 @@ library.add(
   faBook,
   faTimes,
   faBars,
-  faSearch
+  faSearch,
+  faEnvelope,
+  faHome,
+  faBirthdayCake
 );
 
 export default library;
