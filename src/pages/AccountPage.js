@@ -6,14 +6,12 @@ import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
-
 import {
   faPhone,
   faEnvelope,
   faHome,
-  faBirthdayCake,
+  faBirthdayCake
 } from '@fortawesome/free-solid-svg-icons';
-
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
@@ -30,7 +28,7 @@ const AccountPage = props => {
     <div className="account-page">
       <h1>My Profile</h1>
       <div className="user-information">
-        <Avatar avatarURL={props.authUser.photoUrl} />
+        <Avatar avatarUrl={props.authUser.photoUrl} />
         <div className="username-container">
           <span className="username-age">
             {props.authUser.username}, {props.authUser.age} years old

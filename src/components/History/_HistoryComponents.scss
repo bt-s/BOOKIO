@@ -15,13 +15,16 @@
   }
   .part-b {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
     @include smaller-than(sm) {
       flex-direction: column;
     }
     flex: 9;
     > .title-and-status {
+      display: flex;
+      flex-direction: column;
+      padding: 0px 18%;
       .title {
         font-weight: bold;
         font-size: 14px;

@@ -56,18 +56,14 @@ const HistoryPage = props => {
                       .get()
                       .then(
                         // inject the other user's data
-                        user => {
-                          transac.involvedUser = user.data();
-                        }
+                        user => (transac.involvedUser = user.data())
                       ),
                     props.firebase
                       .book(transac.itemID)
                       .get()
                       .then(
                         // inject book data
-                        book => {
-                          transac.book = book.data();
-                        }
+                        book => (transac.book = book.data())
                       )
                   ]).then(bookAndUser => {
                     // console.log('injected', bookAndUser, transac);
