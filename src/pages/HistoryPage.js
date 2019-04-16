@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {withFirebase} from '../components/Firebase';
 
 import Radio from '../components/Button/Radio';
-import {RequestMessage} from '../components/History/Components';
+import {RequestMessage} from '../components/History/RequestMessage';
 
 const _ = require('lodash/core');
 
