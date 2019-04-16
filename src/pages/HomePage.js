@@ -6,15 +6,7 @@ import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
 import {withFirebase} from '../components/Firebase';
-import {
-  faPhone,
-  faEnvelope,
-  faHome,
-  faBirthdayCake,
-  faUserShield,
-} from '@fortawesome/free-solid-svg-icons';
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 const HomePage = props => {
   const bannerSrcSet = [
     ''.concat(
@@ -28,7 +20,7 @@ const HomePage = props => {
     ''.concat(
       require('../images/homepage/book-stack-min-2400x600.jpg'),
       ' 1400w'
-    ),
+    )
   ].join(',');
 
   return (
@@ -140,7 +132,7 @@ const HomePage = props => {
 };
 
 HomePage.propTypes = {
-  firebase: PropTypes.object,
+  firebase: PropTypes.object
 };
 
 export default compose(withFirebase)(HomePage);

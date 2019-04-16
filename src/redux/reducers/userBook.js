@@ -18,7 +18,7 @@ const initialState = {
   }
 };
 
-export default function reducers(state = {...initialState}, action) {
+const userBookReducer = (state = {...initialState}, action) => {
   switch (action.type) {
     case ADD_NEW_USER_BOOK_LOADING:
       return {
@@ -55,4 +55,6 @@ export default function reducers(state = {...initialState}, action) {
     default:
       return state;
   }
-}
+};
+
+export default userBookReducer;
