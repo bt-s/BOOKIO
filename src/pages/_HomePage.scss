@@ -80,39 +80,6 @@
     @include media-breakpoint(md) {
       font-size: 36px;
     }
-
-    .right {
-      color: $black-lighter;
-      background-color: $white;
-      border-right: $logo-horizontal-border-primary;
-      border-left: $logo-horizontal-border-primary;
-      border-top: $logo-vertical-border-primary;
-      border-bottom: $logo-vertical-border-primary;
-      margin-left: 4px;
-      border-radius: $border-radius;
-    }
-  }
-
-  h2 {
-    font-size: 14px;
-    color: $gray-lighter;
-
-    @include media-breakpoint(sm) {
-      font-size: 18px;
-    }
-
-    @include media-breakpoint(md) {
-      font-size: 20px;
-    }
-  }
-
-  .homepage-btns {
-    display: flex;
-    flex-direction: column;
-
-    @include media-breakpoint(sm) {
-      flex-direction: row;
-    }
   }
 
   .banner-buttons {
@@ -202,10 +169,6 @@
   .line-break {
     margin-bottom: $padding-sm;
   }
-}
-
-.btn-dark-orange {
-  background-color: #f38202;
 }
 
 .how-it-works-container {
