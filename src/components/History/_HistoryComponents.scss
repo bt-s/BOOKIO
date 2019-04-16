@@ -34,7 +34,7 @@
   .title-and-status {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     padding: 0px 18%;
 
     .title {
@@ -70,6 +70,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  margin: 0px 10px 10px;
 
   @include smaller-than(sm) {
     .people-and-operation {
@@ -101,7 +102,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: flex-start;
 
   > .type {
