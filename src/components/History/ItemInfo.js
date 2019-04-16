@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {Link} from 'react-router-dom';
+import * as ROUTES from '../../constants/routes';
+
+import Loader from '../Loader/Loader';
+
 const ItemInfo = props => {
   return (
     <div className="item-info">
-      <img src={props.imgURL} alt={props.imgURL} />
+      <Link to={'/detail/' + props.bookId}>
+        <img src={props.imgURL} alt={props.title} />
+      </Link>
       <div className="part-b">
         <div className="title-and-status">
           <div className="title">{props.title}</div>
@@ -15,17 +22,18 @@ const ItemInfo = props => {
     </div>
   );
 };
+
 ItemInfo.propTypes = {
   imgURL: PropTypes.string,
   title: PropTypes.string,
   status: PropTypes.string,
-  supplement: PropTypes.object //
+  supplement: PropTypes.object,
+  bookId: PropTypes.string
 };
+
 ItemInfo.defaultProps = {
-  // imgURL: reactJPG,
   title: 'Book Title',
   status: 'Requesting'
-  // supplement: 'Duration: 1-23 Mar. 2019'
 };
 
 export default ItemInfo;

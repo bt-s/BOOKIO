@@ -82,7 +82,9 @@ const RequestMessage = props => {
           title={props.message.book && props.message.book.title}
           status={statusMap(status)}
           supplement={props.message.supplement}
+          bookId={props.message.itemID}
         />
+
         <div className="people-and-operation">
           <div className="type-and-people">
             {/*  */}

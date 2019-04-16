@@ -1,32 +1,43 @@
 .item-info {
   display: flex;
-  flex-direction: row;
   height: 150px;
-  > img {
+  flex-direction: column;
+
+  @include media-breakpoint(sm) {
+    flex-direction: row;
+    flex: 3;
+  }
+
+  img {
     display: flex;
     flex: 5;
     margin: 0px 20px 10px 20px;
     object-fit: cover;
     border-radius: 4px;
-    width: 40%;
     max-height: 100%;
+    width: 100%;
+    max-width: 200px;
   }
+
   .part-b {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    flex: 9;
+
     @include smaller-than(sm) {
       flex-direction: column;
     }
-    flex: 9;
-    > .title-and-status {
-      display: flex;
-      flex-direction: column;
-      padding: 0px 18%;
-      .title {
-        font-weight: bold;
-        font-size: 14px;
-      }
+  }
+
+  .title-and-status {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 18%;
+
+    .title {
+      font-weight: bold;
+      font-size: 14px;
     }
   }
 }
@@ -35,60 +46,65 @@
   border-radius: 7px;
   background: $white-dim;
   margin-top: 20px;
-  .msg-time {
-    padding: 5px 0px 5px;
-    border-bottom: 1px solid $gray-line;
-    margin: 0px 20px 10px 20px;
+}
+
+.msg-time {
+  padding: 5px 0px 5px;
+  border-bottom: 1px solid $gray-line;
+  margin: 0px 20px 10px 20px;
+}
+
+.msg-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.people-and-operation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  @include smaller-than(sm) {
+    .people-and-operation {
+      margin-top: 15px;
+      width: 100%;
+      align-items: center;
+      flex-direction: row;
+    }
   }
-  .msg-body {
+
+  @include media-breakpoint(sm) {
+    flex: 1;
+  }
+
+  .user-label {
+    padding-left: 20px;
+  }
+
+  .operation {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    .people-and-operation {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
-      .user-label {
-        padding-left: 20px;
-      }
-      .type-and-people {
-        margin-bottom: 15px;
-        > .type {
-          margin-bottom: 5px;
-        }
-        > .user-container {
-          text-decoration: none;
-        }
-      }
-      .operation {
-        display: flex;
-        flex-direction: row;
-        margin: 0 0 10px 0px;
-        .btn {
-          border-width: 2px;
-          margin-right: 20px;
-          border-radius: 30px;
-          height: 35px;
-        }
-      }
+    margin: 0 0 10px 0px;
+
+    .btn {
+      border-width: 2px;
+      margin-right: 20px;
+      border-radius: 30px;
+      height: 35px;
     }
-    @include media-breakpoint(sm) {
-      .item-info {
-        flex: 3;
-      }
-      .people-and-operation {
-        flex: 1;
-      }
-    }
-    @include smaller-than(sm) {
-      flex-direction: column;
-      .people-and-operation {
-        margin-top: 15px;
-        width: 100%;
-        align-items: center;
-        flex-direction: row;
-      }
-    }
+  }
+}
+
+.type-and-people {
+  margin-bottom: 15px;
+
+  > .type {
+    margin-bottom: 5px;
+  }
+
+  > .user-container {
+    text-decoration: none;
   }
 }
