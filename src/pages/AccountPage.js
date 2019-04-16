@@ -11,7 +11,7 @@ import {storeBooks} from '../redux/actions/storeBooks';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   withAuthorization,
-  withEmailVerification
+  withEmailVerification,
 } from '../components/Session/Session';
 
 import Avatar from '../components/Account/Avatar';
@@ -96,7 +96,7 @@ const AccountPage = props => {
 };
 
 AccountPage.propTypes = {
-  authUser: PropTypes.object
+  authUser: PropTypes.object,
 };
 
 const condition = authUser => !!authUser;

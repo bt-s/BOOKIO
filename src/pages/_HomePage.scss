@@ -1,18 +1,24 @@
 .home-img-banner {
-  position: absolute;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
   z-index: -1;
-  height: 500px;
-  width: auto;
+  height: 225px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
 
   @include media-breakpoint(sm) {
-    width: auto;
+    width: 800px;
+    height: 580px;
+    position: absolute;
+    right: 0;
   }
 
   @include media-breakpoint(md) {
+    width: 800px;
+    height: 600px;
+  }
+  @include media-breakpoint(lg) {
+    width: 800px;
     height: 600px;
   }
 }
@@ -21,33 +27,47 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 500px;
+  height: 300px;
+  margin: 0 auto 0 auto;
 
   @include media-breakpoint(sm) {
-    float: right;
+    float: left;
+    height: 400px;
   }
 
   @include media-breakpoint(md) {
     height: 600px;
+    float: left;
   }
 
   .inner {
-    background: rgba(255, 255, 255, 0.5);
-    padding: 40px;
     border-radius: 4px;
-    margin: 0 15px;
-  }
+    margin: 0 20px;
 
-  h1 {
-    font-size: 18px;
-    margin-top: 0;
+    border-color: $orange;
+    color: #4a4a4a;
 
     @include media-breakpoint(sm) {
-      font-size: 20px;
+      width: 400px;
+      padding: 20px;
+    }
+  }
+
+  .inner-content {
+    text-align: justify;
+  }
+  h1 {
+    font-size: 20px;
+    margin-top: 0;
+    color: #4a4a4a;
+    text-align: left;
+
+    @include media-breakpoint(sm) {
+      font-size: 36px;
     }
 
     @include media-breakpoint(md) {
-      font-size: 24px;
+      font-size: 36px;
     }
 
     .right {
@@ -64,6 +84,7 @@
 
   h2 {
     font-size: 14px;
+    color: #4a4a4a;
 
     @include media-breakpoint(sm) {
       font-size: 18px;
@@ -96,5 +117,89 @@
         margin-right: $padding-sm;
       }
     }
+  }
+}
+
+.inner-card {
+  width: 200px;
+  height: 230px;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 20px;
+  box-shadow: 1px 1px 4px 0 #9b9b9b;
+  background-color: #ffffff;
+  margin-bottom: 40px;
+  color: #4a4a4a;
+  h2 {
+    font-size: 14px;
+    color: #4a4a4a;
+
+    @include media-breakpoint(sm) {
+      font-size: 18px;
+    }
+
+    @include media-breakpoint(md) {
+      font-size: 20px;
+    }
+  }
+}
+
+.btn-dark-orange {
+  background-color: #f38202;
+}
+
+.how-it-works {
+  padding: 0 20px 20px 20px;
+  width: 550px;
+  text-align: justify;
+  color: #4a4a4a;
+  h1 {
+    font-size: 24px;
+    margin-top: 0;
+    color: #4a4a4a;
+    text-align: left;
+    padding-top: 10px;
+
+    @include media-breakpoint(sm) {
+      font-size: 30px;
+    }
+
+    @include media-breakpoint(md) {
+      font-size: 28px;
+    }
+  }
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: $padding-xxs;
+  margin-top: $padding-xs;
+  @include media-breakpoint(sm) {
+    font-size: 18px;
+  }
+
+  @include media-breakpoint(md) {
+    font-size: 20px;
+  }
+}
+
+.mockup-platform {
+  height: 240px;
+  width: 280px;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  @include media-breakpoint(sm) {
+    height: 360px;
+    width: 450px;
+  }
+}
+
+.title-section {
+  font-size: 20px;
+  color: #4a4a4a;
+  @include media-breakpoint(sm) {
+    font-size: 34px;
   }
 }
