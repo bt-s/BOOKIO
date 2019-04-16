@@ -2,10 +2,12 @@ $border-radius: 2px;
 $navbar-icon-size: 20px;
 .scroll-height {
   // height: $navbar-height-mobile !important;
-  transition: height 0.25s ease-in;
-  @include media-breakpoint(sm) {
-    height: $navbar-height !important;
-  }
+  transition: height 0.35s ease-in;
+  height: 0px !important;
+  overflow: hidden;
+  // @include media-breakpoint(sm) {
+  //   height: $navbar-height !important;
+  // }
 }
 
 .navbar {
@@ -17,10 +19,10 @@ $navbar-icon-size: 20px;
   height: $navbar-height-mobile-top;
   background-color: $black-lighter;
   z-index: 1000;
-  transition: height 0.25s ease-in;
+  transition: height 0.15s ease-in;
 
   @include media-breakpoint(sm) {
-    height: $navbar-height-top;
+    height: $navbar-height;
   }
 
   &.mobile-menu-open {

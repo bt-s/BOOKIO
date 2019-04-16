@@ -27,7 +27,7 @@ const accountMenuList = [
         My Profile
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
   {
     id: 1,
@@ -37,7 +37,7 @@ const accountMenuList = [
         Edit Profile
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
 
   {
@@ -48,13 +48,13 @@ const accountMenuList = [
         Settings
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
   {
     id: 5,
     title: <SignOut />,
-    classes: 'link section-ending',
-  },
+    classes: 'link section-ending'
+  }
 ];
 
 const accountMenu = (
@@ -96,11 +96,20 @@ const NavbarNonAuth = () => (
 
 const Navbar = props => {
   const [isTop, setIsTop] = useState(true);
+  let lastScrollPos = 0;
 
   useEffect(() => {
-    document.addEventListener('scroll', () => {
-      let val = window.scrollY < 100;
-      setIsTop(val);
+    document.addEventListener('scroll', e => {
+      // let val = window.scrollY < 100;
+      if (lastScrollPos - window.scrollY < 0) {
+        setTimeout(() => setIsTop(false));
+      } else if (lastScrollPos - window.scrollY > 0) {
+        setTimeout(() => setIsTop(true));
+      }
+      console.log(lastScrollPos, 'y', window.scrollY);
+      lastScrollPos = window.scrollY;
+
+      // setIsTop(val);
     });
   }, []);
 
@@ -120,7 +129,7 @@ const Navbar = props => {
 };
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser,
+  authUser: state.sessionState.authUser
 });
 
 export default withRouter(connect(mapStateToProps)(Navbar));
