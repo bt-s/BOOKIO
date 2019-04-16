@@ -6,13 +6,6 @@ import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
-import {
-  faPhone,
-  faEnvelope,
-  faHome,
-  faBirthdayCake
-} from '@fortawesome/free-solid-svg-icons';
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   withAuthorization,
@@ -38,7 +31,7 @@ const AccountPage = props => {
         <div className="user-info-container">
           <span className="username">Hey, I am {props.authUser.username} </span>
           <span className="info-item">
-            <FontAwesomeIcon icon={faEnvelope} />
+            <FontAwesomeIcon icon="envelope" />
             {props.authUser.email}
           </span>
           <span className="info-item">
@@ -46,11 +39,11 @@ const AccountPage = props => {
             {props.authUser.phoneNumber}
           </span>
           <span className="info-item">
-            <FontAwesomeIcon icon={faHome} />
+            <FontAwesomeIcon icon="home" />
             {props.authUser.location}
           </span>
           <span className="info-item">
-            <FontAwesomeIcon icon={faBirthdayCake} />
+            <FontAwesomeIcon icon="birthday-cake" />
             {props.authUser.age}
           </span>
           <Link to={ROUTES.EDIT_PROFILE} className="edit-profile">

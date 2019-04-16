@@ -7,6 +7,9 @@ import {withFirebase} from '../components/Firebase';
 import UserLabel from '../components/Books/UserLabel';
 import RatingStars from '../components/Books/RatingStars';
 
+import {Link} from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
+
 const _ = require('lodash/core');
 
 const BookDetailContainer = props => {
@@ -145,12 +148,33 @@ const BookDetail = props => {
     </div>
   );
 
+  const getImages = () => {
+    if (book.imageUrls) {
+      const mod = Math.min(book.imageUrls.length, 2);
+
+      return book.imageUrls.map((image, ix) => (
+        <img
+          key={ix}
+          className="book-img"
+          src={image}
+          alt={book.title}
+          style={{width: `calc(100% / ${mod} - 20px)`}}
+        />
+      ));
+    }
+  };
+
   return (
     <div className="book-details-container">
-      <div className="book-info-container">
+      <div className="book-details-page-header">
         <div className="book-title">{book.title}</div>
+        <Link to={ROUTES.BOOKS} className="btn btn-orange">
+          To Books Overview
+        </Link>
+      </div>
+      <div className="book-info-container">
         <div className="author">by {book.author}</div>
-        <img className="book-img" src={book.imageUrls} alt={book.title} />
+        <div className="images">{getImages()}</div>
         <div className="book-rating">
           <span>GoodReads users give this book: </span>
           <RatingStars rating={book.rating} />
@@ -161,16 +185,13 @@ const BookDetail = props => {
       <div className="book-pickup-container">
         <div className="header-pickup">Pickup Location </div>
         {googleMap}
-        <div className="distance">
-          {book.location && book.location.lat + ' ' + book.location.lon}
-        </div>
         {ownerDetails}
+        {firebase.getMyUID() !== book.ownerId && (
+          <button className="btn btn-black" onClick={requestBook}>
+            Request
+          </button>
+        )}
       </div>
-      {firebase.getMyUID() !== book.ownerId && (
-        <button className="btn-request btn" onClick={requestBook}>
-          Request
-        </button>
-      )}
     </div>
   );
 };
@@ -178,7 +199,6 @@ const BookDetail = props => {
 BookDetail.propTypes = {
   imageUrls: PropTypes.string,
   title: PropTypes.string,
-  distance: PropTypes.string,
   description: PropTypes.string,
   userProfile: PropTypes.string,
   rating: PropTypes.string,
