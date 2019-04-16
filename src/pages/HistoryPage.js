@@ -39,57 +39,53 @@ const HistoryPage = props => {
                   .transaction(id)
                   .get()
                   .then(transac => {
-                    return transac.data();
+                    transac = transac.data();
+                    // calc transaction type
+                    transac.type =
+                      transac.type === 'to borrow'
+                        ? transac.providerID === props.firebase.getMyUID()
+                          ? 'lend'
+                          : 'borrow'
+                        : transac.providerID === props.firebase.getMyUID()
+                        ? 'give'
+                        : 'get';
+                    return Promise.all([
+                      props.firebase
+                        // get the user other than me
+                        .user(
+                          transac.providerID === props.firebase.getMyUID()
+                            ? transac.consumerID
+                            : transac.providerID
+                        )
+                        .get()
+                        .then(
+                          // inject the other user's data
+                          user => {
+                            transac.involvedUser = user.data();
+                          }
+                        ),
+                      props.firebase
+                        .book(transac.itemID)
+                        .get()
+                        .then(
+                          // inject book data
+                          book => {
+                            transac.book = book.data();
+                          }
+                        )
+                    ]).then(bookAndUser => {
+                      console.log('injected', bookAndUser, transac);
+                      return transac;
+                    });
                   })
               )
-            ).then(transactions => {
-              Promise.all(
-                transactions.map(transac => {
-                  // calc transaction type
-                  transac.type =
-                    transac.type === 'to borrow'
-                      ? transac.providerID === props.firebase.getMyUID()
-                        ? 'lend'
-                        : 'borrow'
-                      : transac.providerID === props.firebase.getMyUID()
-                      ? 'give'
-                      : 'get';
-                  return Promise.all([
-                    props.firebase
-                      // get the user other than me
-                      .user(
-                        transac.providerID === props.firebase.getMyUID()
-                          ? transac.consumerID
-                          : transac.providerID
-                      )
-                      .get()
-                      .then(
-                        // inject the other user's data
-                        user => {
-                          transac.involvedUser = user.data();
-                        }
-                      ),
-                    props.firebase
-                      .book(transac.itemID)
-                      .get()
-                      .then(
-                        // inject book data
-                        book => {
-                          transac.book = book.data();
-                        }
-                      )
-                  ]).then(bookAndUser => {
-                    console.log('injected', bookAndUser, transac);
-                    return transac;
-                  });
-                })
-              ).then(transacsWithData => {
-                console.log('the final full data', transacsWithData);
-                setTransactions(transacsWithData);
-                setGotTransactions(true);
-              });
+            ).then(transacsWithData => {
+              console.log('the final full data', transacsWithData);
+              setTransactions(transacsWithData);
+              setGotTransactions(true);
             });
         });
+      // });
     }
   }
 
