@@ -63,13 +63,11 @@ const HistoryPage = props => {
                         book => (transac.book = book.data())
                       )
                   ]).then(bookAndUser => {
-                    // console.log('injected', bookAndUser, transac);
                     return transac;
                   });
                 })
             )
           ).then(transacsWithData => {
-            // console.log('the full data', transacsWithData);
             setTransactions(transacsWithData);
             setGotTransactions(true);
           });

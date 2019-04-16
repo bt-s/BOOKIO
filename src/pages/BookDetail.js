@@ -67,7 +67,6 @@ const BookDetail = props => {
   const {book, owner, firebase, bookId} = props;
   const requestBook = () => {
     const consumerID = firebase.getMyUID();
-    console.log('book.type', book.type);
 
     firebase
       .user(consumerID)
@@ -90,8 +89,6 @@ const BookDetail = props => {
                 type: book.type
               })
               .then(transac => {
-                console.log('Request successful, transaction id is:', transac);
-                console.log('user me', user, user.data());
                 firebase.user(consumerID).update({
                   transactions: (user.data().transactions || []).concat(
                     transac.id
@@ -107,7 +104,7 @@ const BookDetail = props => {
                 alert('You have successfully requested this item');
               })
               .catch(err => {
-                console.log('Request failed', err);
+                console.error('Request failed', err);
               });
       });
   };
