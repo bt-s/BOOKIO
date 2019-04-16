@@ -25,7 +25,7 @@ const AccountPage = props => {
   const onSearchBooks = uid => {
     index
       .search({
-        query: uid
+        query: uid,
       })
       .then(res => {
         props.storeBooks(res.hits);
@@ -44,12 +44,6 @@ const AccountPage = props => {
       <h1>My Profile</h1>
       <div className="user-information">
         <Avatar avatarUrl={props.authUser.photoUrl} />
-        <div className="username-container">
-          <span className="username-age">
-            {props.authUser.username}, {props.authUser.age} years old
-          </span>
-          <span className="location">{props.authUser.location}</span>
-        </div>
         <div className="user-info-container">
           <span className="username">Hey, I am {props.authUser.username} </span>
           <span className="info-item">
@@ -103,11 +97,11 @@ const condition = authUser => !!authUser;
 
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser,
-  books: state.booksState.books
+  books: state.booksState.books,
 });
 
 const mapDispatchToProps = dispatch => ({
-  storeBooks: books => dispatch(storeBooks(books))
+  storeBooks: books => dispatch(storeBooks(books)),
 });
 
 export default compose(
