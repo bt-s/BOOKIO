@@ -7,6 +7,11 @@ import {withFirebase} from '../components/Firebase';
 import UserLabel from '../components/Books/UserLabel';
 import RatingStars from '../components/Books/RatingStars';
 
+import {Link} from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
+
+const _ = require('lodash/core');
+
 const BookDetailContainer = props => {
   const [book, setBooks] = useState([]);
   const [owner, setOwner] = useState([]);
@@ -61,31 +66,46 @@ const BookDetailContainer = props => {
 const BookDetail = props => {
   const {book, owner, firebase, bookId} = props;
   const requestBook = () => {
-    console.log('book.type', book.type);
-    firebase
-      .transactions()
-      .add({
-        providerID: book.ownerId,
-        consumerID: firebase.getMyUID(),
-        status: 'Ongoing',
-        requestTime: new Date().getTime(),
-        itemID: bookId,
-        type: book.type
-      })
-      .then(transac => {
-        console.log('reqeust success, transaction id is', transac);
+    const consumerID = firebase.getMyUID();
 
-        firebase
-          .user(firebase.getMyUID())
-          .get()
-          .then(user =>
-            firebase.user(firebase.getMyUID()).update({
-              transactions: (user.data().transactions || []).concat(transac.id)
-            })
-          );
-      })
-      .catch(() => {
-        console.log('request fail');
+    firebase
+      .user(consumerID)
+      .get()
+      .then(user => {
+        const item =
+          user.data().items &&
+          user.data().items.filter(item => item === bookId);
+
+        !_.isEmpty(item)
+          ? alert('You have already requested this item')
+          : firebase
+              .transactions()
+              .add({
+                providerID: book.ownerId,
+                consumerID: consumerID,
+                status: 'Ongoing',
+                requestTime: new Date().getTime(),
+                itemID: bookId,
+                type: book.type
+              })
+              .then(transac => {
+                firebase.user(consumerID).update({
+                  transactions: (user.data().transactions || []).concat(
+                    transac.id
+                  ),
+                  // items I requested
+                  items: (user.data().items || []).concat(bookId)
+                });
+                firebase.user(book.ownerId).update({
+                  transactions: (user.data().transactions || []).concat(
+                    transac.id
+                  )
+                });
+                alert('You have successfully requested this item');
+              })
+              .catch(err => {
+                console.error('Request failed', err);
+              });
       });
   };
 
@@ -125,15 +145,36 @@ const BookDetail = props => {
     </div>
   );
 
+  const getImages = () => {
+    if (book.imageUrls) {
+      const mod = Math.min(book.imageUrls.length, 2);
+
+      return book.imageUrls.map((image, ix) => (
+        <img
+          key={ix}
+          className="book-img"
+          src={image}
+          alt={book.title}
+          style={{width: `calc(100% / ${mod} - 20px)`}}
+        />
+      ));
+    }
+  };
+
   return (
     <div className="book-details-container">
-      <div className="book-info-container">
+      <div className="book-details-page-header">
         <div className="book-title">{book.title}</div>
+        <Link to={ROUTES.BOOKS} className="btn btn-orange">
+          To Books Overview
+        </Link>
+      </div>
+      <div className="book-info-container">
         <div className="author">by {book.author}</div>
-        <img className="book-img" src={book.imageUrls} alt={book.title} />
+        <div className="images">{getImages()}</div>
         <div className="book-rating">
           <span>GoodReads users give this book: </span>
-          <RatingStars rating={'' + book.rating} />
+          <RatingStars rating={book.rating} />
         </div>
         <div className="header-description">Description </div>
         <div className="book-description">{book.description}</div>
@@ -141,16 +182,13 @@ const BookDetail = props => {
       <div className="book-pickup-container">
         <div className="header-pickup">Pickup Location </div>
         {googleMap}
-        <div className="distance">
-          {book.location && book.location.lat + ' ' + book.location.lon}
-        </div>
         {ownerDetails}
+        {firebase.getMyUID() !== book.ownerId && (
+          <button className="btn btn-black" onClick={requestBook}>
+            Request
+          </button>
+        )}
       </div>
-      {firebase.getMyUID() !== book.ownerId && (
-        <button className="btn-request btn" onClick={requestBook}>
-          Request
-        </button>
-      )}
     </div>
   );
 };
@@ -158,7 +196,6 @@ const BookDetail = props => {
 BookDetail.propTypes = {
   imageUrls: PropTypes.string,
   title: PropTypes.string,
-  distance: PropTypes.string,
   description: PropTypes.string,
   userProfile: PropTypes.string,
   rating: PropTypes.string,

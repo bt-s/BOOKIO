@@ -60,6 +60,10 @@ const AddNewBookFormBase = props => {
     setLocation(loc);
   };
 
+  const getAddress = val => {
+    // Here if you want to get the address and the city.
+  };
+
   const handleImageUploaded = url => {
     imageUrls.push(url);
   };
@@ -159,6 +163,7 @@ const AddNewBookFormBase = props => {
             onValidate={onValidate}>
             <input
               className="title-input"
+              placeholder="Book Author"
               type="text"
               onChange={e =>
                 changeNewBook({
@@ -181,7 +186,7 @@ const AddNewBookFormBase = props => {
             onValidate={onValidate}>
             <textarea
               className="input-description"
-              placeholder="Describe it"
+              placeholder="Please give description about the book (e.g condition, your personal opinion about the book)"
               name="description"
               type="text"
               value={description}
@@ -208,16 +213,22 @@ const AddNewBookFormBase = props => {
             style={{
               width: '100%',
               height: '200px',
-              position: 'relative'
+              position: 'relative',
+              border: '1px solid #d1d5da',
+              borderRadius: '10px',
+              overflow: 'hidden'
             }}
             zoom={15}
             coord={location}
             getCoord={changeLocation}
             initCoord={initLocation}
+            autocomplete={true}
+            mapClick={true}
+            getAddress={getAddress}
           />
 
           <button
-            className="btn-publish btn"
+            className="btn btn-black"
             onClick={e => {
               e.preventDefault();
               setProgressStyle('on');

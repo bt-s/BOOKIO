@@ -10,9 +10,13 @@
   margin: 5px 20px 5px 0px;
   text-align: center;
   position: relative;
+  -webkit-box-shadow: -1px 6px 10px 0px rgba(0, 0, 0, 0.07);
+  -moz-box-shadow: -1px 6px 10px 0px rgba(0, 0, 0, 0.07);
+  box-shadow: -1px 6px 10px 0px rgba(0, 0, 0, 0.07);
 }
 
-.drag-hover {
+.drag-hover,
+.drop-box:hover {
   border: dashed 3px rgba(112, 111, 111, 0.34) !important;
   background-color: rgba(158, 154, 154, 0.15) !important;
 }
@@ -40,4 +44,5 @@
   -khtml-opacity: 0;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }

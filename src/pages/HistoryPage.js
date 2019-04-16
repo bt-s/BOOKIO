@@ -2,99 +2,81 @@ import React, {useState} from 'react';
 import {withFirebase} from '../components/Firebase';
 
 import Radio from '../components/Button/Radio';
-import {RequestMessage} from '../components/History/Components';
+import {RequestMessage} from '../components/History/RequestMessage';
+
+import Loader from '../components/Loader/Loader';
 
 const HistoryPage = props => {
-  const [msgType, setMsgType] = useState('give');
+  const [msgType, setMsgType] = useState(
+    localStorage.getItem('history_type') || 'lend'
+  );
   const [gotTransactions, setGotTransactions] = useState(false);
   const [transactions, setTransactions] = useState([]);
+  const [tictok, setTictok] = useState(0);
 
   if (!gotTransactions) {
-    console.log('////', props);
-
-    props.firebase.myUID &&
+    if (!props.firebase.getMyUID()) {
+      // use this to keep re-rendering until firebase mounted
+      setTimeout(() => {
+        setTictok(tictok + 1);
+      }, tictok * 200);
+    } else {
       props.firebase
         .user(props.firebase.getMyUID())
         .get()
         .then(user => {
-          console.log('user12///', user.data());
           Promise.all(
             user.data().transactions.map(id =>
               props.firebase
                 .transaction(id)
                 .get()
                 .then(transac => {
-                  return {id: id, ...transac.data()};
+                  transac = transac.data();
+                  transac.id = id;
+                  // calc transaction type
+                  transac.type =
+                    transac.type === 'to borrow'
+                      ? transac.providerID === props.firebase.getMyUID()
+                        ? 'lend'
+                        : 'borrow'
+                      : transac.providerID === props.firebase.getMyUID()
+                      ? 'give'
+                      : 'get';
+                  return Promise.all([
+                    props.firebase
+                      // get the user other than me
+                      .user(
+                        transac.providerID === props.firebase.getMyUID()
+                          ? transac.consumerID
+                          : transac.providerID
+                      )
+                      .get()
+                      .then(
+                        // inject the other user's data
+                        user => (transac.involvedUser = user.data())
+                      ),
+                    props.firebase
+                      .book(transac.itemID)
+                      .get()
+                      .then(
+                        // inject book data
+                        book => (transac.book = book.data())
+                      )
+                  ]).then(bookAndUser => {
+                    return transac;
+                  });
                 })
             )
-          ).then(transactions => {
-            console.log('transactions with IDDD', transactions);
-            transactions.forEach(transac => {
-              // calc transaction type
-              transac.type =
-                transac.type === 'to borrow'
-                  ? transac.providerID === props.firebase.getMyUID()
-                    ? 'lend'
-                    : 'borrow'
-                  : transac.providerID === props.firebase.getMyUID()
-                  ? 'give'
-                  : 'get';
-
-              props.firebase
-                .user(
-                  transac.providerID === props.firebase.getMyUID()
-                    ? transac.consumerID
-                    : transac.providerID
-                )
-                .get()
-                .then(
-                  user =>
-                    (transac.involvedUser = user.exists ? user.data() : false)
-                );
-              props.firebase
-                .book(transac.itemID)
-                .get()
-                .then(
-                  book => (transac.book = book.exists ? book.data() : false)
-                );
-            });
-            console.log('before set', transactions);
-
-            setTransactions(transactions);
+          ).then(transacsWithData => {
+            setTransactions(transacsWithData);
             setGotTransactions(true);
           });
         });
-
-    // previous one, working, but data not filtered
-    // props.firebase
-    //   .transactions()
-    //   .get()
-    //   .then(querySnapshot => {
-    //     const transacs = querySnapshot.docs.map(doc => {
-    //       return {id: doc.id, ...doc.data()};
-    //     });
-    //     transacs.forEach(transac => {
-    //       props.firebase
-    //         .user(
-    //           transac.providerID === props.firebase.getMyUID()
-    //             ? transac.consumerID
-    //             : transac.providerID
-    //         )
-    //         .get()
-    //         .then(
-    //           user => (transac.involvedUser = user.exists ? user.data() : false)
-    //         );
-    //       props.firebase
-    //         .book(transac.itemID)
-    //         .get()
-    //         .then(book => (transac.book = book.exists ? book.data() : false));
-    //     });
-    //     setTransactions(transacs);
-    //     setGotTransactions(true);
-    //   });
+      // });
+    }
   }
 
-  function getMsgOfType(type) {
+  const getMsgOfType = type => {
     return transactions
       .filter(msg => {
         return msg.type === msgType;
@@ -107,13 +89,13 @@ const HistoryPage = props => {
             props.firebase.transaction(msg.id).update({status: 'declined'});
           }}
           acceptCallback={() => {
-            props.firebase.transaction(msg.id).update({status: 'accpeted'});
+            props.firebase.transaction(msg.id).update({status: 'accepted'});
           }}
         />
       ));
-  }
+  };
 
-  return (
+  return gotTransactions ? (
     <div className="history-page">
       <div className="filters">
         <Radio
@@ -125,6 +107,7 @@ const HistoryPage = props => {
           checked={msgType === 'lend'}
           onChange={() => {
             setMsgType('lend');
+            localStorage.setItem('history_type', 'lend');
           }}
         />
         <Radio
@@ -136,6 +119,7 @@ const HistoryPage = props => {
           checked={msgType === 'give'}
           onChange={() => {
             setMsgType('give');
+            localStorage.setItem('history_type', 'give');
           }}
         />
         <Radio
@@ -147,6 +131,7 @@ const HistoryPage = props => {
           checked={msgType === 'borrow'}
           onChange={() => {
             setMsgType('borrow');
+            localStorage.setItem('history_type', 'borrow');
           }}
         />
         <Radio
@@ -158,6 +143,7 @@ const HistoryPage = props => {
           checked={msgType === 'get'}
           onChange={() => {
             setMsgType('get');
+            localStorage.setItem('history_type', 'get');
           }}
         />
       </div>
@@ -165,6 +151,8 @@ const HistoryPage = props => {
         <div className="msg-container">{getMsgOfType(msgType)}</div>
       )}
     </div>
+  ) : (
+    <Loader />
   );
 };
 

@@ -1,0 +1,19 @@
+.my-books-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-add-book {
+  &.account {
+    font-size: 30px;
+    width: auto;
+    position: relative;
+    bottom: auto;
+    right: auto;
+    z-index: 1;
+    height: 40px;
+    font-size: 17px;
+    font-weight: 400;
+  }
+}

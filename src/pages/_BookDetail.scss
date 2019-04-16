@@ -1,5 +1,5 @@
 .book-details-container {
-  margin-top: $padding-xs;
+  margin: 0 0 $padding-lg;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -10,7 +10,6 @@
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
-    margin-top: $padding-sm;
 
     @include media-breakpoint(sm) {
       flex-basis: 60%;
@@ -25,7 +24,6 @@
 
     @include media-breakpoint(sm) {
       flex-basis: 20%;
-      margin-top: 105px;
     }
   }
 
@@ -35,6 +33,19 @@
     color: $gray-lighter;
     font-size: 25px;
     margin-bottom: $padding-xs;
+    order: 2;
+
+    @include media-breakpoint(sm) {
+      order: 1;
+    }
+  }
+
+  .btn-orange {
+    order: 1;
+
+    @include media-breakpoint(sm) {
+      order: 2;
+    }
   }
 
   .author {
@@ -49,6 +60,11 @@
     object-fit: cover;
     margin-right: $padding-xs;
     margin-bottom: $padding-xs;
+    max-height: 300px;
+
+    @include media-breakpoint(sm) {
+      max-height: 400px;
+    }
   }
 
   .book-rating {
@@ -82,25 +98,6 @@
     margin-bottom: $padding-xs;
   }
 
-  .btn-request {
-    margin-top: $padding-xs;
-    width: 100px;
-    height: 35px;
-    border-radius: 19px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-    background-color: $black;
-    font-size: 12px;
-    color: $white;
-    text-align: center;
-    display: flex;
-    position: fixed;
-    right: 40px;
-    bottom: 40px;
-    justify-content: center;
-    text-decoration: none;
-    align-items: center;
-  }
-
   .google-map-wrapper {
     height: 350px;
     width: 250px;
@@ -114,9 +111,25 @@
 
     > div {
       > div {
-        height: 350px !important;
-        width: 250px !important;
+        &:first-child {
+          height: 350px !important;
+          width: 250px !important;
+        }
       }
     }
+  }
+}
+
+.book-details-page-header {
+  display: flex;
+  flex: 1 0 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: $padding-xs;
+  flex-direction: column;
+
+  @include media-breakpoint(sm) {
+    flex-direction: row;
+    align-items: center;
   }
 }

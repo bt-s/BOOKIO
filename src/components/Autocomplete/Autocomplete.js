@@ -1,5 +1,7 @@
 import React, {Fragment, useState, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Loader from '../../components/Loader/Loader';
 
 const Autocomplete = props => {
   const {
@@ -8,7 +10,8 @@ const Autocomplete = props => {
     suggestions,
     isLoading,
     suggestionsImage,
-    suggestionsAuthor
+    suggestionsAuthor,
+    placeholder
   } = props;
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -121,7 +124,13 @@ const Autocomplete = props => {
         })}
       </ul>
     ) : (
-      <div className="suggestions loading">Loading..</div>
+      <div className="suggestions loading">
+        <span>Lo</span>
+        <span>ad</span>
+        <span>in</span>
+        <span>g.</span>
+        <span>..</span>
+      </div>
     ));
 
   return (
@@ -132,8 +141,14 @@ const Autocomplete = props => {
         onChange={onChange}
         onKeyDown={onKeyDown}
         value={userInput}
+        placeholder={placeholder}
       />
-      {suggestionsListComponent}
+      <ReactCSSTransitionGroup
+        transitionName="suggestion-transition"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}>
+        {suggestionsListComponent}
+      </ReactCSSTransitionGroup>
     </Fragment>
   );
 };
@@ -143,7 +158,8 @@ Autocomplete.propTypes = {
   suggestions: PropTypes.array,
   isLoading: PropTypes.bool,
   fetchSuggestions: PropTypes.func,
-  getUserPick: PropTypes.func
+  getUserPick: PropTypes.func,
+  placeholder: PropTypes.string
 };
 
 export default Autocomplete;

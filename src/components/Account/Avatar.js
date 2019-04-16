@@ -58,7 +58,7 @@ const Avatar = props => {
     <div className="avatar-container">
       <img
         className="avatar"
-        src={imgURL === '' ? props.avatarURL : imgURL}
+        src={imgURL === '' ? props.avatarUrl : imgURL}
         alt=""
       />
       <Dropdown
@@ -72,11 +72,11 @@ const Avatar = props => {
 };
 
 Avatar.propTypes = {
-  avatarURL: PropTypes.string
+  avatarUrl: PropTypes.string
 };
 
 Avatar.defaultProps = {
-  avatarURL: steve
+  avatarUrl: steve
 };
 
 export default withFirebase(Avatar);

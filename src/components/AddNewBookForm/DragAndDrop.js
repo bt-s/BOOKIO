@@ -34,7 +34,7 @@ const DragAndDrop = props => {
     setDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       props.handleDrop(e.dataTransfer.files);
-      e.dataTransfer.clearData();
+      //e.dataTransfer.clearData();
       dragCounter.current = 0;
     }
   };
@@ -66,7 +66,10 @@ const DragAndDrop = props => {
         {dragging ? (
           'Drop here'
         ) : (
-          <div className="drag-box">Click to choose file or Drop file here</div>
+          <div className="drag-box">
+            Click to choose or <br />
+            Drop file here
+          </div>
         )}
       </div>
     </div>

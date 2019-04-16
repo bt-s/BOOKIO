@@ -34,10 +34,12 @@
   text-decoration: none;
   font-size: 17px;
   font-weight: bold;
+
   @include smaller-than(sm) {
     .desktop {
       display: none;
     }
+
     font-size: 30px;
     width: 60px;
     position: fixed;
@@ -46,6 +48,7 @@
     z-index: 998;
     height: 60px;
   }
+
   .desktop {
     margin-left: 10px;
   }
