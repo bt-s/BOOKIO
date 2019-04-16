@@ -36,7 +36,9 @@ const Dropdown = props => {
       {showMenu && (
         <ul className="dd-list" onClick={e => e.stopPropagation()}>
           {props.items.map(item => (
-            <li className={`dd-list-item ${item.classes}`} key={item.id}>
+            <li
+              className={`dd-list-item ${item.classes}`}
+              key={item.id + Math.random()}>
               {item.title}
             </li>
           ))}

@@ -96,7 +96,7 @@ const NavbarNonAuth = () => (
 
 const Navbar = props => {
   const [isTop, setIsTop] = useState(true);
-  let lastScrollPos = 0;
+  let lastScrollPos = 2000;
 
   useEffect(() => {
     document.addEventListener('scroll', e => {
@@ -106,7 +106,6 @@ const Navbar = props => {
       } else if (lastScrollPos - window.scrollY > 0) {
         setTimeout(() => setIsTop(true));
       }
-      console.log(lastScrollPos, 'y', window.scrollY);
       lastScrollPos = window.scrollY;
 
       // setIsTop(val);
