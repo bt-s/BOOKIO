@@ -60,12 +60,12 @@ $btn-lr-padding: 10px;
   height: 40px;
   padding: 0 $padding-xs;
   box-shadow: $button-shadow;
-  background-color: $black !important;
-  border-radius: 30px !important;
+  background-color: $black;
+  border-radius: 30px;
   align-self: flex-start;
   margin-top: 20px;
   position: relative;
-  border: non !important;
+  border: non;
   min-width: 120px;
 
   @include smaller-than(sm) {

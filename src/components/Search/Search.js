@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 
 import {connect} from 'react-redux';
 
-import {hasLocation, withDistance} from '../../helpers/utils';
+import {hasLocation, withDistance} from '../../helpers/locationHelper';
 import {storeBooks} from '../../redux/actions/storeBooks';
 import {storeCoords} from '../../redux/actions/storeCoords';
 import {searchBooks} from '../../redux/actions/searchBooks';

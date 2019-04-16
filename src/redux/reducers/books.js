@@ -1,6 +1,8 @@
-const books = (state = {books: []}, action) => {
+import {STORE_BOOKS} from '../constants/action-types';
+
+const booksReducer = (state = {books: []}, action) => {
   switch (action.type) {
-    case 'STORE_BOOKS':
+    case STORE_BOOKS:
       return {...state, books: action.books};
 
     default:
@@ -8,4 +10,4 @@ const books = (state = {books: []}, action) => {
   }
 };
 
-export default books;
+export default booksReducer;

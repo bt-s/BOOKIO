@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-
+import {faEdit, faCog, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
@@ -24,16 +24,37 @@ const accountMenuList = [
     title: (
       <Link to={ROUTES.ACCOUNT}>
         <FontAwesomeIcon icon="user" />
-        My profile
+        My Profile
       </Link>
     ),
-    classes: 'link section-ending'
+    classes: 'link section-ending',
+  },
+  {
+    id: 1,
+    title: (
+      <Link to={ROUTES.EDIT_PROFILE}>
+        <FontAwesomeIcon icon={faEdit} />
+        Edit Profile
+      </Link>
+    ),
+    classes: 'link section-ending',
+  },
+
+  {
+    id: 1,
+    title: (
+      <Link to={ROUTES.EDIT_PROFILE}>
+        <FontAwesomeIcon icon={faCog} />
+        Settings
+      </Link>
+    ),
+    classes: 'link section-ending',
   },
   {
     id: 5,
     title: <SignOut />,
-    classes: 'link'
-  }
+    classes: 'link section-ending',
+  },
 ];
 
 const accountMenu = (
@@ -79,10 +100,7 @@ const Navbar = props => {
   useEffect(() => {
     document.addEventListener('scroll', () => {
       let val = window.scrollY < 100;
-      // if (val !== isTop) {
       setIsTop(val);
-      console.log(val);
-      // }
     });
   }, []);
 
@@ -102,7 +120,7 @@ const Navbar = props => {
 };
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser
+  authUser: state.sessionState.authUser,
 });
 
 export default withRouter(connect(mapStateToProps)(Navbar));

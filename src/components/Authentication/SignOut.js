@@ -10,12 +10,12 @@ const SignOutButton = props => (
     className="btn-sign-out"
     type="button"
     onClick={props.firebase.doSignOut}
-    text="Sign out"
+    text="Sign Out"
   />
 );
 
 SignOutButton.propTypes = {
-  firebase: PropTypes.object
+  firebase: PropTypes.object,
 };
 
 export default withFirebase(SignOutButton);
