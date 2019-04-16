@@ -50,7 +50,6 @@ const EditProfilePage = props => {
         roles
       })
       .then(function() {
-        console.log('updateduser');
         setUsername(username);
         setAge(age);
         setLocation(location);

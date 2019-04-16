@@ -1,12 +1,18 @@
 .history-page {
+  padding-bottom: $padding-lg;
+
   .filters {
     display: flex;
     justify-content: space-between;
     padding: 20px 0 0;
     border-bottom: 1px solid $white-dimmer;
     padding-bottom: 4px;
+
     .radio-styled > .radio-label {
       padding-bottom: 5px;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

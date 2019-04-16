@@ -1,0 +1,130 @@
+.item-info {
+  display: flex;
+  height: 150px;
+  flex-direction: column;
+
+  @include media-breakpoint(sm) {
+    flex-direction: row;
+    flex: 3;
+  }
+
+  img {
+    display: flex;
+    flex: 5;
+    margin: 0px 20px;
+    object-fit: cover;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 200px;
+    height: calc(100% - 10px);
+    width: 200px;
+  }
+
+  .part-b {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex: 9;
+
+    @include smaller-than(sm) {
+      flex-direction: column;
+    }
+  }
+
+  .title-and-status {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0px 18%;
+
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .status {
+    }
+  }
+}
+
+.request-msg {
+  border-radius: 7px;
+  background: $white-dim;
+  margin-top: 20px;
+}
+
+.msg-time {
+  padding: 5px 0px 5px;
+  border-bottom: 1px solid $gray-line;
+  margin: 0px 20px 10px;
+}
+
+.msg-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.people-and-operation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0px 10px 10px;
+
+  @include smaller-than(sm) {
+    .people-and-operation {
+      margin-top: 15px;
+      width: 100%;
+      align-items: center;
+      flex-direction: row;
+    }
+  }
+
+  @include media-breakpoint(sm) {
+    flex: 1;
+  }
+
+  .operation {
+    display: flex;
+    flex-direction: row;
+
+    .btn {
+      border-width: 2px;
+      margin-right: 20px;
+      border-radius: 30px;
+      height: 35px;
+    }
+  }
+}
+
+.type-and-people {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  > .type {
+    margin-bottom: 5px;
+  }
+
+  > .user-container {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+.contact-option {
+  display: flex;
+  align-items: center;
+
+  svg {
+    height: 16px;
+    width: 16px;
+    margin: 0 8px 0 6px;
+  }
+}

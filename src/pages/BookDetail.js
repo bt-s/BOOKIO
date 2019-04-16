@@ -67,13 +67,15 @@ const BookDetail = props => {
   const {book, owner, firebase, bookId} = props;
   const requestBook = () => {
     const consumerID = firebase.getMyUID();
-    console.log('book.type', book.type);
 
     firebase
       .user(consumerID)
       .get()
       .then(user => {
-        const item = user.data().items.filter(item => item === bookId);
+        const item =
+          user.data().items &&
+          user.data().items.filter(item => item === bookId);
+
         !_.isEmpty(item)
           ? alert('You have already requested this item')
           : firebase
@@ -87,27 +89,22 @@ const BookDetail = props => {
                 type: book.type
               })
               .then(transac => {
-                console.log('Request successful, transaction id is:', transac);
-                //firebase
-                //.transaction(transac.id)
-                //.get()
-                //.then(transac => console.log(transac.data()));
-                firebase
-                  .user(consumerID)
-                  .get()
-                  .then(user => {
-                    console.log('user.data()', user.data());
-                    firebase.user(consumerID).update({
-                      transactions: (user.data().transactions || []).concat(
-                        transac.id
-                      ),
-                      items: (user.data().items || []).concat(bookId)
-                    });
-                  });
+                firebase.user(consumerID).update({
+                  transactions: (user.data().transactions || []).concat(
+                    transac.id
+                  ),
+                  // items I requested
+                  items: (user.data().items || []).concat(bookId)
+                });
+                firebase.user(book.ownerId).update({
+                  transactions: (user.data().transactions || []).concat(
+                    transac.id
+                  )
+                });
                 alert('You have successfully requested this item');
               })
-              .catch(() => {
-                console.log('Request failed');
+              .catch(err => {
+                console.error('Request failed', err);
               });
       });
   };
@@ -177,7 +174,7 @@ const BookDetail = props => {
         <div className="images">{getImages()}</div>
         <div className="book-rating">
           <span>GoodReads users give this book: </span>
-          <RatingStars rating={'' + book.rating} />
+          <RatingStars rating={book.rating} />
         </div>
         <div className="header-description">Description </div>
         <div className="book-description">{book.description}</div>

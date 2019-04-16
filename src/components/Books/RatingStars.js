@@ -19,7 +19,7 @@ const RatingStars = props => {
 };
 
 RatingStars.propTypes = {
-  rating: PropTypes.string
+  rating: PropTypes.number
 };
 
 export default RatingStars;
