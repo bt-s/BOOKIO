@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
-import {hasLocation, withDistance} from '../helpers/utils';
+import {hasLocation, withDistance} from '../helpers/locationHelper';
 import {storeBooks} from '../redux/actions/storeBooks';
 import {storeCoords} from '../redux/actions/storeCoords';
 import * as ROUTES from '../constants/routes';

@@ -7,10 +7,10 @@ import {
 const initialState = {
   isLoading: false,
   isError: false,
-  bookTitleSuggestions: [],
+  bookTitleSuggestions: []
 };
 
-export default function reducers(state = {...initialState}, action) {
+const bookReducer = (state = {...initialState}, action) => {
   switch (action.type) {
     case BOOK_TITLE_SUGGESTION_LOADING:
       return {
@@ -33,4 +33,6 @@ export default function reducers(state = {...initialState}, action) {
     default:
       return state;
   }
-}
+};
+
+export default bookReducer;

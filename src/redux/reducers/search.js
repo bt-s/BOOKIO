@@ -1,6 +1,8 @@
-const search = (state = {hasSearched: false}, action) => {
+import {SEARCH_BOOKS} from '../constants/action-types';
+
+const searchReducer = (state = {hasSearched: false}, action) => {
   switch (action.type) {
-    case 'SEARCH_BOOKS':
+    case SEARCH_BOOKS:
       return {...state, hasSearched: action.hasSearched};
 
     default:
@@ -8,4 +10,4 @@ const search = (state = {hasSearched: false}, action) => {
   }
 };
 
-export default search;
+export default searchReducer;

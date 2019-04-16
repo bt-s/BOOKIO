@@ -1,6 +1,8 @@
-const coords = (state = {coords: {lat: 0, lng: 0}}, action) => {
+import {STORE_COORDS} from '../constants/action-types';
+
+const coordsReducer = (state = {coords: {lat: 0, lng: 0}}, action) => {
   switch (action.type) {
-    case 'STORE_COORDS':
+    case STORE_COORDS:
       return {...state, coords: action.coords};
 
     default:
@@ -8,4 +10,4 @@ const coords = (state = {coords: {lat: 0, lng: 0}}, action) => {
   }
 };
 
-export default coords;
+export default coordsReducer;
