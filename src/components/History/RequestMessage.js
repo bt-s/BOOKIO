@@ -86,8 +86,6 @@ const RequestMessage = props => {
     </React.Fragment>
   );
 
-  console.log(involvedUser);
-
   return (
     <div className="request-msg">
       <div className="msg-time">{createdAt ? formatDate(createdAt) : null}</div>
