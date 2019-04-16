@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import {withFirebase} from '../Firebase';
 
-import steve from '../../images/stevejobs.jpg';
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import Dropdown from '../Dropdown/Dropdown';
@@ -73,10 +71,6 @@ const Avatar = props => {
 
 Avatar.propTypes = {
   avatarUrl: PropTypes.string
-};
-
-Avatar.defaultProps = {
-  avatarUrl: steve
 };
 
 export default withFirebase(Avatar);
