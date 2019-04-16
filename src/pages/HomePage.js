@@ -130,7 +130,7 @@ const HomePage = props => {
           </div>
           <div>
             <div className="header-title">Return the book</div>
-            Return the book on time to let other customer read the book you.
+            Return the book on time to let other customer read the book you
             like. We will remind you when you need to return the book.
           </div>
         </div>
