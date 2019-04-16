@@ -5,7 +5,7 @@
   height: 200px;
   position: relative;
   margin: 0 auto;
-  @include media-breakpoint(sm){
+  @include media-breakpoint(sm) {
     margin-left: 75px;
   }
 
@@ -14,7 +14,6 @@
     width: 100%;
     align-items: center;
   }
-
 }
 
 .avatar {
@@ -24,8 +23,8 @@
 .edit-avatar {
   .dd-header {
     background-color: $black-lighter;
-    background:$black;
-    color:$white;
+    background: $black;
+    color: $white;
     position: absolute;
     padding: $padding-xxs $padding-xs;
     margin-top: -47px;
@@ -39,7 +38,7 @@
 
   .dd-list {
     margin-top: 0;
-    width: 200px;
+    width: 250px;
     background-clip: padding-box;
     border-radius: 2px;
     border: 1px solid rgba(25, 31, 35, 0.15);

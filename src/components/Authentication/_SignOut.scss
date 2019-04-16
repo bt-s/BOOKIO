@@ -1,13 +1,9 @@
 .btn-sign-out {
   cursor: pointer;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 12px;
+  font-size: 14px;
   background-color: transparent;
   border: none;
-  padding: 0;
 
-  @include media-breakpoint(sm) {
-    font-size: 15px;
-  }
+  padding: 0;
 }
