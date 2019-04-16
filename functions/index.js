@@ -21,7 +21,7 @@ exports.fetchTitleSuggestion = functions.https.onRequest((req, res) => {
         message: 'Not allowed'
       });
     }
-    console.log(req.query.filter);
+
     axios({
       method: 'GET',
       headers: {
@@ -33,11 +33,9 @@ exports.fetchTitleSuggestion = functions.https.onRequest((req, res) => {
       }`
     })
       .then(result => {
-        console.log(result.data);
         return res.status(200).json(result.data);
       })
       .catch(err => {
-        console.log(err);
         return res.status(err.code).json({
           message: `Cannot fetch data from API. ${err.message}`
         });
@@ -124,8 +122,7 @@ function distance(lat1, lon1, lat2, lon2) {
 exports.getBooksByDistance = functions.https.onRequest((req, res) => {
   let lon = req.query.lon;
   let lat = req.query.lat;
-  console.log(lon);
-  console.log(lat);
+
   return cors(req, res, () => {
     if (req.method !== 'GET') {
       return res.status(404).json({
@@ -140,7 +137,6 @@ exports.getBooksByDistance = functions.https.onRequest((req, res) => {
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           let tempObj = doc.data();
-          console.log(tempObj);
           tempObj.id = doc.id;
           tempObj.distance = distance(
             lat,
@@ -148,14 +144,9 @@ exports.getBooksByDistance = functions.https.onRequest((req, res) => {
             tempObj.location.lat,
             tempObj.location.lon
           );
-          // geolib.getDistance(
-          //   {latitude: lat, longitude: lon},
-          //   {latitude: tempObj.location.lat, longitude: tempObj.location.lon}
-          // ) / 1000;
-          console.log(tempObj);
           mapped_data.push(tempObj);
         });
-        console.log(mapped_data);
+
         mapped_data.sort(compare);
         if (req.query.limit || req.query.offset) {
           return res

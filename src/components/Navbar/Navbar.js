@@ -79,10 +79,7 @@ const Navbar = props => {
   useEffect(() => {
     document.addEventListener('scroll', () => {
       let val = window.scrollY < 100;
-      // if (val !== isTop) {
       setIsTop(val);
-      console.log(val);
-      // }
     });
   }, []);
 

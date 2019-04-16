@@ -1,11 +1,3 @@
-/*
-  @callback(param):
-  if provided, it will be called with
-  a url to picture uploaded as the parameter
-  @monitor(param):
-  this function is used for the caller of this function
-  to know about the status of uploading
-*/
 export const uploadPictureToFirebase = (
   fileObj,
   remoteFolder,
@@ -42,10 +34,10 @@ export const uploadPictureToFirebase = (
           monitor(progress);
         }
         switch (snapshot.state) {
-          case firebase.storage.TaskState.PAUSED: // or 'paused'
+          case firebase.storage.TaskState.PAUSED:
             console.log('Upload is paused');
             break;
-          case firebase.storage.TaskState.RUNNING: // or 'running'
+          case firebase.storage.TaskState.RUNNING:
             console.log('Upload is running');
             break;
           default:
@@ -55,7 +47,7 @@ export const uploadPictureToFirebase = (
       function(error) {
         // A full list of error codes is available at
         // https://firebase.google.com/docs/storage/web/handle-errors
-        console.log(error);
+        console.error(error);
         switch (error.code) {
           case 'storage/unauthorized':
             // User doesn't have permission to access the object
@@ -75,12 +67,10 @@ export const uploadPictureToFirebase = (
       function() {
         // Upload completed successfully, now we can get the download URL
         uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-          console.log('File available at', downloadURL);
           if (monitor) {
             monitor(1); // 100% uploaded
           }
           if (callback) {
-            console.log('Executing your callback', callback, '\n');
             callback(downloadURL);
           }
           resolve();
