@@ -74,13 +74,13 @@ const HistoryPage = props => {
                           }
                         )
                     ]).then(bookAndUser => {
-                      console.log('injected', bookAndUser, transac);
+                      // console.log('injected', bookAndUser, transac);
                       return transac;
                     });
                   })
               )
             ).then(transacsWithData => {
-              console.log('the final full data', transacsWithData);
+              // console.log('the final full data', transacsWithData);
               setTransactions(transacsWithData);
               setGotTransactions(true);
             });
