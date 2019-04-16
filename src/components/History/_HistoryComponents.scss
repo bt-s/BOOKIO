@@ -5,13 +5,12 @@
   > img {
     display: flex;
     flex: 5;
-    margin: 0px 20px 10px;
+    margin: 0px 20px 10px 20px;
     object-fit: cover;
     border-radius: 4px;
     width: 40%;
     max-height: 100%;
     object-fit: contain;
-    margin-right: 30px;
   }
   .part-b {
     display: flex;
@@ -46,19 +45,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    @include media-breakpoint(sm) {
-      .item-info {
-        flex: 3;
-      }
-      .people-and-operation {
-        flex: 1;
-      }
-    }
     .people-and-operation {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
+      .user-label {
+        padding-left: 20px;
+      }
       .type-and-people {
         margin-bottom: 15px;
         > .type {
@@ -78,6 +72,14 @@
           border-radius: 30px;
           height: 35px;
         }
+      }
+    }
+    @include media-breakpoint(sm) {
+      .item-info {
+        flex: 3;
+      }
+      .people-and-operation {
+        flex: 1;
       }
     }
     @include smaller-than(sm) {

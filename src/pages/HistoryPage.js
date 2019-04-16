@@ -36,6 +36,7 @@ const HistoryPage = props => {
                 .get()
                 .then(transac => {
                   transac = transac.data();
+                  transac.id = id;
                   // calc transaction type
                   transac.type =
                     transac.type === 'to borrow'
@@ -94,7 +95,7 @@ const HistoryPage = props => {
             props.firebase.transaction(msg.id).update({status: 'declined'});
           }}
           acceptCallback={() => {
-            props.firebase.transaction(msg.id).update({status: 'accpeted'});
+            props.firebase.transaction(msg.id).update({status: 'accepted'});
           }}
         />
       ));

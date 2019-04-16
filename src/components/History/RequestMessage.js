@@ -7,13 +7,37 @@ import ItemInfo from './ItemInfo';
 
 const RequestMessage = props => {
   const [showOperation, setShowOperation] = useState(
-    props.message.status === 'Ongoing'
+    props.message.status.toLowerCase() === 'ongoing'
   );
   const [status, setStatus] = useState(props.message.status);
   const {createdAt} = props.message.book
     ? props.message.book
     : {createdAt: '1970-01-01'};
 
+  const statusMap = status => {
+    console.log('status', status);
+    switch (status.toLowerCase()) {
+      case 'ongoing':
+        return ['get', 'borrow'].includes(props.message.type.toLowerCase())
+          ? 'Requesting'
+          : 'Waiting For Response';
+        break;
+      case 'accepted':
+        return 'Accepted';
+        break;
+      case 'declined':
+        return 'Declined';
+        break;
+      default:
+        return '';
+        break;
+    }
+    return {ongoing: 'Waiting For Response'}[status.toLowerCase()];
+    // if (['get','borrow'].includes(props.message.type.toLowerCase())) {
+    // }else{
+
+    // }
+  };
   const OperationButtons = (
     <div className="operation">
       <button
@@ -63,7 +87,7 @@ const RequestMessage = props => {
             'No Picture Provided'
           }
           title={props.message.book && props.message.book.title}
-          status={status}
+          status={statusMap(status)}
           supplement={props.message.supplement}
         />
         <div className="people-and-operation">
@@ -79,8 +103,14 @@ const RequestMessage = props => {
                 avatarUrl={props.message.involvedUser.photoUrl}
               />
             </Link>
+            {props.message.status.toLowerCase() === 'accepted' &&
+              (props.message.involvedUser.email ||
+                props.message.involvedUser.phoneNumber)}
           </div>
-          {showOperation && OperationButtons}
+          {showOperation &&
+            ['give', 'lend'].includes(props.message.type.toLowerCase()) &&
+            props.message.status.toLowerCase() === 'ongoing' &&
+            OperationButtons}
         </div>
       </div>
       <div className="msg-cut-off-line" />
