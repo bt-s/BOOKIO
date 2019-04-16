@@ -34,7 +34,12 @@ const Dropdown = props => {
         {props.headerTitle}
       </div>
       {showMenu && (
-        <ul className="dd-list" onClick={e => e.stopPropagation()}>
+        <ul
+          className="dd-list"
+          onClick={e => {
+            e.stopPropagation();
+            toggleMenu();
+          }}>
           {props.items.map(item => (
             <li
               className={`dd-list-item ${item.classes}`}
