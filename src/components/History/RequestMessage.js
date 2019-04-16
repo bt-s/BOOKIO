@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import UserLabel from '../Books/UserLabel';
 import ItemInfo from './ItemInfo';
@@ -14,11 +15,13 @@ const RequestMessage = props => {
     ? props.message.book
     : {createdAt: '1970-01-01'};
 
+  const involvedUser = props.message.involvedUser;
+
   const statusMap = status => {
     switch (status.toLowerCase()) {
       case 'ongoing':
         return ['get', 'borrow'].includes(props.message.type.toLowerCase())
-          ? 'Requesting'
+          ? 'Requested'
           : 'Waiting For Response';
       case 'accepted':
         return 'Accepted';
@@ -27,10 +30,8 @@ const RequestMessage = props => {
       default:
         return '';
     }
-
-    // This code can never be reached
-    return {ongoing: 'Waiting For Response'}[status.toLowerCase()];
   };
+
   const OperationButtons = (
     <div className="operation">
       <button
@@ -42,7 +43,7 @@ const RequestMessage = props => {
             setShowOperation(false);
           }
         }}>
-        Decline
+        <span>Decline</span>
       </button>
       <button
         className="btn accept"
@@ -53,7 +54,7 @@ const RequestMessage = props => {
             setShowOperation(false);
           }
         }}>
-        Accept
+        <span>Accept</span>
       </button>
     </div>
   );
@@ -67,6 +68,25 @@ const RequestMessage = props => {
         ':' +
         date.getMinutes()
     )[0];
+
+  const providerContactDetails = (
+    <React.Fragment>
+      {involvedUser.email && (
+        <div className="contact-option">
+          <FontAwesomeIcon icon="envelope" />
+          <span>{involvedUser.email}</span>
+        </div>
+      )}
+      {involvedUser.photoNumer && (
+        <div className="contact-option">
+          <FontAwesomeIcon icon="phone" />
+          <span>{involvedUser.phoneNumber}</span>
+        </div>
+      )}
+    </React.Fragment>
+  );
+
+  console.log(involvedUser);
 
   return (
     <div className="request-msg">
@@ -87,20 +107,20 @@ const RequestMessage = props => {
 
         <div className="people-and-operation">
           <div className="type-and-people">
-            {/*  */}
-            {/*  */}
-            {/* Here should link to that user's profile page */}
-            {/*  */}
-            {/*  */}
-            <Link to="/account" className="user-container">
+            <div className="user">
+              {props.message.type === ('give' || 'lend') ? (
+                <span>Book requested by: </span>
+              ) : (
+                <span>Book provided by: </span>
+              )}
+
               <UserLabel
-                userName={props.message.involvedUser.username}
-                avatarUrl={props.message.involvedUser.photoUrl}
+                userName={involvedUser.username}
+                avatarUrl={involvedUser.photoUrl}
               />
-            </Link>
-            {props.message.status.toLowerCase() === 'accepted' &&
-              (props.message.involvedUser.email ||
-                props.message.involvedUser.phoneNumber)}
+              {props.message.status.toLowerCase() === 'accepted' &&
+                providerContactDetails}
+            </div>
           </div>
           {showOperation &&
             ['give', 'lend'].includes(props.message.type.toLowerCase()) &&
