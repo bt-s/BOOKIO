@@ -153,7 +153,7 @@ const BookDetail = props => {
         <img className="book-img" src={book.imageUrls} alt={book.title} />
         <div className="book-rating">
           <span>GoodReads users give this book: </span>
-          <RatingStars rating={'' + book.rating} />
+          <RatingStars rating={book.rating} />
         </div>
         <div className="header-description">Description </div>
         <div className="book-description">{book.description}</div>

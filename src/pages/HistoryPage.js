@@ -7,13 +7,15 @@ import {RequestMessage} from '../components/History/Components';
 const _ = require('lodash/core');
 
 const HistoryPage = props => {
-  const [msgType, setMsgType] = useState('lend');
+  const [msgType, setMsgType] = useState(
+    localStorage.getItem('history_type') || 'lend'
+  );
   const [gotTransactions, setGotTransactions] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [tictok, setTictok] = useState(0);
 
   if (!gotTransactions) {
-    console.log(
+    console.info(
       `wait another ${(0.2 * tictok).toFixed(
         2
       )}s for firebase be mounted to this page`
@@ -41,43 +43,50 @@ const HistoryPage = props => {
                   })
               )
             ).then(transactions => {
-              transactions.forEach(transac => {
-                // calc transaction type
-                transac.type =
-                  transac.type === 'to borrow'
-                    ? transac.providerID === props.firebase.getMyUID()
-                      ? 'lend'
-                      : 'borrow'
-                    : transac.providerID === props.firebase.getMyUID()
-                    ? 'give'
-                    : 'get';
-                Promise.all([
-                  props.firebase
-                    // get the user other than me
-                    .user(
-                      transac.providerID === props.firebase.getMyUID()
-                        ? transac.consumerID
-                        : transac.providerID
-                    )
-                    .get()
-                    .then(
-                      // inject the other user's data
-                      user =>
-                        (transac.involvedUser = user.exists
-                          ? user.data()
-                          : false)
-                    ),
-                  props.firebase
-                    .book(transac.itemID)
-                    .get()
-                    .then(
-                      // inject book data
-                      book => (transac.book = book.exists ? book.data() : false)
-                    )
-                ]).then(bookAndUser => {
-                  setTransactions(transactions);
-                  setGotTransactions(true);
-                });
+              Promise.all(
+                transactions.map(transac => {
+                  // calc transaction type
+                  transac.type =
+                    transac.type === 'to borrow'
+                      ? transac.providerID === props.firebase.getMyUID()
+                        ? 'lend'
+                        : 'borrow'
+                      : transac.providerID === props.firebase.getMyUID()
+                      ? 'give'
+                      : 'get';
+                  return Promise.all([
+                    props.firebase
+                      // get the user other than me
+                      .user(
+                        transac.providerID === props.firebase.getMyUID()
+                          ? transac.consumerID
+                          : transac.providerID
+                      )
+                      .get()
+                      .then(
+                        // inject the other user's data
+                        user => {
+                          transac.involvedUser = user.data();
+                        }
+                      ),
+                    props.firebase
+                      .book(transac.itemID)
+                      .get()
+                      .then(
+                        // inject book data
+                        book => {
+                          transac.book = book.data();
+                        }
+                      )
+                  ]).then(bookAndUser => {
+                    console.log('injected', bookAndUser, transac);
+                    return transac;
+                  });
+                })
+              ).then(transacsWithData => {
+                console.log('the final full data', transacsWithData);
+                setTransactions(transacsWithData);
+                setGotTransactions(true);
               });
             });
         });
@@ -115,6 +124,7 @@ const HistoryPage = props => {
           checked={msgType === 'lend'}
           onChange={() => {
             setMsgType('lend');
+            localStorage.setItem('history_type', 'lend');
           }}
         />
         <Radio
@@ -126,6 +136,7 @@ const HistoryPage = props => {
           checked={msgType === 'give'}
           onChange={() => {
             setMsgType('give');
+            localStorage.setItem('history_type', 'give');
           }}
         />
         <Radio
@@ -137,6 +148,7 @@ const HistoryPage = props => {
           checked={msgType === 'borrow'}
           onChange={() => {
             setMsgType('borrow');
+            localStorage.setItem('history_type', 'borrow');
           }}
         />
         <Radio
@@ -148,6 +160,7 @@ const HistoryPage = props => {
           checked={msgType === 'get'}
           onChange={() => {
             setMsgType('get');
+            localStorage.setItem('history_type', 'get');
           }}
         />
       </div>
