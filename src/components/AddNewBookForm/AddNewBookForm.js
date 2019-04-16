@@ -228,7 +228,7 @@ const AddNewBookFormBase = props => {
           />
 
           <button
-            className="btn-publish btn"
+            className="btn btn-black"
             onClick={e => {
               e.preventDefault();
               setProgressStyle('on');

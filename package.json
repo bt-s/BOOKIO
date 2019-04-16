@@ -19,6 +19,7 @@
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.8.3",
     "react-geocode": "^0.1.2",
     "react-google-autocomplete": "^1.0.18",

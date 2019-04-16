@@ -38,9 +38,17 @@ const HomePage = props => {
             <span className="right">IO</span>
           </h1>
           <h2>Free book-sharing made easy</h2>
-          <Link to={ROUTES.SIGN_UP} className="btn btn-orange btn-signup">
-            Register now
-          </Link>
+          <p>
+            Register an account today, so that you can share and request books!
+          </p>
+          <div className="homepage-btns">
+            <Link to={ROUTES.SIGN_UP} className="btn btn-orange btn-homepage">
+              Register Now
+            </Link>
+            <Link to={ROUTES.BOOKS} className="btn btn-black btn-homepage">
+              Find Books
+            </Link>
+          </div>
         </div>
       </div>
     </React.Fragment>

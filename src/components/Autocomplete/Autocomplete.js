@@ -1,5 +1,7 @@
 import React, {Fragment, useState, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Loader from '../../components/Loader/Loader';
 
 const Autocomplete = props => {
   const {
@@ -122,7 +124,13 @@ const Autocomplete = props => {
         })}
       </ul>
     ) : (
-      <div className="suggestions loading">Loading..</div>
+      <div className="suggestions loading">
+        <span>Lo</span>
+        <span>ad</span>
+        <span>in</span>
+        <span>g.</span>
+        <span>..</span>
+      </div>
     ));
 
   return (
@@ -135,7 +143,12 @@ const Autocomplete = props => {
         value={userInput}
         placeholder={placeholder}
       />
-      {suggestionsListComponent}
+      <ReactCSSTransitionGroup
+        transitionName="suggestion-transition"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}>
+        {suggestionsListComponent}
+      </ReactCSSTransitionGroup>
     </Fragment>
   );
 };
