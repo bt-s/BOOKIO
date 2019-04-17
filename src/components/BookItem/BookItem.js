@@ -46,7 +46,7 @@ const BookItem = props => {
           <div className="book-item-type">{props.type}</div>
         </div>
         <p className="book-item-description">
-          {props.bookDescription.substring(0, 120) + '...'}
+          {props.bookDescription.substring(0, 100) + '...'}
         </p>
         {!props.accountPage && booksPageOnly}
       </div>
