@@ -1,10 +1,16 @@
 .radio-styled {
+  width: 300px;
+  text-align: center;
+  border: 1px solid black;
   .radio-label {
     color: $black-lighter;
-    font-size: 20px;
+    font-size: 16px;
+    @include media-breakpoint(sm) {
+      font-size: 20px;
+    }
   }
   input:checked + label {
     color: black;
-    border-bottom: 3px solid black;
+    border-bottom: 1px solid black;
   }
 }
