@@ -31,11 +31,13 @@ const BookItem = props => {
 
   return (
     <Link to={'/detail/' + props.bookId}>
-      <img
-        className="book-item-img"
-        src={props.bookImgSrc}
-        alt={props.bookTitle}
-      />
+      <div className="book-item-img-container">
+        <img
+          className="book-item-img"
+          src={props.bookImgSrc}
+          alt={props.bookTitle}
+        />
+      </div>
       <div className="book-item-header">
         <h3 className="book-item-title">{props.bookTitle}</h3>
         <h3 className="book-item-author">{props.authorName}</h3>
