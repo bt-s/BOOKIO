@@ -1,7 +1,6 @@
 import React, {Fragment, useState, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import Loader from '../../components/Loader/Loader';
 
 const Autocomplete = props => {
   const {
