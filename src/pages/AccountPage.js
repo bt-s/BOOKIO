@@ -11,12 +11,10 @@ import {storeBooks} from '../redux/actions/storeBooks';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   withAuthorization,
-  withEmailVerification,
+  withEmailVerification
 } from '../components/Session/Session';
 
 import Avatar from '../components/Account/Avatar';
-import LoginManagement from '../components/Account/LoginManagement';
-import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 import SearchResults from '../components/Books/SearchResults';
 
 import {index} from '../components/Algolia';
@@ -25,7 +23,7 @@ const AccountPage = props => {
   const onSearchBooks = uid => {
     index
       .search({
-        query: uid,
+        query: uid
       })
       .then(res => {
         props.storeBooks(res.hits);
@@ -68,17 +66,6 @@ const AccountPage = props => {
         </div>
       </div>
       <div className="line-break" />
-      <h1>Settings</h1>
-      <div className="user-information">
-        <div className="sub-header-account">Change Password</div>
-        <PasswordChangeForm />
-      </div>
-      <div className="line-break-sm" />
-      <div className="user-information">
-        <div className="sub-header-account"> Manage Account</div>
-        <LoginManagement authUser={props.authUser} />
-      </div>
-      <div className="line-break" />
       <div className="my-books-section">
         <h2>My Books</h2>
         <Link className="btn btn-add-book account" to={ROUTES.ADD_BOOK}>
@@ -91,18 +78,18 @@ const AccountPage = props => {
 };
 
 AccountPage.propTypes = {
-  authUser: PropTypes.object,
+  authUser: PropTypes.object
 };
 
 const condition = authUser => !!authUser;
 
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser,
-  books: state.booksState.books,
+  books: state.booksState.books
 });
 
 const mapDispatchToProps = dispatch => ({
-  storeBooks: books => dispatch(storeBooks(books)),
+  storeBooks: books => dispatch(storeBooks(books))
 });
 
 export default compose(

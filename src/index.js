@@ -22,6 +22,7 @@ import HomePage from './pages/HomePage';
 import PasswordForgetPage from './pages/PasswordForgetPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
+import SettingsPage from './pages/SettingsPage';
 
 import './styling/style.scss';
 
@@ -152,6 +153,16 @@ const AppBase = () => (
         <WithFooter>
           <WithNavbar>
             <EditProfilePage />
+          </WithNavbar>
+        </WithFooter>
+      )}
+    />
+    <Route
+      path={ROUTES.SETTINGS}
+      render={() => (
+        <WithFooter>
+          <WithNavbar>
+            <SettingsPage />
           </WithNavbar>
         </WithFooter>
       )}

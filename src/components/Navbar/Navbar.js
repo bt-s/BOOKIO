@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {faEdit, faCog, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faCog} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
@@ -27,7 +27,7 @@ const accountMenuList = [
         My Profile
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
   {
     id: 1,
@@ -37,24 +37,24 @@ const accountMenuList = [
         Edit Profile
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
 
   {
     id: 1,
     title: (
-      <Link to={ROUTES.EDIT_PROFILE}>
+      <Link to={ROUTES.SETTINGS}>
         <FontAwesomeIcon icon={faCog} />
         Settings
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
   {
     id: 5,
     title: <SignOut />,
-    classes: 'link section-ending',
-  },
+    classes: 'link section-ending'
+  }
 ];
 
 const accountMenu = (
@@ -120,7 +120,7 @@ const Navbar = props => {
 };
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser,
+  authUser: state.sessionState.authUser
 });
 
 export default withRouter(connect(mapStateToProps)(Navbar));
