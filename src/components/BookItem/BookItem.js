@@ -23,7 +23,7 @@ const BookItem = props => {
       <div className="book-item-distance-container">
         <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
         <span className="book-item-distance">
-          {parseDistance(props.distance)} away
+          {parseDistance(props.distance)}
         </span>
       </div>
     </div>
@@ -31,15 +31,15 @@ const BookItem = props => {
 
   return (
     <Link to={'/detail/' + props.bookId}>
-      <div className="book-item-header">
-        <h3 className="book-item-title">{props.bookTitle}</h3>
-        <h3 className="book-item-author">{props.authorName}</h3>
-      </div>
       <img
         className="book-item-img"
         src={props.bookImgSrc}
         alt={props.bookTitle}
       />
+      <div className="book-item-header">
+        <h3 className="book-item-title">{props.bookTitle}</h3>
+        <h3 className="book-item-author">{props.authorName}</h3>
+      </div>
       <div className="book-item-inner">
         <div className="book-item-inner-header">
           <RatingStars rating={props.rating} />

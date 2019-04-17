@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: space-around;
   box-shadow: 1px 1px 4px 0 #9b9b9b;
-  border-radius: 10px;
+  border-radius: 6px;
   max-height: 400px;
   height: 350px;
   transition: all 0.2s ease-in-out;
@@ -43,6 +43,7 @@
   text-align: center;
 
   .book-item-title {
+    font-size: 14px;
     font-weight: 600;
     margin: 0 $padding-sm;
     text-overflow: ellipsis;
@@ -51,6 +52,7 @@
   }
 
   .book-item-author {
+    font-size: 14px;
     margin: 0 $padding-sm;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -63,6 +65,7 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+  border-radius: 6px 6px 0px 0px;
 }
 
 .book-item-inner {
