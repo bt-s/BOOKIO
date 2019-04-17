@@ -45,11 +45,6 @@ const HistoryPage = props => {
                         ? 'give'
                         : 'get';
                   }
-                  console.log(
-                    transac.providerID,
-                    props.firebase.getMyUID(),
-                    transac.type
-                  );
 
                   return Promise.all([
                     props.firebase
