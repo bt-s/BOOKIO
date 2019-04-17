@@ -20,7 +20,7 @@
     margin-right: -15px;
     margin-left: 10px;
     z-index: 1;
-    color: $black;
+    color: $theme-dark-color;
 
     @include media-breakpoint(sm) {
       margin-left: 60px;

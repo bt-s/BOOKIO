@@ -1,7 +1,7 @@
 $logo-horizontal-border-primary: 3px solid $white;
 $logo-vertical-border-primary: 2px solid $white;
-$logo-horizontal-border-secondary: 3px solid $black-lighter;
-$logo-vertical-border-secondary: 2px solid $black-lighter;
+$logo-horizontal-border-secondary: 3px solid $theme-light-color;
+$logo-vertical-border-secondary: 2px solid $theme-light-color;
 
 $border-radius: 2px;
 
@@ -27,7 +27,7 @@ $border-radius: 2px;
     }
 
     .right {
-      color: $black-lighter;
+      color: $theme-light-color;
       background-color: $white;
       border-right: $logo-horizontal-border-primary;
       border-left: $logo-horizontal-border-primary;
@@ -38,12 +38,12 @@ $border-radius: 2px;
 
   &.secondary {
     .left {
-      color: $black-lighter;
+      color: $theme-light-color;
     }
 
     .right {
       color: $white;
-      background-color: $black-lighter;
+      background-color: $theme-light-color;
       border-right: $logo-horizontal-border-secondary;
       border-left: $logo-horizontal-border-secondary;
       border-top: $logo-vertical-border-secondary;

@@ -72,7 +72,7 @@ const AddNewBookBase = props => {
       <div className="add-book-page-header">
         <h1 className="add-book-page-title"> Share New Book </h1>
         <Link to={ROUTES.BOOKS} className="btn btn-orange">
-          To Books Overview
+          Go to Books Discovery
         </Link>
       </div>
       <div className="subtitle">Images</div>
@@ -94,14 +94,14 @@ const AddNewBookBase = props => {
 
 const mapStateToProps = state => {
   return {
-    newBook: state.userBookState.newBook
+    newBook: state.userBookState.newBook,
   };
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      addNewUserBook
+      addNewUserBook,
     },
     dispatch
   );
