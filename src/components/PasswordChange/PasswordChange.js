@@ -25,6 +25,8 @@ const PasswordChangeForm = props => {
   };
 
   const onSubmit = e => {
+    e.preventDefault();
+    console.log(e);
     props.firebase
       .doPasswordUpdate(form.passwordOne, form.passwordTwo)
       .then(() => {
@@ -35,12 +37,10 @@ const PasswordChangeForm = props => {
       .catch(error => {
         dispatchError(error);
       });
-
-    e.preventDefault();
   };
 
   return isReset ? (
-    <p>Your password has been reset.</p>
+    <p className="pw-success">Your password has been updated.</p>
   ) : (
     <div className="pw-change">
       <form onSubmit={onSubmit} className="auth-form">
@@ -60,7 +60,7 @@ const PasswordChangeForm = props => {
         />
         <br />
         {error.code ? <p>{error.message}</p> : ''}
-        <Button type="submit" onClick={onSubmit} text="Update" />
+        <Button type="submit" text="Update" />
       </form>
     </div>
   );
