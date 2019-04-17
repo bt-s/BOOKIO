@@ -34,14 +34,23 @@ const HistoryPage = props => {
                   transac = transac.data();
                   transac.id = id;
                   // calc transaction type
-                  transac.type =
-                    transac.type === 'lend' // only 2 types marked in a book lend or give. Please comply with this naming convention in
-                      ? transac.providerID === props.firebase.getMyUID()
+                  if (transac.type === 'lend') {
+                    transac.type =
+                      transac.providerID === props.firebase.getMyUID()
                         ? 'lend'
-                        : 'borrow'
-                      : transac.providerID === props.firebase.getMyUID()
-                      ? 'give'
-                      : 'get';
+                        : 'borrow';
+                  } else {
+                    transac.type =
+                      transac.providerID === props.firebase.getMyUID()
+                        ? 'give'
+                        : 'get';
+                  }
+                  console.log(
+                    transac.providerID,
+                    props.firebase.getMyUID(),
+                    transac.type
+                  );
+
                   return Promise.all([
                     props.firebase
                       // get the user other than me
