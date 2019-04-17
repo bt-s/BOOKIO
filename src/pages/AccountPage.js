@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
@@ -21,13 +21,16 @@ import {withDistance} from '../helpers/locationHelper';
 import {index} from '../components/Algolia';
 
 const AccountPage = props => {
+  const [myBooks, setMyBooks] = useState([]);
   const onSearchBooks = uid => {
     index
       .search({
         query: uid
       })
       .then(res => {
-        props.storeBooks(withDistance(res.hits, props.coords));
+        // props.storeBooks(withDistance(res.hits, props.coords));
+        // myBooks = res.hits;
+        setMyBooks(res.hits);
       })
       .catch(err => {
         console.error(err);
@@ -73,7 +76,7 @@ const AccountPage = props => {
           <span>Add Book</span>
         </Link>
       </div>
-      <SearchResults books={props.books} accountPage={true} />
+      {myBooks && <SearchResults books={myBooks} accountPage={true} />}
     </div>
   );
 };
@@ -84,21 +87,21 @@ AccountPage.propTypes = {
 
 const condition = authUser => !!authUser;
 
-const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser,
-  books: state.booksState.books
-});
+// const mapStateToProps = state => ({
+//   authUser: state.sessionState.authUser,
+//   books: state.booksState.books
+// });
 
-const mapDispatchToProps = dispatch => ({
-  storeBooks: books => dispatch(storeBooks(books))
-});
+// const mapDispatchToProps = dispatch => ({
+//   storeBooks: books => dispatch(storeBooks(books))
+// });
 
 export default compose(
   withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  // connect(
+  //   mapStateToProps,
+  //   mapDispatchToProps
+  // ),
   withEmailVerification,
   withAuthorization(condition)
 )(AccountPage);
