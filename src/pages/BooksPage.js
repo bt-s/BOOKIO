@@ -50,6 +50,16 @@ const BooksPage = props => {
       });
   };
 
+  const noBooksFound = (
+    <div className="no-books-found">
+      <h2>Whooooops...!</h2>
+      <p>
+        You must have an extraordinary taste! Unforuntately no one has the book
+        that you are looking for on offer at the moment.
+      </p>
+    </div>
+  );
+
   if (
     _.isEmpty(props.books) &&
     props.hasSearched === false &&
@@ -91,6 +101,8 @@ const BooksPage = props => {
       </div>
       {!_.isEmpty(props.books) && props.coords !== initialCoords ? (
         <SearchResults books={props.books} />
+      ) : typeof props.books === 'undefined' ? (
+        <div>{noBooksFound}</div>
       ) : (
         <Loader />
       )}
