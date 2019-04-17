@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 
@@ -8,6 +8,7 @@ import {hasLocation, withDistance} from '../../helpers/locationHelper';
 import {storeBooks} from '../../redux/actions/storeBooks';
 import {storeCoords} from '../../redux/actions/storeCoords';
 import {searchBooks} from '../../redux/actions/searchBooks';
+import {storeSearchQuery} from '../../redux/actions/storeSearchQuery';
 
 import {index} from '../Algolia';
 
@@ -18,8 +19,6 @@ import * as ROUTES from '../../constants/routes';
 const _ = require('lodash/core');
 
 const SearchBase = props => {
-  const [searchString, setSearchString] = useState('');
-
   useEffect(() => {
     if (!hasLocation(props.coords))
       navigator.geolocation.getCurrentPosition(pos => {
@@ -31,7 +30,7 @@ const SearchBase = props => {
   }, []);
 
   const handleChange = e => {
-    setSearchString(e.target.value);
+    props.storeSearchQuery(e.target.value);
   };
 
   const onSearchAlgolia = e => {
@@ -40,7 +39,7 @@ const SearchBase = props => {
 
     index
       .search({
-        query: searchString
+        query: props.query
       })
       .then(res => {
         !_.isEmpty(res.hits)
@@ -59,7 +58,7 @@ const SearchBase = props => {
           name="search"
           placeholder="Search for a book"
           type="text"
-          value={searchString}
+          value={props.query}
           onChange={handleChange}
         />
       </form>
@@ -79,13 +78,15 @@ SearchBase.propTypes = {
 const mapStateToProps = state => ({
   books: state.booksState.books,
   coords: state.coordsState.coords,
+  query: state.searchQueryState.query,
   hasSearched: state.searchState.hasSearched
 });
 
 const mapDispatchToProps = dispatch => ({
   storeBooks: books => dispatch(storeBooks(books)),
   storeCoords: coords => dispatch(storeCoords(coords)),
-  searchBooks: hasSearched => dispatch(searchBooks(hasSearched))
+  searchBooks: hasSearched => dispatch(searchBooks(hasSearched)),
+  storeSearchQuery: query => dispatch(storeSearchQuery(query))
 });
 
 const Search = withRouter(

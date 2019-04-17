@@ -27,3 +27,6 @@ export const STORE_BOOKS = 'STORE_BOOKS';
 
 /* Action Types for store coords state */
 export const STORE_COORDS = 'STORE_COORDS';
+
+/* Action Types for store search query state */
+export const STORE_SEARCH_QUERY = 'STORE_SEARCH_QUERY';
