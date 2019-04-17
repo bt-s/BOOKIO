@@ -12,7 +12,7 @@ const HomePage = props => (
     <div className="home-page-banner">
       <div className="home-banner-txt-container">
         <div className="inner">
-          <h1>Join the largest book sharing platform in the world</h1>
+          <h1>Why should you join BOOKIO</h1>
 
           <div className="inner-content">
             BOOKIO is one of the world's leading book sharing platforms. It
@@ -110,7 +110,7 @@ const HomePage = props => (
 );
 
 HomePage.propTypes = {
-  firebase: PropTypes.object,
+  firebase: PropTypes.object
 };
 
 export default compose(withFirebase)(HomePage);

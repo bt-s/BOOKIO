@@ -15,6 +15,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
 
+const _ = require('lodash/core');
+
 const SearchBase = props => {
   const [searchString, setSearchString] = useState('');
 
@@ -41,7 +43,9 @@ const SearchBase = props => {
         query: searchString
       })
       .then(res => {
-        props.storeBooks(withDistance(res.hits, props.coords));
+        !_.isEmpty(res.hits)
+          ? props.storeBooks(withDistance(res.hits, props.coords))
+          : props.storeBooks();
       });
 
     props.history.push(ROUTES.BOOKS);

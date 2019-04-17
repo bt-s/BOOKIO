@@ -94,3 +94,22 @@ div {
     max-width: $max-width-lg;
   }
 }
+
+textarea {
+  border: 1px solid $gray;
+  border-radius: 6px;
+  transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
+  box-shadow: 0 0 0 1px $gray;
+  &:focus {
+    z-index: 2;
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+      0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+  }
+  &:active {
+    z-index: 2;
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+      0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+  }
+}
