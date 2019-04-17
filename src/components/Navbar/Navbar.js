@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {faEdit, faCog, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faCog} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
