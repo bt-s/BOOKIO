@@ -8,7 +8,11 @@
   @include media-breakpoint(sm) {
     margin-left: 75px;
   }
-
+  &:hover {
+    .edit-avatar {
+      display: flex;
+    }
+  }
   img {
     border-radius: 50%;
     width: 100%;
@@ -21,6 +25,7 @@
 }
 
 .edit-avatar {
+  display: none;
   .dd-header {
     background-color: $black-lighter;
     background: $black;
@@ -29,7 +34,7 @@
     padding: $padding-xxs $padding-xs;
     margin-top: -47px;
     margin-left: $padding-xxs;
-    border-radius: 2px;
+    border-radius: 6px;
 
     svg {
       margin-right: $padding-xxs;
