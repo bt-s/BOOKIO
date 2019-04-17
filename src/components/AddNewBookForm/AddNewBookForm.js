@@ -205,7 +205,7 @@ const AddNewBookFormBase = props => {
             value={type}
             onChange={e => setType(e.target.value)}>
             <option value="lend">Lend</option>
-            <option value="giveaway">Giveaway</option>
+            <option value="give">Giveaway</option>
           </select>
 
           <div className="subtitle">Location</div>

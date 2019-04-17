@@ -98,19 +98,19 @@ const Navbar = props => {
   const [isTop, setIsTop] = useState(true);
   let lastScrollPos = 2000;
 
-  useEffect(() => {
-    document.addEventListener('scroll', e => {
-      // let val = window.scrollY < 100;
-      if (lastScrollPos - window.scrollY < 0) {
-        setTimeout(() => setIsTop(false));
-      } else if (lastScrollPos - window.scrollY > 0) {
-        setTimeout(() => setIsTop(true));
-      }
-      lastScrollPos = window.scrollY;
+  // useEffect(() => {
+  //   document.addEventListener('scroll', e => {
+  //     // let val = window.scrollY < 100;
+  //     if (lastScrollPos - window.scrollY < 0) {
+  //       setTimeout(() => setIsTop(false));
+  //     } else if (lastScrollPos - window.scrollY > 0) {
+  //       setTimeout(() => setIsTop(true));
+  //     }
+  //     lastScrollPos = window.scrollY;
 
-      // setIsTop(val);
-    });
-  }, []);
+  //     // setIsTop(val);
+  //   });
+  // }, []);
 
   return (
     <nav className={'navbar ' + (isTop ? '' : 'scroll-height')}>
