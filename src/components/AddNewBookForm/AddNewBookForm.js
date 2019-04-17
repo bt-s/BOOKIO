@@ -215,7 +215,7 @@ const AddNewBookFormBase = props => {
               height: '200px',
               position: 'relative',
               border: '1px solid #d1d5da',
-              borderRadius: '10px',
+              borderRadius: '6px',
               overflow: 'hidden'
             }}
             zoom={15}
@@ -228,7 +228,7 @@ const AddNewBookFormBase = props => {
           />
 
           <button
-            className="btn btn-black"
+            className="btn btn-black btn-publish" // this is not a regular button
             onClick={e => {
               e.preventDefault();
               setProgressStyle('on');

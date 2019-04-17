@@ -92,12 +92,11 @@ a {
   }
 }
 
-input {
-  border: none;
+textarea {
+  border: 1px solid $gray;
   border-radius: 6px;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
-
+  box-shadow: 0 0 0 1px $gray;
   &:focus {
     z-index: 2;
     outline: none;
