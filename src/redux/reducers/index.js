@@ -3,6 +3,7 @@ import {combineReducers} from 'redux';
 import bookReducer from './book';
 import booksReducer from './books';
 import coordsReducer from './coords';
+import pageReducer from './page';
 import searchReducer from './search';
 import searchQueryReducer from './searchQuery';
 import sessionReducer from './session';
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   bookState: bookReducer,
   booksState: booksReducer,
   coordsState: coordsReducer,
+  pageState: pageReducer,
   searchState: searchReducer,
   searchQueryState: searchQueryReducer,
   sessionState: sessionReducer,

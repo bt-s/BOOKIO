@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 
@@ -19,6 +19,8 @@ import * as ROUTES from '../../constants/routes';
 const _ = require('lodash/core');
 
 const SearchBase = props => {
+  const [currentQuery, setCurrentQuery] = useState('');
+
   useEffect(() => {
     if (!hasLocation(props.coords))
       navigator.geolocation.getCurrentPosition(pos => {
@@ -30,16 +32,17 @@ const SearchBase = props => {
   }, []);
 
   const handleChange = e => {
-    props.storeSearchQuery(e.target.value);
+    setCurrentQuery(e.target.value);
   };
 
   const onSearchAlgolia = e => {
     e.preventDefault();
+    props.storeSearchQuery(currentQuery);
     props.searchBooks(true);
 
     index
       .search({
-        query: props.query
+        query: currentQuery
       })
       .then(res => {
         !_.isEmpty(res.hits)
@@ -58,7 +61,7 @@ const SearchBase = props => {
           name="search"
           placeholder="Search for a book"
           type="text"
-          value={props.query}
+          value={currentQuery}
           onChange={handleChange}
         />
       </form>
