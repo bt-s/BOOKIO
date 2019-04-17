@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {compose} from 'recompose';
-import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
-
-import {storeBooks} from '../redux/actions/storeBooks';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
@@ -16,7 +13,6 @@ import {
 
 import Avatar from '../components/Account/Avatar';
 import SearchResults from '../components/Books/SearchResults';
-import {withDistance} from '../helpers/locationHelper';
 
 import {index} from '../components/Algolia';
 
@@ -28,8 +24,6 @@ const AccountPage = props => {
         query: uid
       })
       .then(res => {
-        // props.storeBooks(withDistance(res.hits, props.coords));
-        // myBooks = res.hits;
         setMyBooks(res.hits);
       })
       .catch(err => {
@@ -87,21 +81,8 @@ AccountPage.propTypes = {
 
 const condition = authUser => !!authUser;
 
-// const mapStateToProps = state => ({
-//   authUser: state.sessionState.authUser,
-//   books: state.booksState.books
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   storeBooks: books => dispatch(storeBooks(books))
-// });
-
 export default compose(
   withRouter,
-  // connect(
-  //   mapStateToProps,
-  //   mapDispatchToProps
-  // ),
   withEmailVerification,
   withAuthorization(condition)
 )(AccountPage);

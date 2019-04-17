@@ -5,7 +5,6 @@ import {withFirebase} from '../Firebase';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import Dropdown from '../Dropdown/Dropdown';
 import {uploadPictureToFirebase} from '../../helpers/storageHelper';
 
 const Avatar = props => {
