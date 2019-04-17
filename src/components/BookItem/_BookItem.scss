@@ -81,34 +81,17 @@
     display: flex;
     justify-content: space-between;
     .user-label {
-      &:nth-child(2) {
-        font-size: 12px;
-      }
+      font-size: 12px;
     }
   }
 }
 
 .book-item-description {
   margin: 3px 0;
-  font-size: 10px;
-}
-
-.book-item-user-info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.book-item-user-avatar {
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-}
-
-.book-item-username {
-  font-size: 10px;
-  flex: 1 0 auto;
-  padding-left: $padding-xxs;
+  font-size: 13px;
+  line-height: 16px;
+  max-height: 48px;
+  overflow: hidden;
 }
 
 .book-item-distance-container {
@@ -116,6 +99,6 @@
   align-items: center;
 }
 .book-item-distance {
-  font-size: 10px;
+  font-size: 12px;
   padding-left: 4px;
 }
