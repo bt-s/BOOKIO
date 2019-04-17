@@ -110,8 +110,8 @@ const AddNewBookFormBase = props => {
           updateImage(res.id);
           setProgressStyle('redirect');
           setTimeout(() => {
-            props.history.push('/books');
-          }, 2000);
+            window.location = '/books';
+          }, 3000);
         });
       })
       .then(res => {
