@@ -86,7 +86,7 @@ const BookDetail = props => {
                 status: 'Ongoing',
                 requestTime: new Date().getTime(),
                 itemID: bookId,
-                type: book.type
+                type: book.type // lend or give
               })
               .then(transac => {
                 firebase.user(consumerID).update({
