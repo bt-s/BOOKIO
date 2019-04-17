@@ -33,12 +33,12 @@
 
 .username {
   font-size: 20px;
-  color: $black;
+  color: $content-text;
   font-weight: bold;
   padding-bottom: $padding-xxs;
   @include media-breakpoint(sm) {
     font-size: 30px;
-    color: $black;
+    color: $content-text;
     font-weight: bold;
     padding-bottom: $padding-xxs;
   }

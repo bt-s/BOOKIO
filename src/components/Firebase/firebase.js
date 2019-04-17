@@ -113,6 +113,10 @@ class Firebase {
     // Specify Algolia's objectID using the Firebase object key
     firebaseObject.objectID = dataSnapshot.id;
     // Add or update object
+    index.setSettings({
+      attributesForFaceting: ['type']
+    });
+
     index.saveObject(firebaseObject, err => {
       if (err) {
         throw err;

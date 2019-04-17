@@ -16,26 +16,26 @@ h1 {
   font-size: 24px;
   font-weight: 700;
   line-height: 1.33;
-  color: $black;
+  color: $content-text;
 }
 
 h2 {
   font-size: 25px;
   font-weight: 700;
   line-height: 1.33;
-  color: $black;
+  color: $content-text;
 }
 
 h3 {
   font-size: 12px;
   font-weight: normal;
   line-height: 1.33;
-  color: $black;
+  color: $content-text;
 }
 
 a {
   line-height: 1.5;
-  color: $black;
+  color: $content-text;
   font-weight: 700;
 }
 
@@ -44,7 +44,7 @@ label {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
-  color: $black;
+  color: $content-text;
 }
 
 a {
@@ -52,6 +52,9 @@ a {
   font-size: 14px;
 }
 
+div {
+  color: $content-text;
+}
 *,
 ::after,
 ::before {

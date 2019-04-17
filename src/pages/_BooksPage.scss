@@ -6,7 +6,7 @@
   height: 80px;
   .filters {
     .on {
-      background: $black-lighter;
+      background: $theme-light-color;
     }
     > * {
       margin-right: 10px;
@@ -25,7 +25,7 @@
   width: 156px;
   height: 40px;
   box-shadow: $button-shadow;
-  background-color: $black-lighter;
+  background-color: $theme-light-color;
   border-radius: 30px;
   align-items: center;
   display: flex;

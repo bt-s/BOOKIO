@@ -53,14 +53,14 @@ const HomePage = props => (
         <div className="line-break" />
         <span>
           Find your favorite book, request to owner, and decide on when you can
-          \ come pick it up.
+          come pick it up.
         </span>
       </div>
       <div className="inner-card">
         <h2>Efficient</h2>
         <div className="line-break" />
         <span>
-          Track your booking without hassle. You will be notified for every \
+          Track your booking without hassle. You will be notified for every
           process change.
         </span>
       </div>
@@ -68,7 +68,7 @@ const HomePage = props => (
         <h2>Search</h2>
         <div className="line-break" />
         <span>
-          We provide lots of books from different authors with different \
+          We provide lots of books from different authors with different
           languages.
         </span>
       </div>

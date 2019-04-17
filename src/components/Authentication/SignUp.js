@@ -63,7 +63,10 @@ const SignUpFormBase = props => {
               email: form.email,
               location: form.location,
               // phoneNumber: form.Number,
-              roles
+              roles,
+              items: [],
+              photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT,
+              transactions: []
             },
             {merge: true}
           );
