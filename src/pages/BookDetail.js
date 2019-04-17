@@ -110,7 +110,7 @@ const BookDetail = props => {
   };
 
   const borrowOrHave =
-    book.type === 'to borrow' ? (
+    book.type === 'lend' ? (
       <span>You can borrow this book from:</span>
     ) : (
       <span>You can get this book for free from:</span>

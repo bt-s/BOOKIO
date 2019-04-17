@@ -35,7 +35,7 @@ const HistoryPage = props => {
                   transac.id = id;
                   // calc transaction type
                   transac.type =
-                    transac.type === 'lend' // only 2 types marked in a book lend or give. Please comply with this naming convention
+                    transac.type === 'lend' // only 2 types marked in a book lend or give. Please comply with this naming convention in
                       ? transac.providerID === props.firebase.getMyUID()
                         ? 'lend'
                         : 'borrow'
