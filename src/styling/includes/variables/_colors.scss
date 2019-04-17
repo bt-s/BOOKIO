@@ -9,6 +9,10 @@ $black: #000000;
 $black-lighter: #24292e;
 $gray-lighter: #4a4a4a;
 $yellow: #fef170;
+$dark-green: #006766;
+$light-green: #008584;
+$dark-brown: #321919;
+$dark-pink: #c30f42;
 
 $purple-flat: #4500d2;
 $white-dim: #f2f2f2;
@@ -29,3 +33,10 @@ $facebook-text-shadow: 0 -1px 0 #354c8c;
 
 // Shadow
 $button-shadow: 1px 3px 15px 0 rgba(0, 0, 0, 0.54);
+
+//Theme color
+$theme-dark-color: $dark-green;
+$theme-light-color: $light-green;
+
+//Text Color
+$content-text: $gray-lighter;

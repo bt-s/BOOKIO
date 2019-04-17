@@ -86,7 +86,7 @@ const BookDetail = props => {
                 status: 'Ongoing',
                 requestTime: new Date().getTime(),
                 itemID: bookId,
-                type: book.type // lend or give
+                type: book.type, // lend or give
               })
               .then(transac => {
                 firebase.user(consumerID).update({
@@ -94,12 +94,12 @@ const BookDetail = props => {
                     transac.id
                   ),
                   // items I requested
-                  items: (user.data().items || []).concat(bookId)
+                  items: (user.data().items || []).concat(bookId),
                 });
                 firebase.user(book.ownerId).update({
                   transactions: (user.data().transactions || []).concat(
                     transac.id
-                  )
+                  ),
                 });
                 alert('You have successfully requested this item');
               })
@@ -135,7 +135,7 @@ const BookDetail = props => {
         <GoogleMap
           style={{
             width: '250px',
-            height: '350px'
+            height: '350px',
           }}
           coord={book.location}
           initCoord={book.location}
@@ -173,7 +173,7 @@ const BookDetail = props => {
         <div className="author">by {book.author}</div>
         <div className="images">{getImages()}</div>
         <div className="book-rating">
-          <span>GoodReads users give this book: </span>
+          <span>Rating from GoodReads: </span>
           <RatingStars rating={book.rating} />
         </div>
         <div className="header-description">Description </div>
@@ -202,11 +202,11 @@ BookDetail.propTypes = {
   reviewTotal: PropTypes.string,
   author: PropTypes.string,
   timeToPick: PropTypes.string,
-  pickupLocation: PropTypes.string
+  pickupLocation: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   books: state.booksState.books,
-  authUser: state.sessionState.authUser
+  authUser: state.sessionState.authUser,
 });
 export default connect(mapStateToProps)(withFirebase(BookDetailContainer));
