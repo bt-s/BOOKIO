@@ -9,12 +9,12 @@ import Button from '../components/Button/Button';
 import {
   Validation,
   Validator,
-  ValidationHelper
+  ValidationHelper,
 } from '../components/Forms/Validation';
 
 import {
   withAuthorization,
-  withEmailVerification
+  withEmailVerification,
 } from '../components/Session/Session';
 
 const EditProfilePage = props => {
@@ -47,7 +47,7 @@ const EditProfilePage = props => {
         phoneNumber: phoneNumber,
         location: location,
         age: age,
-        roles
+        roles,
       })
       .then(function() {
         setUsername(username);
@@ -63,7 +63,7 @@ const EditProfilePage = props => {
             phoneNumber: phoneNumber,
             location: location,
             age: age,
-            roles
+            roles,
           })
           .then(() => {
             let newUserData = {
@@ -72,7 +72,7 @@ const EditProfilePage = props => {
               email: email,
               phoneNumber: phoneNumber,
               location: location,
-              age: age
+              age: age,
             };
             window.localStorage.setItem(
               'authUser',
@@ -118,10 +118,10 @@ const EditProfilePage = props => {
               <label className="field-label">Phone Number</label>
               <input
                 className="field-input"
-                placeholder=" "
+                placeholder=""
                 value={phoneNumber}
                 name="phoneNumber"
-                type="text"
+                type="number"
                 onChange={e => {
                   setPhoneNumber(e.target.value);
                 }}
@@ -180,17 +180,17 @@ const EditProfilePage = props => {
   );
 };
 EditProfilePage.propTypes = {
-  authUser: PropTypes.object
+  authUser: PropTypes.object,
 };
 
 const condition = authUser => !!authUser;
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser
+  authUser: state.sessionState.authUser,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSetAuthUser: authUser => dispatch({type: 'AUTH_USER_SET', authUser})
+  onSetAuthUser: authUser => dispatch({type: 'AUTH_USER_SET', authUser}),
 });
 
 export default compose(
