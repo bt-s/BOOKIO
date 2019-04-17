@@ -34,15 +34,13 @@
   background-color: $white;
   height: 30px;
   display: flex;
-  padding: 0 20px 0 35px;
   align-items: center;
   border-radius: $border-radius;
   font-size: 10px;
   margin-left: -7px;
 
   @include media-breakpoint(sm) {
-    max-width: 300px;
-    margin-right: auto;
+    max-width: 350px;
   }
 
   @include media-breakpoint(md) {
@@ -52,11 +50,7 @@
   input {
     background: none;
     border: none;
-    padding: 0;
+    padding-left: 30px;
     width: 100%;
-
-    @include media-breakpoint(sm) {
-      max-width: 300px;
-    }
   }
 }

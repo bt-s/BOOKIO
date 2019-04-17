@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: space-around;
   box-shadow: 1px 1px 4px 0 #9b9b9b;
-  border-radius: 10px;
+  border-radius: 6px;
   max-height: 400px;
   height: 350px;
   transition: all 0.2s ease-in-out;
@@ -41,8 +41,10 @@
   justify-content: center;
   height: 45px;
   text-align: center;
+  margin-top: 6px;
 
   .book-item-title {
+    font-size: 14px;
     font-weight: 600;
     margin: 0 $padding-sm;
     text-overflow: ellipsis;
@@ -51,6 +53,7 @@
   }
 
   .book-item-author {
+    font-size: 14px;
     margin: 0 $padding-sm;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -63,13 +66,14 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+  border-radius: 6px 6px 0px 0px;
 }
 
 .book-item-inner {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: 0px 12px;
+  margin: 0px 12px 6px;
   flex: 1 0 auto;
 
   .book-item-inner-header {
@@ -81,37 +85,22 @@
     display: flex;
     justify-content: space-between;
     .user-label {
-      &:nth-child(2) {
-        font-size: 12px;
-      }
+      font-size: 12px;
     }
   }
 }
 
 .book-item-description {
   margin: 3px 0;
-  font-size: 10px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
-.book-item-user-info {
+.book-item-distance-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
 }
-
-.book-item-user-avatar {
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-}
-
-.book-item-username {
-  font-size: 10px;
-  flex: 1 0 auto;
-  padding-left: $padding-xxs;
-}
-
 .book-item-distance {
-  font-size: 10px;
+  font-size: 12px;
   padding-left: 4px;
 }

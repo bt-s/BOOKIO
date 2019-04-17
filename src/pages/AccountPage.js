@@ -16,6 +16,7 @@ import {
 
 import Avatar from '../components/Account/Avatar';
 import SearchResults from '../components/Books/SearchResults';
+import {withDistance} from '../helpers/locationHelper';
 
 import {index} from '../components/Algolia';
 
@@ -26,7 +27,7 @@ const AccountPage = props => {
         query: uid
       })
       .then(res => {
-        props.storeBooks(res.hits);
+        props.storeBooks(withDistance(res.hits, props.coords));
       })
       .catch(err => {
         console.error(err);

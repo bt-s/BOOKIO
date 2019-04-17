@@ -106,7 +106,7 @@ const RequestMessage = props => {
         <div className="people-and-operation">
           <div className="type-and-people">
             <div className="user">
-              {props.message.type === ('give' || 'lend') ? (
+              {['give', 'lend'].includes(props.message.type) ? (
                 <span>Book requested by: </span>
               ) : (
                 <span>Book provided by: </span>

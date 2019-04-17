@@ -54,6 +54,11 @@
   }
 }
 
-.btn-add-book:hover {
-  zoom: 105%;
+@include media-breakpoint(sm) {
+  .btn-add-book:hover {
+    transform: scale(
+      1.05
+    ); // I can not solve the font distortion issue if we do the zoom animation
+    transition: all 0.2s ease;
+  }
 }

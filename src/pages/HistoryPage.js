@@ -34,14 +34,18 @@ const HistoryPage = props => {
                   transac = transac.data();
                   transac.id = id;
                   // calc transaction type
-                  transac.type =
-                    transac.type === 'to borrow'
-                      ? transac.providerID === props.firebase.getMyUID()
+                  if (transac.type === 'lend') {
+                    transac.type =
+                      transac.providerID === props.firebase.getMyUID()
                         ? 'lend'
-                        : 'borrow'
-                      : transac.providerID === props.firebase.getMyUID()
-                      ? 'give'
-                      : 'get';
+                        : 'borrow';
+                  } else {
+                    transac.type =
+                      transac.providerID === props.firebase.getMyUID()
+                        ? 'give'
+                        : 'get';
+                  }
+
                   return Promise.all([
                     props.firebase
                       // get the user other than me

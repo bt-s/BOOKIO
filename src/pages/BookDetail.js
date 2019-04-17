@@ -86,7 +86,7 @@ const BookDetail = props => {
                 status: 'Ongoing',
                 requestTime: new Date().getTime(),
                 itemID: bookId,
-                type: book.type
+                type: book.type // lend or give
               })
               .then(transac => {
                 firebase.user(consumerID).update({
@@ -110,7 +110,7 @@ const BookDetail = props => {
   };
 
   const borrowOrHave =
-    book.type === 'to borrow' ? (
+    book.type === 'lend' ? (
       <span>You can borrow this book from:</span>
     ) : (
       <span>You can get this book for free from:</span>

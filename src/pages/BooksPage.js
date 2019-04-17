@@ -64,8 +64,8 @@ const BooksPage = props => {
         <FilterGroup
           onFilterUpdate={filters => {
             const strMap = {
-              'Books to Borrow': 'to borrow',
-              'Books to Have': 'to have'
+              'Books to Borrow': 'lend',
+              'Books to Have': 'give'
             };
             if (filters.length > 0) {
               onFilter(

@@ -1,4 +1,5 @@
 $description-height: 200px;
+$upload-font: 16px;
 
 .upload-progress {
   &.redirect {
@@ -96,7 +97,7 @@ $description-height: 200px;
     border-radius: 10px;
     padding: 0 $padding-sm;
     margin-bottom: $padding-sm;
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .btn-publish {
@@ -118,18 +119,19 @@ $description-height: 200px;
     border-radius: 10px;
     padding: 20px $padding-sm;
     margin-bottom: $padding-sm;
-    font-size: 13px;
+    font-size: 16px;
+    width: 100%;
     background: $white-dim;
   }
   .title-input {
     width: 100%;
-    // background: none;
+    background: none;
     border: 1px solid $gray;
     height: 40px;
     border-radius: 10px;
     padding: 0 $padding-sm;
     margin-bottom: $padding-sm;
-    font-size: 13px;
+    font-size: 16px;
     background: $white-dim;
   }
 

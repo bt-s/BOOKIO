@@ -110,8 +110,8 @@ const AddNewBookFormBase = props => {
           updateImage(res.id);
           setProgressStyle('redirect');
           setTimeout(() => {
-            props.history.push('/books');
-          }, 2000);
+            window.location = '/books';
+          }, 3000);
         });
       })
       .then(res => {
@@ -204,8 +204,8 @@ const AddNewBookFormBase = props => {
             type="text"
             value={type}
             onChange={e => setType(e.target.value)}>
-            <option value="lend">Lend</option>
-            <option value="giveaway">Giveaway</option>
+            <option value="lend">Lend Out</option>
+            <option value="give">Giveaway</option>
           </select>
 
           <div className="subtitle">Location</div>
