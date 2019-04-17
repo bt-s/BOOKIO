@@ -146,12 +146,15 @@ $navbar-icon-size: 20px;
 
   .dd-list-item {
     width: 100%;
-    padding: 0 $padding-xs;
+    padding: 0 0 0 $padding-xs;
     height: $dropdown-menu-item-height;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
+    > * {
+      width: 100%;
+      height: 100%;
+    }
     &.link {
       svg {
         width: 12px;
