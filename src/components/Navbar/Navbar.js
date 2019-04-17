@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {faEdit, faCog, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faCog} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
@@ -94,38 +94,19 @@ const NavbarNonAuth = () => (
   </div>
 );
 
-const Navbar = props => {
-  const [isTop, setIsTop] = useState(true);
-  let lastScrollPos = 2000;
-
-  // useEffect(() => {
-  //   document.addEventListener('scroll', e => {
-  //     // let val = window.scrollY < 100;
-  //     if (lastScrollPos - window.scrollY < 0) {
-  //       setTimeout(() => setIsTop(false));
-  //     } else if (lastScrollPos - window.scrollY > 0) {
-  //       setTimeout(() => setIsTop(true));
-  //     }
-  //     lastScrollPos = window.scrollY;
-
-  //     // setIsTop(val);
-  //   });
-  // }, []);
-
-  return (
-    <nav className={'navbar ' + (isTop ? '' : 'scroll-height')}>
-      <div className="navbar-content-container">
-        <BrandLogo />
-        <Search />;
-        {props.authUser ? (
-          <NavbarAuth authUser={props.authUser} />
-        ) : (
-          <NavbarNonAuth />
-        )}
-      </div>
-    </nav>
-  );
-};
+const Navbar = props => (
+  <nav className="navbar">
+    <div className="navbar-content-container">
+      <BrandLogo />
+      <Search />;
+      {props.authUser ? (
+        <NavbarAuth authUser={props.authUser} />
+      ) : (
+        <NavbarNonAuth />
+      )}
+    </div>
+  </nav>
+);
 
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser

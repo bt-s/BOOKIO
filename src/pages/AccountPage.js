@@ -18,7 +18,7 @@ import Avatar from '../components/Account/Avatar';
 import LoginManagement from '../components/Account/LoginManagement';
 import PasswordChangeForm from '../components/PasswordChange/PasswordChange';
 import SearchResults from '../components/Books/SearchResults';
-import {hasLocation, withDistance} from '../helpers/locationHelper';
+import {withDistance} from '../helpers/locationHelper';
 
 import {index} from '../components/Algolia';
 

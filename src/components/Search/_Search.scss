@@ -40,6 +40,10 @@
   margin-left: -7px;
 
   @include media-breakpoint(sm) {
+    max-width: 350px;
+  }
+
+  @include media-breakpoint(md) {
     max-width: 400px;
   }
 
