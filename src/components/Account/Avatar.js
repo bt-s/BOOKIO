@@ -9,7 +9,7 @@ import Dropdown from '../Dropdown/Dropdown';
 import {uploadPictureToFirebase} from '../../helpers/storageHelper';
 
 const Avatar = props => {
-  const [statusText, setStatusText] = useState('Upload a photo...');
+  const [statusText, setStatusText] = useState('Edit');
   const [imgURL, setImgURL] = useState('');
 
   const postUploadTask = url => {
@@ -18,39 +18,12 @@ const Avatar = props => {
         photoUrl: url
       })
       .then(function() {
+        setStatusText('Edit');
+
         setImgURL(url);
         props.firebase.user(props.firebase.getMyUID()).update({photoUrl: url});
       });
   };
-
-  const uploadField = [
-    {
-      id: 0,
-      title: (
-        <label>
-          {statusText}
-          <input
-            type="file"
-            name=""
-            onChange={e => {
-              uploadPictureToFirebase(
-                e.target.files[0],
-                'portrait_images',
-                props.firebase,
-                postUploadTask,
-                status => {
-                  setStatusText(status);
-                }
-              );
-            }}
-            id=""
-            style={{display: 'none'}}
-          />
-        </label>
-      ),
-      classes: 'link avatar-upload'
-    }
-  ];
 
   return (
     <div className="avatar-container">
@@ -59,12 +32,27 @@ const Avatar = props => {
         src={imgURL === '' ? props.avatarUrl : imgURL}
         alt=""
       />
-      <Dropdown
-        classes="edit-avatar"
-        headerObject={<FontAwesomeIcon icon="pencil-alt" />}
-        headerTitle="Edit"
-        items={uploadField}
-      />
+      <label className="change-avatar">
+        <FontAwesomeIcon icon="pencil-alt" />
+        {statusText}
+        <input
+          type="file"
+          name=""
+          onChange={e => {
+            uploadPictureToFirebase(
+              e.target.files[0],
+              'portrait_images',
+              props.firebase,
+              postUploadTask,
+              status => {
+                setStatusText((parseFloat(status) * 100).toFixed(2) + '%');
+              }
+            );
+          }}
+          id=""
+          style={{display: 'none'}}
+        />
+      </label>
     </div>
   );
 };
