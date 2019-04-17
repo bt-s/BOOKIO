@@ -4,6 +4,7 @@ export const ADMIN = '/admin';
 export const BOOK_DETAIL = '/detail/:bookId';
 export const BOOKS = '/books';
 export const EDIT_PROFILE = '/account-edit';
+export const SETTINGS = '/settings';
 export const LANDING = '/';
 export const LOG_IN = '/login';
 export const MY_BOOK_HISTORY = '/my-book-history';

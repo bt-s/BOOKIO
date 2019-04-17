@@ -68,17 +68,6 @@ const AccountPage = props => {
         </div>
       </div>
       <div className="line-break" />
-      <h1>Settings</h1>
-      <div className="user-information">
-        <div className="sub-header-account">Change Password</div>
-        <PasswordChangeForm />
-      </div>
-      <div className="line-break-sm" />
-      <div className="user-information">
-        <div className="sub-header-account"> Manage Account</div>
-        <LoginManagement authUser={props.authUser} />
-      </div>
-      <div className="line-break" />
       <div className="my-books-section">
         <h2>My Books</h2>
         <Link className="btn btn-add-book account" to={ROUTES.ADD_BOOK}>

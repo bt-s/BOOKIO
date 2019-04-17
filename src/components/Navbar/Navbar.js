@@ -43,7 +43,7 @@ const accountMenuList = [
   {
     id: 1,
     title: (
-      <Link to={ROUTES.EDIT_PROFILE}>
+      <Link to={ROUTES.SETTINGS}>
         <FontAwesomeIcon icon={faCog} />
         Settings
       </Link>
