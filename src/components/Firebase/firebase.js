@@ -134,10 +134,6 @@ class Firebase {
           .then(snapshot => {
             const dbUser = snapshot.data();
 
-            console.log('snapshot', snapshot);
-            console.log('dbUser', dbUser);
-            console.log('authUser', authUser);
-
             // default empty roles
             if (dbUser && !dbUser.roles) {
               dbUser.roles = [];
@@ -145,40 +141,14 @@ class Firebase {
 
             // merge auth and db user
             authUser = {
-              // age: authUser.age,
               email: authUser.email,
               emailVerified: authUser.emailVerified,
-              // location: authUser.location,
               phoneNumber: authUser.phoneNumber,
               photoUrl: authUser.photoURL,
               providerData: authUser.providerData,
-              // userName: authUser.userName,
-              // roles: authUser.roles,
               uid: authUser.uid,
               ...dbUser
             };
-            // // default empty roles
-            // if (!dbUser.roles) {
-            //   dbUser.roles = [];
-            // }
-
-            // // merge auth and db user
-            // authUser = {
-            //   age: authUser.age,
-            //   email: authUser.email,
-            //   emailVerified: authUser.emailVerified,
-            //   location: authUser.location,
-            //   myBooks: authUser.myBooks,
-            //   phoneNumber: authUser.phoneNumber,
-            //   photoUrl: authUser.photoUrl,
-            //   providerData: authUser.providerData,
-            //   userName: authUser.userName,
-            //   roles: authUser.roles,
-            //   transactions: authUser.transactions,
-            //   uid: authUser.uid,
-            //   ...dbUser
-            // };
-
             next(authUser);
           });
       } else {
