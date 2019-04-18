@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     padding: 20px 0 0;
-    // border-bottom: 1px solid $white-dimmer;
+    border-bottom: 1px solid $white-dimmer;
     padding-bottom: 4px;
 
     .radio-styled > .radio-label {
@@ -19,7 +19,14 @@
 
 .no-transactions {
   padding: $padding-lg 0;
-  max-width: 450px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    max-width: 450px;
+    font-size: 16px;
+  }
 }
 
 .no-transaction-buttons {

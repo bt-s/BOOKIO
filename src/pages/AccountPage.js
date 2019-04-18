@@ -62,7 +62,7 @@ const AccountPage = props => {
           <span className="info-item">
             <FontAwesomeIcon icon="phone" />
             <span>
-              {!phoneNumber === null ? (
+              {phoneNumber !== null ? (
                 phoneNumber
               ) : (
                 <i>Tell us your phone number</i>
@@ -75,7 +75,7 @@ const AccountPage = props => {
           </span>
           <span className="info-item">
             <FontAwesomeIcon icon="birthday-cake" />
-            <span>{!age === null ? age : <i>Tell us your age</i>}</span>
+            <span>{age !== null ? age : <i>Tell us your age</i>}</span>
           </span>
           <Link to={ROUTES.EDIT_PROFILE} className="edit-profile">
             Edit Profile
