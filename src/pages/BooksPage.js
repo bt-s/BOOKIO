@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -7,9 +7,13 @@ import axios from 'axios';
 import {hasLocation, withDistance} from '../helpers/locationHelper';
 import {storeBooks} from '../redux/actions/storeBooks';
 import {storeCoords} from '../redux/actions/storeCoords';
+import {incrementPage, decrementPage} from '../redux/actions/storePage';
+import {storeSearchQuery} from '../redux/actions/storeSearchQuery';
+
 import * as ROUTES from '../constants/routes';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
+import Button from '../components/Button/Button';
 import Loader from '../components/Loader/Loader';
 import SearchResults from '../components/Books/SearchResults';
 import FilterGroup from '../components/Books/FilterGroup';
@@ -20,13 +24,20 @@ const _ = require('lodash/core');
 const BooksPage = props => {
   const initialCoords = {lat: 0, lng: 0};
 
+  useEffect(() => {
+    onFilter(props.query);
+  }, []);
+
   const onFilter = filter => {
+    props.storeSearchQuery(filter);
     index
       .search({
-        filters: filter
+        filters: filter,
+        page: props.page
       })
       .then(res => {
-        props.storeBooks(withDistance(res.hits.reverse(), props.coords));
+        props.storeBooks(withDistance(res.hits, props.coords));
+        console.log(res);
       })
       .catch(err => {
         console.error(err);
@@ -39,7 +50,7 @@ const BooksPage = props => {
       url: `https://us-central1-bookio.cloudfunctions.net/getBooks`
     })
       .then(res => {
-        props.storeBooks(withDistance(res.data.reverse(), props.coords));
+        props.storeBooks(withDistance(res.data, props.coords));
       })
       .catch(err => {
         console.error(err);
@@ -63,6 +74,19 @@ const BooksPage = props => {
   ) {
     getBooks();
   }
+
+  const depaginate = () => {
+    props.decrementPage(props.page);
+  };
+
+  const paginate = () => {
+    props.incrementPage(props.page);
+  };
+
+  useEffect(() => {
+    console.log('page: ', props.page);
+    onFilter(props.query);
+  }, [props.page]);
 
   return (
     <React.Fragment>
@@ -96,7 +120,21 @@ const BooksPage = props => {
         </Link>
       </div>
       {!_.isEmpty(props.books) && props.coords !== initialCoords ? (
-        <SearchResults books={props.books} />
+        <React.Fragment>
+          <SearchResults books={props.books} />
+          <Button
+            className="btn"
+            type="button"
+            onClick={depaginate}
+            text="Depaginate"
+          />
+          <Button
+            className="btn"
+            type="button"
+            onClick={paginate}
+            text="Paginate"
+          />
+        </React.Fragment>
       ) : typeof props.books === 'undefined' ? (
         <div>{noBooksFound}</div>
       ) : (
@@ -117,12 +155,17 @@ BooksPage.propTypes = {
 const mapStateToProps = state => ({
   books: state.booksState.books,
   coords: state.coordsState.coords,
-  hasSearched: state.searchState.hasSearched
+  hasSearched: state.searchState.hasSearched,
+  page: state.pageState,
+  query: state.searchQueryState.query
 });
 
 const mapDispatchToProps = dispatch => ({
   storeBooks: books => dispatch(storeBooks(books)),
-  storeCoords: coords => dispatch(storeCoords(coords))
+  storeCoords: coords => dispatch(storeCoords(coords)),
+  storeSearchQuery: query => dispatch(storeSearchQuery(query)),
+  incrementPage: page => dispatch(incrementPage(page)),
+  decrementPage: page => dispatch(decrementPage(page))
 });
 
 export default connect(
