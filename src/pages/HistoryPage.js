@@ -108,7 +108,11 @@ const HistoryPage = props => {
         .get()
         .then(
           user =>
-            user.data().transactions ? manageTransactions(user) : <Loader /> //noTransactionsToShow
+            user.data().transactions && user.data().transactions.length > 0 ? (
+              manageTransactions(user)
+            ) : (
+              <Loader />
+            ) //noTransactionsToShow
         );
       // });
     }
