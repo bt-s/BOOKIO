@@ -21,8 +21,14 @@ $field-height: 40px;
 }
 
 .account-page {
+  padding-bottom: $padding-lg;
+
   @include media-breakpoint(sm) {
     margin-top: 50px;
+  }
+
+  .no-results {
+    font-size: 15px;
   }
 }
 

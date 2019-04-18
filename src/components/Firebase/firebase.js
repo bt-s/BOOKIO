@@ -99,15 +99,16 @@ class Firebase {
   onBooksAddedListener = () =>
     this.db.collection('books').onSnapshot(snap => {
       snap.docChanges().forEach(change => {
+        console.log('on snapshot', change);
+
         if (change.type === 'added') {
+          console.log('in update', change.doc);
+
           this.addOrUpdateIndexRecord(change.doc);
         }
       });
     });
 
-  // TODO This is not so efficient: for some reason Firestore thinks
-  // that all its book objects have changed and then sends all of them
-  // to Algolia
   addOrUpdateIndexRecord(dataSnapshot) {
     let firebaseObject = dataSnapshot.data();
     // Specify Algolia's objectID using the Firebase object key

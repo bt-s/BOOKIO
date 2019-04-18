@@ -82,6 +82,11 @@ $btn-lr-padding: 10px;
   cursor: pointer;
 }
 
+.btn-disabled {
+  pointer-events: none;
+  background: gray;
+}
+
 .btn-auth {
   min-width: 250px;
 }

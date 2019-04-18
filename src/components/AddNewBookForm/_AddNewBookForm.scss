@@ -113,6 +113,7 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
   .booktype {
     width: 100%;
     height: $input-height;
+    background: #f8f8f8;
     border: 1px solid $gray;
     border-radius: 6px;
     transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
@@ -163,7 +164,7 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     border-radius: 10px;
     padding: 0 $padding-sm;
     font-size: 16px;
-    background-color: $white-dim;
+    background-color: #f8f8f8;
 
     &:focus {
       background-color: $white;
@@ -177,17 +178,16 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
   }
 
   .autocomplete-input {
-    margin-top: 10px;
     border: 1px solid $gray;
     border-radius: 6px;
     transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
     box-shadow: 0 0 0 1px $gray;
     height: $input-height;
     width: 100%;
-    background-color: $white-dim;
+    background-color: #f8f8f8;
     font-size: 17px;
     padding: 0px 20px;
-    margin-bottom: 5px;
+    margin-bottom: 50px;
 
     &:focus {
       background-color: $white;

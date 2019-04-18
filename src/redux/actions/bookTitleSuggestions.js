@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import {debounce} from '../../helpers/utils';
 import {
   BOOK_TITLE_SUGGESTION_ERROR,
   BOOK_TITLE_SUGGESTION_LOADING,
@@ -26,7 +26,7 @@ const error = () => {
 };
 
 export const fetchBookTitleSuggestions = payload => {
-  return dispatch => {
+  return debounce(dispatch => {
     dispatch(loading());
     axios({
       method: 'GET',
@@ -39,5 +39,5 @@ export const fetchBookTitleSuggestions = payload => {
       .catch(err => {
         dispatch(error());
       });
-  };
+  }, 200);
 };
