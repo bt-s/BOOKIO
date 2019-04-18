@@ -41,6 +41,7 @@ $btn-lr-padding: 10px;
   align-items: center;
   color: $white;
   border: none;
+  border-radius: $border-radius;
   text-decoration: none;
   padding: 0 $padding-xs;
   font-size: 15px;
@@ -48,12 +49,12 @@ $btn-lr-padding: 10px;
   font-weight: 500;
   border-radius: $border-radius;
   height: $btn-height;
+
   @include button-bg($theme-light-color);
 }
 
 .btn-orange {
   @include button-bg($orange);
-  border-radius: 4px;
 }
 
 .btn-black {
@@ -62,7 +63,6 @@ $btn-lr-padding: 10px;
   padding: 0 $padding-xs;
   box-shadow: $button-shadow;
   background-color: $theme-light-color;
-  border-radius: 30px;
   align-self: flex-start;
   margin-top: 20px;
   position: relative;
