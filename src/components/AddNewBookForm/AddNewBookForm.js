@@ -1,18 +1,23 @@
 import React, {useEffect, useState, useReducer, useRef} from 'react';
+import PropTypes from 'prop-types';
+
 import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {
   addNewUserBook,
   changeNewBook
 } from '../../redux/actions/addNewUserBook';
+
+import {withRouter} from 'react-router-dom';
 import {withFirebase} from '../Firebase';
+
 import {uploadPictureToFirebase} from '../../helpers/storageHelper';
+import {errorReducer} from '../../helpers/validationHelper';
+
 import TitleForm from './TitleForm';
 import Map from '../GoogleMap/GoogleMap';
 import {Validation, Validator, ValidationHelper} from '../Forms/Validation';
-import {errorReducer} from '../../helpers/validationHelper';
 
 const AddNewBookFormBase = props => {
   const {
@@ -24,21 +29,25 @@ const AddNewBookFormBase = props => {
     firebase,
     files
   } = props;
+
+  const [type, setType] = useState('lend');
+  const [progressStyle, setProgressStyle] = useState('off');
   const [description, setDescription] = useState('');
+  const [error, dispatchError] = useReducer(errorReducer, {});
   const [location, setLocation] = useState({
     lat: 0,
     lon: 0
   });
-
   const [initLocation, setInitLocation] = useState({
     lat: 0,
     lon: 0
   });
-  const [type, setType] = useState('lend');
 
   const [progressStyle, setProgressStyle] = useState('off');
   const [error, dispatchError] = useReducer(errorReducer, {});
+
   const validationRef = useRef(null);
+  let imageUrls = [];
 
   const onValidate = error => {
     dispatchError(error);
@@ -59,9 +68,7 @@ const AddNewBookFormBase = props => {
     setLocation(loc);
   };
 
-  const getAddress = val => {
-    // Here if you want to get the address and the city.
-  };
+  const getAddress = val => {};
 
   let imageUrls = [];
 
@@ -271,6 +278,19 @@ const AddNewBookFormBase = props => {
       </Validation>
     </div>
   );
+};
+
+AddNewBookFormBase.propTypes = {
+  addNewUserBook: PropTypes.func,
+  authUser: PropTypes.object,
+  changeNewBook: PropTypes.func,
+  files: PropTypes.array,
+  firebase: PropTypes.object,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+  rating: PropTypes.number,
+  title: PropTypes.string
 };
 
 const mapStateToProps = state => ({

@@ -57,7 +57,8 @@ const Avatar = props => {
 };
 
 Avatar.propTypes = {
-  avatarUrl: PropTypes.string
+  avatarUrl: PropTypes.string,
+  firebase: PropTypes.object
 };
 
 export default withFirebase(Avatar);

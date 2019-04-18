@@ -1,6 +1,7 @@
 $description-height: 200px;
 $upload-font: 16px;
 $input-height: 40px;
+$abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
 
 .upload-progress {
   &.redirect {
@@ -33,7 +34,7 @@ $input-height: 40px;
     position: fixed;
     top: $navbar-height;
     height: 4px;
-    box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
+    box-shadow: $abp-shadow;
     left: 0px;
     background: yellow;
 
@@ -47,7 +48,7 @@ $input-height: 40px;
     z-index: 10;
     top: $navbar-height;
     height: 4px;
-    box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
+    box-shadow: $abp-shadow;
     left: 0px;
     width: 0px;
     background: yellow;
@@ -69,23 +70,19 @@ $input-height: 40px;
     border-radius: 6px;
     transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
     box-shadow: 0 0 0 1px $gray;
-    &:focus {
-      z-index: 2;
-      outline: none;
-      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
-        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
-    }
+
+    &:focus,
     &:active {
       z-index: 2;
       outline: none;
-      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
-        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+      box-shadow: $box-shadow;
     }
   }
 
   .margin-bottom-10px {
     margin-bottom: -10px;
   }
+
   .two-col {
     width: 45%;
     height: 100%;
@@ -94,12 +91,6 @@ $input-height: 40px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-    }
-
-    > * {
-      // border-radius: 10px;
-
-      // border: $white-dimmer;
     }
 
     > .subtitle {
@@ -114,9 +105,11 @@ $input-height: 40px;
       font-size: 13px;
     }
   }
+
   #error-image {
     text-align: left;
   }
+
   .booktype {
     width: 100%;
     height: $input-height;
@@ -125,12 +118,13 @@ $input-height: 40px;
     transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
     box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.34);
     padding: 0 $padding-sm;
-    // margin-bottom: $padding-sm;
     font-size: 16px;
     outline: none;
+
     &:hover {
       cursor: pointer;
     }
+
     option {
       outline: none;
       font-size: 16px;
@@ -151,16 +145,16 @@ $input-height: 40px;
     resize: none;
     border-radius: 10px;
     padding: 20px $padding-sm;
-    // margin-bottom: $padding-sm;
     font-size: 16px;
     width: 100%;
     background-color: $white-dim;
+
     &:focus {
       background-color: $white;
     }
   }
+
   .title-input {
-    // border: none;
     border: 1px solid $gray;
 
     width: 100%;
@@ -170,6 +164,7 @@ $input-height: 40px;
     padding: 0 $padding-sm;
     font-size: 16px;
     background-color: $white-dim;
+
     &:focus {
       background-color: $white;
     }
@@ -196,16 +191,13 @@ $input-height: 40px;
 
     &:focus {
       background-color: $white;
-      z-index: 2;
-      outline: none;
-      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
-        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
     }
+
+    &:focus,
     &:active {
       z-index: 2;
       outline: none;
-      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
-        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+      box-shadow: $box-shadow;
     }
   }
 
