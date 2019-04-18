@@ -4,9 +4,8 @@ import {compose} from 'recompose';
 import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
-import {withFirebase} from '../components/Firebase';
-
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
 import {
   withAuthorization,
   withEmailVerification
@@ -14,10 +13,6 @@ import {
 
 import Avatar from '../components/Account/Avatar';
 import SearchResults from '../components/Books/SearchResults';
-
-import {index} from '../components/Algolia';
-
-const _ = require('lodash/core');
 
 const AccountPage = props => {
   const [myBooks, setMyBooks] = useState([]);
@@ -45,7 +40,6 @@ const AccountPage = props => {
   };
 
   useEffect(() => {
-    // onSearchBooks(props.authUser.uid);
     fetchUserInventory(props.authUser.uid);
   }, []);
 
