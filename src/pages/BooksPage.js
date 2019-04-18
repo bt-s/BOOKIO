@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -7,7 +7,11 @@ import axios from 'axios';
 import {hasLocation, withDistance} from '../helpers/locationHelper';
 import {storeBooks} from '../redux/actions/storeBooks';
 import {storeCoords} from '../redux/actions/storeCoords';
-import {incrementPage, decrementPage} from '../redux/actions/storePage';
+import {
+  incrementPage,
+  decrementPage,
+  goToPage
+} from '../redux/actions/storePage';
 import {storeSearchQuery} from '../redux/actions/storeSearchQuery';
 
 import * as ROUTES from '../constants/routes';
@@ -18,11 +22,13 @@ import Loader from '../components/Loader/Loader';
 import SearchResults from '../components/Books/SearchResults';
 import FilterGroup from '../components/Books/FilterGroup';
 import {index} from '../components/Algolia';
+import Pagination from '../components/Pagination/Pagination';
 
 const _ = require('lodash/core');
 
 const BooksPage = props => {
   const initialCoords = {lat: 0, lng: 0};
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     onFilter(props.query);
@@ -38,6 +44,7 @@ const BooksPage = props => {
       .then(res => {
         props.storeBooks(withDistance(res.hits, props.coords));
         console.log(res);
+        setTotalPages(res.nbPages);
       })
       .catch(err => {
         console.error(err);
@@ -83,6 +90,10 @@ const BooksPage = props => {
     props.incrementPage(props.page);
   };
 
+  const handleChoosePage = page => {
+    props.goToPage(page);
+  };
+
   useEffect(() => {
     console.log('page: ', props.page);
     onFilter(props.query);
@@ -122,17 +133,10 @@ const BooksPage = props => {
       {!_.isEmpty(props.books) && props.coords !== initialCoords ? (
         <React.Fragment>
           <SearchResults books={props.books} />
-          <Button
-            className="btn"
-            type="button"
-            onClick={depaginate}
-            text="Depaginate"
-          />
-          <Button
-            className="btn"
-            type="button"
-            onClick={paginate}
-            text="Paginate"
+          <Pagination
+            totalPages={totalPages}
+            currentPage={props.page}
+            handleChoose={handleChoosePage}
           />
         </React.Fragment>
       ) : typeof props.books === 'undefined' ? (
@@ -165,7 +169,8 @@ const mapDispatchToProps = dispatch => ({
   storeCoords: coords => dispatch(storeCoords(coords)),
   storeSearchQuery: query => dispatch(storeSearchQuery(query)),
   incrementPage: page => dispatch(incrementPage(page)),
-  decrementPage: page => dispatch(decrementPage(page))
+  decrementPage: page => dispatch(decrementPage(page)),
+  goToPage: page => dispatch(goToPage(page))
 });
 
 export default connect(
