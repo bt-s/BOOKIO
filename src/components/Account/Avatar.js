@@ -14,7 +14,7 @@ const Avatar = props => {
   const postUploadTask = url => {
     props.firebase.auth.currentUser
       .updateProfile({
-        photoUrl: url
+        photoURL: url // actually, we are not using this anymore. now what we use All from firestore
       })
       .then(function() {
         setStatusText('Edit');

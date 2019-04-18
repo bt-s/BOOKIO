@@ -139,26 +139,45 @@ class Firebase {
             console.log('authUser', authUser);
 
             // default empty roles
-            if (!dbUser.roles) {
+            if (dbUser && !dbUser.roles) {
               dbUser.roles = [];
             }
 
             // merge auth and db user
             authUser = {
-              age: authUser.age,
+              // age: authUser.age,
               email: authUser.email,
               emailVerified: authUser.emailVerified,
-              location: authUser.location,
-              myBooks: authUser.myBooks,
+              // location: authUser.location,
               phoneNumber: authUser.phoneNumber,
-              photoUrl: authUser.photoUrl,
+              photoUrl: authUser.photoURL,
               providerData: authUser.providerData,
-              userName: authUser.userName,
-              roles: authUser.roles,
-              transactions: authUser.transactions,
+              // userName: authUser.userName,
+              // roles: authUser.roles,
               uid: authUser.uid,
               ...dbUser
             };
+            // // default empty roles
+            // if (!dbUser.roles) {
+            //   dbUser.roles = [];
+            // }
+
+            // // merge auth and db user
+            // authUser = {
+            //   age: authUser.age,
+            //   email: authUser.email,
+            //   emailVerified: authUser.emailVerified,
+            //   location: authUser.location,
+            //   myBooks: authUser.myBooks,
+            //   phoneNumber: authUser.phoneNumber,
+            //   photoUrl: authUser.photoUrl,
+            //   providerData: authUser.providerData,
+            //   userName: authUser.userName,
+            //   roles: authUser.roles,
+            //   transactions: authUser.transactions,
+            //   uid: authUser.uid,
+            //   ...dbUser
+            // };
 
             next(authUser);
           });

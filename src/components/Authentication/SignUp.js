@@ -59,7 +59,7 @@ const SignUpFormBase = props => {
         .then(authUser => {
           authUser.user.updateProfile({
             displayName: form.username,
-            photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT
+            photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT
           });
           return props.firebase.user(authUser.user.uid).set(
             {
