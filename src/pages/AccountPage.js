@@ -47,7 +47,6 @@ const AccountPage = props => {
   const phoneNumber = props.authUser.phoneNumber;
   const location = props.authUser.location;
   const age = props.authUser.age;
-  console.log('aaaaa', props.authUser);
 
   return (
     <div className="account-page">
