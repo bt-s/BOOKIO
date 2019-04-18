@@ -27,7 +27,7 @@ const accountMenuList = [
         My Profile
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
   {
     id: 1,
@@ -37,7 +37,7 @@ const accountMenuList = [
         Edit Profile
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
 
   {
@@ -48,13 +48,13 @@ const accountMenuList = [
         Settings
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
   {
     id: 5,
     title: <SignOut />,
-    classes: 'link section-ending',
-  },
+    classes: 'link section-ending'
+  }
 ];
 
 const accountMenu = (
@@ -67,7 +67,10 @@ const accountMenu = (
 );
 
 const NavbarAuth = ({authUser}) =>
-  authUser.roles.includes(ROLES.ADMIN) && authUser.emailVerified ? (
+  authUser &&
+  authUser.roles &&
+  authUser.roles.includes(ROLES.ADMIN) &&
+  authUser.emailVerified ? (
     <React.Fragment>
       {bookShelfLink}
       {accountMenu}
@@ -109,7 +112,7 @@ const Navbar = props => (
 );
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser,
+  authUser: state.sessionState.authUser
 });
 
 export default withRouter(connect(mapStateToProps)(Navbar));
