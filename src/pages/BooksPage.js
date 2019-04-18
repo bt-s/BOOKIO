@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import axios from 'axios';
 
 import {hasLocation, withDistance} from '../helpers/locationHelper';
 import {storeBooks} from '../redux/actions/storeBooks';
@@ -34,12 +33,10 @@ const BooksPage = props => {
   };
 
   const getBooks = () => {
-    axios({
-      method: 'GET',
-      url: `https://us-central1-bookio.cloudfunctions.net/getBooks`
-    })
+    index
+      .search()
       .then(res => {
-        props.storeBooks(withDistance(res.data.reverse(), props.coords));
+        props.storeBooks(withDistance(res.hits.reverse(), props.coords));
       })
       .catch(err => {
         console.error(err);
