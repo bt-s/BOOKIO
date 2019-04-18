@@ -1,0 +1,16 @@
+.edit-profile-page {
+  padding-bottom: $padding-md;
+
+  .auth-form {
+    margin: 0 auto;
+    max-width: 350px;
+
+    @include media-breakpoint(xs) {
+      margin: 25px auto;
+    }
+  }
+
+  .btn-auth {
+    margin-top: $padding-sm;
+  }
+}
