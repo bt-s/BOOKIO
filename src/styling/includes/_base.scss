@@ -16,26 +16,26 @@ h1 {
   font-size: 24px;
   font-weight: 700;
   line-height: 1.33;
-  color: $black;
+  color: $content-text;
 }
 
 h2 {
   font-size: 25px;
   font-weight: 700;
   line-height: 1.33;
-  color: $black;
+  color: $content-text;
 }
 
 h3 {
   font-size: 12px;
   font-weight: normal;
   line-height: 1.33;
-  color: $black;
+  color: $content-text;
 }
 
 a {
   line-height: 1.5;
-  color: $black;
+  color: $content-text;
   font-weight: 700;
 }
 
@@ -44,7 +44,7 @@ label {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
-  color: $black;
+  color: $content-text;
 }
 
 a {
@@ -52,6 +52,9 @@ a {
   font-size: 14px;
 }
 
+div {
+  color: $content-text;
+}
 *,
 ::after,
 ::before {
@@ -89,5 +92,24 @@ a {
 
   @include media-breakpoint(lg) {
     max-width: $max-width-lg;
+  }
+}
+
+textarea {
+  border: 1px solid $gray;
+  border-radius: 6px;
+  transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
+  box-shadow: 0 0 0 1px $gray;
+  &:focus {
+    z-index: 2;
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+      0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+  }
+  &:active {
+    z-index: 2;
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+      0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
   }
 }

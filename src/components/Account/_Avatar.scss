@@ -20,16 +20,40 @@
   height: 100%;
 }
 
+.change-avatar {
+  position: relative;
+  bottom: 20%;
+  left: 10%;
+  padding: 5px;
+  border-radius: 6px;
+  width: 35%;
+  background: $black-lighter;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+    background: lighten($black, 8%);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    background: lighten($black, 25%);
+    transition: all 0.3s ease;
+  }
+}
+
 .edit-avatar {
   .dd-header {
-    background-color: $black-lighter;
-    background: $black;
+    background-color: $theme-light-color;
+    background: $theme-dark-color;
     color: $white;
     position: absolute;
     padding: $padding-xxs $padding-xs;
     margin-top: -47px;
     margin-left: $padding-xxs;
-    border-radius: 2px;
+    border-radius: 6px;
 
     svg {
       margin-right: $padding-xxs;

@@ -1,5 +1,6 @@
 $description-height: 200px;
 $upload-font: 16px;
+$input-height: 40px;
 
 .upload-progress {
   &.redirect {
@@ -61,10 +62,27 @@ $upload-font: 16px;
   justify-content: space-between;
   flex-wrap: wrap;
 
+  input {
+    border: 1px solid $gray;
+    border-radius: 6px;
+    transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
+    box-shadow: 0 0 0 1px $gray;
+    &:focus {
+      z-index: 2;
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+    }
+    &:active {
+      z-index: 2;
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+    }
+  }
   .two-col {
     width: 45%;
     height: 100%;
-    justify-content: space-between;
 
     &:last-child {
       display: flex;
@@ -91,48 +109,81 @@ $upload-font: 16px;
 
   .booktype {
     width: 100%;
-    background: $white-dim;
+    height: $input-height;
     border: 1px solid $gray;
-    height: 40px;
-    border-radius: 10px;
+    border-radius: 6px;
+    transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
+    box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.34);
     padding: 0 $padding-sm;
     margin-bottom: $padding-sm;
     font-size: 16px;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+    option {
+      outline: none;
+      font-size: 16px;
+    }
   }
 
   .btn-publish {
-    width: 166px;
-    height: 43px;
     box-shadow: $button-shadow;
-    background-color: black;
-    border-radius: 30px;
-    align-self: flex-start;
     margin-top: 20px;
-    // z-index: 5;
+    font-size: 17px;
+    font-weight: bold;
+    align-self: flex-end;
     position: relative;
   }
 
   .input-description {
     height: $description-height;
     resize: none;
-    border: 1px solid $gray;
     border-radius: 10px;
     padding: 20px $padding-sm;
     margin-bottom: $padding-sm;
     font-size: 16px;
     width: 100%;
-    background: $white-dim;
   }
   .title-input {
+    // border: none;
+    border: 1px solid $gray;
+
     width: 100%;
     background: none;
-    border: 1px solid $gray;
-    height: 40px;
+    height: $input-height;
     border-radius: 10px;
     padding: 0 $padding-sm;
     margin-bottom: $padding-sm;
     font-size: 16px;
-    background: $white-dim;
+  }
+
+  .google-map-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .autocomplete-input {
+    margin-top: 10px;
+    border: 1px solid $gray;
+    border-radius: 6px;
+    transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
+    box-shadow: 0 0 0 1px $gray;
+    height: $input-height;
+    width: 100%;
+
+    &:focus {
+      z-index: 2;
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+    }
+    &:active {
+      z-index: 2;
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+    }
   }
 
   @include smaller-than(sm) {

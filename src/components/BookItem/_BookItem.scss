@@ -9,7 +9,8 @@
   border-radius: 6px;
   max-height: 400px;
   height: 350px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
 
   @include media-breakpoint(sm) {
     max-width: 310px;
@@ -30,8 +31,9 @@
     height: 100%;
   }
 
-  &:hover {
-    transform: scale(1.015, 1.015) translateY(-1px);
+  &:hover .book-item-img {
+    transform: scale(1.15);
+    transition: all 0.3s ease-in;
   }
 }
 
@@ -61,12 +63,21 @@
   }
 }
 
-.book-item-img {
+.book-item-img-container {
   max-height: 175px;
   height: 100%;
   width: 100%;
-  object-fit: cover;
   border-radius: 6px 6px 0px 0px;
+  overflow: hidden;
+  .book-item-img {
+    max-height: 175px;
+    height: 100%;
+    width: 100%;
+    transition: all 0.3s ease-out;
+    animation-delay: 0.5s;
+    border-radius: 6px 6px 0px 0px;
+    object-fit: cover;
+  }
 }
 
 .book-item-inner {

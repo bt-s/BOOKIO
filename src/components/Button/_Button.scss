@@ -47,7 +47,7 @@ $btn-lr-padding: 10px;
   font-weight: 500;
   border-radius: $border-radius;
   height: $btn-height;
-  @include button-bg($black-lighter);
+  @include button-bg($theme-light-color);
 }
 
 .btn-orange {
@@ -60,7 +60,7 @@ $btn-lr-padding: 10px;
   height: 40px;
   padding: 0 $padding-xs;
   box-shadow: $button-shadow;
-  background-color: $black;
+  background-color: $theme-light-color;
   border-radius: 30px;
   align-self: flex-start;
   margin-top: 20px;
@@ -128,7 +128,7 @@ $btn-lr-padding: 10px;
   font-size: 15px;
   font-family: sans-serif;
   &.on {
-    @include button-bg-darken($base-color);
+    @include button-bg-darken($theme-dark-color);
     color: white;
   }
 }

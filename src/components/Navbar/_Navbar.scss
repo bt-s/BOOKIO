@@ -7,7 +7,7 @@ $navbar-icon-size: 20px;
   justify-content: center;
   width: 100%;
   height: $navbar-height-mobile-top;
-  background-color: $black-lighter;
+  background-color: $theme-dark-color;
   z-index: 1000;
 
   @include media-breakpoint(sm) {

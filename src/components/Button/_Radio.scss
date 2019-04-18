@@ -3,14 +3,12 @@
   text-align: center;
   border: 1px solid black;
   .radio-label {
-    color: $black-lighter;
-    font-size: 16px;
-    @include media-breakpoint(sm) {
-      font-size: 20px;
-    }
+    color: $content-text;
+    font-size: 20px;
   }
   input:checked + label {
-    color: black;
-    border-bottom: 1px solid black;
+    color: $theme-dark-color;
+    border-bottom: 3px solid $theme-dark-color;
+
   }
 }

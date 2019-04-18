@@ -33,12 +33,12 @@
 
 .username {
   font-size: 20px;
-  color: $black;
+  color: $content-text;
   font-weight: bold;
   padding-bottom: $padding-xxs;
   @include media-breakpoint(sm) {
     font-size: 30px;
-    color: $black;
+    color: $content-text;
     font-weight: bold;
     padding-bottom: $padding-xxs;
   }
@@ -126,7 +126,29 @@
     display: flex;
     flex-direction: row;
     flex-basis: 70%;
-    margin-bottom: $padding-xxs;
+    // margin-bottom: $padding-xxs;
+    border: none;
+    padding: 0px 8px;
+    margin: 5px;
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+
+    transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
+
+    &:focus {
+      z-index: 2;
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+    }
+    &:active {
+      z-index: 2;
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
+        0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
+    }
   }
   @include media-breakpoint(sm) {
     display: flex;

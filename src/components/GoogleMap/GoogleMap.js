@@ -96,7 +96,7 @@ export const MapContainer = props => {
   const locationName = 'Your Location';
 
   return (
-    <React.Fragment>
+    <div className="google-map-container">
       <Map
         google={props.google}
         containerStyle={{
@@ -111,12 +111,12 @@ export const MapContainer = props => {
       </Map>
       {props.autocomplete && (
         <Autocomplete
-          className="title-input"
+          className="autocomplete-input"
           onPlaceSelected={onPlaceSelected}
           types={['address']}
         />
       )}
-    </React.Fragment>
+    </div>
   );
 };
 
