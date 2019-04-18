@@ -69,7 +69,8 @@ const SignUpFormBase = props => {
               phoneNumber,
               photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT,
               transactions,
-              myBooks
+              myBooks,
+              items: []
             },
             {merge: true}
           );

@@ -46,7 +46,8 @@ const SignInFacebookBase = props => {
               phoneNumber: '',
               photoUrl: socialAuthUser.user.photoURL,
               transactions: [],
-              myBooks: []
+              myBooks: [],
+              items: []
             },
             {merge: true}
           );
