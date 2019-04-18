@@ -22,7 +22,6 @@ const SignUpFormBase = props => {
   const initialFormValues = () => ({
     username: '',
     email: '',
-    // phoneNumber: '',
     location: '',
     passwordOne: '',
     passwordTwo: ''
@@ -121,7 +120,6 @@ const SignUpFormBase = props => {
             onChange={handleChange}
           />
         </Validator>
-
         {error.email && <span className="validation-error">{error.email}</span>}
 
         <Validator
@@ -138,7 +136,6 @@ const SignUpFormBase = props => {
           />
         </Validator>
 
-        {/* Use Google Maps API to find location */}
         {error.location && (
           <span className="validation-error">{error.location}</span>
         )}
@@ -208,7 +205,7 @@ SignUpFormBase.propTypes = {
 
 const SignUpLink = () => (
   <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Register</Link>
+    Don't have an account? <Link to={ROUTES.SIGN_UP}>Register</Link>{' '}
   </p>
 );
 

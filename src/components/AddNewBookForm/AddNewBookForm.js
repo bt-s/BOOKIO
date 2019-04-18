@@ -43,9 +43,6 @@ const AddNewBookFormBase = props => {
     lon: 0
   });
 
-  const [progressStyle, setProgressStyle] = useState('off');
-  const [error, dispatchError] = useReducer(errorReducer, {});
-
   const validationRef = useRef(null);
   let imageUrls = [];
 
@@ -69,8 +66,6 @@ const AddNewBookFormBase = props => {
   };
 
   const getAddress = val => {};
-
-  let imageUrls = [];
 
   const handleImageUploaded = url => {
     imageUrls.push(url);

@@ -9,6 +9,8 @@ import Numeral from 'numeral';
 import RatingStars from '../Books/RatingStars';
 import UserLabel from '../Books/UserLabel';
 
+import {index} from '../Algolia';
+
 const BookItem = props => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleted, setDeleted] = useState(false);
@@ -33,43 +35,45 @@ const BookItem = props => {
     </div>
   );
 
+  const deleteBookItem = e => {
+    e.preventDefault();
+
+    props.firebase
+      .book(props.bookId)
+      .delete()
+      .then(() => {
+        setDeleted(true);
+        index.deleteObject(props.bookId);
+
+        props.firebase
+          .user(props.firebase.getMyUID())
+          .get()
+          .then(doc => {
+            const restItems = doc
+              .data()
+              .items.filter(item => item !== props.bookId);
+          });
+      });
+  };
+
+  const confirmDeleteFunc = e => {
+    e.preventDefault();
+    if (!confirmDelete) {
+      setTimeout(() => setConfirmDelete(false), 5000); // disappear in 5s
+      setConfirmDelete(true);
+    } else {
+      setConfirmDelete(false);
+    }
+  };
+
   const accountPageOnly = (
     <div className="delete-book">
       {confirmDelete && (
-        <button
-          className="delete-confirm-btn"
-          onClick={evt => {
-            evt.preventDefault();
-
-            props.firebase
-              .book(props.bookId)
-              .delete()
-              .then(() => {
-                setDeleted(true);
-                props.firebase
-                  .user(props.firebase.getMyUID())
-                  .get()
-                  .then(doc => {
-                    const restItems = doc
-                      .data()
-                      .items.filter(item => item !== props.bookId);
-                  });
-              });
-          }}>
+        <button className="delete-confirm-btn" onClick={deleteBookItem}>
           Confirm Delete
         </button>
       )}
-      <button
-        className="delete-book-btn"
-        onClick={evt => {
-          evt.preventDefault();
-          if (!confirmDelete) {
-            setTimeout(() => setConfirmDelete(false), 5000); // disappear in 5s
-            setConfirmDelete(true);
-          } else {
-            setConfirmDelete(false);
-          }
-        }}>
+      <button className="delete-book-btn" onClick={confirmDeleteFunc}>
         <FontAwesomeIcon icon="times" />
       </button>
     </div>
