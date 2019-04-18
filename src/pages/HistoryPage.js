@@ -106,14 +106,7 @@ const HistoryPage = props => {
       props.firebase
         .user(props.firebase.getMyUID())
         .get()
-        .then(
-          user =>
-            user.data().transactions && user.data().transactions.length > 0 ? (
-              manageTransactions(user)
-            ) : (
-              <Loader />
-            ) //noTransactionsToShow
-        );
+        .then(user => manageTransactions(user));
       // });
     }
   }
@@ -138,63 +131,65 @@ const HistoryPage = props => {
   };
 
   return gotTransactions ? (
-    <div className="history-page">
-      <div className="filters">
-        <Radio
-          key="lend"
-          id="lend"
-          name="history-type"
-          value="lend"
-          label="Lending"
-          checked={msgType === 'lend'}
-          onChange={() => {
-            setMsgType('lend');
-            localStorage.setItem('history_type', 'lend');
-          }}
-        />
-        <Radio
-          id="give"
-          key="give"
-          name="history-type"
-          value="give"
-          label="Giving"
-          checked={msgType === 'give'}
-          onChange={() => {
-            setMsgType('give');
-            localStorage.setItem('history_type', 'give');
-          }}
-        />
-        <Radio
-          id="borrow"
-          key="borrow"
-          name="history-type"
-          value="borrow"
-          label="Borrowing"
-          checked={msgType === 'borrow'}
-          onChange={() => {
-            setMsgType('borrow');
-            localStorage.setItem('history_type', 'borrow');
-          }}
-        />
-        <Radio
-          id="get"
-          key="get"
-          name="history-type"
-          value="get"
-          label="Getting"
-          checked={msgType === 'get'}
-          onChange={() => {
-            setMsgType('get');
-            localStorage.setItem('history_type', 'get');
-          }}
-        />
-      </div>
-      {gotTransactions && (
+    transactions && transactions.length > 0 ? (
+      <div className="history-page">
+        <div className="filters">
+          <Radio
+            key="lend"
+            id="lend"
+            name="history-type"
+            value="lend"
+            label="Lending"
+            checked={msgType === 'lend'}
+            onChange={() => {
+              setMsgType('lend');
+              localStorage.setItem('history_type', 'lend');
+            }}
+          />
+          <Radio
+            id="give"
+            key="give"
+            name="history-type"
+            value="give"
+            label="Giving"
+            checked={msgType === 'give'}
+            onChange={() => {
+              setMsgType('give');
+              localStorage.setItem('history_type', 'give');
+            }}
+          />
+          <Radio
+            id="borrow"
+            key="borrow"
+            name="history-type"
+            value="borrow"
+            label="Borrowing"
+            checked={msgType === 'borrow'}
+            onChange={() => {
+              setMsgType('borrow');
+              localStorage.setItem('history_type', 'borrow');
+            }}
+          />
+          <Radio
+            id="get"
+            key="get"
+            name="history-type"
+            value="get"
+            label="Getting"
+            checked={msgType === 'get'}
+            onChange={() => {
+              setMsgType('get');
+              localStorage.setItem('history_type', 'get');
+            }}
+          />
+        </div>
         <div className="msg-container">{getMsgOfType(msgType)}</div>
-      )}
-    </div>
+      </div>
+    ) : (
+      noTransactionsToShow()
+    )
   ) : (
-    noTransactionsToShow()
+    <Loader />
   );
 };
 
