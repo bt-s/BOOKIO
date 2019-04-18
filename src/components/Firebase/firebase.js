@@ -144,15 +144,12 @@ class Firebase {
               age: authUser.age,
               email: authUser.email,
               emailVerified: authUser.emailVerified,
-              items: authUser.items,
               location: authUser.location,
-              myBooks: authUser.myBooks,
               phoneNumber: authUser.phoneNumber,
-              photoUrl: authUser.photoUrl,
+              photoUrl: authUser.photoURL,
               providerData: authUser.providerData,
               userName: authUser.userName,
               roles: authUser.roles,
-              transactions: authUser.transactions,
               uid: authUser.uid,
               ...dbUser
             };

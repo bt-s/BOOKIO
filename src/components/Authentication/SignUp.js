@@ -44,10 +44,7 @@ const SignUpFormBase = props => {
   };
 
   const onSubmit = e => {
-    const items = [];
     const roles = [];
-    const transactions = [];
-    const myBooks = [];
     const phoneNumber = null;
     const age = null;
 
@@ -59,7 +56,7 @@ const SignUpFormBase = props => {
         .then(authUser => {
           authUser.user.updateProfile({
             displayName: form.username,
-            photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT
+            photoURL: process.env.REACT_APP_DEFAULT_PORTRAIT
           });
           return props.firebase.user(authUser.user.uid).set(
             {
@@ -69,9 +66,7 @@ const SignUpFormBase = props => {
               location: form.location,
               roles,
               phoneNumber,
-              photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT,
-              transactions,
-              myBooks
+              photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT
             },
             {merge: true}
           );
