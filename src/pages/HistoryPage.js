@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
+import {compose} from 'recompose';
 
 import {withFirebase} from '../components/Firebase';
-
-import Radio from '../components/Button/Radio';
-
 import {RequestMessage} from '../components/History/RequestMessage';
-import {compose} from 'recompose';
 
 import {
   withAuthorization,
@@ -15,6 +13,7 @@ import {
 } from '../components/Session/Session';
 
 import Loader from '../components/Loader/Loader';
+import Radio from '../components/Button/Radio';
 
 const HistoryPage = props => {
   const [msgType, setMsgType] = useState(
@@ -217,6 +216,16 @@ const HistoryPage = props => {
   ) : (
     <Loader />
   );
+};
+
+HistoryPage.propTypes = {
+  authUser: PropTypes.object,
+  books: PropTypes.array,
+  dispatch: PropTypes.func,
+  firebase: PropTypes.object,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default compose(

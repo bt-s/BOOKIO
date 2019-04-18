@@ -63,6 +63,16 @@ const BookDetailContainer = props => {
   );
 };
 
+BookDetailContainer.propTypes = {
+  authUser: PropTypes.object,
+  books: PropTypes.array,
+  dispatch: PropTypes.func,
+  firebase: PropTypes.object,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
+};
+
 const BookDetail = props => {
   const [requestBtnTxt, setRequestBtnTxt] = useState('Request');
   const {book, owner, firebase, bookId} = props;
@@ -204,19 +214,15 @@ const BookDetail = props => {
 };
 
 BookDetail.propTypes = {
-  imageUrls: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  userProfile: PropTypes.string,
-  rating: PropTypes.string,
-  reviewTotal: PropTypes.string,
-  author: PropTypes.string,
-  timeToPick: PropTypes.string,
-  pickupLocation: PropTypes.string
+  book: PropTypes.array,
+  owner: PropTypes.array,
+  firebase: PropTypes.object,
+  bookId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
   books: state.booksState.books,
   authUser: state.sessionState.authUser
 });
+
 export default connect(mapStateToProps)(withFirebase(BookDetailContainer));

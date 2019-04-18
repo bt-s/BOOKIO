@@ -175,8 +175,15 @@ const EditProfilePage = props => {
     </div>
   );
 };
+
 EditProfilePage.propTypes = {
-  authUser: PropTypes.object
+  authUser: PropTypes.object,
+  dispatch: PropTypes.func,
+  firebase: PropTypes.object,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+  onSetAuthUser: PropTypes.func
 };
 
 const condition = authUser => !!authUser;

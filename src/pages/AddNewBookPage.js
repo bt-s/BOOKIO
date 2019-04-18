@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import AddNewBookForm from '../components/AddNewBookForm/AddNewBookForm';
 import DragAndDrop from '../components/AddNewBookForm/DragAndDrop';
 import {connect} from 'react-redux';
@@ -92,6 +93,18 @@ const AddNewBookBase = props => {
       <AddNewBookForm files={files} />
     </div>
   );
+};
+
+AddNewBookBase.propTypes = {
+  addNewUserBook: PropTypes.func,
+  authUser: PropTypes.object,
+  dispatch: PropTypes.func,
+  firebase: PropTypes.object,
+  history: PropTypes.object,
+  isLoading: PropTypes.bool,
+  location: PropTypes.object,
+  match: PropTypes.object,
+  newBook: PropTypes.object
 };
 
 const mapStateToProps = state => {
