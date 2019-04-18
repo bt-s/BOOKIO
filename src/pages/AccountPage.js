@@ -17,23 +17,11 @@ import SearchResults from '../components/Books/SearchResults';
 
 import {index} from '../components/Algolia';
 
+const _ = require('lodash/core');
+
 const AccountPage = props => {
   const [myBooks, setMyBooks] = useState([]);
-  // const onSearchBooks = uid => {
-  //   index
-  //     .search({
-  //       query: uid
-  //     })
-  //     .then(res => {
-  //       setMyBooks(res.hits);
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // };
 
-  // Agolia is not update accordingly after delete
-  // Have to use this
   const fetchUserInventory = uid => {
     props.firebase
       .user(uid)
@@ -89,6 +77,7 @@ const AccountPage = props => {
           </Link>
         </div>
       </div>
+
       <div className="line-break" />
       <div className="my-books-section">
         <h2>My Books</h2>
@@ -96,9 +85,9 @@ const AccountPage = props => {
           <span>Add Book</span>
         </Link>
       </div>
-      {myBooks && (
+      {myBooks ? (
         <SearchResults books={myBooks.reverse()} accountPage={true} />
-      )}
+      ) : <h2>You haven't added any books yet.</h2>}
     </div>
   );
 };
