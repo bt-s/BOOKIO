@@ -64,9 +64,10 @@ const SignUpFormBase = props => {
               location: form.location,
               // phoneNumber: form.Number,
               roles,
-              items: [],
+              items: [], // this name is not good, it represents the books u requested, should be renamed
               photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT,
-              transactions: []
+              transactions: [],
+              myBooks: [] // all books belong to me
             },
             {merge: true}
           );
