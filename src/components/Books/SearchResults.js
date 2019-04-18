@@ -5,9 +5,11 @@ import BookItem from '../../components/BookItem/BookItem';
 
 const SearchResults = props => (
   <div className="search-result">
-    {props.books.map((book, ix) => (
-      <div key={ix} className="book-item-container">
+    {props.books.map((book, ix) => {
+      return (
+        // <div className="book-item-container">
         <BookItem
+          key={ix}
           bookId={book.id || book.objectID}
           bookImgSrc={book.imageUrls ? book.imageUrls[0] : book.imageSource}
           bookTitle={book.title}
@@ -20,8 +22,9 @@ const SearchResults = props => (
           rating={book.rating}
           accountPage={props.accountPage}
         />
-      </div>
-    ))}
+        // </div>
+      );
+    })}
   </div>
 );
 

@@ -44,7 +44,7 @@ const SearchBase = props => {
       })
       .then(res => {
         !_.isEmpty(res.hits)
-          ? props.storeBooks(withDistance(res.hits, props.coords))
+          ? props.storeBooks(withDistance(res.hits.reverse(), props.coords))
           : props.storeBooks();
       });
 
