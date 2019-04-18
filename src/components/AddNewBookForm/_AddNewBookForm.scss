@@ -11,18 +11,22 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     align-content: center;
     position: fixed;
     z-index: 10;
-    left: 30%;
     top: 40%;
     background: black;
-    width: 40%;
-    height: 15%;
+    width: 300px;
+    height: 150px;
     opacity: 0.6;
 
     > h3 {
-      margin: 40px;
+      padding: $padding-xs;
       color: white;
-      font-size: 25px;
+      font-size: 12px;
       align-self: center;
+
+      @include media-breakpoint(xs) {
+        padding: $padding-sm;
+        font-size: 18px;
+      }
     }
   }
 
