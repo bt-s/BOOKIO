@@ -37,9 +37,10 @@ const Autocomplete = props => {
   };
 
   const onClick = e => {
+    const regex = /by .*/gi;
     setActiveSuggestion(0);
     setShowSuggestions(false);
-    setUserInput(e.currentTarget.innerText);
+    setUserInput(e.currentTarget.innerText.replace(regex, ''));
 
     if (getUserPick) getUserPick(activeSuggestion);
   };
