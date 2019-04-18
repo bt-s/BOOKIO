@@ -79,6 +79,7 @@ const AddNewBookFormBase = props => {
   };
 
   const storeData = () => {
+    setProgressStyle('on');
     firebase
       .books()
       .add({
@@ -130,9 +131,20 @@ const AddNewBookFormBase = props => {
       });
   };
 
+  const validate_image = () => {
+    if (files.length === 0) {
+      let image = '*Book Image is required';
+      dispatchError({image});
+    } else {
+      dispatchError({image: ''});
+    }
+  };
+
   const handleSubmit = e => {
     addNewUserBook('loading');
     const allErrors = validationRef.current.validate();
+    allErrors.image = error.image;
+    validate_image();
     if (Object.values(allErrors).join('') === '') {
       console.warn('[ADD_NEW_BOOK] Calling API to add New Book');
       storeData();
@@ -141,6 +153,8 @@ const AddNewBookFormBase = props => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(parseLocation);
+    dispatchError({image: ''});
+    addNewUserBook('loading');
   }, []);
 
   return (
@@ -149,6 +163,13 @@ const AddNewBookFormBase = props => {
         <h1>Upload succed, redirecting to homepage.</h1>
       </div>
       <Validation ref={validationRef}>
+        {error.image !== '' && (
+          <span
+            id="error-image"
+            className="validation-error margin-bottom-10px">
+            {error.image}
+          </span>
+        )}
         <div className="two-col">
           <div className="subtitle">Title</div>
           <Validator
@@ -239,7 +260,6 @@ const AddNewBookFormBase = props => {
             className="btn btn-black btn-publish" // this is not a regular button
             onClick={e => {
               e.preventDefault();
-              setProgressStyle('on');
               handleSubmit(e);
             }}>
             Publish{' '}

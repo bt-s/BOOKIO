@@ -22,6 +22,12 @@ const TitleForm = props => {
     });
   };
 
+  const getUserInput = val => {
+    props.changeNewBook({
+      title: val
+    });
+  };
+
   return (
     <React.Fragment>
       <Autocomplete
@@ -39,6 +45,7 @@ const TitleForm = props => {
         )}
         getUserPick={handleUserPick}
         placeholder="Book Title"
+        getUserInput={getUserInput}
       />
     </React.Fragment>
   );

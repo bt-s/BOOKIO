@@ -72,32 +72,45 @@ const AddNewBookBase = props => {
 
   return (
     <div className="add-book-page">
-      <div className="add-book-page-header">
-        <h1 className="add-book-page-title"> Share New Book </h1>
-        <Link to={ROUTES.BOOKS} className="btn btn-orange">
-          Go to Books Discovery
-        </Link>
-      </div>
-      <div className="subtitle">Images</div>
-      <div className="image-box-container">
-        <ReactCSSTransitionGroup
-          transitionName="image-box-transition"
-          transitionEnterTimeout={700}
-          transitionLeaveTimeout={700}>
-          {files.map((file, i) => {
-            return ImageBox(file, i);
-          })}
-        </ReactCSSTransitionGroup>
-        <DragAndDrop handleDrop={handleDrop} />
-      </div>
-      <AddNewBookForm files={files} />
+      {/* {props.isLoading ? ( */}
+      <React.Fragment>
+        <div className="add-book-page-header">
+          <h1 className="add-book-page-title"> Share New Book </h1>
+          <Link to={ROUTES.BOOKS} className="btn btn-orange">
+            Go to Books Discovery
+          </Link>
+        </div>
+        <div className="subtitle">Images</div>
+        <div className="image-box-container">
+          <ReactCSSTransitionGroup
+            transitionName="image-box-transition"
+            transitionEnterTimeout={700}
+            transitionLeaveTimeout={700}>
+            {files.map((file, i) => {
+              return ImageBox(file, i);
+            })}
+          </ReactCSSTransitionGroup>
+          <DragAndDrop handleDrop={handleDrop} />
+        </div>
+        <AddNewBookForm files={files} />
+      </React.Fragment>
+      {/* ) : (
+        <div>
+          <img
+            alt="loading"
+            src={require('../images/loading_preview_green.gif')}
+          />
+          <h1>Uploading....</h1>
+        </div>
+      )} */}
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    newBook: state.userBookState.newBook
+    newBook: state.userBookState.newBook,
+    isLoading: state.userBookState.isLoading
   };
 };
 
