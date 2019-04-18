@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
+import {withFirebase} from '../Firebase';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Numeral from 'numeral';
 
@@ -9,6 +10,9 @@ import RatingStars from '../Books/RatingStars';
 import UserLabel from '../Books/UserLabel';
 
 const BookItem = props => {
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleted, setDeleted] = useState(false);
+
   const parseDistance = distance => {
     const dist =
       parseInt(distance) > 0
@@ -29,9 +33,59 @@ const BookItem = props => {
     </div>
   );
 
+  const accountPageOnly = (
+    <div className="delete-book">
+      {confirmDelete && (
+        <button
+          className="delete-confirm-btn"
+          onClick={evt => {
+            evt.preventDefault();
+
+            props.firebase
+              .book(props.bookId)
+              .delete()
+              .then(() => {
+                setDeleted(true);
+                props.firebase
+                  .user(props.firebase.getMyUID())
+                  .get()
+                  .then(doc => {
+                    const restItems = doc
+                      .data()
+                      .items.filter(item => item !== props.bookId);
+                  });
+              });
+          }}>
+          Confirm Delete
+        </button>
+      )}
+      <button
+        className="delete-book-btn"
+        onClick={evt => {
+          evt.preventDefault();
+          if (!confirmDelete) {
+            setTimeout(() => setConfirmDelete(false), 5000); // disappear in 5s
+            setConfirmDelete(true);
+          } else {
+            setConfirmDelete(false);
+          }
+        }}>
+        <FontAwesomeIcon icon="times" />
+      </button>
+    </div>
+  );
+
   return (
-    <Link to={'/detail/' + props.bookId}>
-      <div className="book-item-img-container">
+    <Link
+      to={'/detail/' + props.bookId}
+      className={'book-item-container' + (deleted ? ' hide' : '')}>
+      {props.accountPage && accountPageOnly}
+      <div
+        className={
+          confirmDelete
+            ? 'book-item-img-container dim-this'
+            : 'book-item-img-container'
+        }>
         <img
           className="book-item-img"
           src={props.bookImgSrc}
@@ -68,4 +122,4 @@ BookItem.propTypes = {
   rating: PropTypes.number
 };
 
-export default BookItem;
+export default withFirebase(BookItem);

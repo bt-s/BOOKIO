@@ -46,6 +46,10 @@ const SignUpFormBase = props => {
 
   const onSubmit = e => {
     const roles = [];
+    const transactions = [];
+    const myBooks = [];
+    const phoneNumber = null;
+    const age = null;
 
     const allErrors = validationRef.current.validate();
 
@@ -59,14 +63,15 @@ const SignUpFormBase = props => {
           });
           return props.firebase.user(authUser.user.uid).set(
             {
-              username: form.username,
+              age,
               email: form.email,
+              username: form.username,
               location: form.location,
-              // phoneNumber: form.Number,
               roles,
-              items: [],
+              phoneNumber,
               photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT,
-              transactions: []
+              transactions,
+              myBooks
             },
             {merge: true}
           );
@@ -74,7 +79,6 @@ const SignUpFormBase = props => {
         .then(authUser => {
           form.username = '';
           form.email = '';
-          // form.phoneNumber = '';
           form.location = '';
           form.passwordOne = '';
           form.passwordTwo = '';

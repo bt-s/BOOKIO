@@ -9,7 +9,10 @@ import {compose} from 'recompose';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
-
+import {
+  withAuthorization,
+  withEmailVerification
+} from '../components/Session/Session';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const AddNewBookBase = props => {
@@ -94,14 +97,14 @@ const AddNewBookBase = props => {
 
 const mapStateToProps = state => {
   return {
-    newBook: state.userBookState.newBook,
+    newBook: state.userBookState.newBook
   };
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      addNewUserBook,
+      addNewUserBook
     },
     dispatch
   );
@@ -114,4 +117,7 @@ const AddNewBook = compose(
   )
 );
 
-export default AddNewBook(AddNewBookBase);
+export default compose(
+  withAuthorization(authUser => !!authUser),
+  withEmailVerification
+)(AddNewBook(AddNewBookBase));

@@ -3,7 +3,12 @@ import {withFirebase} from '../components/Firebase';
 
 import Radio from '../components/Button/Radio';
 import {RequestMessage} from '../components/History/RequestMessage';
+import {compose} from 'recompose';
 
+import {
+  withAuthorization,
+  withEmailVerification
+} from '../components/Session/Session';
 import Loader from '../components/Loader/Loader';
 
 const HistoryPage = props => {
@@ -160,4 +165,8 @@ const HistoryPage = props => {
   );
 };
 
-export default withFirebase(HistoryPage);
+export default compose(
+  withAuthorization(authUser => !!authUser),
+  withEmailVerification,
+  withFirebase
+)(HistoryPage);
