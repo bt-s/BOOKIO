@@ -37,6 +37,13 @@
   }
 }
 
+.dim-this {
+  filter: brightness(70%);
+}
+.hide {
+  display: none;
+}
+
 .book-item-header {
   display: flex;
   flex-direction: column;

@@ -11,6 +11,7 @@ import UserLabel from '../Books/UserLabel';
 
 const BookItem = props => {
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleted, setDeleted] = useState(false);
 
   const parseDistance = distance => {
     const dist =
@@ -43,7 +44,7 @@ const BookItem = props => {
               .book(props.bookId)
               .delete()
               .then(() => {
-                console.log('delete book', props.bookId);
+                setDeleted(true);
                 props.firebase
                   .user(props.firebase.getMyUID())
                   .get()
@@ -51,7 +52,6 @@ const BookItem = props => {
                     const restItems = doc
                       .data()
                       .items.filter(item => item !== props.bookId);
-                    console.log('rest', restItems);
                   });
               });
           }}>
@@ -75,7 +75,9 @@ const BookItem = props => {
   );
 
   return (
-    <Link to={'/detail/' + props.bookId}>
+    <Link
+      to={'/detail/' + props.bookId}
+      className={'book-item-container' + (deleted ? ' hide' : '')}>
       {props.accountPage && accountPageOnly}
       <div
         className={
