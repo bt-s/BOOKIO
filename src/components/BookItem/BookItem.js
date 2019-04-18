@@ -9,6 +9,8 @@ import Numeral from 'numeral';
 import RatingStars from '../Books/RatingStars';
 import UserLabel from '../Books/UserLabel';
 
+import {index} from '../Algolia';
+
 const BookItem = props => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleted, setDeleted] = useState(false);
@@ -41,6 +43,8 @@ const BookItem = props => {
       .delete()
       .then(() => {
         setDeleted(true);
+        index.deleteObject(props.bookId);
+
         props.firebase
           .user(props.firebase.getMyUID())
           .get()
