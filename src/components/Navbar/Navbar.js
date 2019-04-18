@@ -50,7 +50,12 @@ const accountMenuList = [
   },
   {
     id: 5,
-    title: <SignOut />,
+    title: (
+      <React.Fragment>
+        <FontAwesomeIcon icon="sign-out-alt" />
+        <SignOut />
+      </React.Fragment>
+    ),
     classes: 'link section-ending'
   }
 ];

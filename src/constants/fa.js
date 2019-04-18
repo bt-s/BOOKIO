@@ -15,7 +15,8 @@ import {
   faCog,
   faEdit,
   faHome,
-  faBirthdayCake
+  faBirthdayCake,
+  faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 import {library} from '@fortawesome/fontawesome-svg-core';
@@ -37,7 +38,8 @@ library.add(
   faCog,
   faEdit,
   faHome,
-  faBirthdayCake
+  faBirthdayCake,
+  faSignOutAlt
 );
 
 export default library;
