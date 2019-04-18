@@ -1,8 +1,18 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
+
 import {withFirebase} from '../components/Firebase';
 
 import Radio from '../components/Button/Radio';
+
 import {RequestMessage} from '../components/History/RequestMessage';
+import {compose} from 'recompose';
+
+import {
+  withAuthorization,
+  withEmailVerification
+} from '../components/Session/Session';
 
 import Loader from '../components/Loader/Loader';
 
@@ -14,6 +24,78 @@ const HistoryPage = props => {
   const [transactions, setTransactions] = useState([]);
   const [tictok, setTictok] = useState(0);
 
+  const manageTransactions = user => {
+    Promise.all(
+      user.data().transactions.map(id =>
+        props.firebase
+          .transaction(id)
+          .get()
+          .then(transac => {
+            transac = transac.data();
+            transac.id = id;
+            // calc transaction type
+            if (transac.type === 'lend') {
+              transac.type =
+                transac.providerID === props.firebase.getMyUID()
+                  ? 'lend'
+                  : 'borrow';
+            } else {
+              transac.type =
+                transac.providerID === props.firebase.getMyUID()
+                  ? 'give'
+                  : 'get';
+            }
+
+            return Promise.all([
+              props.firebase
+                // get the user other than me
+                .user(
+                  transac.providerID === props.firebase.getMyUID()
+                    ? transac.consumerID
+                    : transac.providerID
+                )
+                .get()
+                .then(
+                  // inject the other user's data
+                  user => (transac.involvedUser = user.data())
+                ),
+              props.firebase
+                .book(transac.itemID)
+                .get()
+                .then(
+                  // inject book data
+                  book => (transac.book = book.data())
+                )
+            ]).then(bookAndUser => {
+              return transac;
+            });
+          })
+      )
+    ).then(transacsWithData => {
+      setTransactions(transacsWithData);
+      setGotTransactions(true);
+    });
+  };
+
+  const noTransactionsToShow = () => (
+    <div className="no-transactions">
+      <p>
+        It seems like you have not requested any books.nd that no one has
+        requested books from you. As soon as you have made a request, or a
+        request has been made to you, information about such requests will be
+        available on this page.
+      </p>
+      <div className="no-transaction-buttons">
+        <Link to={ROUTES.BOOKS} className="btn btn-orange btn-no-transac">
+          <span>Find Books</span>
+        </Link>
+        <Link className="btn btn-black btn-no-transac" to={ROUTES.ADD_BOOK}>
+          <span>Add Book</span>
+        </Link>
+      </div>
+    </div>
+  );
+
   if (!gotTransactions) {
     if (!props.firebase.getMyUID()) {
       // use this to keep re-rendering until firebase mounted
@@ -24,58 +106,14 @@ const HistoryPage = props => {
       props.firebase
         .user(props.firebase.getMyUID())
         .get()
-        .then(user => {
-          Promise.all(
-            user.data().transactions.map(id =>
-              props.firebase
-                .transaction(id)
-                .get()
-                .then(transac => {
-                  transac = transac.data();
-                  transac.id = id;
-                  // calc transaction type
-                  if (transac.type === 'lend') {
-                    transac.type =
-                      transac.providerID === props.firebase.getMyUID()
-                        ? 'lend'
-                        : 'borrow';
-                  } else {
-                    transac.type =
-                      transac.providerID === props.firebase.getMyUID()
-                        ? 'give'
-                        : 'get';
-                  }
-
-                  return Promise.all([
-                    props.firebase
-                      // get the user other than me
-                      .user(
-                        transac.providerID === props.firebase.getMyUID()
-                          ? transac.consumerID
-                          : transac.providerID
-                      )
-                      .get()
-                      .then(
-                        // inject the other user's data
-                        user => (transac.involvedUser = user.data())
-                      ),
-                    props.firebase
-                      .book(transac.itemID)
-                      .get()
-                      .then(
-                        // inject book data
-                        book => (transac.book = book.data())
-                      )
-                  ]).then(bookAndUser => {
-                    return transac;
-                  });
-                })
-            )
-          ).then(transacsWithData => {
-            setTransactions(transacsWithData);
-            setGotTransactions(true);
-          });
-        });
+        .then(
+          user =>
+            user.data().transactions && user.data().transactions.length > 0 ? (
+              manageTransactions(user)
+            ) : (
+              <Loader />
+            ) //noTransactionsToShow
+        );
       // });
     }
   }
@@ -156,8 +194,12 @@ const HistoryPage = props => {
       )}
     </div>
   ) : (
-    <Loader />
+    noTransactionsToShow()
   );
 };
 
-export default withFirebase(HistoryPage);
+export default compose(
+  withAuthorization(authUser => !!authUser),
+  withEmailVerification,
+  withFirebase
+)(HistoryPage);

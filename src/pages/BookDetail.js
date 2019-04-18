@@ -64,10 +64,11 @@ const BookDetailContainer = props => {
 };
 
 const BookDetail = props => {
+  const [requestBtnTxt, setRequestBtnTxt] = useState('Request');
   const {book, owner, firebase, bookId} = props;
+
   const requestBook = () => {
     const consumerID = firebase.getMyUID();
-
     firebase
       .user(consumerID)
       .get()
@@ -76,36 +77,40 @@ const BookDetail = props => {
           user.data().items &&
           user.data().items.filter(item => item === bookId);
 
-        !_.isEmpty(item)
-          ? alert('You have already requested this item')
-          : firebase
-              .transactions()
-              .add({
-                providerID: book.ownerId,
-                consumerID: consumerID,
-                status: 'Ongoing',
-                requestTime: new Date().getTime(),
-                itemID: bookId,
-                type: book.type, // lend or give
-              })
-              .then(transac => {
-                firebase.user(consumerID).update({
-                  transactions: (user.data().transactions || []).concat(
-                    transac.id
-                  ),
-                  // items I requested
-                  items: (user.data().items || []).concat(bookId),
-                });
-                firebase.user(book.ownerId).update({
-                  transactions: (user.data().transactions || []).concat(
-                    transac.id
-                  ),
-                });
-                alert('You have successfully requested this item');
-              })
-              .catch(err => {
-                console.error('Request failed', err);
+        if (!_.isEmpty(item)) {
+          setRequestBtnTxt('Requested');
+          // alert('You have already requested this item');
+        } else {
+          firebase
+            .transactions()
+            .add({
+              providerID: book.ownerId,
+              consumerID: consumerID,
+              status: 'Ongoing',
+              requestTime: new Date().getTime(),
+              itemID: bookId,
+              type: book.type // lend or give
+            })
+            .then(transac => {
+              setRequestBtnTxt('Requested');
+              firebase.user(consumerID).update({
+                transactions: (user.data().transactions || []).concat(
+                  transac.id
+                ),
+                // items I requested
+                items: (user.data().items || []).concat(bookId)
               });
+              firebase.user(book.ownerId).update({
+                transactions: (user.data().transactions || []).concat(
+                  transac.id
+                )
+              });
+              // alert('You have successfully requested this item');
+            })
+            .catch(err => {
+              console.error('Request failed', err);
+            });
+        }
       });
   };
 
@@ -135,7 +140,7 @@ const BookDetail = props => {
         <GoogleMap
           style={{
             width: '250px',
-            height: '350px',
+            height: '350px'
           }}
           coord={book.location}
           initCoord={book.location}
@@ -183,9 +188,9 @@ const BookDetail = props => {
         <div className="header-pickup">Pickup Location </div>
         {googleMap}
         {ownerDetails}
-        {firebase.getMyUID() !== book.ownerId && (
+        {firebase.getMyUID() && firebase.getMyUID() !== book.ownerId && (
           <button className="btn btn-black" onClick={requestBook}>
-            Request
+            {requestBtnTxt}
           </button>
         )}
       </div>
@@ -202,11 +207,11 @@ BookDetail.propTypes = {
   reviewTotal: PropTypes.string,
   author: PropTypes.string,
   timeToPick: PropTypes.string,
-  pickupLocation: PropTypes.string,
+  pickupLocation: PropTypes.string
 };
 
 const mapStateToProps = state => ({
   books: state.booksState.books,
-  authUser: state.sessionState.authUser,
+  authUser: state.sessionState.authUser
 });
 export default connect(mapStateToProps)(withFirebase(BookDetailContainer));

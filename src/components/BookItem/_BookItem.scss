@@ -37,6 +37,13 @@
   }
 }
 
+.dim-this {
+  filter: brightness(70%);
+}
+.hide {
+  display: none;
+}
+
 .book-item-header {
   display: flex;
   flex-direction: column;
@@ -60,6 +67,48 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+}
+
+.delete-book {
+  .delete-confirm-btn {
+    border-radius: 6px;
+    height: 40px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 10%;
+    right: 0;
+    z-index: 30;
+
+    background: rgb(212, 71, 71);
+    &:hover {
+      cursor: pointer;
+      background: darken(rgb(212, 71, 71), 8%);
+      transition: all 0.3s ease;
+    }
+    &:active {
+      background: darken(rgb(212, 71, 71), 25%);
+      transition: all 0.3s ease;
+    }
+  }
+  .delete-book-btn {
+    height: 32px;
+    width: 32px;
+    font-size: 28px;
+    border: none;
+    font-weight: 100;
+    background: no-repeat;
+    color: #aaaaaa;
+    position: absolute;
+    right: 2px;
+    z-index: 50;
+    &:hover {
+      cursor: pointer;
+      color: rgb(212, 71, 71);
+    }
   }
 }
 

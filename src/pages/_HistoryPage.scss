@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     padding: 20px 0 0;
-    border-bottom: 1px solid $white-dimmer;
+    // border-bottom: 1px solid $white-dimmer;
     padding-bottom: 4px;
 
     .radio-styled > .radio-label {
@@ -15,4 +15,43 @@
       }
     }
   }
+}
+
+.no-transactions {
+  padding: $padding-lg 0;
+  max-width: 450px;
+}
+
+.no-transaction-buttons {
+  display: flex;
+  flex-direction: column;
+  padding-top: $padding-xxs;
+
+  @include media-breakpoint(xs) {
+    flex-direction: row;
+  }
+
+  a {
+    &:first-child {
+      margin-bottom: $padding-xs;
+
+      @include media-breakpoint(xs) {
+        margin-right: $padding-sm;
+      }
+    }
+  }
+}
+
+.btn-no-transac {
+  position: relative;
+  align-self: auto;
+  margin: 0;
+  border-radius: 30px;
+  height: 40px;
+  box-shadow: none;
+  min-width: 130px;
+  font-size: 15px;
+  font-weight: normal;
+  bottom: auto;
+  right: auto;
 }

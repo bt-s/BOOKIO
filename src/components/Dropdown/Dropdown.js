@@ -37,8 +37,8 @@ const Dropdown = props => {
         <ul
           className="dd-list"
           onClick={e => {
-            e.stopPropagation();
-            toggleMenu();
+            // e.stopPropagation();
+            hideDropdownMenu();
           }}>
           {props.items.map(item => (
             <li

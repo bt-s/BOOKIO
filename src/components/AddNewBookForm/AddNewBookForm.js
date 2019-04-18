@@ -98,6 +98,14 @@ const AddNewBookFormBase = props => {
         updatedAt: new Date().getTime()
       })
       .then(res => {
+        firebase
+          .user(firebase.getMyUID())
+          .get()
+          .then(doc => {
+            firebase
+              .user(firebase.getMyUID())
+              .update({myBooks: [...doc.data().myBooks, res.id]});
+          });
         Promise.all(
           files.map(file =>
             uploadPictureToFirebase(
