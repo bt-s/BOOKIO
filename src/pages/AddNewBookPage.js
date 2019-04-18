@@ -62,7 +62,6 @@ const AddNewBookBase = props => {
         onDragStart={e => onDragStart(e, i)}
         onDragOver={() => onDragOver(i)}>
         <img src={URL.createObjectURL(file)} alt={'to be uploaded'} />
-        <div className="text">{file.name}</div>
         <button onClick={() => removeFiles(i)}>
           <FontAwesomeIcon icon="times-circle" />
         </button>
@@ -72,37 +71,25 @@ const AddNewBookBase = props => {
 
   return (
     <div className="add-book-page">
-      {/* {props.isLoading ? ( */}
-      <React.Fragment>
-        <div className="add-book-page-header">
-          <h1 className="add-book-page-title"> Share New Book </h1>
-          <Link to={ROUTES.BOOKS} className="btn btn-orange">
-            Go to Books Discovery
-          </Link>
-        </div>
-        <div className="subtitle">Images</div>
-        <div className="image-box-container">
-          <ReactCSSTransitionGroup
-            transitionName="image-box-transition"
-            transitionEnterTimeout={700}
-            transitionLeaveTimeout={700}>
-            {files.map((file, i) => {
-              return ImageBox(file, i);
-            })}
-          </ReactCSSTransitionGroup>
-          <DragAndDrop handleDrop={handleDrop} />
-        </div>
-        <AddNewBookForm files={files} />
-      </React.Fragment>
-      {/* ) : (
-        <div>
-          <img
-            alt="loading"
-            src={require('../images/loading_preview_green.gif')}
-          />
-          <h1>Uploading....</h1>
-        </div>
-      )} */}
+      <div className="add-book-page-header">
+        <h1 className="add-book-page-title"> Share New Book </h1>
+        <Link to={ROUTES.BOOKS} className="btn btn-orange">
+          Go to Books Discovery
+        </Link>
+      </div>
+      <div className="subtitle">Images</div>
+      <div className="image-box-container">
+        <ReactCSSTransitionGroup
+          transitionName="image-box-transition"
+          transitionEnterTimeout={700}
+          transitionLeaveTimeout={700}>
+          {files.map((file, i) => {
+            return ImageBox(file, i);
+          })}
+        </ReactCSSTransitionGroup>
+        <DragAndDrop handleDrop={handleDrop} />
+      </div>
+      <AddNewBookForm files={files} />
     </div>
   );
 };
@@ -115,12 +102,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      addNewUserBook
-    },
-    dispatch
-  );
+  bindActionCreators({addNewUserBook}, dispatch);
 
 const AddNewBook = compose(
   withFirebase,
