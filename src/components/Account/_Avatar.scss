@@ -22,6 +22,9 @@
 }
 
 .change-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   position: relative;
   bottom: 20%;
   left: 10%;
