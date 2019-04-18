@@ -5,24 +5,28 @@ import BookItem from '../../components/BookItem/BookItem';
 
 const SearchResults = props => (
   <div className="search-result">
-    {props.books.map((book, ix) => (
-      // <div className="book-item-container">
-      <BookItem
-        key={ix}
-        bookId={book.id || book.objectID}
-        bookImgSrc={book.imageUrls ? book.imageUrls[0] : book.imageSource}
-        bookTitle={book.title}
-        bookDescription={book.description}
-        type={book.type}
-        userAvatar={book.avatar}
-        userName={book.owner}
-        authorName={book.author}
-        distance={book.distance}
-        rating={book.rating}
-        accountPage={props.accountPage}
-      />
-      // </div>
-    ))}
+    {props.books.map((book, ix) => {
+      console.log('a', book);
+
+      return (
+        // <div className="book-item-container">
+        <BookItem
+          key={ix}
+          bookId={book.id || book.objectID}
+          bookImgSrc={book.imageUrls ? book.imageUrls[0] : book.imageSource}
+          bookTitle={book.title}
+          bookDescription={book.description}
+          type={book.type}
+          userAvatar={book.avatar}
+          userName={book.owner}
+          authorName={book.author}
+          distance={book.distance}
+          rating={book.rating}
+          accountPage={props.accountPage}
+        />
+        // </div>
+      );
+    })}
   </div>
 );
 

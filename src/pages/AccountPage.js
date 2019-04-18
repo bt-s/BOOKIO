@@ -40,11 +40,14 @@ const AccountPage = props => {
       .get()
       .then(doc =>
         Promise.all(
-          doc.data().myBooks.map(id =>
-            props.firebase
-              .book(id)
-              .get()
-              .then(book => book.data())
+          doc.data().myBooks.map(
+            id =>
+              props.firebase
+                .book(id)
+                .get()
+                .then(book => {
+                  return book.exists ? {id, ...book.data()} : undefined;
+                }) // insert id
           )
         )
       )
