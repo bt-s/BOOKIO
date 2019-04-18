@@ -61,7 +61,7 @@ const BookItem = props => {
     <div className="delete-book">
       {confirmDelete && (
         <button className="delete-confirm-btn" onClick={deleteBookItem}>
-          Confirm Delete
+          Confirm Deletion
         </button>
       )}
       <button className="delete-book-btn" onClick={confirmDeleteFunc}>
