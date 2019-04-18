@@ -70,7 +70,9 @@ const AccountPage = props => {
           <span>Add Book</span>
         </Link>
       </div>
-      {myBooks && <SearchResults books={myBooks} accountPage={true} />}
+      {myBooks && (
+        <SearchResults books={myBooks.reverse()} accountPage={true} />
+      )}
     </div>
   );
 };

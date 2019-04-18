@@ -30,7 +30,7 @@ const BooksPage = props => {
         filters: filter
       })
       .then(res => {
-        props.storeBooks(withDistance(res.hits, props.coords));
+        props.storeBooks(withDistance(res.hits.reverse(), props.coords));
       })
       .catch(err => {
         console.error(err);
@@ -43,7 +43,7 @@ const BooksPage = props => {
       url: `https://us-central1-bookio.cloudfunctions.net/getBooks`
     })
       .then(res => {
-        props.storeBooks(withDistance(res.data, props.coords));
+        props.storeBooks(withDistance(res.data.reverse(), props.coords));
       })
       .catch(err => {
         console.error(err);
