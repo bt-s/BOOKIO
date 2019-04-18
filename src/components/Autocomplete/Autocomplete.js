@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -29,9 +29,11 @@ const Autocomplete = props => {
     if (fetchSuggestions) {
       fetchSuggestions(userInputVal);
     }
+
     setActiveSuggestion(0);
     setShowSuggestions(true);
     setUserInput(userInputVal);
+
     if (getUserInput) getUserInput(userInputVal);
   };
 
@@ -39,6 +41,7 @@ const Autocomplete = props => {
     setActiveSuggestion(0);
     setShowSuggestions(false);
     setUserInput(e.currentTarget.innerText);
+
     if (getUserPick) getUserPick(activeSuggestion);
   };
 
@@ -131,7 +134,7 @@ const Autocomplete = props => {
     ));
 
   return (
-    <Fragment>
+    <React.Fragment>
       <input
         className={props.className}
         type="text"
@@ -141,7 +144,7 @@ const Autocomplete = props => {
         placeholder={placeholder}
       />
       {suggestionsListComponent}
-    </Fragment>
+    </React.Fragment>
   );
 };
 
