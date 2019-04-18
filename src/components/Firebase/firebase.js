@@ -96,7 +96,7 @@ class Firebase {
     });
 
   // *** Algolia API ***
-  onBooksAddedListener = () =>
+  onBooksAddedListener = change => {
     this.db.collection('books').onSnapshot(snap => {
       snap.docChanges().forEach(change => {
         console.log('on snapshot', change);
@@ -108,7 +108,7 @@ class Firebase {
         }
       });
     });
-
+  };
   addOrUpdateIndexRecord(dataSnapshot) {
     let firebaseObject = dataSnapshot.data();
     // Specify Algolia's objectID using the Firebase object key

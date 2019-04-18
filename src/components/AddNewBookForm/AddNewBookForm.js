@@ -118,15 +118,15 @@ const AddNewBookFormBase = props => {
             )
           )
         ).then(() => {
+          // This line should be investigate further in future.
+          // Now still using old method to search for all books
+          firebase.onBooksAddedListener(res);
           updateImage(res.id);
           setProgressStyle('redirect');
           setTimeout(() => {
             window.location = '/books';
           }, 3000);
         });
-      })
-      .then(res => {
-        firebase.onBooksAddedListener();
       })
       .catch(() => {
         addNewUserBook('error');

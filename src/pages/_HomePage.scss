@@ -174,9 +174,12 @@
 .how-it-works-container {
   display: flex;
   align-items: center;
-  flex-direction: column;
 
-  @include media-breakpoint(sm) {
+  @include smaller-than(sm) {
+    flex-direction: column;
+  }
+
+  @include media-breakpoint(lg) {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
@@ -189,7 +192,7 @@
   padding: 0 0 20px;
 
   @include media-breakpoint(xs) {
-    padding: 0 20px 20px 20px;
+    padding: 12px 20px 20px 20px;
   }
 }
 
@@ -210,7 +213,11 @@
 
 .mockup-platform {
   justify-content: center;
-  max-width: 100%;
+
+  width: 50%;
+  @include smaller-than(sm) {
+    width: 100%;
+  }
 }
 
 .title-section {
