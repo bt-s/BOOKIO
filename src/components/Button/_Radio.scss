@@ -1,4 +1,7 @@
 .radio-styled {
+  width: 300px;
+  text-align: center;
+  border: 1px solid black;
   .radio-label {
     color: $content-text;
     font-size: 20px;
@@ -6,5 +9,6 @@
   input:checked + label {
     color: $theme-dark-color;
     border-bottom: 3px solid $theme-dark-color;
+
   }
 }
