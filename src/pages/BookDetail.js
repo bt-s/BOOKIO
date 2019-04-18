@@ -189,7 +189,12 @@ const BookDetail = props => {
         {googleMap}
         {ownerDetails}
         {firebase.getMyUID() && firebase.getMyUID() !== book.ownerId && (
-          <button className="btn btn-black" onClick={requestBook}>
+          <button
+            className={
+              'btn btn-black' +
+              (requestBtnTxt === 'Requested' ? ' btn-disabled' : '')
+            }
+            onClick={requestBook}>
             {requestBtnTxt}
           </button>
         )}
