@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const Pagination = props => {
@@ -26,7 +26,7 @@ const Pagination = props => {
             }`}>
             <a
               className="page-link"
-              href="#"
+              href={`#page=${page}`}
               onClick={() => props.handleChoose(page - 1)}>
               {page}
             </a>

@@ -16,7 +16,6 @@ import {storeSearchQuery} from '../redux/actions/storeSearchQuery';
 import * as ROUTES from '../constants/routes';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import Button from '../components/Button/Button';
 import Loader from '../components/Loader/Loader';
 import SearchResults from '../components/Books/SearchResults';
 import FilterGroup from '../components/Books/FilterGroup';
@@ -79,14 +78,6 @@ const BooksPage = props => {
   ) {
     getBooks();
   }
-
-  const depaginate = () => {
-    props.decrementPage(props.page);
-  };
-
-  const paginate = () => {
-    props.incrementPage(props.page);
-  };
 
   const handleChoosePage = page => {
     props.goToPage(page);
