@@ -23,6 +23,12 @@ const HistoryPage = props => {
   const [gotTransactions, setGotTransactions] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [tictok, setTictok] = useState(0);
+  const [typeAmount, setTypeAmount] = useState({
+    lend: 0,
+    give: 0,
+    get: 0,
+    borrow: 0
+  });
 
   const manageTransactions = user => {
     Promise.all(
@@ -72,6 +78,18 @@ const HistoryPage = props => {
           })
       )
     ).then(transacsWithData => {
+      // calc amount of different types
+      const tmp = ['lend', 'give', 'borrow', 'get']
+        .map(type => {
+          return {
+            [type]: transacsWithData.filter(transac => type === transac.type)
+              .length
+          };
+        })
+        .reduce((pre, cur) => Object.assign(pre, cur));
+      console.log('dd', tmp);
+
+      setTypeAmount(tmp);
       setTransactions(transacsWithData);
       setGotTransactions(true);
     });
@@ -139,7 +157,9 @@ const HistoryPage = props => {
             id="lend"
             name="history-type"
             value="lend"
-            label="Lending"
+            label={
+              'Lending' + (typeAmount.lend > 0 ? `(${typeAmount.lend})` : '')
+            }
             checked={msgType === 'lend'}
             onChange={() => {
               setMsgType('lend');
@@ -151,7 +171,9 @@ const HistoryPage = props => {
             key="give"
             name="history-type"
             value="give"
-            label="Giving"
+            label={
+              'Giving' + (typeAmount.give > 0 ? `(${typeAmount.give})` : '')
+            }
             checked={msgType === 'give'}
             onChange={() => {
               setMsgType('give');
@@ -163,7 +185,10 @@ const HistoryPage = props => {
             key="borrow"
             name="history-type"
             value="borrow"
-            label="Borrowing"
+            label={
+              'Borrowing' +
+              (typeAmount.borrow > 0 ? `(${typeAmount.borrow})` : '')
+            }
             checked={msgType === 'borrow'}
             onChange={() => {
               setMsgType('borrow');
@@ -175,7 +200,9 @@ const HistoryPage = props => {
             key="get"
             name="history-type"
             value="get"
-            label="Getting"
+            label={
+              'Getting' + (typeAmount.get > 0 ? `(${typeAmount.get})` : '')
+            }
             checked={msgType === 'get'}
             onChange={() => {
               setMsgType('get');
