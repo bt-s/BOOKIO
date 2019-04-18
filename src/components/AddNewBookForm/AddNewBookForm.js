@@ -287,7 +287,7 @@ AddNewBookFormBase.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object,
-  rating: PropTypes.number || PropTypes.string,
+  rating: PropTypes.oneOfType(PropTypes.string, PropTypes.number),
   title: PropTypes.string
 };
 

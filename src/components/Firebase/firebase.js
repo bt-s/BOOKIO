@@ -99,7 +99,11 @@ class Firebase {
   onBooksAddedListener = () =>
     this.db.collection('books').onSnapshot(snap => {
       snap.docChanges().forEach(change => {
+        console.log('on snapshot', change);
+
         if (change.type === 'added') {
+          console.log('in update', change.doc);
+
           this.addOrUpdateIndexRecord(change.doc);
         }
       });
