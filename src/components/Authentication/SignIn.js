@@ -35,8 +35,7 @@ const SignInFacebookBase = props => {
           return props.firebase.user(socialAuthUser.user.uid).set(
             {
               username: socialAuthUser.user.displayName,
-              email: socialAuthUser.user.email,
-              roles: []
+              email: socialAuthUser.user.email
             },
             {merge: true}
           );
@@ -119,7 +118,7 @@ const SignInFormBase = props => {
     <Validation ref={validationRef}>
       <form onSubmit={onSubmit} className="auth-form">
         {error.email && <span className="validation-error">{error.email}</span>}
-       
+
         <Validator
           name="email"
           value={form.email}
@@ -137,7 +136,7 @@ const SignInFormBase = props => {
         {error.password && (
           <span className="validation-error">{error.password}</span>
         )}
-    
+
         <Validator
           name="password"
           value={form.password}

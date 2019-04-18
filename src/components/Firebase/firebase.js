@@ -134,11 +134,6 @@ class Firebase {
           .then(snapshot => {
             const dbUser = snapshot.data();
 
-            // default empty roles
-            if (dbUser && !dbUser.roles) {
-              dbUser.roles = [];
-            }
-
             // merge auth and db user
             authUser = {
               age: authUser.age,
@@ -150,7 +145,6 @@ class Firebase {
               photoUrl: authUser.photoUrl,
               providerData: authUser.providerData,
               userName: authUser.userName,
-              roles: authUser.roles,
               transactions: authUser.transactions,
               uid: authUser.uid,
               ...dbUser

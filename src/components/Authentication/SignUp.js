@@ -45,7 +45,6 @@ const SignUpFormBase = props => {
   };
 
   const onSubmit = e => {
-    const roles = [];
     const transactions = [];
     const myBooks = [];
     const phoneNumber = null;
@@ -67,7 +66,6 @@ const SignUpFormBase = props => {
               email: form.email,
               username: form.username,
               location: form.location,
-              roles,
               phoneNumber,
               photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT,
               transactions,

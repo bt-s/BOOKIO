@@ -39,15 +39,13 @@ const EditProfilePage = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-    const roles = [];
     props.firebase.auth.currentUser
       .updateProfile({
         username: username,
         email: email,
         phoneNumber: phoneNumber,
         location: location,
-        age: age,
-        roles
+        age: age
       })
       .then(function() {
         setUsername(username);
@@ -62,8 +60,7 @@ const EditProfilePage = props => {
             email: email,
             phoneNumber: phoneNumber,
             location: location,
-            age: age,
-            roles
+            age: age
           })
           .then(() => {
             let newUserData = {
