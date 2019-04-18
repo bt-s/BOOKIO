@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {throttle} from '../../helpers/utils';
-
 import {changeNewBook} from '../../redux/actions/addNewUserBook';
 import {fetchBookTitleSuggestions} from '../../redux/actions/bookTitleSuggestions';
+
 import Autocomplete from '../Autocomplete/Autocomplete';
+import {throttle} from '../../helpers/utils';
 
 const TitleForm = props => {
   const getBookTitle = throttle(
@@ -15,6 +17,7 @@ const TitleForm = props => {
 
   const handleUserPick = value => {
     let userPick = props.bookTitleSuggestions[value];
+
     props.changeNewBook({
       title: userPick.bookTitleBare,
       rating: userPick.avgRating,
@@ -47,6 +50,15 @@ const TitleForm = props => {
       getUserInput={getUserInput}
     />
   );
+};
+
+TitleForm.propTypes = {
+  bookTitleSuggestions: PropTypes.array,
+  changeNewBook: PropTypes.func,
+  className: PropTypes.string,
+  fetchBookTitleSuggestions: PropTypes.func,
+  isLoading: PropTypes.bool,
+  newBook: PropTypes.object
 };
 
 const mapStateToProps = state => ({
