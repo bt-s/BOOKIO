@@ -49,6 +49,11 @@ const AccountPage = props => {
     fetchUserInventory(props.authUser.uid);
   }, []);
 
+  const email = props.authUser.email;
+  const phoneNumber = props.authUser.phoneNumber;
+  const location = props.authUser.location;
+  const age = props.authUser.age;
+
   return (
     <div className="account-page">
       <h1>My Profile</h1>
@@ -58,19 +63,25 @@ const AccountPage = props => {
           <span className="username">Hey, I am {props.authUser.username} </span>
           <span className="info-item">
             <FontAwesomeIcon icon="envelope" />
-            {props.authUser.email}
+            <span>{email}</span>
           </span>
           <span className="info-item">
             <FontAwesomeIcon icon="phone" />
-            {props.authUser.phoneNumber}
+            <span>
+              {!phoneNumber === null ? (
+                phoneNumber
+              ) : (
+                <i>Tell us your phone number</i>
+              )}
+            </span>
           </span>
           <span className="info-item">
             <FontAwesomeIcon icon="home" />
-            {props.authUser.location}
+            <span>{location}</span>
           </span>
           <span className="info-item">
             <FontAwesomeIcon icon="birthday-cake" />
-            {props.authUser.age}
+            <span>{!age === null ? age : <i>Tell us your age</i>}</span>
           </span>
           <Link to={ROUTES.EDIT_PROFILE} className="edit-profile">
             Edit Profile
@@ -87,7 +98,9 @@ const AccountPage = props => {
       </div>
       {myBooks ? (
         <SearchResults books={myBooks.reverse()} accountPage={true} />
-      ) : <h2>You haven't added any books yet.</h2>}
+      ) : (
+        <h2>You haven't added any books yet.</h2>
+      )}
     </div>
   );
 };
