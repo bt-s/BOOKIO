@@ -27,3 +27,11 @@ export const STORE_BOOKS = 'STORE_BOOKS';
 
 /* Action Types for store coords state */
 export const STORE_COORDS = 'STORE_COORDS';
+
+/* Action Types for store search query state */
+export const STORE_SEARCH_QUERY = 'STORE_SEARCH_QUERY';
+
+/* Action Types for store page state */
+export const INCREMENT_PAGE = 'INCREMENT_PAGE';
+export const DECREMENT_PAGE = 'DECREMENT_PAGE';
+export const GO_TO_PAGE = 'GO_TO_PAGE';

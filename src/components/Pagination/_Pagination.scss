@@ -1,0 +1,32 @@
+.pagination {
+  display: inline-block;
+}
+
+.pagination li {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  list-style: none;
+}
+
+.page-link {
+  text-decoration: none;
+  list-style: none;
+  font-weight: 700;
+}
+
+.pagination .active {
+  background-color: $dark-green;
+  border-radius: 25px;
+}
+
+.active .page-link {
+  color: $white;
+}
+
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
