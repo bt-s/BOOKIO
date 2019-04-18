@@ -126,11 +126,7 @@ const Autocomplete = props => {
       </ul>
     ) : (
       <div className="suggestions loading">
-        <span>Lo</span>
-        <span>ad</span>
-        <span>in</span>
-        <span>g.</span>
-        <span>..</span>
+        <span>Loading...</span>
       </div>
     ));
 
@@ -144,12 +140,7 @@ const Autocomplete = props => {
         value={userInput}
         placeholder={placeholder}
       />
-      <ReactCSSTransitionGroup
-        transitionName="suggestion-transition"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}>
-        {suggestionsListComponent}
-      </ReactCSSTransitionGroup>
+      {suggestionsListComponent}
     </Fragment>
   );
 };

@@ -29,44 +29,34 @@ const TitleForm = props => {
   };
 
   return (
-    <React.Fragment>
-      <Autocomplete
-        className={props.className}
-        isLoading={props.isLoading}
-        fetchSuggestions={getBookTitle}
-        suggestions={props.bookTitleSuggestions.map(
-          suggestion => suggestion.bookTitleBare
-        )}
-        suggestionsImage={props.bookTitleSuggestions.map(
-          suggestion => suggestion.imageUrl
-        )}
-        suggestionsAuthor={props.bookTitleSuggestions.map(
-          suggestion => suggestion.author.name
-        )}
-        getUserPick={handleUserPick}
-        placeholder="Book Title"
-        getUserInput={getUserInput}
-      />
-    </React.Fragment>
+    <Autocomplete
+      className={props.className}
+      isLoading={props.isLoading}
+      fetchSuggestions={getBookTitle}
+      suggestions={props.bookTitleSuggestions.map(
+        suggestion => suggestion.bookTitleBare
+      )}
+      suggestionsImage={props.bookTitleSuggestions.map(
+        suggestion => suggestion.imageUrl
+      )}
+      suggestionsAuthor={props.bookTitleSuggestions.map(
+        suggestion => suggestion.author.name
+      )}
+      getUserPick={handleUserPick}
+      placeholder="Book Title"
+      getUserInput={getUserInput}
+    />
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    bookTitleSuggestions: state.bookState.bookTitleSuggestions,
-    isLoading: state.bookState.isLoading,
-    newBook: state.userBookState.newBook
-  };
-};
+const mapStateToProps = state => ({
+  bookTitleSuggestions: state.bookState.bookTitleSuggestions,
+  isLoading: state.bookState.isLoading,
+  newBook: state.userBookState.newBook
+});
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      fetchBookTitleSuggestions,
-      changeNewBook
-    },
-    dispatch
-  );
+  bindActionCreators({fetchBookTitleSuggestions, changeNewBook}, dispatch);
 
 export default connect(
   mapStateToProps,
