@@ -16,6 +16,8 @@ import SearchResults from '../components/Books/SearchResults';
 
 import {index} from '../components/Algolia';
 
+const _ = require('lodash/core');
+
 const AccountPage = props => {
   const [myBooks, setMyBooks] = useState([]);
   const onSearchBooks = uid => {
@@ -63,14 +65,18 @@ const AccountPage = props => {
           </Link>
         </div>
       </div>
-      <div className="line-break" />
-      <div className="my-books-section">
-        <h2>My Books</h2>
-        <Link className="btn btn-add-book account" to={ROUTES.ADD_BOOK}>
-          <span>Add Book</span>
-        </Link>
-      </div>
-      {myBooks && <SearchResults books={myBooks} accountPage={true} />}
+      {!_.isEmpty(myBooks) && (
+        <React.Fragment>
+          <div className="line-break" />
+          <div className="my-books-section">
+            <h2>My Books</h2>
+            <Link className="btn btn-add-book account" to={ROUTES.ADD_BOOK}>
+              <span>Add Book</span>
+            </Link>
+          </div>
+          <SearchResults books={myBooks} accountPage={true} />
+        </React.Fragment>
+      )}
     </div>
   );
 };
