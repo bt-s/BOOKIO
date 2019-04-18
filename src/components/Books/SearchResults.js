@@ -6,8 +6,6 @@ import BookItem from '../../components/BookItem/BookItem';
 const SearchResults = props => (
   <div className="search-result">
     {props.books.map((book, ix) => {
-      console.log('a', book);
-
       return (
         // <div className="book-item-container">
         <BookItem

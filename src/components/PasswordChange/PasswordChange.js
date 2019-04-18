@@ -10,7 +10,7 @@ const PasswordChangeForm = props => {
   const initialFormValues = () => ({
     passwordOne: '',
     passwordTwo: '',
-    isReset: false,
+    isReset: false
   });
 
   const [isReset, setIsReset] = useState(false);
@@ -20,13 +20,12 @@ const PasswordChangeForm = props => {
   const handleChange = e => {
     dispatchForm({
       name: e.target.name,
-      value: e.target.value,
+      value: e.target.value
     });
   };
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(e);
     props.firebase
       .doPasswordUpdate(form.passwordOne, form.passwordTwo)
       .then(() => {
@@ -67,7 +66,7 @@ const PasswordChangeForm = props => {
 };
 
 PasswordChangeForm.propTypes = {
-  firebase: PropTypes.object,
+  firebase: PropTypes.object
 };
 
 export default withFirebase(PasswordChangeForm);

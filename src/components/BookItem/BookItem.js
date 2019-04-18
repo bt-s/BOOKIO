@@ -40,7 +40,6 @@ const BookItem = props => {
           className="delete-confirm-btn"
           onClick={evt => {
             evt.preventDefault();
-            console.log('deleteing', props);
 
             props.firebase
               .book(props.bookId)
