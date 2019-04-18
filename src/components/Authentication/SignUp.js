@@ -44,10 +44,6 @@ const SignUpFormBase = props => {
   };
 
   const onSubmit = e => {
-    const roles = [];
-    const phoneNumber = null;
-    const age = null;
-
     const allErrors = validationRef.current.validate();
 
     if (JSON.stringify(allErrors) === JSON.stringify(initialFormValues())) {
@@ -60,12 +56,9 @@ const SignUpFormBase = props => {
           });
           return props.firebase.user(authUser.user.uid).set(
             {
-              age,
               email: form.email,
               username: form.username,
-              location: form.location,
-              roles,
-              phoneNumber
+              location: form.location
             },
             {merge: true}
           );
