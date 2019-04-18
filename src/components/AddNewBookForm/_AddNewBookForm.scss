@@ -177,7 +177,6 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
   }
 
   .autocomplete-input {
-    margin-top: 10px;
     border: 1px solid $gray;
     border-radius: 6px;
     transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
@@ -187,7 +186,7 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     background-color: $white-dim;
     font-size: 17px;
     padding: 0px 20px;
-    margin-bottom: 5px;
+    margin-bottom: 50px;
 
     &:focus {
       background-color: $white;
