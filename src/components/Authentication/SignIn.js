@@ -12,6 +12,7 @@ import {formReducer, errorReducer} from '../../helpers/validationHelper';
 import * as ROUTES from '../../constants/routes';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faFacebookF} from '@fortawesome/free-brands-svg-icons';
 
 const ERROR_CODE_ACCOUNT_EXISTS =
   'auth/account-exists-with-different-credential';
@@ -61,7 +62,7 @@ const SignInFacebookBase = props => {
       <Button
         className="btn btn-auth btn-facebook"
         type="submit"
-        icon={<FontAwesomeIcon icon="facebook-f" />}
+        icon={<FontAwesomeIcon icon={faFacebookF} />}
         text="Login with Facebook"
       />
       {error.code ? (

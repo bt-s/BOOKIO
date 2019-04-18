@@ -11,13 +11,13 @@ const SIGN_IN_METHODS = [
   {
     id: 'password',
     method: 'E-mail login',
-    provider: null,
+    provider: null
   },
   {
     id: 'facebook.com',
     method: 'Facebook login',
-    provider: 'facebookProvider',
-  },
+    provider: 'facebookProvider'
+  }
 ];
 
 const LoginManagementBase = props => {
@@ -63,7 +63,7 @@ const LoginManagementBase = props => {
 
   return (
     <React.Fragment>
-      <ul className= "settings">
+      <ul className="settings">
         {SIGN_IN_METHODS.map(signInMethod => {
           const onlyOneLeft = activeSignInMethods.length === 1;
           const isEnabled = activeSignInMethods.includes(signInMethod.id);
@@ -87,13 +87,14 @@ const LoginManagementBase = props => {
                   onUnlink={onUnlink}
                 />
               )}
-              
             </li>
           );
         })}
-        <li><DeleteAccount /></li>
+        <li>
+          <DeleteAccount />
+        </li>
       </ul>
-     
+
       {error && error.message}
     </React.Fragment>
   );
@@ -101,7 +102,7 @@ const LoginManagementBase = props => {
 
 LoginManagementBase.propTypes = {
   firebase: PropTypes.object,
-  authUser: PropTypes.object,
+  authUser: PropTypes.object
 };
 
 const SocialLoginToggle = ({
@@ -109,7 +110,7 @@ const SocialLoginToggle = ({
   isEnabled,
   signInMethod,
   onLink,
-  onUnlink,
+  onUnlink
 }) =>
   isEnabled ? (
     <Button

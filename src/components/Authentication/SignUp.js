@@ -102,7 +102,7 @@ const SignUpFormBase = props => {
 
   return (
     <Validation ref={validationRef}>
-      <form className="auth-form" onSubmit={onSubmit}>
+      <form className="auth-form sign-up" onSubmit={onSubmit}>
         {error.username && (
           <span className="validation-error">{error.username}</span>
         )}

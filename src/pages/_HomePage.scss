@@ -184,9 +184,13 @@
 }
 
 .how-it-works {
-  padding: 0 20px 20px 20px;
   text-align: justify;
   color: $gray-lighter;
+  padding: 0 0 20px;
+
+  @include media-breakpoint(xs) {
+    padding: 0 20px 20px 20px;
+  }
 }
 
 .header-title {

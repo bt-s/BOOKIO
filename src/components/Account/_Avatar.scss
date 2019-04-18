@@ -5,6 +5,7 @@
   height: 200px;
   position: relative;
   margin: 0 auto;
+
   @include media-breakpoint(sm) {
     margin-left: 75px;
   }
@@ -38,6 +39,7 @@
     background: lighten($black, 8%);
     transition: all 0.3s ease;
   }
+
   &:active {
     background: lighten($black, 25%);
     transition: all 0.3s ease;

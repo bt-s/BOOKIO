@@ -15,6 +15,7 @@ const DragAndDrop = props => {
     e.preventDefault();
     e.stopPropagation();
     dragCounter.current += 1;
+
     if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
       setDragging(true);
     }
@@ -24,6 +25,7 @@ const DragAndDrop = props => {
     e.preventDefault();
     e.stopPropagation();
     dragCounter.current -= 1;
+
     if (dragCounter.current > 0) return;
     setDragging(false);
   };
@@ -32,6 +34,7 @@ const DragAndDrop = props => {
     e.preventDefault();
     e.stopPropagation();
     setDragging(false);
+
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       props.handleDrop(e.dataTransfer.files);
       e.dataTransfer.clearData();

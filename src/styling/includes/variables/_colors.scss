@@ -31,8 +31,10 @@ $facebook-blue-gradient: linear-gradient(#5b7bd5, #4864b1) !important;
 $facebook-blue-gradient-hover: linear-gradient(#4c69ba, #3b55a0) !important;
 $facebook-text-shadow: 0 -1px 0 #354c8c;
 
-// Shadow
+// Shadows
 $button-shadow: 1px 3px 15px 0 rgba(0, 0, 0, 0.54);
+$box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3), 0 1px 1px 0 rgba(0, 0, 0, 0.07),
+  0 0 0 4px rgba(50, 151, 211, 0.3);
 
 //Theme color
 $theme-dark-color: $dark-green;
