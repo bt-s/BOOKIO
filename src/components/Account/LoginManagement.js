@@ -94,7 +94,6 @@ const LoginManagementBase = props => {
           <DeleteAccount />
         </li>
       </ul>
-
       {error && error.message}
     </React.Fragment>
   );

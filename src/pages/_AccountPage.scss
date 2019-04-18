@@ -85,9 +85,23 @@ $field-height: 40px;
 }
 
 .settings {
-  margin: 25px auto 25px auto;
+  list-style: none;
+  margin: 0;
+
+  @include media-breakpoint(xs) {
+    margin: 25px auto 25px auto;
+  }
+
   @include media-breakpoint(sm) {
     margin-left: 75px;
+  }
+
+  li {
+    margin-bottom: $padding-xs;
+
+    button {
+      min-width: 200px;
+    }
   }
 
   .account-header {
