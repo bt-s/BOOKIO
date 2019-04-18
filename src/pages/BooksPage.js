@@ -53,7 +53,9 @@ const BooksPage = props => {
     index
       .search()
       .then(res => {
-        props.storeBooks(withDistance(res.data, props.coords));
+        if (res.exists) {
+          props.storeBooks(withDistance(res.data, props.coords));
+        }
       })
       .catch(err => {
         console.error(err);
@@ -91,7 +93,6 @@ const BooksPage = props => {
   };
 
   useEffect(() => {
-    console.log('page: ', props.page);
     onFilter(props.query);
   }, [props.page]);
 
@@ -100,6 +101,7 @@ const BooksPage = props => {
       <div className="books-tool-bar">
         <FilterGroup
           onFilterUpdate={filters => {
+            props.goToPage(0);
             const strMap = {
               'Books to Borrow': 'lend',
               'Books to Have': 'give'
