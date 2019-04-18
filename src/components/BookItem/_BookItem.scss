@@ -82,13 +82,14 @@
     top: 10%;
     right: 0;
     z-index: 30;
-
     background: rgb(212, 71, 71);
+
     &:hover {
       cursor: pointer;
       background: darken(rgb(212, 71, 71), 8%);
       transition: all 0.3s ease;
     }
+
     &:active {
       background: darken(rgb(212, 71, 71), 25%);
       transition: all 0.3s ease;
@@ -105,6 +106,7 @@
     position: absolute;
     right: 2px;
     z-index: 50;
+
     &:hover {
       cursor: pointer;
       color: rgb(212, 71, 71);
@@ -118,6 +120,7 @@
   width: 100%;
   border-radius: 6px 6px 0px 0px;
   overflow: hidden;
+
   .book-item-img {
     max-height: 175px;
     height: 100%;

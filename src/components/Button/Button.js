@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const isRegularType = type => ['reset', 'submit', 'button'].includes(type);
 
 const Button = props => {
-  // only for toggle btn
   const [pushed, setPushed] = useState(false);
 
   return (
