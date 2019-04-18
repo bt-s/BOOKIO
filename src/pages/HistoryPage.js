@@ -96,7 +96,7 @@ const HistoryPage = props => {
   const noTransactionsToShow = () => (
     <div className="no-transactions">
       <p>
-        It seems like you have not requested any books.nd that no one has
+        It seems like you have not requested any books and that no one has
         requested books from you. As soon as you have made a request, or a
         request has been made to you, information about such requests will be
         available on this page.
