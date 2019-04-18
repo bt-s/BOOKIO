@@ -163,7 +163,7 @@ const AddNewBookFormBase = props => {
   return (
     <div className="add-book-form">
       <div className={'upload-progress ' + progressStyle}>
-        <h1>Upload succed, redirecting to homepage.</h1>
+        <h3>Upload succeeded, redirecting to books overview page.</h3>
       </div>
       <Validation ref={validationRef}>
         {error.image !== '' && (
@@ -260,7 +260,7 @@ const AddNewBookFormBase = props => {
           />
 
           <button
-            className="btn btn-black btn-publish" // this is not a regular button
+            className="btn btn-black btn-publish"
             onClick={e => {
               e.preventDefault();
               handleSubmit(e);
