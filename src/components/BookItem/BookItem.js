@@ -44,15 +44,6 @@ const BookItem = props => {
       .then(() => {
         setDeleted(true);
         index.deleteObject(props.bookId);
-
-        props.firebase
-          .user(props.firebase.getMyUID())
-          .get()
-          .then(doc => {
-            const restItems = doc
-              .data()
-              .items.filter(item => item !== props.bookId);
-          });
       });
   };
 
