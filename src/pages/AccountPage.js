@@ -4,6 +4,7 @@ import {compose} from 'recompose';
 import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
+import {withFirebase} from '../components/Firebase';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
@@ -18,21 +19,43 @@ import {index} from '../components/Algolia';
 
 const AccountPage = props => {
   const [myBooks, setMyBooks] = useState([]);
-  const onSearchBooks = uid => {
-    index
-      .search({
-        query: uid
-      })
-      .then(res => {
-        setMyBooks(res.hits);
-      })
-      .catch(err => {
-        console.error(err);
+  // const onSearchBooks = uid => {
+  //   index
+  //     .search({
+  //       query: uid
+  //     })
+  //     .then(res => {
+  //       setMyBooks(res.hits);
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+  // };
+
+  // Agolia is not update accordingly after delete
+  // Have to use this
+  const fetchUserInventory = uid => {
+    props.firebase
+      .user(uid)
+      .get()
+      .then(doc =>
+        Promise.all(
+          doc.data().myBooks.map(id =>
+            props.firebase
+              .book(id)
+              .get()
+              .then(book => book.data())
+          )
+        )
+      )
+      .then(books => {
+        setMyBooks(books.filter(book => book)); // filter out undefined one
       });
   };
 
   useEffect(() => {
-    onSearchBooks(props.authUser.uid);
+    // onSearchBooks(props.authUser.uid);
+    fetchUserInventory(props.authUser.uid);
   }, []);
 
   return (
