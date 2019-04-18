@@ -65,8 +65,7 @@ const SignUpFormBase = props => {
               username: form.username,
               location: form.location,
               roles,
-              phoneNumber,
-              photoUrl: process.env.REACT_APP_DEFAULT_PORTRAIT
+              phoneNumber
             },
             {merge: true}
           );
