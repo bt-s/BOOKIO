@@ -265,14 +265,15 @@ const AddNewBookFormBase = props => {
             getAddress={getAddress}
           />
 
-          <Button
+          <button
             className="btn btn-black btn-publish"
             onClick={e => {
               e.preventDefault();
               handleSubmit(e);
-            }}
-            text="Publish"
-          />
+            }}>
+            {' '}
+            Publish
+          </button>
         </div>
       </Validation>
     </div>
