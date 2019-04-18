@@ -46,12 +46,12 @@ $auth-form-width-small: 250px;
   align-items: center;
   min-width: $auth-form-width-small;
   max-width: $auth-form-width-small;
-  margin: 25px auto 25px auto;
+  margin: 25px auto;
 
   @include media-breakpoint(sm) {
     min-width: $auth-form-width;
     max-width: $auth-form-width;
-    margin: 25px auto 25px auto;
+    margin: 25px auto;
   }
 
   .form-header {

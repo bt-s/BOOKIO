@@ -119,7 +119,6 @@ const SignInFormBase = props => {
     <Validation ref={validationRef}>
       <form onSubmit={onSubmit} className="auth-form">
         {error.email && <span className="validation-error">{error.email}</span>}
-
         <Validator
           name="email"
           value={form.email}
@@ -154,7 +153,6 @@ const SignInFormBase = props => {
 
         <PasswordForgetLink styling="pw-forget-link" />
         <Button className="btn btn-auth" type="submit" text="Login" />
-
         {error.code ? (
           <p className="form-submission-error">ERROR: {error.message}</p>
         ) : (

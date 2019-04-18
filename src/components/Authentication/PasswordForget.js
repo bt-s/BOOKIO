@@ -61,7 +61,7 @@ const PasswordForgetFormBase = props => {
 };
 
 PasswordForgetFormBase.propTypes = {
-  firebase: PropTypes.object,
+  firebase: PropTypes.object
 };
 
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
@@ -73,7 +73,7 @@ const PasswordForgetLink = props => (
 );
 
 PasswordForgetLink.propTypes = {
-  styling: PropTypes.string,
+  styling: PropTypes.string
 };
 
 export {PasswordForgetForm, PasswordForgetLink};
