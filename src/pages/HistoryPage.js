@@ -79,7 +79,7 @@ const HistoryPage = props => {
       )
     ).then(transacsWithData => {
       // calc amount of different types
-      const tmp = ['lend', 'give', 'borrow', 'get']
+      const tmpTypeCount = ['lend', 'give', 'borrow', 'get']
         .map(type => {
           return {
             [type]: transacsWithData.filter(transac => type === transac.type)
@@ -87,9 +87,8 @@ const HistoryPage = props => {
           };
         })
         .reduce((pre, cur) => Object.assign(pre, cur));
-      console.log('dd', tmp);
 
-      setTypeAmount(tmp);
+      setTypeAmount(tmpTypeCount);
       setTransactions(transacsWithData);
       setGotTransactions(true);
     });
