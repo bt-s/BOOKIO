@@ -37,7 +37,6 @@ const AddNewBookFormBase = props => {
   const [type, setType] = useState('lend');
 
   const [progressStyle, setProgressStyle] = useState('off');
-  let imageUrls = [];
   const [error, dispatchError] = useReducer(errorReducer, {});
   const validationRef = useRef(null);
 
@@ -64,6 +63,8 @@ const AddNewBookFormBase = props => {
     // Here if you want to get the address and the city.
   };
 
+  let imageUrls = [];
+
   const handleImageUploaded = url => {
     imageUrls.push(url);
   };
@@ -86,7 +87,6 @@ const AddNewBookFormBase = props => {
         title,
         ownerId: props.authUser.uid,
         owner: props.authUser.username,
-        //owner: JSON.parse(localStorage.getItem('authUser')).uid,
         avatar: props.authUser.photoUrl,
         rating: parseFloat(rating),
         description,
@@ -133,7 +133,7 @@ const AddNewBookFormBase = props => {
 
   const validate_image = () => {
     if (files.length === 0) {
-      let image = '*Book Image is required';
+      const image = '*Book Image is required';
       dispatchError({image});
     } else {
       dispatchError({image: ''});
@@ -142,9 +142,12 @@ const AddNewBookFormBase = props => {
 
   const handleSubmit = e => {
     addNewUserBook('loading');
+
     const allErrors = validationRef.current.validate();
     allErrors.image = error.image;
+
     validate_image();
+
     if (Object.values(allErrors).join('') === '') {
       console.warn('[ADD_NEW_BOOK] Calling API to add New Book');
       storeData();
@@ -160,7 +163,7 @@ const AddNewBookFormBase = props => {
   return (
     <div className="add-book-form">
       <div className={'upload-progress ' + progressStyle}>
-        <h1>Upload succed, redirecting to homepage.</h1>
+        <h3>Upload succeeded, redirecting to books overview page.</h3>
       </div>
       <Validation ref={validationRef}>
         {error.image !== '' && (
@@ -257,7 +260,7 @@ const AddNewBookFormBase = props => {
           />
 
           <button
-            className="btn btn-black btn-publish" // this is not a regular button
+            className="btn btn-black btn-publish"
             onClick={e => {
               e.preventDefault();
               handleSubmit(e);
@@ -278,13 +281,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      addNewUserBook,
-      changeNewBook
-    },
-    dispatch
-  );
+  bindActionCreators({addNewUserBook, changeNewBook}, dispatch);
 
 const AddNewBookForm = compose(
   withFirebase,

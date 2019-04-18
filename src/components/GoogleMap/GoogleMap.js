@@ -97,6 +97,13 @@ export const MapContainer = props => {
 
   return (
     <div className="google-map-container">
+      {props.autocomplete && (
+        <Autocomplete
+          className="autocomplete-input"
+          onPlaceSelected={onPlaceSelected}
+          types={['address']}
+        />
+      )}
       <Map
         google={props.google}
         containerStyle={{
@@ -109,13 +116,6 @@ export const MapContainer = props => {
         onClick={onMapClicked}>
         <Marker name={locationName} position={markerCoordinates} />
       </Map>
-      {props.autocomplete && (
-        <Autocomplete
-          className="autocomplete-input"
-          onPlaceSelected={onPlaceSelected}
-          types={['address']}
-        />
-      )}
     </div>
   );
 };

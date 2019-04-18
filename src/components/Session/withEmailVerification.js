@@ -49,7 +49,7 @@ const withEmailVerification = Component => {
           className={'btn btn-refresh'}
           onClick={refreshPage}
           disabled={isSent}
-          text="I have confirmation my e-mail"
+          text="I have confirmed my e-mail"
         />
       </div>
     ) : (

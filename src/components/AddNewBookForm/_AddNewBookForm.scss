@@ -29,7 +29,7 @@ $input-height: 40px;
   &.on {
     width: 100%;
     z-index: 10;
-    transition: all 2.8s ease-in;
+    transition: all 1.4s ease-in;
     position: fixed;
     top: $navbar-height;
     height: 4px;
@@ -110,7 +110,8 @@ $input-height: 40px;
 
     .validation-error {
       background-color: transparent;
-      padding: 0px;
+      padding: 0 25px;
+      font-size: 13px;
     }
   }
   #error-image {
@@ -167,7 +168,6 @@ $input-height: 40px;
     height: $input-height;
     border-radius: 10px;
     padding: 0 $padding-sm;
-    // margin-bottom: $padding-sm;
     font-size: 16px;
     background-color: $white-dim;
     &:focus {
@@ -190,6 +190,9 @@ $input-height: 40px;
     height: $input-height;
     width: 100%;
     background-color: $white-dim;
+    font-size: 17px;
+    padding: 0px 20px;
+    margin-bottom: 5px;
 
     &:focus {
       background-color: $white;

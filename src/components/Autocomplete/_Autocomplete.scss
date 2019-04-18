@@ -6,54 +6,58 @@ input {
 
 .suggestions {
   position: absolute;
-  // border: 1px solid #999;
+  padding: 0;
+  margin: 0;
   border-top-width: 0;
   list-style: none;
-  margin: 0px 7px;
-  max-height: 143px;
   overflow-y: auto;
   padding-left: 0;
   border-radius: 0px !important;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
   width: 90%;
+  height: autoauto;
+  border: 1px solid $gray;
+  border-top: none;
+
   @include media-breakpoint(sm) {
-    width: 40%;
+    width: 43%;
   }
-}
 
-.suggestions li {
-  padding: 0.5rem;
-  background-color: $white;
-  color: $white;
-  display: flex;
-}
-.suggestions img {
-  width: 35px;
-  height: 100%;
-  margin-right: 5px;
-  align-items: flex-start;
-}
+  li {
+    padding: 0.5rem;
+    background-color: $white;
+    color: $white;
+    display: flex;
+  }
 
-.suggestions .desc-wrapper {
-  height: 100%;
-  margin-top: 7px;
-  font-size: 15px;
-  width: 100%;
-  overflow: hidden;
-  // align-items: flex-start;
-}
+  img {
+    width: 35px;
+    height: 100%;
+    margin-right: 5px;
+    align-items: flex-start;
+  }
 
-.suggestions .desc-wrapper div {
-  white-space: nowrap;
-  overflow: hidden;
-  -ms-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  width: 100%;
-}
+  .desc-wrapper {
+    height: 100%;
+    margin-top: 7px;
+    font-size: 15px;
+    width: 100%;
+    overflow: hidden;
+    // align-items: flex-start;
+  }
 
-.suggestions .desc-wrapper span {
-  font-size: 12px;
+  .desc-wrapper div {
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+
+  .desc-wrapper span {
+    font-size: 12px;
+  }
 }
 
 .loading {
