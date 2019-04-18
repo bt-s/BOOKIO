@@ -7,6 +7,7 @@ const FilterGroup = props => {
   /* eslint-disable no-unused-vars */
   const [filterStatus, setFilterStatus] = useState(
     /* eslint-enable no-unused-vars */
+
     props.filters.reduce((pre, cur) => {
       pre[cur] = {pushed: false};
       return pre;
@@ -25,7 +26,6 @@ const FilterGroup = props => {
 
             filterStatus[title].pushed = !filterStatus[title].pushed;
 
-            // setFilterStatus({title: {pushed: !filterStatus[title].pushed}});
             props.onFilterUpdate(
               Object.keys(filterStatus).filter(key => filterStatus[key].pushed)
             );
@@ -40,6 +40,7 @@ const FilterGroup = props => {
 };
 
 FilterGroup.propTypes = {
+  filters: PropTypes.array,
   onBorrowFilter: PropTypes.func,
   onHaveFilter: PropTypes.func
 };

@@ -7,7 +7,6 @@ const SearchResults = props => (
   <div className="search-result">
     {props.books.map((book, ix) => {
       return (
-        // <div className="book-item-container">
         <BookItem
           key={ix}
           bookId={book.id || book.objectID}
@@ -22,7 +21,6 @@ const SearchResults = props => (
           rating={book.rating}
           accountPage={props.accountPage}
         />
-        // </div>
       );
     })}
   </div>

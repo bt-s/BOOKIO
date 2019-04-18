@@ -3,14 +3,14 @@
   flex-direction: row;
   align-items: center;
   padding: 5px 5px 5px 0;
-  // width: 150px;
+
   > img {
     margin-right: 5px;
     height: 24px;
     width: 24px;
     border-radius: 15px;
-    // border: 1px solid $black-lighter;
   }
+
   > div {
     :last-child {
       white-space: nowrap;
@@ -19,6 +19,7 @@
       max-width: 100%;
     }
   }
+
   @include smaller-than(sm) {
     padding: 5px 5px 5px 0;
   }
