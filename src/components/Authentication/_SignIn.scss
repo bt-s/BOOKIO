@@ -17,3 +17,12 @@
     text-decoration: underline;
   }
 }
+
+.auth-page {
+  &.sign-in,
+  &.sign-up {
+    .auth-form {
+      margin-bottom: 0;
+    }
+  }
+}
