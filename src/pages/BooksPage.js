@@ -43,7 +43,6 @@ const BooksPage = props => {
       })
       .then(res => {
         props.storeBooks(withDistance(res.hits, props.coords));
-        console.log(res);
         setTotalPages(res.nbPages);
       })
       .catch(err => {

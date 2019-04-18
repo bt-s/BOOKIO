@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button/Button';
 
 const Pagination = props => {
   const getRange = pageNumber => {
@@ -17,12 +16,6 @@ const Pagination = props => {
 
   return (
     <React.Fragment>
-      {/* <Button
-        className="btn"
-        type="button"
-        // onClick={depaginate}
-        text="Depaginate"
-      /> */}
       <div className="pagination-wrapper">
         <span>Pages</span>
         <ul className="pagination">
@@ -42,13 +35,6 @@ const Pagination = props => {
           ))}
         </ul>
       </div>
-
-      {/* <Button
-        className="btn"
-        type="button"
-        // onClick={paginate}
-        text="Paginate"
-      /> */}
     </React.Fragment>
   );
 };
