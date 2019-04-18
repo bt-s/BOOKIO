@@ -15,27 +15,25 @@ const Pagination = props => {
   };
 
   return (
-    <React.Fragment>
-      <div className="pagination-wrapper">
-        <span>Pages</span>
-        <ul className="pagination">
-          {getRange(props.totalPages).map((page, index) => (
-            <li
-              key={index}
-              className={`page-item${
-                props.currentPage === page - 1 ? ' active' : ''
-              }`}>
-              <a
-                className="page-link"
-                href="#"
-                onClick={() => props.handleChoose(page - 1)}>
-                {page}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </React.Fragment>
+    <div className="pagination-wrapper">
+      <span>Pages</span>
+      <ul className="pagination">
+        {getRange(props.totalPages).map((page, index) => (
+          <li
+            key={index}
+            className={`page-item${
+              props.currentPage === page - 1 ? ' active' : ''
+            }`}>
+            <a
+              className="page-link"
+              href="#"
+              onClick={() => props.handleChoose(page - 1)}>
+              {page}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

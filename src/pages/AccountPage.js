@@ -50,8 +50,6 @@ const AccountPage = props => {
   const location = props.authUser.location;
   const age = props.authUser.age;
 
-  console.log(myBooks);
-
   return (
     <div className="account-page">
       <h1>My Profile</h1>
