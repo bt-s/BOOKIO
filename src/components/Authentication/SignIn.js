@@ -31,8 +31,12 @@ const SignInFacebookBase = props => {
     props.firebase
       .doSignInWithFacebook()
       .then(socialAuthUser => {
+        console.log('im in fb');
+
         // Only create a new DB instance on first FB sign in
         if (socialAuthUser.additionalUserInfo.isNewUser) {
+          console.log(socialAuthUser.user, 'new');
+
           return props.firebase.user(socialAuthUser.user.uid).set(
             {
               username: socialAuthUser.user.displayName,
