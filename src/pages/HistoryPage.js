@@ -15,7 +15,6 @@ import {
 } from '../components/Session/Session';
 
 import Loader from '../components/Loader/Loader';
-import {RequestMessage} from '../components/History/RequestMessage';
 
 const HistoryPage = props => {
   const [msgType, setMsgType] = useState(
