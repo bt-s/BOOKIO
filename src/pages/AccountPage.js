@@ -14,6 +14,8 @@ import {
 import Avatar from '../components/Account/Avatar';
 import SearchResults from '../components/Books/SearchResults';
 
+const _ = require('lodash/core');
+
 const AccountPage = props => {
   const [myBooks, setMyBooks] = useState([]);
 
@@ -47,6 +49,8 @@ const AccountPage = props => {
   const phoneNumber = props.authUser.phoneNumber;
   const location = props.authUser.location;
   const age = props.authUser.age;
+
+  console.log(myBooks);
 
   return (
     <div className="account-page">
@@ -90,10 +94,10 @@ const AccountPage = props => {
           <span>Add Book</span>
         </Link>
       </div>
-      {myBooks ? (
+      {!_.isEmpty(myBooks) ? (
         <SearchResults books={myBooks.reverse()} accountPage={true} />
       ) : (
-        <h2>You haven't added any books yet.</h2>
+        <p className="no-results">You haven't added any books yet.</p>
       )}
     </div>
   );
