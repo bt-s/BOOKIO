@@ -36,7 +36,13 @@ const SignInFacebookBase = props => {
           return props.firebase.user(socialAuthUser.user.uid).set(
             {
               username: socialAuthUser.user.displayName,
-              email: socialAuthUser.user.email
+              email: socialAuthUser.user.email,
+              age: '',
+              location: '',
+              phoneNumber: '',
+              photoUrl: socialAuthUser.user.photoURL,
+              transactions: [],
+              myBooks: []
             },
             {merge: true}
           );
