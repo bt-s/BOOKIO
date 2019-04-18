@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {faEdit, faCog} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
@@ -32,7 +31,7 @@ const accountMenuList = [
     id: 1,
     title: (
       <Link to={ROUTES.EDIT_PROFILE}>
-        <FontAwesomeIcon icon={faEdit} />
+        <FontAwesomeIcon icon="edit" />
         Edit Profile
       </Link>
     ),
@@ -43,7 +42,7 @@ const accountMenuList = [
     id: 1,
     title: (
       <Link to={ROUTES.SETTINGS}>
-        <FontAwesomeIcon icon={faCog} />
+        <FontAwesomeIcon icon="cog" />
         Settings
       </Link>
     ),

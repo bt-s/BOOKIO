@@ -6,25 +6,26 @@ import {
   faUser,
   faBook,
   faBars,
+  faPlus,
   faTimes,
   faPhone,
   faTimesCircle,
   faSearch,
   faEnvelope,
+  faCog,
+  faEdit,
   faHome,
   faBirthdayCake
 } from '@fortawesome/free-solid-svg-icons';
-
-import {faFacebookF} from '@fortawesome/free-brands-svg-icons';
 
 import {library} from '@fortawesome/fontawesome-svg-core';
 
 library.add(
   faPhone,
   faTimesCircle,
-  faFacebookF,
   faMapMarkerAlt,
   faPencilAlt,
+  faPlus,
   faStar,
   faStarHalf,
   faUser,
@@ -33,6 +34,8 @@ library.add(
   faBars,
   faSearch,
   faEnvelope,
+  faCog,
+  faEdit,
   faHome,
   faBirthdayCake
 );
