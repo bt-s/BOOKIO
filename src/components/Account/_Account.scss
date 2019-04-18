@@ -51,8 +51,11 @@
 
   .info-item {
     margin-bottom: $padding-xxs;
+
     svg {
       margin-right: $padding-xxs;
+      height: 18px;
+      width: 18px;
     }
   }
 }
