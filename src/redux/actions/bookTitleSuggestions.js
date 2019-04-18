@@ -39,5 +39,5 @@ export const fetchBookTitleSuggestions = payload => {
       .catch(err => {
         dispatch(error());
       });
-  }, 200);
+  }, 500);
 };
