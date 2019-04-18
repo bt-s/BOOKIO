@@ -16,6 +16,7 @@ import {uploadPictureToFirebase} from '../../helpers/storageHelper';
 import {errorReducer} from '../../helpers/validationHelper';
 
 import TitleForm from './TitleForm';
+import Button from '../Button/Button';
 import Map from '../GoogleMap/GoogleMap';
 import {Validation, Validator, ValidationHelper} from '../Forms/Validation';
 
@@ -264,14 +265,14 @@ const AddNewBookFormBase = props => {
             getAddress={getAddress}
           />
 
-          <button
+          <Button
             className="btn btn-black btn-publish"
             onClick={e => {
               e.preventDefault();
               handleSubmit(e);
-            }}>
-            Publish{' '}
-          </button>
+            }}
+            text="Publish"
+          />
         </div>
       </Validation>
     </div>

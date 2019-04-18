@@ -1,18 +1,25 @@
 import React, {useState} from 'react';
-import AddNewBookForm from '../components/AddNewBookForm/AddNewBookForm';
-import DragAndDrop from '../components/AddNewBookForm/DragAndDrop';
+import PropTypes from 'prop-types';
+
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addNewUserBook} from '../redux/actions/addNewUserBook';
 import {withFirebase} from '../components/Firebase';
 import {compose} from 'recompose';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+import AddNewBookForm from '../components/AddNewBookForm/AddNewBookForm';
+import DragAndDrop from '../components/AddNewBookForm/DragAndDrop';
+import Button from '../components/Button/Button';
+
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
+
 import {
   withAuthorization,
   withEmailVerification
 } from '../components/Session/Session';
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const AddNewBookBase = props => {
@@ -62,9 +69,11 @@ const AddNewBookBase = props => {
         onDragStart={e => onDragStart(e, i)}
         onDragOver={() => onDragOver(i)}>
         <img src={URL.createObjectURL(file)} alt={'to be uploaded'} />
-        <button onClick={() => removeFiles(i)}>
-          <FontAwesomeIcon icon="times-circle" />
-        </button>
+        <Button
+          className=""
+          onClick={() => removeFiles(i)}
+          icon={<FontAwesomeIcon icon="times-circle" />}
+        />
       </div>
     );
   };
@@ -92,6 +101,18 @@ const AddNewBookBase = props => {
       <AddNewBookForm files={files} />
     </div>
   );
+};
+
+AddNewBookBase.propTypes = {
+  addNewUserBook: PropTypes.func,
+  authUser: PropTypes.object,
+  dispatch: PropTypes.func,
+  firebase: PropTypes.object,
+  history: PropTypes.object,
+  isLoading: PropTypes.bool,
+  location: PropTypes.object,
+  match: PropTypes.object,
+  newBook: PropTypes.object
 };
 
 const mapStateToProps = state => {

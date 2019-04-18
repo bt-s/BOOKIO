@@ -150,11 +150,24 @@ $navbar-icon-size: 20px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    &:last-child {
+      svg {
+        padding: 0;
+        margin-left: 20px;
+      }
+
+      button {
+        margin-left: -20px;
+      }
+    }
+
     > * {
       width: 100%;
       height: 100%;
       padding-left: 20px;
     }
+
     &.link {
       svg {
         width: 12px;
@@ -173,7 +186,8 @@ $navbar-icon-size: 20px;
       margin: 0 auto 0 auto;
     }
 
-    a {
+    a,
+    button {
       display: flex;
       justify-content: flex-start;
       align-items: center;

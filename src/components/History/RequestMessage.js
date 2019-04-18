@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
+import Button from '../Button/Button';
 import UserLabel from '../Books/UserLabel';
 import ItemInfo from './ItemInfo';
 
@@ -32,30 +33,26 @@ const RequestMessage = props => {
     }
   };
 
+  const declineRequest = () => {
+    if (props.declineCallback) {
+      props.declineCallback();
+      setStatus('Declined');
+      setShowOperation(false);
+    }
+  };
+
+  const acceptRequest = () => {
+    if (props.acceptCallback) {
+      props.acceptCallback();
+      setStatus('Accepted');
+      setShowOperation(false);
+    }
+  };
+
   const OperationButtons = (
     <div className="operation">
-      <button
-        className="btn decline"
-        onClick={() => {
-          if (props.declineCallback) {
-            props.declineCallback();
-            setStatus('Declined');
-            setShowOperation(false);
-          }
-        }}>
-        <span>Decline</span>
-      </button>
-      <button
-        className="btn accept"
-        onClick={() => {
-          if (props.acceptCallback) {
-            props.acceptCallback();
-            setStatus('Accepted');
-            setShowOperation(false);
-          }
-        }}>
-        <span>Accept</span>
-      </button>
+      <Button className="btn decline" onClick={declineRequest} text="Decline" />
+      <Button className="btn accept" onClick={acceptRequest} text="Accept" />
     </div>
   );
 
@@ -130,6 +127,7 @@ const RequestMessage = props => {
     </div>
   );
 };
+
 RequestMessage.propTypes = {
   message: PropTypes.object,
   declineCallback: PropTypes.func,

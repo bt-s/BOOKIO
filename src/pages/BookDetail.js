@@ -6,6 +6,7 @@ import GoogleMap from '../components/GoogleMap/GoogleMap';
 import {withFirebase} from '../components/Firebase';
 import UserLabel from '../components/Books/UserLabel';
 import RatingStars from '../components/Books/RatingStars';
+import Button from '../components/Button/Button';
 
 import {Link} from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
@@ -61,6 +62,16 @@ const BookDetailContainer = props => {
       bookId={props.match.params.bookId}
     />
   );
+};
+
+BookDetailContainer.propTypes = {
+  authUser: PropTypes.object,
+  books: PropTypes.array,
+  dispatch: PropTypes.func,
+  firebase: PropTypes.object,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object
 };
 
 const BookDetail = props => {
@@ -189,14 +200,14 @@ const BookDetail = props => {
         {googleMap}
         {ownerDetails}
         {firebase.getMyUID() && firebase.getMyUID() !== book.ownerId && (
-          <button
+          <Button
             className={
               'btn btn-black' +
               (requestBtnTxt === 'Requested' ? ' btn-disabled' : '')
             }
-            onClick={requestBook}>
-            {requestBtnTxt}
-          </button>
+            onClick={requestBook}
+            text={requestBtnTxt}
+          />
         )}
       </div>
     </div>
@@ -204,19 +215,15 @@ const BookDetail = props => {
 };
 
 BookDetail.propTypes = {
-  imageUrls: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  userProfile: PropTypes.string,
-  rating: PropTypes.string,
-  reviewTotal: PropTypes.string,
-  author: PropTypes.string,
-  timeToPick: PropTypes.string,
-  pickupLocation: PropTypes.string
+  book: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  owner: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  firebase: PropTypes.object,
+  bookId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
   books: state.booksState.books,
   authUser: state.sessionState.authUser
 });
+
 export default connect(mapStateToProps)(withFirebase(BookDetailContainer));
