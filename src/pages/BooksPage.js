@@ -9,15 +9,11 @@ import {storeBooks} from '../redux/actions/storeBooks';
 import {storeCoords} from '../redux/actions/storeCoords';
 import * as ROUTES from '../constants/routes';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {library} from '@fortawesome/fontawesome-svg-core';
-import {faPlus} from '@fortawesome/free-solid-svg-icons';
 
 import Loader from '../components/Loader/Loader';
 import SearchResults from '../components/Books/SearchResults';
 import FilterGroup from '../components/Books/FilterGroup';
 import {index} from '../components/Algolia';
-
-library.add(faPlus);
 
 const _ = require('lodash/core');
 
