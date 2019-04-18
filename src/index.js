@@ -13,7 +13,6 @@ import Navbar from './components/Navbar/Navbar';
 
 import AccountPage from './pages/AccountPage';
 import AddNewBookPage from './pages/AddNewBookPage';
-import AdminPage from './pages/AdminPage';
 import BookDetail from './pages/BookDetail';
 import BooksPage from './pages/BooksPage';
 import EditProfilePage from './pages/EditProfilePage';
@@ -77,16 +76,6 @@ const AppBase = () => (
         <WithFooter>
           <WithNavbar>
             <AccountPage />
-          </WithNavbar>
-        </WithFooter>
-      )}
-    />
-    <Route
-      path={ROUTES.ADMIN}
-      render={() => (
-        <WithFooter>
-          <WithNavbar>
-            <AdminPage />
           </WithNavbar>
         </WithFooter>
       )}

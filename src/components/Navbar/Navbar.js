@@ -5,7 +5,6 @@ import {faEdit, faCog} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
 
 import BrandLogo from '../BrandLogo/BrandLogo';
 import Dropdown from '../Dropdown/Dropdown';
@@ -27,7 +26,7 @@ const accountMenuList = [
         My Profile
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
   {
     id: 1,
@@ -37,7 +36,7 @@ const accountMenuList = [
         Edit Profile
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
 
   {
@@ -48,13 +47,13 @@ const accountMenuList = [
         Settings
       </Link>
     ),
-    classes: 'link section-ending',
+    classes: 'link section-ending'
   },
   {
     id: 5,
     title: <SignOut />,
-    classes: 'link section-ending',
-  },
+    classes: 'link section-ending'
+  }
 ];
 
 const accountMenu = (
@@ -66,21 +65,12 @@ const accountMenu = (
   />
 );
 
-const NavbarAuth = ({authUser}) =>
-  authUser.roles.includes(ROLES.ADMIN) && authUser.emailVerified ? (
-    <React.Fragment>
-      {bookShelfLink}
-      {accountMenu}
-      <Link to={ROUTES.ADMIN} className="navbar-admin">
-        Admin
-      </Link>
-    </React.Fragment>
-  ) : (
-    <React.Fragment>
-      {bookShelfLink}
-      {accountMenu}
-    </React.Fragment>
-  );
+const NavbarAuth = ({authUser}) => (
+  <React.Fragment>
+    {bookShelfLink}
+    {accountMenu}
+  </React.Fragment>
+);
 
 const NavbarNonAuth = () => (
   <div className="navbar-authentication">
@@ -109,7 +99,7 @@ const Navbar = props => (
 );
 
 const mapStateToProps = state => ({
-  authUser: state.sessionState.authUser,
+  authUser: state.sessionState.authUser
 });
 
 export default withRouter(connect(mapStateToProps)(Navbar));
