@@ -10,7 +10,8 @@ const Autocomplete = props => {
     isLoading,
     suggestionsImage,
     suggestionsAuthor,
-    placeholder
+    placeholder,
+    getUserInput
   } = props;
   const [activeSuggestion, setActiveSuggestion] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -31,6 +32,7 @@ const Autocomplete = props => {
     setActiveSuggestion(0);
     setShowSuggestions(true);
     setUserInput(userInputVal);
+    if (getUserInput) getUserInput(userInputVal);
   };
 
   const onClick = e => {
@@ -158,7 +160,8 @@ Autocomplete.propTypes = {
   isLoading: PropTypes.bool,
   fetchSuggestions: PropTypes.func,
   getUserPick: PropTypes.func,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  getUserInput: PropTypes.func
 };
 
 export default Autocomplete;

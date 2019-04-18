@@ -28,7 +28,7 @@ $input-height: 40px;
   &.on {
     width: 100%;
     z-index: 10;
-    transition: all 1.8s ease;
+    transition: all 2.8s ease-in;
     position: fixed;
     top: $navbar-height;
     height: 4px;
@@ -61,6 +61,7 @@ $input-height: 40px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: -10px;
 
   input {
     border: 1px solid $gray;
@@ -79,6 +80,10 @@ $input-height: 40px;
       box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
         0 1px 1px 0 rgba(0, 0, 0, 0.07), 0 0 0 4px rgba(50, 151, 211, 0.3);
     }
+  }
+
+  .margin-bottom-10px {
+    margin-bottom: -10px;
   }
   .two-col {
     width: 45%;
@@ -99,6 +104,7 @@ $input-height: 40px;
     > .subtitle {
       border: none;
       background: none;
+      margin-top: $padding-sm;
     }
 
     .validation-error {
@@ -106,7 +112,9 @@ $input-height: 40px;
       padding: 0px;
     }
   }
-
+  #error-image {
+    text-align: left;
+  }
   .booktype {
     width: 100%;
     height: $input-height;
@@ -115,7 +123,7 @@ $input-height: 40px;
     transition: box-shadow 0.08s ease-in, color 0.08s ease-in;
     box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.34);
     padding: 0 $padding-sm;
-    margin-bottom: $padding-sm;
+    // margin-bottom: $padding-sm;
     font-size: 16px;
     outline: none;
     &:hover {
@@ -141,9 +149,13 @@ $input-height: 40px;
     resize: none;
     border-radius: 10px;
     padding: 20px $padding-sm;
-    margin-bottom: $padding-sm;
+    // margin-bottom: $padding-sm;
     font-size: 16px;
     width: 100%;
+    background-color: $white-dim;
+    &:focus {
+      background-color: $white;
+    }
   }
   .title-input {
     // border: none;
@@ -154,8 +166,12 @@ $input-height: 40px;
     height: $input-height;
     border-radius: 10px;
     padding: 0 $padding-sm;
-    margin-bottom: $padding-sm;
+    // margin-bottom: $padding-sm;
     font-size: 16px;
+    background-color: $white-dim;
+    &:focus {
+      background-color: $white;
+    }
   }
 
   .google-map-container {
@@ -163,6 +179,7 @@ $input-height: 40px;
     justify-content: space-between;
     flex-direction: column;
   }
+
   .autocomplete-input {
     margin-top: 10px;
     border: 1px solid $gray;
@@ -171,8 +188,10 @@ $input-height: 40px;
     box-shadow: 0 0 0 1px $gray;
     height: $input-height;
     width: 100%;
+    background-color: $white-dim;
 
     &:focus {
+      background-color: $white;
       z-index: 2;
       outline: none;
       box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3),
