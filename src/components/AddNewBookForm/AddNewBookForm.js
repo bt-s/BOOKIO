@@ -16,7 +16,6 @@ import {uploadPictureToFirebase} from '../../helpers/storageHelper';
 import {errorReducer} from '../../helpers/validationHelper';
 
 import TitleForm from './TitleForm';
-import Button from '../Button/Button';
 import Map from '../GoogleMap/GoogleMap';
 import {Validation, Validator, ValidationHelper} from '../Forms/Validation';
 
