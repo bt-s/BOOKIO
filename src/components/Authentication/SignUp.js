@@ -22,7 +22,6 @@ const SignUpFormBase = props => {
   const initialFormValues = () => ({
     username: '',
     email: '',
-    // phoneNumber: '',
     location: '',
     passwordOne: '',
     passwordTwo: ''
@@ -45,6 +44,7 @@ const SignUpFormBase = props => {
   };
 
   const onSubmit = e => {
+    const items = [];
     const roles = [];
     const transactions = [];
     const myBooks = [];
