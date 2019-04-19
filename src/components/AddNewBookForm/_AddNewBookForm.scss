@@ -11,37 +11,34 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     align-content: center;
     position: fixed;
     z-index: 10;
+    left: 30%;
     top: 40%;
     background: black;
-    width: 300px;
-    height: 150px;
+    width: 40%;
+    height: 15%;
     opacity: 0.6;
+    border-radius: 30px;
 
-    > h3 {
-      padding: $padding-xs;
+    > h1 {
+      margin: 40px;
       color: white;
-      font-size: 12px;
+      font-size: 25px;
       align-self: center;
-
-      @include media-breakpoint(xs) {
-        padding: $padding-sm;
-        font-size: 18px;
-      }
     }
   }
 
   &.on {
     width: 100%;
     z-index: 10;
-    transition: all 1.4s ease-in;
+    transition: all 1.8s ease;
     position: fixed;
     top: $navbar-height;
     height: 4px;
-    box-shadow: $abp-shadow;
+    box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     left: 0px;
     background: yellow;
 
-    > h3 {
+    > h1 {
       display: none;
     }
   }
@@ -51,17 +48,16 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     z-index: 10;
     top: $navbar-height;
     height: 4px;
-    box-shadow: $abp-shadow;
+    box-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     left: 0px;
     width: 0px;
     background: yellow;
 
-    > h3 {
+    > h1 {
       display: none;
     }
   }
 }
-
 .add-book-form {
   display: flex;
   justify-content: space-between;
