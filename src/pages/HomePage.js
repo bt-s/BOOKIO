@@ -26,7 +26,7 @@ const HomePage = props => (
             <Link to={ROUTES.SIGN_UP} className="btn btn-black btn-homepage">
               <span>Join Now</span>
             </Link>
-            <Link to={ROUTES.BOOKS} className="btn btn-orange btn-homepage">
+            <Link to={ROUTES.BOOKS} className="btn btn-find btn-homepage">
               <span>Find Books</span>
             </Link>
           </div>

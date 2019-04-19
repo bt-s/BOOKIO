@@ -2,33 +2,37 @@ $btn-height: 35px;
 $border-radius: 20px;
 $btn-lr-padding: 10px;
 
-@mixin button-bg($bg) {
-  background: $bg;
+@mixin button-bg() {
+  // background: $bg;
   transition: all 0.3s ease;
 
   @include media-breakpoint(sm) {
     &:not([disabled]) {
       &:hover {
-        background: lighten($bg, 8%);
+        // background: lighten($bg, 8%);
+        filter: brightness(108%);
         transition: all 0.3s ease;
       }
       &:active {
-        background: lighten($bg, 25%);
+        // background: lighten($bg, 15%);
+        filter: brightness(115%);
         transition: all 0.3s ease;
       }
     }
   }
 }
 
-@mixin button-bg-darken($bg) {
-  @include button-bg($bg);
+@mixin button-bg-darken() {
+  @include button-bg();
   @include media-breakpoint(sm) {
     &:not([disabled]) {
       &:hover {
-        background: darken($bg, 8%);
+        // background: darken($bg, 8%);
+        filter: brightness(92%);
       }
       &:active {
-        background: darken($bg, 25%);
+        // background: darken($bg, 15%);
+        filter: brightness(85%);
       }
     }
   }
@@ -45,24 +49,26 @@ $btn-lr-padding: 10px;
   text-decoration: none;
   padding: 0 $padding-xs;
   font-size: 15px;
+  font-weight: bold;
   font-family: Helvetica;
-  font-weight: 500;
   border-radius: $border-radius;
   height: $btn-height;
-
-  @include button-bg($theme-light-color);
+  background: $linear-green;
+  @include button-bg();
 }
 
 .btn-orange {
-  @include button-bg($orange);
+  @include button-bg();
 }
 
 .btn-black {
   width: auto;
+  font-weight: bold;
   height: 40px;
   padding: 0 $padding-xs;
-  box-shadow: $button-shadow;
-  background-color: $theme-light-color;
+  // box-shadow: $button-shadow;
+  // background-color: $theme-light-color;
+  background: $linear-green;
   align-self: flex-start;
   margin-top: 20px;
   position: relative;
@@ -126,15 +132,19 @@ $btn-lr-padding: 10px;
   flex-shrink: 2;
   outline: none;
   height: 28px;
+  font-weight: bold;
   padding-left: $btn-lr-padding;
   padding-right: $btn-lr-padding;
   border-radius: 14px;
   border: none;
-  @include button-bg-darken($sub-background);
+  color: gray;
+  background: $sub-background;
+  @include button-bg-darken();
   font-size: 15px;
   font-family: sans-serif;
   &.on {
-    @include button-bg-darken($theme-dark-color);
+    background: $theme-dark-color;
+    @include button-bg-darken();
     color: white;
   }
 }

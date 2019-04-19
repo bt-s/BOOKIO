@@ -24,7 +24,6 @@
 .btn-add-book {
   width: 156px;
   height: 40px;
-  box-shadow: $button-shadow;
   background-color: $theme-light-color;
   align-items: center;
   display: flex;
@@ -50,14 +49,5 @@
 
   .desktop {
     margin-left: 10px;
-  }
-}
-
-@include media-breakpoint(sm) {
-  .btn-add-book:hover {
-    transform: scale(
-      1.05
-    ); // I can not solve the font distortion issue if we do the zoom animation
-    transition: all 0.2s ease;
   }
 }

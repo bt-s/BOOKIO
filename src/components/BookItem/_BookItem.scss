@@ -144,6 +144,21 @@
     justify-content: space-between;
   }
 
+  .book-item-type {
+    text-transform: capitalize;
+    border-radius: 6px;
+    padding: 0px 5px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .lend-label {
+    background: #a5a27c;
+  }
+  .give-label {
+    background: #a57ca5;
+  }
+
   .book-item-inner-footer {
     display: flex;
     justify-content: space-between;

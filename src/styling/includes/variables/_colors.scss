@@ -17,6 +17,8 @@ $dark-pink: #c30f42;
 $purple-flat: #4500d2;
 $white-dim: #f2f2f2;
 $white-dimmer: #8e8e8e;
+
+$linear-green: linear-gradient(308deg, #61f7a8 0%, #468d73 100%);
 // Color Scheme #1
 $base-color: $black;
 $dominant-color: $purple-flat;
@@ -37,8 +39,12 @@ $box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3), 0 1px 1px 0 rgba(0, 0, 0, 0.07),
   0 0 0 4px rgba(50, 151, 211, 0.3);
 
 //Theme color
-$theme-dark-color: $dark-green;
-$theme-light-color: $light-green;
+$theme-dark-color: linear-gradient(308deg, #61f7a8 0%, #468d73 100%);
+$theme-light-color: linear-gradient(
+  308deg,
+  rgba(91, 244, 164, 1) 0%,
+  rgba(81, 162, 133, 1) 100%
+);
 
 //Text Color
 $content-text: $gray-lighter;

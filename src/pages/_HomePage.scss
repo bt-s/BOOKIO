@@ -93,12 +93,15 @@
     }
   }
 
+  .btn-find {
+    background: linear-gradient(308deg, #ff92d3 0%, #46698d 100%);
+  }
   .btn-homepage {
     width: 100%;
     height: 40px;
     box-shadow: none;
     position: relative;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 17px;
     bottom: auto;
     right: auto;

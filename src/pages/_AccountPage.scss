@@ -16,7 +16,8 @@ $field-height: 40px;
     z-index: 1;
     height: $field-height;
     font-size: 17px;
-    font-weight: 400;
+    font-weight: bold;
+    background: $linear-green;
   }
 }
 
