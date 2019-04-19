@@ -23,9 +23,14 @@ const SearchBase = props => {
   useEffect(() => {
     if (!hasLocation(props.coords))
       navigator.geolocation.getCurrentPosition(pos => {
-        props.storeCoords({
+        const gottenCoords = {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude
+        };
+
+        props.storeCoords(gottenCoords);
+        index.search({}).then(res => {
+          props.storeBooks(withDistance(res.hits.reverse(), gottenCoords));
         });
       });
   }, []);
