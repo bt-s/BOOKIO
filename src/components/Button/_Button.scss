@@ -3,18 +3,15 @@ $border-radius: 20px;
 $btn-lr-padding: 10px;
 
 @mixin button-bg() {
-  // background: $bg;
   transition: all 0.3s ease;
 
   @include media-breakpoint(sm) {
     &:not([disabled]) {
       &:hover {
-        // background: lighten($bg, 8%);
         filter: brightness(108%);
         transition: all 0.3s ease;
       }
       &:active {
-        // background: lighten($bg, 15%);
         filter: brightness(115%);
         transition: all 0.3s ease;
       }
@@ -27,11 +24,9 @@ $btn-lr-padding: 10px;
   @include media-breakpoint(sm) {
     &:not([disabled]) {
       &:hover {
-        // background: darken($bg, 8%);
         filter: brightness(92%);
       }
       &:active {
-        // background: darken($bg, 15%);
         filter: brightness(85%);
       }
     }
@@ -66,8 +61,6 @@ $btn-lr-padding: 10px;
   font-weight: bold;
   height: 40px;
   padding: 0 $padding-xs;
-  // box-shadow: $button-shadow;
-  // background-color: $theme-light-color;
   background: $linear-green;
   align-self: flex-start;
   margin-top: 20px;
