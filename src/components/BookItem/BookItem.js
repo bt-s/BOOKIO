@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {withFirebase} from '../Firebase';
@@ -15,6 +16,11 @@ const BookItem = props => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleted, setDeleted] = useState(false);
 
+  const initCoords = {
+    lat: 0,
+    lng: 0
+  };
+
   const parseDistance = distance => {
     const dist =
       parseInt(distance) > 0
@@ -27,10 +33,14 @@ const BookItem = props => {
     <div className="book-item-inner-footer">
       <UserLabel userName={props.userName} avatarUrl={props.userAvatar} />
       <div className="book-item-distance-container">
-        <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
-        <span className="book-item-distance">
-          {parseDistance(props.distance)}
-        </span>
+        {JSON.stringify(props.coords) !== JSON.stringify(initCoords) && (
+          <React.Fragment>
+            <FontAwesomeIcon icon="map-marker-alt" aria-hidden="true" />
+            <span className="book-item-distance">
+              {parseDistance(props.distance)}
+            </span>
+          </React.Fragment>
+        )}
       </div>
     </div>
   );
@@ -117,4 +127,8 @@ BookItem.propTypes = {
   rating: PropTypes.number
 };
 
-export default withFirebase(BookItem);
+const mapStateToProps = state => ({
+  coords: state.coordsState.coords
+});
+
+export default connect(mapStateToProps)(withFirebase(BookItem));
