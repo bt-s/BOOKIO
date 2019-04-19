@@ -72,16 +72,17 @@
 
 .delete-book {
   .delete-confirm-btn {
-    border-radius: 4px;
+    font-weight: bold;
+    border-radius: 6px;
     height: 30px;
     border: none;
     color: white;
     font-size: 14px;
     position: absolute;
-    top: $padding-xs;
-    right: $padding-xs;
+    top: 32px;
+    right: 10px;
     z-index: 999;
-    background: rgb(212, 71, 71);
+    background: #d44747;
 
     &:hover {
       cursor: pointer;
