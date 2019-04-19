@@ -42,50 +42,7 @@ const DefaultLoginToggle = props => {
       disabled={onlyOneLeft}
       text={`Deactivate ${signInMethod.method}`}
     />
-  ) : (
-    <Validation ref={validationRef}>
-      <form onSubmit={onSubmit}>
-        {error.passwordOne && <span>{error.passwordOne}</span>}
-        <label htmlFor="" className="form-header">
-          New password
-        </label>
-        <Validator
-          name="passwordOne"
-          value={form.passwordOne}
-          validations={[ValidationHelper.required('Password is required')]}
-          onValidate={onValidate}>
-          <input
-            name="passwordOne"
-            type="password"
-            placeholder=""
-            value={form.passwordOne}
-            onChange={handleChange}
-          />
-        </Validator>
-
-        {error.passwordTwo && <span>{error.passwordTwo}</span>}
-        <label htmlFor="" className="form-header">
-          Confirm new password
-        </label>
-        <Validator
-          name="passwordTwo"
-          value={form.passwordTwo}
-          validations={[
-            ValidationHelper.required('Password confirmation is required')
-          ]}
-          onValidate={onValidate}>
-          <input
-            name="passwordTwo"
-            type="password"
-            placeholder=""
-            value={form.passwordTwo}
-            onChange={handleChange}
-          />
-        </Validator>
-        <Button type="submit" text={`Link ${signInMethod.id}`} />
-      </form>
-    </Validation>
-  );
+  ) : null;
 };
 
 DefaultLoginToggle.propTypes = {
