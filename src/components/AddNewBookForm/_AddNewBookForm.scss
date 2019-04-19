@@ -19,11 +19,20 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     opacity: 0.6;
     border-radius: 30px;
 
-    > h1 {
+    > h3 {
       margin: 40px;
       color: white;
       font-size: 25px;
       align-self: center;
+    }
+
+    @include smaller-than(sm) {
+      width: 60%;
+      left: 20%;
+      text-align: center;
+      > h3 {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -38,7 +47,7 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     left: 0px;
     background: yellow;
 
-    > h1 {
+    > h3 {
       display: none;
     }
   }
@@ -53,7 +62,7 @@ $abp-shadow: 0 3px 12px rgba(4, 5, 5, 0.5);
     width: 0px;
     background: yellow;
 
-    > h1 {
+    > h3 {
       display: none;
     }
   }

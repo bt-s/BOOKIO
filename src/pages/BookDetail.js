@@ -90,7 +90,6 @@ const BookDetail = props => {
 
         if (!_.isEmpty(item)) {
           setRequestBtnTxt('Requested');
-          // alert('You have already requested this item');
         } else {
           firebase
             .transactions()
@@ -116,7 +115,6 @@ const BookDetail = props => {
                   transac.id
                 )
               });
-              // alert('You have successfully requested this item');
             })
             .catch(err => {
               console.error('Request failed', err);

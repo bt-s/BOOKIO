@@ -165,7 +165,7 @@ const AddNewBookFormBase = props => {
   return (
     <div className="add-book-form">
       <div className={'upload-progress ' + progressStyle}>
-        <h1>Upload succeeded, redirecting to books overview page.</h1>
+        <h3>Upload succeeded, redirecting to books overview page.</h3>
       </div>
       <Validation ref={validationRef}>
         {error.image !== '' && (
