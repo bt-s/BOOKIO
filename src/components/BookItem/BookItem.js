@@ -109,7 +109,7 @@ const BookItem = props => {
               'book-item-type' +
               (props.type === 'give' ? ' give-label' : ' lend-label')
             }>
-            {props.type}
+            {{lend: 'To Borrow', give: 'To Have'}[props.type]}
           </div>
         </div>
         <p className="book-item-description">
