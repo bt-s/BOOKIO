@@ -27,27 +27,14 @@ $border-radius: 2px;
     }
 
     .right {
-      color: $theme-light-color;
       background-color: $white;
-      border-right: $logo-horizontal-border-primary;
-      border-left: $logo-horizontal-border-primary;
-      border-top: $logo-vertical-border-primary;
-      border-bottom: $logo-vertical-border-primary;
     }
   }
 
   &.secondary {
-    .left {
-      color: $theme-light-color;
-    }
-
     .right {
-      color: $white;
-      background-color: $theme-light-color;
-      border-right: $logo-horizontal-border-secondary;
-      border-left: $logo-horizontal-border-secondary;
-      border-top: $logo-vertical-border-secondary;
-      border-bottom: $logo-vertical-border-secondary;
+      color: white;
+      background-color: #656565;
     }
   }
 }
