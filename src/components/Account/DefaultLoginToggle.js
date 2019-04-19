@@ -36,13 +36,15 @@ const DefaultLoginToggle = props => {
     props.onLink(form.passwordOne);
   };
 
-  return isEnabled ? (
-    <Button
-      onClick={() => onUnlink(signInMethod.id)}
-      disabled={onlyOneLeft}
-      text={`Deactivate ${signInMethod.method}`}
-    />
-  ) : null;
+  return (
+    isEnabled && (
+      <Button
+        onClick={() => onUnlink(signInMethod.id)}
+        disabled={onlyOneLeft}
+        text={`Deactivate ${signInMethod.method}`}
+      />
+    )
+  );
 };
 
 DefaultLoginToggle.propTypes = {
