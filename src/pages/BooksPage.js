@@ -52,9 +52,8 @@ const BooksPage = props => {
     index
       .search()
       .then(res => {
-        if (res.exists) {
-          props.storeBooks(withDistance(res.data, props.coords));
-        }
+        props.storeBooks(withDistance(res.hits, props.coords));
+        setTotalPages(res.nbPages);
       })
       .catch(err => {
         console.error(err);
@@ -65,7 +64,7 @@ const BooksPage = props => {
     <div className="no-books-found">
       <h2>Whooooops...!</h2>
       <p>
-        You must have an extraordinary taste! Unforuntately no one has the book
+        You must have an extraordinary taste! Unfortunately no one has the book
         that you are looking for on offer at the moment.
       </p>
     </div>
