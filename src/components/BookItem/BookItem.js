@@ -104,7 +104,13 @@ const BookItem = props => {
       <div className="book-item-inner">
         <div className="book-item-inner-header">
           <RatingStars rating={props.rating} />
-          <div className="book-item-type">{props.type}</div>
+          <div
+            className={
+              'book-item-type' +
+              (props.type === 'give' ? ' give-label' : ' lend-label')
+            }>
+            {{lend: 'To Borrow', give: 'To Have'}[props.type]}
+          </div>
         </div>
         <p className="book-item-description">
           {props.bookDescription.substring(0, 100) + '...'}

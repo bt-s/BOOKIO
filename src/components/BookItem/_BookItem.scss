@@ -72,16 +72,17 @@
 
 .delete-book {
   .delete-confirm-btn {
-    border-radius: 4px;
+    font-weight: bold;
+    border-radius: 6px;
     height: 30px;
     border: none;
     color: white;
     font-size: 14px;
     position: absolute;
-    top: $padding-xs;
-    right: $padding-xs;
+    top: 32px;
+    right: 10px;
     z-index: 999;
-    background: rgb(212, 71, 71);
+    background: #d44747;
 
     &:hover {
       cursor: pointer;
@@ -141,6 +142,21 @@
   .book-item-inner-header {
     display: flex;
     justify-content: space-between;
+  }
+
+  .book-item-type {
+    text-transform: capitalize;
+    border-radius: 6px;
+    padding: 0px 5px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .lend-label {
+    background: #a5a27c;
+  }
+  .give-label {
+    background: #a57ca5;
   }
 
   .book-item-inner-footer {

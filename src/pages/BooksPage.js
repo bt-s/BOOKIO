@@ -28,10 +28,6 @@ const BooksPage = props => {
   const initialCoords = {lat: 0, lng: 0};
   const [totalPages, setTotalPages] = useState(1);
 
-  useEffect(() => {
-    onFilter(props.query);
-  }, []);
-
   const onFilter = filter => {
     props.storeSearchQuery(filter);
     index

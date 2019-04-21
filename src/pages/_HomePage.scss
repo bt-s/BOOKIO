@@ -93,12 +93,15 @@
     }
   }
 
+  .btn-find {
+    background: $orange;
+  }
   .btn-homepage {
     width: 100%;
     height: 40px;
     box-shadow: none;
     position: relative;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 17px;
     bottom: auto;
     right: auto;

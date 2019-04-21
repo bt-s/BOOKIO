@@ -42,7 +42,7 @@
 
   .btn-orange {
     order: 1;
-
+    background: $orange;
     @include media-breakpoint(sm) {
       order: 2;
     }

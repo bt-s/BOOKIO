@@ -6,10 +6,15 @@ $navbar-icon-size: 20px;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: $navbar-height-mobile-top;
-  background-color: $theme-dark-color;
+  height: 75px;
+  background: $theme-dark-color;
   z-index: 1000;
 
+  @include smaller-than(sm) {
+    input {
+      height: 30px;
+    }
+  }
   @include media-breakpoint(sm) {
     height: $navbar-height;
   }
