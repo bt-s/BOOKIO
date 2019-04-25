@@ -99,9 +99,9 @@ class Firebase {
   onBooksAddedListener = change => {
     this.db.collection('books').onSnapshot(snap => {
       snap.docChanges().forEach(change => {
-        if (change.type === 'added') {
-          this.addOrUpdateIndexRecord(change.doc);
-        }
+        // if (change.type === 'added') {
+        this.addOrUpdateIndexRecord(change.doc);
+        // }
       });
     });
   };
