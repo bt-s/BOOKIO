@@ -72,7 +72,7 @@ const AddNewBookFormBase = props => {
   };
 
   const updateImage = id => {
-    firebase
+    return firebase
       .books()
       .doc(id)
       .update({imageUrls})
@@ -120,12 +120,13 @@ const AddNewBookFormBase = props => {
         ).then(() => {
           // This line should be investigate further in future.
           // Now still using old method to search for all books
-          firebase.onBooksAddedListener(res);
-          updateImage(res.id);
-          setProgressStyle('redirect');
-          setTimeout(() => {
-            window.location = '/books';
-          }, 3000);
+          updateImage(res.id).then(() => {
+            firebase.onBooksAddedListener(res);
+            setProgressStyle('redirect');
+            setTimeout(() => {
+              window.location = '/books';
+            }, 3000);
+          });
         });
       })
       .catch(() => {
