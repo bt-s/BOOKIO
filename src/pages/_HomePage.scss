@@ -16,16 +16,17 @@
 }
 
 .home-img-banner {
-  z-index: -1;
   height: 225px;
   width: 300px;
   margin-left: auto;
   background-color: white;
-  margin-top: -50px;
+  margin-top: 0;
   margin-right: 0px;
 
+  // 2026 fix: the 2019 styles used z-index:-1 with -50/-100px top margins,
+  // which made the illustration overlap the banner buttons on phones.
   @include media-breakpoint(xs) {
-    margin-top: -100px;
+    margin-top: 0;
   }
 
   @include media-breakpoint(sm) {
