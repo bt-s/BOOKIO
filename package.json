@@ -1,57 +1,42 @@
 {
-  "name": "bookaround",
-  "version": "0.1.0",
+  "name": "bookio",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.15",
-    "@fortawesome/free-brands-svg-icons": "^5.7.2",
-    "@fortawesome/free-solid-svg-icons": "^5.7.2",
-    "@fortawesome/react-fontawesome": "^0.1.4",
-    "@google-cloud/storage": "^2.4.2",
-    "algoliasearch": "^3.32.1",
-    "axios": "^0.18.0",
-    "cors": "^2.8.5",
-    "dotenv": "^7.0.0",
-    "firebase": "^5.8.4",
-    "google-maps-react": "^2.0.2",
-    "lodash": "^4.17.11",
-    "node-sass": "^4.11.0",
-    "numeral": "^2.0.6",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.3",
-    "react-addons-css-transition-group": "^15.6.2",
-    "react-dom": "^16.8.3",
-    "react-geocode": "^0.1.2",
-    "react-google-autocomplete": "^1.0.18",
-    "react-google-maps": "^9.4.5",
-    "react-media": "^1.9.2",
-    "react-redux": "^6.0.1",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "^2.1.8",
-    "recompose": "^0.30.0",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
-  },
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run --exclude '**/*.emulator.test.jsx'",
+    "lint": "eslint src",
+    "test:emulator": "firebase emulators:exec --only auth,firestore,storage 'vitest run **/*.emulator.test.jsx'"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
+    "@fortawesome/react-fontawesome": "^3.5.0",
+    "@reduxjs/toolkit": "^2.13.0",
+    "@vis.gl/react-google-maps": "^1.10.1",
+    "algoliasearch": "^5.60.0",
+    "axios": "^1.20.0",
+    "firebase": "^13.0.0",
+    "numeral": "^2.0.6",
+    "prop-types": "^15.8.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-redux": "^9.3.0",
+    "react-router-dom": "^7.18.4",
+    "redux": "^5.0.1"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "redux-thunk": "^2.3.0",
-    "rimraf": "^2.6.3",
-    "uuid": "^3.3.2"
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@vitejs/plugin-react": "^6.1.2",
+    "firebase-tools": "^15.34.0",
+    "jsdom": "^25.0.1",
+    "sass": "^1.105.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
   }
 }

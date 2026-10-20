@@ -45,17 +45,39 @@ Once the user has been authenticated, the user has access to the add books page 
 - Google Maps API
 - Facebook API
 
+## Development setup
+
+The app was modernized in 2026 (see [MODERNIZATION.md](MODERNIZATION.md) for
+the full plan and migration notes). It now builds with
+[Vite](https://vite.dev/) and runs on React 19, react-router-dom 7, the
+modular Firebase Web SDK, Redux Toolkit and Algolia's v5 client.
+
+Requirements: Node.js 20+.
+
+```bash
+npm install
+cp .env.example .env.local   # fill in your own keys
+npm run dev                  # start the dev server
+npm run build                # production build into dist/
+npm test                     # vitest unit + mock tests
+npm run test:emulator        # integration tests against the local
+                             # Firebase Emulator Suite (needs Java 21+)
+```
+
+Environment variables are read from `.env.local` (never committed). See
+`.env.example` for the full list: Firebase project config, an Algolia
+**search-only** key, a Google Maps API key and the default portrait URL.
+
+> Security note: the 2019 codebase used an Algolia admin key in the browser
+> to keep the search index in sync. That key must stay server-side. Index
+> writes are kept behind thin client wrappers for parity but should move to
+> the Firebase Cloud Functions in `/functions` before production use.
+
 ## Project file structure
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-Any files belonging to Create React App will not be explained here.
+`/src`
 
-`/scr`
-
-- `.env'\
-  In this file we store all our API keys and environment variables.
-  
-- `index.js`\
+- `main.jsx`\
   The root JS file of the project. In this file, all pages are loaded and
   react-router-dom is used to render the pages based on the URL. Also, the Redux
   store as well as the Firebase context are provided to the app in this file.
@@ -71,7 +93,7 @@ Any files belonging to Create React App will not be explained here.
   DragAndDrop.js and Titleform.js) that allow the user to
   add a new book. This folder also contains two stylesheets (\_AddNewBookForm.scss, \_DragAndDrop.scss).
   - `/Algolia`\
-  Some Algolia endpoints are defined in index.js.
+  Removed; the Algolia v5 client wrapper now lives in `src/algolia`.
 - `/Authentication`\
   This folder contains all React components that take care of user authentication,
   which include (PasswordForget.js, SignIn.js, SignOut.js, and SignUp.js).
@@ -97,16 +119,14 @@ Any files belonging to Create React App will not be explained here.
   This folder contains the Dropdown.js React Component, which is a reusable
   dropdown component. It has the \_Dropdown.scss stylesheet associated with it.
 - `/Firebase`\
-  This folder contains three files (firebase.js, index.js and context.js) and
-  takes care of communication with the backend of our application. We created a
-  withReact.js HOC that uses the React Context to enable the component that it
-  encapsulates to use the Firebase functions.
+  Re-exports the app-wide Firebase facade from `src/firebase` (kept so 2019
+  import paths keep working).
 - `/Footer`\
   This folder contains the Footer.js React component and a stylesheet associated
   with it (\_Footer.js).
 - `/GoogleMap`\
-  This folder contains the GoogleMap.js React component, which renders a Google
-  Map retrieved via the Google Maps API.
+  This folder contains the GoogleMap.jsx React component, which renders a Google
+  Map via @vis.gl/react-google-maps.
 - `/History`\
   This folder contains components for the History page (ItemInfo.js and RequestMessage.js),
   as well as a stylesheet (\_HistoryComponents.sss).
@@ -127,8 +147,9 @@ Any files belonging to Create React App will not be explained here.
   association with it (\Search.scss).
 - `/Session`\
   This folder contains files that take care of handling the user session.
-  It contains three HOCs: withAuthentication.js, withAuthorization.js and
-  withEmailverification.js, as well as a stylesheet (\_Session.scss).
+  It contains three hooks-based wrappers: withAuthentication.jsx,
+  withAuthorization.jsx and withEmailVerification.jsx, as well as a
+  stylesheet (\_Session.scss).
 
 `/constants`
 - `fa.js`\

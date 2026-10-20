@@ -80,3 +80,6 @@ firebase.json
 
 # Firebase function
 /functions/node_modules
+.env.local
+.env.*.local
+dist/
